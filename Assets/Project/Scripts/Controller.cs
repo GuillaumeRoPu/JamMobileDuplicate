@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
@@ -6,6 +7,9 @@ public class Controller : MonoBehaviour
     [SerializeField] InputActionReference _pressPositionInput;
     [SerializeField] InputActionReference _pressInput;
     [SerializeField] InputActionReference _tapInput;
+
+    [SerializeField, Foldout("Events")] UnityEvent _onPress;
+    [SerializeField, Foldout("Events")] UnityEvent _onTap;
 
     GameObject _grabObject;
     Vector2 _grabLocalPress;
@@ -69,6 +73,7 @@ public class Controller : MonoBehaviour
         if (ctx.started)
         {
             _isPressed = true;
+            _onPress?.Invoke();
             Debug.Log("TOUCH");
         }
 
@@ -82,6 +87,7 @@ public class Controller : MonoBehaviour
     {
         if (ctx.started)
         {
+            _onTap?.Invoke();
             Debug.Log("TEST");
         }
     }
