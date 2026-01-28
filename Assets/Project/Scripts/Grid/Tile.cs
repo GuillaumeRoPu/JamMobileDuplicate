@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class Tile : MonoBehaviour, IHoverable
@@ -26,5 +27,27 @@ public class Tile : MonoBehaviour, IHoverable
     public void StopHover()
     {
         _highlight.SetActive(false);
+    }
+
+    public void SetColor(Color color)
+    {
+        _renderer.color = color;
+    }
+
+    public Color GetColor()
+    {
+        return _renderer.color;
+    }
+
+    public void AnnihilateTile()
+    {
+        if (!EditorApplication.isPlaying)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
