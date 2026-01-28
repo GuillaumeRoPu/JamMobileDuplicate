@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour, IHoverable
 
     public void Initialize(bool isOffset, Vector2 gridPosition)
     {
-        _renderer.color = isOffset ? _offsetColor : _baseColor;
+        //_renderer.color = isOffset ? _offsetColor : _baseColor;
         _gridPosition = gridPosition;
     }
 
@@ -26,5 +26,15 @@ public class Tile : MonoBehaviour, IHoverable
     public void StopHover()
     {
         _highlight.SetActive(false);
+    }
+
+    public void SetColor(Color color)
+    {
+        _renderer.color = color;
+    }
+
+    public Color GetColor()
+    {
+        return _renderer.color;
     }
 }
