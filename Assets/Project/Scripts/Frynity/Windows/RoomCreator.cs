@@ -8,6 +8,9 @@ namespace Frynity.Window
 {
     public class RoomCreator : EditorWindow
     {
+
+        RoomCells _room;
+
         float _zoom = 100;
         static float _cellSize;
 
@@ -78,6 +81,15 @@ namespace Frynity.Window
             EditorWindow window = GetWindow<RoomCreator>("Room Creator");
             window.position = new Rect(0, 0, 1000, 700);
             window.Show();
+        }
+
+        public void Open(RoomCells room)
+        {
+            EditorWindow window = GetWindow<RoomCreator>("Room Creator");
+            window.position = new Rect(0, 0, 1000, 700);
+            window.Show();
+
+            _room = room;
         }
 
         void OnGUI()
@@ -413,6 +425,7 @@ namespace Frynity.Window
             {
                 GameObject fab = new GameObject("Room");
 
+                // Sprites & Prefabs
                 GameObject skin = new GameObject("Skin");
                 for (int i = 0; i < _sprites.Count; i++)
                 {
@@ -447,6 +460,16 @@ namespace Frynity.Window
                     obj.transform.SetParent(prefab.transform);
                 }
                 prefab.transform.SetParent(fab.transform);
+
+                // Cells
+                RoomCells room = fab.AddComponent<RoomCells>();
+                List<Vector2Int> cells = new List<Vector2Int>();
+                // Set cell 0 to main cell at position (0,0)
+                for (int i = 0; i < _cells.Count; i++)
+                {
+                    cells.Add(_cells[i] - _cells[0]);
+                }
+                room.CreateRoom(cells, _doors, this);
 
             }
 
