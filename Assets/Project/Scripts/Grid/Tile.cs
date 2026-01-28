@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour, IHoverable
 
     public void Initialize(bool isOffset, Vector2 gridPosition)
     {
-        //_renderer.color = isOffset ? _offsetColor : _baseColor;
+        _renderer.color = isOffset ? _offsetColor : _baseColor;
         _gridPosition = gridPosition;
     }
 
