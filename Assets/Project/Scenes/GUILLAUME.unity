@@ -447,11 +447,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b03a61bdd40c64992db479a72e75be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
-  _width: 16
-  _height: 9
-  _tilePrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
-  _tileParent: {fileID: 572938236}
+  _generateGridOnPlay: 1
+  _gridWidth: 21
+  _gridHeight: 10
+  _gridOrigin: {x: 0, y: 0}
+  _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
+  _tilesParent: {fileID: 572938236}
+  _tilesSize: 1
+  _limits: {x: 7, y: 11}
   _camera: {fileID: 519420032}
+  _coolColors: 1
+  _coolColorsAnimated: 1
+  _testTileAddPosition: {x: 13, y: 3}
+  _testTileRemovePosition: {x: 13, y: 3}
+  _testGridWidth: 10
+  _testGridHeight: 10
+  _testGridHeightOrigin: {x: 1, y: 0}
 --- !u!1 &1080767168
 GameObject:
   m_ObjectHideFlags: 0
