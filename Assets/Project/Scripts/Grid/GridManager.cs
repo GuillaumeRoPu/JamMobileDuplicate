@@ -1,13 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private bool _generateGridOnPlay;
-    [SerializeField] private int _gridWidth;
-    [SerializeField] private int _gridHeight;
-    [SerializeField] private Vector2Int _gridOrigin;
+    [SerializeField] private GridLevelData _gridLevelData;
 
     [SerializeField] private Tile _tilesPrefab;
     [SerializeField] private Transform _tilesParent;
@@ -43,6 +40,15 @@ public class GridManager : MonoBehaviour
             }
         }
         UpdateSizeAll();
+    }
+    void GenerateGrid(List<Vector2Int> tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            AddTile(tile);
+        }
+        UpdateSizeAll();
+
     }
 
     //Erases all the tiles in the grid depending on width and height, as well as the origin
@@ -83,8 +89,7 @@ public class GridManager : MonoBehaviour
         Debug.Log(_tiles.Count);
         if (_generateGridOnPlay)
         {
-            GenerateGrid(_gridWidth, _gridHeight, _gridOrigin);
-            RelocateCamera(_gridWidth, _gridHeight, _gridOrigin);
+            GenerateGrid(_gridLevelData._allTilesPositions);
         }
     }
 
@@ -146,67 +151,24 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    [SerializeField, Foldout("In Editor Draw")] private int _drawGridWidth;
-    [SerializeField, Foldout("In Editor Draw")] private int _drawGridHeight;
-    [SerializeField, Foldout("In Editor Draw")] private Vector2Int _drawGridOrigin;
-
-    [SerializeField, Foldout("In Editor Draw")] private int _eraseGridWidth;
-    [SerializeField, Foldout("In Editor Draw")] private int _eraseGridHeight;
-    [SerializeField, Foldout("In Editor Draw")] private Vector2Int _eraseGridOrigin;
-
-    [Button("Generate Grid (Green)")]
-    public void GenerateGridButton()
-    {
-        GenerateGrid(_drawGridWidth, _drawGridHeight, _drawGridOrigin);
-    }
-
-    [Button("Erase Grid (Red)")]
-    public void EraseGridButton()
-    {
-        EraseGrid(_eraseGridWidth, _eraseGridHeight, _eraseGridOrigin);
-    }
-
     [Button("Update Grid Size")]
     void UpdateSizeAll()
     {
         foreach (var tile in _tiles)
         {
-            tile.Value.transform.position = new Vector2(tile.Key.x * _tilesSize + 0.5f, tile.Key.y * _tilesSize + 0.5f);
+            tile.Value.transform.position = new Vector2(tile.Key.x * _tilesSize + 0.5f * _tilesSize, tile.Key.y * _tilesSize + 0.5f * _tilesSize);
             tile.Value.transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
         }
     }
 
-    [Button("Erase All Tiles")]
-    public void RemoveAllTiles()
-    {
-        List<Vector2Int> list = new List<Vector2Int>();
-        foreach (var tile in _tiles.Keys)
-        {
-            list.Add(tile);
-        }
-        foreach (var tile in list)
-        {
-            RemoveTile(tile);
-        }
-        _tiles.Clear();
-
-        Tile[] tiles = _tilesParent.GetComponentsInChildren<Tile>();
-        foreach (var tile in tiles)
-        {
-            Debug.Log("Log");
-            tile.AnnihilateTile();
-        }
-    }
-
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellowNice;
         Gizmos.DrawWireCube(new Vector2(0.5f *_tilesSize, 0.5f * _tilesSize), new Vector2((_limits.x * 2) * _tilesSize + 1 * _tilesSize, (_limits.y * 2) * _tilesSize + 1 * _tilesSize));
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(new Vector2((_drawGridOrigin.x + (float)_drawGridWidth / 2) * _tilesSize, (_drawGridOrigin.y + (float)_drawGridHeight / 2) * _tilesSize), new Vector3(_drawGridWidth * _tilesSize, _drawGridHeight * _tilesSize, 1));
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector2((_eraseGridOrigin.x + (float)_eraseGridWidth / 2) * _tilesSize, (_eraseGridOrigin.y + (float)_eraseGridHeight / 2) * _tilesSize), new Vector3(_eraseGridWidth * _tilesSize, _eraseGridHeight * _tilesSize, 1));
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(new Vector2((_gridOrigin.x + (float)_gridWidth / 2) * _tilesSize, (_gridOrigin.y + (float)_gridHeight / 2) * _tilesSize), new Vector3(_gridWidth * _tilesSize, _gridHeight * _tilesSize, 1));
+        foreach (var tile in _gridLevelData._allTilesPositions)
+        {
+            Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+        }
     }
 }
