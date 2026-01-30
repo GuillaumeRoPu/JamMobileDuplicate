@@ -11,7 +11,8 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private float _tilesSize;
 
-    [SerializeField] private Vector2Int _limits;
+    private Vector2Int _limitsMin;
+    private Vector2Int _limitsMax;
 
     [SerializeField] private Transform _camera;
 
@@ -21,6 +22,7 @@ public class GridManager : MonoBehaviour
     //ALL THE DATA FOR THE GRID IS HERE
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
+    private static Vector2Int _spawnPointTile = new Vector2Int();
 
     //END OF ALL THE DATA
 
@@ -91,9 +93,12 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         Debug.Log(_tiles.Count);
-        if (_generateGridOnPlay)
+        if (_generateGridOnPlay && _gridLevelData != null)
         {
-            GenerateGrid(_gridLevelData._allTilesPositions);
+            _spawnPointTile = _gridLevelData.spawnTile;
+            _limitsMax = _gridLevelData.limitsMax;
+            _limitsMin = _gridLevelData.limitsMin;
+            GenerateGrid(_gridLevelData.allTilesPosition);
         }
     }
 
@@ -127,7 +132,7 @@ public class GridManager : MonoBehaviour
 
     public void AddTile(Vector2Int position)
     {
-        if (_tiles.ContainsKey(position) || Mathf.Abs(position.x) > _limits.x || Mathf.Abs(position.y) > _limits.y)
+        if (_tiles.ContainsKey(position) || (position.x > _limitsMax.x || position.x < _limitsMin.x) || (position.y > _limitsMax.y || position.y < _limitsMin.y))
         {
             Debug.LogWarning("There's Already A Tile Here or Its Out Of Bounds");
         }
@@ -136,7 +141,7 @@ public class GridManager : MonoBehaviour
             var spawnedTile = Instantiate(_tilesPrefab, new Vector2((float)position.x + 0.5f, (float)position.y + 0.5f), Quaternion.identity, _tilesParent);
             spawnedTile.name = $"Tile X:{position.x}, Y:{position.y}";
             var isOffset = ((position.x % 2 == 0 && position.y % 2 != 0) || (position.x % 2 != 0 && position.y % 2 == 0));
-            if (position == _gridLevelData._spawnTile)
+            if (position == _gridLevelData.spawnTile)
             {
                 spawnedTile.SetAsSpawnTile(true);
             }
@@ -174,12 +179,15 @@ public class GridManager : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellowNice;
-        Gizmos.DrawWireCube(new Vector2(0.5f *_tilesSize, 0.5f * _tilesSize), new Vector2((_limits.x * 2) * _tilesSize + 1 * _tilesSize, (_limits.y * 2) * _tilesSize + 1 * _tilesSize));
-        Gizmos.color = Color.cyan;
-        foreach (var tile in _gridLevelData._allTilesPositions)
+        if (_gridLevelData != null) 
         {
-            Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.color = Color.cyan;
+            foreach (var tile in _gridLevelData.allTilesPosition)
+            {
+                Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            }
+            Gizmos.color = Color.yellowNice;
+            Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_gridLevelData.limitsMax.x + _gridLevelData.limitsMin.x) / 2) * _tilesSize, (0.5f + (float)(_gridLevelData.limitsMax.y + _gridLevelData.limitsMin.y) / 2) * _tilesSize), new Vector2((float)(Mathf.Abs(_gridLevelData.limitsMax.x) + Mathf.Abs(_gridLevelData.limitsMin.x) + 1) * _tilesSize, (float)(Mathf.Abs(_gridLevelData.limitsMax.y) + Mathf.Abs(_gridLevelData.limitsMin.y) + 1) * _tilesSize));
         }
     }
 }

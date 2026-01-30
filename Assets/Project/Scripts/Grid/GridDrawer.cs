@@ -148,7 +148,10 @@ public class GridDrawer : MonoBehaviour
     [Button("Generate Grid From Data (Blue)")]
     public void GenerateGridDataButton()
     {
-        GenerateGrid(_gridLevelData._allTilesPositions);
+        if (_gridLevelData != null) 
+        {
+            GenerateGrid(_gridLevelData.allTilesPosition);
+        }
     }
 
     [Button("Erase Tiles (Red)")]
@@ -217,13 +220,33 @@ public class GridDrawer : MonoBehaviour
         //WRITE DATA YOU WANT TO SAVE
 
         List<Vector2Int> valueToSave = new List<Vector2Int>();
+        Vector2Int _limitsMin = new Vector2Int();
+        Vector2Int _limitsMax = new Vector2Int();
         foreach (var tile in _tiles.Keys)
         {
             valueToSave.Add(tile);
+            if(_limitsMin.x > tile.x)
+            {
+                _limitsMin.x = tile.x;
+            }
+            if (_limitsMin.y > tile.y)
+            {
+                _limitsMin.y = tile.y;
+            }
+            if (_limitsMax.x < tile.x)
+            {
+                _limitsMax.x = tile.x;
+            }
+            if (_limitsMax.y < tile.y)
+            {
+                _limitsMax.y = tile.y;
+            }
         }
-        data._allTilesPositions = valueToSave;
-        data._spawnTile = _spawnTile;
-
+        data.allTilesPosition = valueToSave;
+        data.spawnTile = _spawnTile;
+        data.limitsMin = _limitsMin;
+        data.limitsMax = _limitsMax;
+        Debug.Log("Min X : " + data.limitsMin.x + " | Min Y : " + data.limitsMin.y + " | Max X : " + data.limitsMax.x + " | Max Y : " + data.limitsMin.y);
 
         //END OF WRITING DATA EZ
 
@@ -242,7 +265,7 @@ public class GridDrawer : MonoBehaviour
         Gizmos.color = Color.cyan;
         if (_gridLevelData != null)
         {
-            foreach (var tile in _gridLevelData._allTilesPositions)
+            foreach (var tile in _gridLevelData.allTilesPosition)
             {
                 Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
             }

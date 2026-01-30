@@ -172,8 +172,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 345870ffd3f0ad346afa13739068d82c, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -241,7 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d41a75a710459449602ff39fc6571b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tile
-  _baseColor: {r: 0.35089353, g: 0.83396226, b: 0.38226157, a: 1}
+  _baseColor: {r: 0, g: 0, b: 0, a: 1}
   _offsetColor: {r: 0.24927732, g: 0.5924529, b: 0.27911866, a: 1}
   _renderer: {fileID: 6558124936373287714}
   _highlight: {fileID: 6645015416975209214}
+  _isOffset: 0

@@ -17,12 +17,18 @@ public class Tile : MonoBehaviour, IHoverable
     public void Initialize(bool isOffset, Vector2Int gridPosition)
     {
         _isOffset = isOffset;
-        _renderer.color = isOffset ? _offsetColor : _baseColor;
+        SetColor();
+        _cellData._gridPosition = gridPosition;
+    }
+
+    private void SetColor()
+    {
+        //_renderer.color = _isOffset ? _offsetColor : _baseColor;
+        _renderer.color = _baseColor;
         if (_cellData._isSpawnPoint)
         {
             _renderer.color = Color.red;
         }
-        _cellData._gridPosition = gridPosition;
     }
 
     public void OnHover()
@@ -61,10 +67,6 @@ public class Tile : MonoBehaviour, IHoverable
     public void SetAsSpawnTile(bool isSpawn)
     {
         _cellData._isSpawnPoint = isSpawn;
-        _renderer.color = _isOffset ? _offsetColor : _baseColor;
-        if (_cellData._isSpawnPoint)
-        {
-            _renderer.color = Color.red;
-        }
+        SetColor();
     }
 }
