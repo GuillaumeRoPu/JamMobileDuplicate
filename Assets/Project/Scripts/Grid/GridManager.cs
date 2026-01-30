@@ -18,7 +18,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private bool _coolColors;
     [SerializeField] private bool _coolColorsAnimated;
 
+    //ALL THE DATA FOR THE GRID IS HERE
+
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
+
+    //END OF ALL THE DATA
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -132,6 +136,10 @@ public class GridManager : MonoBehaviour
             var spawnedTile = Instantiate(_tilesPrefab, new Vector2((float)position.x + 0.5f, (float)position.y + 0.5f), Quaternion.identity, _tilesParent);
             spawnedTile.name = $"Tile X:{position.x}, Y:{position.y}";
             var isOffset = ((position.x % 2 == 0 && position.y % 2 != 0) || (position.x % 2 != 0 && position.y % 2 == 0));
+            if (position == _gridLevelData._spawnTile)
+            {
+                spawnedTile.SetAsSpawnTile(true);
+            }
             spawnedTile.Initialize(isOffset, position);
             _tiles[position] = spawnedTile;
             UpdateSize(position);

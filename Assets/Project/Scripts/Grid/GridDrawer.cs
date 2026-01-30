@@ -6,19 +6,37 @@ using UnityEngine;
 
 public class GridDrawer : MonoBehaviour
 {
-    [SerializeField] private bool _generateGridOnPlay;
+    [SerializeField, Foldout("Configuration")] private Tile _tilesPrefab;
+    [SerializeField, Foldout("Configuration")] private Transform _tilesParent;
 
-    [SerializeField] private Tile _tilesPrefab;
-    [SerializeField] private Transform _tilesParent;
+    [SerializeField, Foldout("Configuration")] private float _tilesSize;
 
-    [SerializeField] private float _tilesSize;
+    [SerializeField, MaxValue(0), Foldout("Configuration")] private int _limitsMinX;
+    [SerializeField, MinValue(0), Foldout("Configuration")] private int _limitsMaxX;
+    [SerializeField, MaxValue(0), Foldout("Configuration")] private int _limitsMinY;
+    [SerializeField, MinValue(0), Foldout("Configuration")] private int _limitsMaxY;
 
-    [SerializeField, MaxValue(0)] private int _limitsMinX;
-    [SerializeField, MinValue(0)] private int _limitsMaxX;
-    [SerializeField, MaxValue(0)] private int _limitsMinY;
-    [SerializeField, MinValue(0)] private int _limitsMaxY;
+    [SerializeField, Foldout("Draw Tool")] private int _drawGridWidth;
+    [SerializeField, Foldout("Draw Tool")] private int _drawGridHeight;
+    [SerializeField, Foldout("Draw Tool")] private Vector2Int _drawGridOrigin;
+
+    [Space(5)]
+    [SerializeField, Foldout("Draw Tool")] private int _eraseGridWidth;
+    [SerializeField, Foldout("Draw Tool")] private int _eraseGridHeight;
+    [SerializeField, Foldout("Draw Tool")] private Vector2Int _eraseGridOrigin;
+
+    [Space(5)]
+    [SerializeField, Foldout("Draw Tool"), Tooltip("")] private string _gridLevelName;
+
+    [Space(5)]
+    [SerializeField, Foldout("Draw Tool"), Tooltip("The button 'Generate Grid from Data' can create Tiles using the grid's shape")] private GridLevelData _gridLevelData;
+
+    [Space(5)]
+    [SerializeField, Foldout("Draw Tool")] private Vector2Int _chooseSpawnPoint;
+
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
+    private static Vector2Int _spawnTile;
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -35,6 +53,15 @@ public class GridDrawer : MonoBehaviour
                     _tiles[tilePosition].SetColor(newcol);
                 }
             }
+        }
+        UpdateSizeAll();
+    }
+
+    void GenerateGrid(List<Vector2Int> tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            AddTile(tile);
         }
         UpdateSizeAll();
     }
@@ -71,10 +98,6 @@ public class GridDrawer : MonoBehaviour
     {
         Debug.Log(_tiles.Count);
         RemoveAllTiles();
-        if (_generateGridOnPlay)
-        {
-            //GenerateGrid(_gridWidth, _gridHeight, _gridOrigin);
-        }
     }
 
     public Tile GetTileAtPosition(Vector2Int position)
@@ -84,22 +107,6 @@ public class GridDrawer : MonoBehaviour
             return tile;
         }
         return null;
-    }
-
-    private void Update()
-    {
-        // Visual Flair, is getting removed at some point
-        foreach (var tile in _tiles.Values)
-        {
-            Color oldcol = tile.GetColor();
-            Color.RGBToHSV(oldcol, out var H, out var S, out var V);
-            H += 1 * Time.deltaTime;
-            if (H >= 1)
-            {
-                H -= 1;
-            }
-            tile.SetColor(Color.HSVToRGB(H, S, V));
-        }
     }
 
     public void AddTile(Vector2Int position)
@@ -128,28 +135,44 @@ public class GridDrawer : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("There Isn't A Tile Here");
+            Debug.Log("There Isn't A Tile Here : X - " + position.x + " | Y - " + position.y);
         }
     }
 
-    [SerializeField, Foldout("In Editor Draw")] private int _drawGridWidth;
-    [SerializeField, Foldout("In Editor Draw")] private int _drawGridHeight;
-    [SerializeField, Foldout("In Editor Draw")] private Vector2Int _drawGridOrigin;
-
-    [SerializeField, Foldout("In Editor Draw")] private int _eraseGridWidth;
-    [SerializeField, Foldout("In Editor Draw")] private int _eraseGridHeight;
-    [SerializeField, Foldout("In Editor Draw")] private Vector2Int _eraseGridOrigin;
-
-    [Button("Generate Grid (Green)")]
-    public void GenerateGridButton()
+    [Button("Generate Tiles (Green)")]
+    public void GenerateTilesButton()
     {
         GenerateGrid(_drawGridWidth, _drawGridHeight, _drawGridOrigin);
     }
 
-    [Button("Erase Grid (Red)")]
+    [Button("Generate Grid From Data (Blue)")]
+    public void GenerateGridDataButton()
+    {
+        GenerateGrid(_gridLevelData._allTilesPositions);
+    }
+
+    [Button("Erase Tiles (Red)")]
     public void EraseGridButton()
     {
         EraseGrid(_eraseGridWidth, _eraseGridHeight, _eraseGridOrigin);
+    }
+
+    [Button("Make Tile The Spawn Point (Orange)")]
+    public void SetAsSpawnPoint()
+    {
+        if (_tiles.ContainsKey(_chooseSpawnPoint))
+        {
+            if (_tiles.ContainsKey(_spawnTile))
+            {
+                _tiles[_spawnTile].SetAsSpawnTile(false);
+            }
+            _spawnTile = _chooseSpawnPoint;
+            _tiles[_spawnTile].SetAsSpawnTile(true);
+        }
+        else
+        {
+            Debug.LogWarning("Doesn't Exist bro :sob:");
+        }
     }
 
     [Button("Update Grid Size")]
@@ -179,13 +202,9 @@ public class GridDrawer : MonoBehaviour
         Tile[] tiles = _tilesParent.GetComponentsInChildren<Tile>();
         foreach (var tile in tiles)
         {
-            Debug.Log("Log");
             tile.AnnihilateTile();
         }
     }
-
-    //Test
-    [SerializeField] private string _gridLevelName;
 
     [Button("Save The Grid layout")]
     public void CommitValue()
@@ -203,6 +222,7 @@ public class GridDrawer : MonoBehaviour
             valueToSave.Add(tile);
         }
         data._allTilesPositions = valueToSave;
+        data._spawnTile = _spawnTile;
 
 
         //END OF WRITING DATA EZ
@@ -213,16 +233,23 @@ public class GridDrawer : MonoBehaviour
         #endif
     }
 
-
-    //StopTest
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellowNice;
         Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_limitsMaxX + _limitsMinX) /2) * _tilesSize, (0.5f + (float)(_limitsMaxY + _limitsMinY) /2) * _tilesSize), new Vector2( (float)(Mathf.Abs(_limitsMaxX) + Mathf.Abs(_limitsMinX) + 1) * _tilesSize, (float)(Mathf.Abs(_limitsMaxY) + Mathf.Abs(_limitsMinY) + 1) * _tilesSize ));
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(new Vector2((_drawGridOrigin.x + (float)_drawGridWidth / 2) * _tilesSize, (_drawGridOrigin.y + (float)_drawGridHeight / 2) * _tilesSize), new Vector3(_drawGridWidth * _tilesSize, _drawGridHeight * _tilesSize, 1));
+        Gizmos.color = Color.cyan;
+        if (_gridLevelData != null)
+        {
+            foreach (var tile in _gridLevelData._allTilesPositions)
+            {
+                Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            }
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector2((_eraseGridOrigin.x + (float)_eraseGridWidth / 2) * _tilesSize, (_eraseGridOrigin.y + (float)_eraseGridHeight / 2) * _tilesSize), new Vector3(_eraseGridWidth * _tilesSize, _eraseGridHeight * _tilesSize, 1));
+        Gizmos.color = Color.orangeRed;
+        Gizmos.DrawWireCube(new Vector2((_chooseSpawnPoint.x + 0.5f) * _tilesSize, (_chooseSpawnPoint.y + 0.5f) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
     }
 }

@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: 6a7aae0807378f8419da545dbaf9790b, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: 206391f8ff04d1c4a8c0664a73f48c52, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 572938236}
   _tilesSize: 1
@@ -610,7 +610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
-  _generateGridOnPlay: 0
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 819476302}
   _tilesSize: 1
@@ -618,13 +617,15 @@ MonoBehaviour:
   _limitsMaxX: 10
   _limitsMinY: -4
   _limitsMaxY: 4
-  _drawGridWidth: 1
-  _drawGridHeight: 1
-  _drawGridOrigin: {x: -2, y: -2}
+  _drawGridWidth: 11
+  _drawGridHeight: 6
+  _drawGridOrigin: {x: -9, y: -4}
   _eraseGridWidth: 2
   _eraseGridHeight: 2
-  _eraseGridOrigin: {x: -7, y: -2}
-  _gridLevelName: face
+  _eraseGridOrigin: {x: -3, y: -2}
+  _gridLevelName: testSpawn
+  _gridLevelData: {fileID: 11400000, guid: 6a7aae0807378f8419da545dbaf9790b, type: 2}
+  _chooseSpawnPoint: {x: -5, y: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
