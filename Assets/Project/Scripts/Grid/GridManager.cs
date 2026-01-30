@@ -162,10 +162,13 @@ public class GridManager : MonoBehaviour
     [Button("Update Grid Size")]
     void UpdateSizeAll()
     {
-        foreach (var tile in _tiles)
+        if (_tiles != null)
         {
-            tile.Value.transform.position = new Vector2(tile.Key.x * _tilesSize + 0.5f * _tilesSize, tile.Key.y * _tilesSize + 0.5f * _tilesSize);
-            tile.Value.transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
+            foreach (var tile in _tiles)
+            {
+                tile.Value.transform.position = new Vector2(tile.Key.x * _tilesSize + 0.5f * _tilesSize, tile.Key.y * _tilesSize + 0.5f * _tilesSize);
+                tile.Value.transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
+            }
         }
     }
 
