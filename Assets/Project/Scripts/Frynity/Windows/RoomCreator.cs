@@ -1,15 +1,13 @@
-using Frynity.Window;
+using Frynity.Gen;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace Frynity.Window
 {
     public class RoomCreator : EditorWindow
     {
-
-        RoomCells _room;
+        RoomCells _room = null;
 
         float _zoom = 100;
         static float _cellSize;
@@ -24,7 +22,6 @@ namespace Frynity.Window
         }
 
         bool _showObject;
-        List<ObjectType> _objects = new List<ObjectType>();
         List<(Sprite sprite, Vector2 position, float size)> _sprites = new List<(Sprite, Vector2, float)>();
         List<bool> _spriteShow = new List<bool>();
 
@@ -35,15 +32,16 @@ namespace Frynity.Window
         bool _showCells;
         List<Vector2Int> _cells = new List<Vector2Int>();
         List<bool> _cellsShow = new List<bool>();
+        bool _onOther;
 
         // Doors
         bool _showDoor;
-        List<Vector2> _doors = new List<Vector2>();
+        List<(int indexCellsWall, int cellId, Face face)> _doors = new List<(int, int, Face)>();
         List<bool> _doorShow = new List<bool>();
 
         // Settings
         bool _errorPath = false;
-        string _selectedPath;
+        static string _selectedPath;
 
         // Styles
         Texture2D _backgroundTexture;
@@ -76,20 +74,80 @@ namespace Frynity.Window
             DestroyImmediate(_objectsTexture);
         }
 
-        public static void ShowWindow()
+        public static void ShowWindow(RoomCells room = null)
         {
-            EditorWindow window = GetWindow<RoomCreator>("Room Creator");
+            RoomCreator window = GetWindow<RoomCreator>("Room Creator");
             window.position = new Rect(0, 0, 1000, 700);
+            window.Open(room);
             window.Show();
         }
 
         public void Open(RoomCells room)
         {
-            EditorWindow window = GetWindow<RoomCreator>("Room Creator");
-            window.position = new Rect(0, 0, 1000, 700);
-            window.Show();
+            if (room == null) return;
 
             _room = room;
+
+            _cellSize = _room.GetCellSize;
+
+            _showObject = true;
+            _showCells = true;
+            _showDoor = true;
+
+            foreach (SpriteRenderer renderer in room.GetRenderers)
+            {
+                Vector2 pos = renderer.transform.position;
+                pos.y *= -1;
+                _sprites.Add((renderer.sprite, pos, renderer.transform.lossyScale.x));
+                _spriteShow.Add(false);
+            }
+
+            foreach ((GameObject prefab, GameObject obj) prefab in room.GetPrefabs)
+            {
+                Vector2 pos = prefab.obj.transform.position;
+                pos.y *= -1;
+                _prefabs.Add((prefab.prefab, pos, prefab.obj.transform.lossyScale.x/ prefab.prefab.transform.lossyScale.x));
+                _prefabShow.Add(false);
+            }
+
+            foreach (var cell in room.GetCells)
+            {
+                _cells.Add(cell.Value);
+                _cellsShow.Add(false);
+            }
+
+            List<(int id, Face face)> cellsWithWallId = new List<(int, Face)>();
+            for (int i = 0; i < _cells.Count; i++)
+            {
+                List<Face> faces = new List<Face>();
+                bool wallRight = !_cells.Contains(_cells[i] + Vector2Int.right);
+                bool wallLeft = !_cells.Contains(_cells[i] + Vector2Int.left);
+                bool wallDown = !_cells.Contains(_cells[i] + Vector2Int.up);
+                bool wallUp = !_cells.Contains(_cells[i] + Vector2Int.down);
+
+                if (wallRight) faces.Add(Face.Right);
+                if (wallDown) faces.Add(Face.Bottom);
+                if (wallLeft) faces.Add(Face.Left);
+                if (wallUp) faces.Add(Face.Top);
+
+                foreach (Face face in faces)
+                {
+                    cellsWithWallId.Add((i, face));
+                }
+            }
+
+
+            foreach ((int, Face) door in room.GetDoors)
+            {
+                int id = 0;
+                foreach(var cell in cellsWithWallId)
+                {
+                    if (cell.id == door.Item1 && cell.face == door.Item2) break;
+                    else id++;
+                }
+                _doors.Add((id, door.Item1, door.Item2));
+                _doorShow.Add(false);
+            }
         }
 
         void OnGUI()
@@ -245,7 +303,7 @@ namespace Frynity.Window
             {
                 _cells.Add(Vector2Int.zero);
                 _cellsShow.Add(false);
-
+                _showCells = true;
             }
             GUILayout.Space(position.width / 3);
             GUILayout.EndHorizontal();
@@ -275,7 +333,7 @@ namespace Frynity.Window
                 for (int i = 0; i <  _cells.Count; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    _cellsShow[i] = EditorGUILayout.Foldout(_cellsShow[i], "Cell " + i);
+                    _cellsShow[i] = EditorGUILayout.Foldout(_cellsShow[i], "Cell " + i, true);
                     GUILayout.Space(30);
                     if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
@@ -333,8 +391,9 @@ namespace Frynity.Window
             _showDoor = EditorGUILayout.BeginFoldoutHeaderGroup(_showDoor, "Doors");
             if (GUILayout.Button("+"))
             {
-                _doors.Add(Vector2.zero);
+                _doors.Add((0, 0, Face.Left));
                 _doorShow.Add(false);
+                _showDoor = true;
 
             }
             GUILayout.Space(position.width / 3);
@@ -365,7 +424,7 @@ namespace Frynity.Window
                 for (int i = 0; i < _doors.Count; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    _doorShow[i] = EditorGUILayout.Foldout(_doorShow[i], "Door " + i);
+                    _doorShow[i] = EditorGUILayout.Foldout(_doorShow[i], "Door " + i, true);
                     GUILayout.Space(30);
                     if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
@@ -378,13 +437,79 @@ namespace Frynity.Window
                     }
                     GUILayout.FlexibleSpace();
 
-                    GUILayout.EndHorizontal();
-                    if (_doorShow[i])
+                    List<(int id, Face face)> cellsWithWallId = new List<(int, Face)>();
+                    for(int j = 0; j < _cells.Count; j++)
                     {
-                        _doors[i] = EditorGUILayout.Vector2Field("Position", _doors[i], GUILayout.MaxWidth(viewWidth));
+                        List<Face> faces = new List<Face>();
+                        bool wallRight = !_cells.Contains(_cells[j] + Vector2Int.right);
+                        bool wallLeft = !_cells.Contains(_cells[j] + Vector2Int.left);
+                        bool wallDown = !_cells.Contains(_cells[j] + Vector2Int.up);
+                        bool wallUp = !_cells.Contains(_cells[j] + Vector2Int.down);
+
+                        if (wallRight) faces.Add(Face.Right);
+                        if (wallDown) faces.Add(Face.Bottom);
+                        if (wallLeft) faces.Add(Face.Left);
+                        if (wallUp) faces.Add(Face.Top);
+
+                        foreach (Face face in faces)
+                        {
+                            cellsWithWallId.Add((j, face));
+                        }
+                    }
+
+                    if (i >= cellsWithWallId.Count)
+                    {
+                        _doors.RemoveAt(i);
+                        _doorShow.RemoveAt(i);
+                        i--;
+                        GUILayout.EndHorizontal();
+                        continue;
+                    }
+
+                    int index = _doors[i].indexCellsWall;
+                    for (int j = 0; j < _doors.Count; j++)
+                    {
+                        if (i == j) continue;
+                        if (_doors[j] == (index, cellsWithWallId[index].id, cellsWithWallId[index].face))
+                        {
+                            index++;
+                            if (index >= cellsWithWallId.Count) index = 0;
+                            j = 0;
+                        }
+                    }
+
+                    GUILayout.EndHorizontal();
+
+                    if (_doorShow[i] && _doors.Count < cellsWithWallId.Count)
+                    {
+                        index = _doors[i].indexCellsWall;
+                        if (GUILayout.Button("Next", GUILayout.MaxWidth(viewWidth)))
+                        {
+                            index++;
+                            if (index >= cellsWithWallId.Count) index = 0;
+
+                            while (_doors.Contains((index, cellsWithWallId[index].id, cellsWithWallId[index].face)))
+                            {
+                                index++;
+                                if(index >= cellsWithWallId.Count) index = 0;
+                            }
+                        }
+                        if (GUILayout.Button("Back", GUILayout.MaxWidth(viewWidth)))
+                        {
+                            index--;
+                            if (index < 0) index = cellsWithWallId.Count - 1;
+
+                            while (_doors.Contains((index, cellsWithWallId[index].id, cellsWithWallId[index].face)))
+                            {
+                                index--;
+                                if (index < 0) index = cellsWithWallId.Count - 1;
+                            }
+                        }
                         Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
                         EditorGUI.DrawRect(rect, Color.black);
                     }
+                    int id = cellsWithWallId[index].id;
+                    _doors[i] = (index, id, cellsWithWallId[index].face);
                 }
 
                 EditorGUI.indentLevel--;
@@ -419,58 +544,211 @@ namespace Frynity.Window
             }
             GUILayout.EndHorizontal();
 
-            EditorGUILayout.LabelField(_selectedPath);
+            EditorGUILayout.LabelField(_selectedPath, GUILayout.MaxWidth(viewWidth));
 
-            if (GUILayout.Button("Create Prefab", GUILayout.MaxWidth(viewWidth)))
+            if (_room == null)
             {
-                GameObject fab = new GameObject("Room");
-
-                // Sprites & Prefabs
-                GameObject skin = new GameObject("Skin");
-                for (int i = 0; i < _sprites.Count; i++)
+                if (GUILayout.Button("Create Prefab", GUILayout.MaxWidth(viewWidth)))
                 {
-                    GameObject sprite = new GameObject("Sprite " +  i);
-                    SpriteRenderer renderer = sprite.AddComponent<SpriteRenderer>();
-                    renderer.sprite = _sprites[i].sprite;
-                    renderer.sortingOrder = i;
-
-                    Vector2 pos = _sprites[i].position;
-                    pos.y *= -1;
-                    sprite.transform.position = pos;
-                    sprite.transform.localScale = new Vector2(_sprites[i].size, _sprites[i].size);
-                    sprite.transform.SetParent(skin.transform);
-                }
-                skin.transform.SetParent(fab.transform);
-
-                GameObject prefab = new GameObject("Prefabs");
-                for (int i = 0; i < _prefabs.Count; i++)
-                {
-                    Vector2 pos = _prefabs[i].position;
-                    pos.y *= -1;
-                    GameObject obj = Instantiate(_prefabs[i].prefab, pos, Quaternion.identity);
-                    obj.transform.localScale *= new Vector2(_prefabs[i].size, _prefabs[i].size);
-
-                    int j = 0;
-                    foreach (SpriteRenderer renderer in obj.GetComponentsInChildren<SpriteRenderer>())
+                    if (_onOther)
                     {
-                        renderer.sortingOrder = j + _sprites.Count;
-                        j++;
+                        Debug.LogError("You can't create prefab with two cell at the same positions.");
                     }
+                    else
+                    {
+                        GameObject fab = new GameObject("Room");
 
-                    obj.transform.SetParent(prefab.transform);
+                        // Sprites & Prefabs
+                        List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+                        if (_sprites.Count > 0)
+                        {
+                            GameObject skin = new GameObject("Skin");
+                            for (int i = 0; i < _sprites.Count; i++)
+                            {
+                                GameObject sprite = new GameObject("Sprite " + i);
+                                SpriteRenderer renderer = sprite.AddComponent<SpriteRenderer>();
+                                renderer.sprite = _sprites[i].sprite;
+                                renderer.sortingOrder = i;
+
+                                Vector2 pos = _sprites[i].position;
+                                pos.y *= -1;
+                                sprite.transform.position = pos;
+                                sprite.transform.localScale = new Vector2(_sprites[i].size, _sprites[i].size);
+                                sprite.transform.SetParent(skin.transform);
+
+                                renderers.Add(renderer);
+                            }
+                            skin.transform.SetParent(fab.transform);
+                        }
+                        
+
+                        List<(GameObject prefab, GameObject obj)> prefabs = new List<(GameObject, GameObject)>();
+                        if (_prefabs.Count > 0)
+                        {
+                            GameObject prefab = new GameObject("Prefabs");
+                            for (int i = 0; i < _prefabs.Count; i++)
+                            {
+                                Vector2 pos = _prefabs[i].position;
+                                pos.y *= -1;
+
+                                GameObject obj = PrefabUtility.InstantiatePrefab(_prefabs[i].prefab) as GameObject;
+                                obj.transform.position = pos;
+                                obj.transform.localScale *= new Vector2(_prefabs[i].size, _prefabs[i].size);
+
+                                int j = 0;
+                                foreach (SpriteRenderer renderer in obj.GetComponentsInChildren<SpriteRenderer>())
+                                {
+                                    renderer.sortingOrder = j + _sprites.Count;
+                                    j++;
+                                }
+
+                                obj.transform.SetParent(prefab.transform);
+
+                                prefabs.Add((_prefabs[i].prefab, obj));
+                            }
+                            prefab.transform.SetParent(fab.transform);
+                        }
+                            
+
+                        // Cells
+                        RoomCells room = fab.AddComponent<RoomCells>();
+                        Dictionary<int, Vector2Int> cells = new Dictionary<int, Vector2Int>();
+                        // Set cell 0 to main cell at position (0,0)
+                        for (int i = 0; i < _cells.Count; i++)
+                        {
+                            Vector2Int pos = _cells[i];
+                            pos.y *= -1;
+                            cells.Add(i, pos);
+                        }
+
+                        room.SetCells = cells;
+
+                        List<(int, Face)> newDoors = new List<(int, Face)>();
+                        for (int i = 0; i < _doors.Count; i++)
+                        {
+                            newDoors.Add((_doors[i].cellId, _doors[i].face));
+                        }
+                        room.SetDoors = newDoors;
+                        room.SetCellSize = _cellSize;
+                        room.CreateRoom(renderers, prefabs);
+                        Debug.Log("Prefab created");
+                    }
                 }
-                prefab.transform.SetParent(fab.transform);
-
-                // Cells
-                RoomCells room = fab.AddComponent<RoomCells>();
-                List<Vector2Int> cells = new List<Vector2Int>();
-                // Set cell 0 to main cell at position (0,0)
-                for (int i = 0; i < _cells.Count; i++)
+            }
+            else
+            {
+                
+                if (GUILayout.Button("Modify Prefab", GUILayout.MaxWidth(viewWidth)))
                 {
-                    cells.Add(_cells[i] - _cells[0]);
-                }
-                room.CreateRoom(cells, _doors, this);
+                    if (_onOther)
+                    {
+                        Debug.LogError("You can't modify prefab with two cell at the same positions.");
+                    }
+                    else
+                    {
+                        // Sprites
+                        GameObject sprites = null;
+                        bool nouv = false;
+                        if (_room.GetRenderers.Count > 0)
+                        {
+                            sprites = _room.GetRenderers[0].transform.parent.gameObject;
+                        }
+                        else if (_sprites.Count > 0)
+                        {
+                            sprites = new GameObject("Sprites");
+                            nouv = true;
+                        }
 
+                        while (_room.GetRenderers.Count > 0)
+                        {
+                            DestroyImmediate(_room.GetRenderers[0].gameObject);
+                            _room.GetRenderers.RemoveAt(0);
+                        }
+
+                        List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+                        for (int i = 0; i < _sprites.Count; i++)
+                        {
+                            GameObject sprite = new GameObject("Sprite " + i);
+                            SpriteRenderer renderer = sprite.AddComponent<SpriteRenderer>();
+                            renderer.sprite = _sprites[i].sprite;
+                            renderer.sortingOrder = i;
+
+                            Vector2 pos = _sprites[i].position;
+                            pos.y *= -1;
+                            sprite.transform.position = pos;
+                            sprite.transform.localScale = new Vector2(_sprites[i].size, _sprites[i].size);
+
+                            sprite.transform.SetParent(sprites.transform);
+                            renderers.Add(renderer);
+                        }
+                        if (nouv)
+                            sprites.transform.SetParent(_room.transform);
+
+                        // prefabs
+                        GameObject prefabs = null;
+                        nouv = false;
+                        List<(GameObject prefab, GameObject obj)> prefabsList = new List<(GameObject, GameObject)>();
+                        if (_room.GetPrefabs.Count > 0)
+                        {
+                            prefabs = _room.GetPrefabs[0].obj.transform.parent.gameObject;
+                        }
+                        else if (_prefabs.Count > 0)
+                        {
+                            prefabs = new GameObject("Prefabs");
+                            nouv = true;
+                        }
+
+                        while (_room.GetPrefabs.Count > 0)
+                        {
+                            DestroyImmediate(_room.GetPrefabs[0].obj);
+                            _room.GetPrefabs.RemoveAt(0);
+                        }
+
+                        for (int i = 0; i < _prefabs.Count; i++)
+                        {
+                            Vector2 pos = _prefabs[i].position;
+                            pos.y *= -1;
+                            GameObject obj = PrefabUtility.InstantiatePrefab(_prefabs[i].prefab) as GameObject;
+                            obj.transform.position = pos;
+                            obj.transform.localScale *= new Vector2(_prefabs[i].size, _prefabs[i].size);
+
+                            int j = 0;
+                            foreach (SpriteRenderer renderer in obj.GetComponentsInChildren<SpriteRenderer>())
+                            {
+                                renderer.sortingOrder = j + _sprites.Count;
+                                j++;
+                            }
+
+                            obj.transform.SetParent(prefabs.transform);
+                            prefabsList.Add((_prefabs[i].prefab, obj));
+
+                        }
+                        if (nouv)
+                            prefabs.transform.SetParent(_room.transform);
+
+                        // Cells
+                        Dictionary<int, Vector2Int> cells = new Dictionary<int, Vector2Int>();
+                        // Set cell 0 to main cell at position (0,0)
+                        for (int i = 0; i < _cells.Count; i++)
+                        {
+                            Vector2Int pos = _cells[i];
+                            pos.y *= -1;
+                            cells.Add(i, pos);
+                        }
+
+                        _room.SetCells = cells;
+
+                        List<(int, Face)> newDoors = new List<(int, Face)>();
+                        for (int i = 0; i < _doors.Count; i++)
+                        {
+                            newDoors.Add((_doors[i].cellId, _doors[i].face));
+                        }
+                        _room.SetDoors = newDoors;
+                        _room.SetCellSize = _cellSize;
+                        _room.CreateRoom(renderers, prefabsList);
+                        Debug.Log("Prefab modified");
+                    }
+                }
             }
 
 
@@ -501,36 +779,46 @@ namespace Frynity.Window
                 if (_prefabs[i].prefab == null) continue;
 
                 int count = 0;
-
+                Vector2 parent = Vector2.zero;
                 foreach (SpriteRenderer renderer in _prefabs[i].prefab.GetComponentsInChildren<SpriteRenderer>())
                 {
                     Vector2 world = renderer.transform.position;
                     Vector2 scale = renderer.transform.lossyScale;
 
+                    world.y *= -1;
+
                     if (count == 1)
                     {
-                        world.y *= -1;
+                        world -= parent;
                     }
 
+                    if (count == 0)
+                    {
+                        Vector2 origin = Vector2.zero;
+                        if (_room)
+                        {
+                            origin = _room.transform.position;
+                        }
+                        count = 1;
+                        parent = world - origin;
+                        world = Vector2.zero;
+                    }
+
+                    
                     Vector2 pivot = renderer.sprite.pivot / (renderer.sprite.pixelsPerUnit * (Vector2)renderer.sprite.bounds.size);
                     pivot.y = 1 - pivot.y;
 
                     Vector2 pos = _prefabs[i].position + world * _prefabs[i].size - scale * _prefabs[i].size * (Vector2)renderer.sprite.bounds.size * pivot;
-                    
+
                     Texture2D tex = renderer.sprite.texture;
                     GUI.DrawTexture(new Rect(centerPos + pos * _zoom,
                         _prefabs[i].size * scale * renderer.sprite.bounds.size * _zoom), tex);
-
-                    if (count == 0)
-                    {
-                        count = 1;
-                    }
                 }
             }
 
             for (int i = 0;  i < _cells.Count; i++)
             {
-                bool _onOther = false;
+                _onOther = false;
                 for (int j = 0; j < _cells.Count; j++)
                 {
                     if (j != i)
@@ -542,13 +830,17 @@ namespace Frynity.Window
                         }
                     }
                 }
-                Handles.DrawSolidRectangleWithOutline(new Rect(centerPos.x + _cells[i].x * _cellSize * _zoom, centerPos.y + (_cells[i].y - _cellSize/2) * _cellSize * _zoom, _cellSize * _zoom - 1, _cellSize * _zoom - 1), Color.clear, _onOther ? Color.red : i == 0 ? Color.cyan : Color.green);
+                Handles.DrawSolidRectangleWithOutline(new Rect(centerPos.x + _cells[i].x * _cellSize * _zoom, centerPos.y + (_cells[i].y - _cellSize) * _cellSize * _zoom, _cellSize * _zoom - 1, _cellSize * _zoom - 1), Color.clear, _onOther ? Color.red : i == 0 ? Color.cyan : Color.green);
             }
 
             for (int i = 0; i < _doors.Count; i++)
             {
-                Handles.DrawSolidRectangleWithOutline(new Rect(centerPos + _doors[i] * _zoom, new Vector2(10, 10)), Color.blueViolet, Color.cyan);
+                Vector2 pos = (Vector2)_cells[_doors[i].cellId] * _cellSize;
+                pos += _doors[i].face == Face.Top ? new Vector2(_cellSize / 2, -_cellSize) :
+                    _doors[i].face == Face.Bottom ? new Vector2(_cellSize / 2, 0) :
+                    _doors[i].face == Face.Right ? new Vector2(_cellSize, -_cellSize/2) : new Vector2(0, -_cellSize / 2);
 
+                Handles.DrawSolidRectangleWithOutline(new Rect(centerPos + pos * _zoom - new Vector2(5, 5), new Vector2(10, 10)), Color.blueViolet, Color.cyan);
             }
 
             GUILayout.EndArea();
@@ -556,7 +848,6 @@ namespace Frynity.Window
 
         void OnCreateObject(object type)    
         {
-            _objects.Add((ObjectType) type);
             _showObject = true;
             switch (type)
             {
