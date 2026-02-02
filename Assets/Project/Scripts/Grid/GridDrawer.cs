@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridDrawer : MonoBehaviour
 {
@@ -47,11 +48,6 @@ public class GridDrawer : MonoBehaviour
             {
                 Vector2Int tilePosition = new Vector2Int(x + origin.x, y + origin.y);
                 AddTile(tilePosition);
-                Color newcol = new Color(Mathf.Lerp(0, 1, x / ((float)width - 1)) * 1f, 1 * 0.5f, Mathf.Lerp(0, 1, y / ((float)height - 1)) * 1f);
-                if (_tiles.ContainsKey(tilePosition))
-                {
-                    _tiles[tilePosition].SetColor(newcol);
-                }
             }
         }
         UpdateSizeAll();
@@ -123,6 +119,12 @@ public class GridDrawer : MonoBehaviour
             spawnedTile.Initialize(isOffset, position);
             _tiles[position] = spawnedTile;
             UpdateSize(position);
+            Color newcol = new Color(Mathf.Lerp(0, 1, (float)(position.x + Mathf.Abs(_limitsMinX)) / (float)(Mathf.Abs(_limitsMinX) + _limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)(position.y + Mathf.Abs(_limitsMinY)) / (float)(Mathf.Abs(_limitsMinY) + _limitsMaxY)));
+            Debug.Log(newcol.r);
+            if (_tiles.ContainsKey(position))
+            {
+                _tiles[position].SetColor(newcol);
+            }
         }
     }
 
@@ -135,7 +137,10 @@ public class GridDrawer : MonoBehaviour
         }
         else
         {
-            Debug.Log("There Isn't A Tile Here : X - " + position.x + " | Y - " + position.y);
+            if (Application.isPlaying)
+            {
+                Debug.Log("There Isn't A Tile Here : X - " + position.x + " | Y - " + position.y);
+            }
         }
     }
 
@@ -151,6 +156,18 @@ public class GridDrawer : MonoBehaviour
         if (_gridLevelData != null) 
         {
             GenerateGrid(_gridLevelData.allTilesPosition);
+            if (_tiles.ContainsKey(_gridLevelData.spawnTile))
+            {
+                _tiles[_spawnTile].SetAsSpawnTile(false);
+                Color newcol = new Color(Mathf.Lerp(0, 1, (float)(_spawnTile.x + Mathf.Abs(_limitsMinX)) / (float)(Mathf.Abs(_limitsMinX) + _limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)(_spawnTile.y + Mathf.Abs(_limitsMinY)) / (float)(Mathf.Abs(_limitsMinY) + _limitsMaxY)));
+                Debug.Log(newcol.r);
+                if (_tiles.ContainsKey(_spawnTile))
+                {
+                    _tiles[_spawnTile].SetColor(newcol);
+                }
+            }
+            _spawnTile = _gridLevelData.spawnTile;
+            _tiles[_spawnTile].SetAsSpawnTile(true);
         }
     }
 
@@ -168,6 +185,12 @@ public class GridDrawer : MonoBehaviour
             if (_tiles.ContainsKey(_spawnTile))
             {
                 _tiles[_spawnTile].SetAsSpawnTile(false);
+                Color newcol = new Color(Mathf.Lerp(0, 1, (float)_spawnTile.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)_spawnTile.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
+                Debug.Log(newcol.r);
+                if (_tiles.ContainsKey(_spawnTile))
+                {
+                    _tiles[_spawnTile].SetColor(newcol);
+                }
             }
             _spawnTile = _chooseSpawnPoint;
             _tiles[_spawnTile].SetAsSpawnTile(true);
@@ -207,6 +230,8 @@ public class GridDrawer : MonoBehaviour
         {
             tile.AnnihilateTile();
         }
+
+        _spawnTile = new Vector2Int();
     }
 
     [Button("Save The Grid layout")]
@@ -260,16 +285,18 @@ public class GridDrawer : MonoBehaviour
     {
         Gizmos.color = Color.yellowNice;
         Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_limitsMaxX + _limitsMinX) /2) * _tilesSize, (0.5f + (float)(_limitsMaxY + _limitsMinY) /2) * _tilesSize), new Vector2( (float)(Mathf.Abs(_limitsMaxX) + Mathf.Abs(_limitsMinX) + 1) * _tilesSize, (float)(Mathf.Abs(_limitsMaxY) + Mathf.Abs(_limitsMinY) + 1) * _tilesSize ));
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(new Vector2((_drawGridOrigin.x + (float)_drawGridWidth / 2) * _tilesSize, (_drawGridOrigin.y + (float)_drawGridHeight / 2) * _tilesSize), new Vector3(_drawGridWidth * _tilesSize, _drawGridHeight * _tilesSize, 1));
-        Gizmos.color = Color.cyan;
         if (_gridLevelData != null)
         {
+            Gizmos.color = Color.cyan;
             foreach (var tile in _gridLevelData.allTilesPosition)
             {
                 Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
             }
+            Gizmos.color = Color.softYellow;
+            Gizmos.DrawWireCube(new Vector2((0.5f + _gridLevelData.spawnTile.x) * _tilesSize, (0.5f + _gridLevelData.spawnTile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
         }
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(new Vector2((_drawGridOrigin.x + (float)_drawGridWidth / 2) * _tilesSize, (_drawGridOrigin.y + (float)_drawGridHeight / 2) * _tilesSize), new Vector3(_drawGridWidth * _tilesSize, _drawGridHeight * _tilesSize, 1));
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector2((_eraseGridOrigin.x + (float)_eraseGridWidth / 2) * _tilesSize, (_eraseGridOrigin.y + (float)_eraseGridHeight / 2) * _tilesSize), new Vector3(_eraseGridWidth * _tilesSize, _eraseGridHeight * _tilesSize, 1));
         Gizmos.color = Color.orangeRed;

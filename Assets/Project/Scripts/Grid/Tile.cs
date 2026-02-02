@@ -7,15 +7,27 @@ public class Tile : MonoBehaviour, IHoverable
     [SerializeField] private Color _offsetColor;
 
     [SerializeField] private SpriteRenderer _renderer;
+    [SerializeField] private Sprite _inGameSprite;
+    [SerializeField] private Sprite _inEditorSprite;
 
     [SerializeField] private GameObject _highlight;
 
     private CellData _cellData = new CellData();
 
-    public bool _isOffset;
+    public CellData CellData { get { return _cellData; } }
+
+    private bool _isOffset;
 
     public void Initialize(bool isOffset, Vector2Int gridPosition)
     {
+        if (Application.isPlaying)
+        {
+            _renderer.sprite = _inGameSprite;
+        }
+        else
+        {
+            _renderer.sprite = _inEditorSprite;
+        }
         _isOffset = isOffset;
         SetColor();
         _cellData._gridPosition = gridPosition;

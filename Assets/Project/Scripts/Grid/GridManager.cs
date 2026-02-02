@@ -188,6 +188,8 @@ public class GridManager : MonoBehaviour
             }
             Gizmos.color = Color.yellowNice;
             Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_gridLevelData.limitsMax.x + _gridLevelData.limitsMin.x) / 2) * _tilesSize, (0.5f + (float)(_gridLevelData.limitsMax.y + _gridLevelData.limitsMin.y) / 2) * _tilesSize), new Vector2((float)(Mathf.Abs(_gridLevelData.limitsMax.x) + Mathf.Abs(_gridLevelData.limitsMin.x) + 1) * _tilesSize, (float)(Mathf.Abs(_gridLevelData.limitsMax.y) + Mathf.Abs(_gridLevelData.limitsMin.y) + 1) * _tilesSize));
+            Gizmos.color = Color.orangeRed;
+            Gizmos.DrawWireCube(new Vector2((0.5f + _gridLevelData.spawnTile.x) * _tilesSize, (0.5f + _gridLevelData.spawnTile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
         }
     }
 }
