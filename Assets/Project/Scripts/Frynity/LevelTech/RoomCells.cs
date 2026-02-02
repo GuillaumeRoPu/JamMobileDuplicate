@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Frynity.Gen
 {
-    public enum Face
+    public enum FaceDoor
     {
         Top, Bottom, Left, Right
     }
@@ -15,7 +15,7 @@ namespace Frynity.Gen
         List<SpriteRenderer> _renderers = new List<SpriteRenderer>();
         List<(GameObject prefab, GameObject obj)> _objects = new List<(GameObject, GameObject)>();
         Dictionary<int, Vector2Int> _localCells = new Dictionary<int, Vector2Int>();
-        List<(int cellId, Face face)> _localDoors = new List<(int, Face)>();
+        List<(int cellId, FaceDoor face)> _localDoors = new List<(int, FaceDoor)>();
         List<bool> _activeDoors = new List<bool>();
 
         public float GetCellSize => _cellSize;
@@ -24,8 +24,8 @@ namespace Frynity.Gen
         public List<(GameObject prefab, GameObject obj)> GetPrefabs => _objects;
         public Dictionary<int, Vector2Int> GetCells => _localCells;
         public Dictionary<int, Vector2Int> SetCells { set { _localCells = value; }  }
-        public List<(int cell, Face face)> GetDoors => _localDoors;
-        public List<(int, Face)> SetDoors 
+        public List<(int cell, FaceDoor face)> GetDoors => _localDoors;
+        public List<(int, FaceDoor)> SetDoors 
         { 
             set 
             { 
@@ -46,7 +46,7 @@ namespace Frynity.Gen
             _objects = prefabs;
         }
 
-        public void ActiveDoor(int cell, Face face)
+        public void ActiveDoor(int cell, FaceDoor face)
         {
             for (int i = 0; i < _localDoors.Count; i++)
             {
@@ -72,9 +72,9 @@ namespace Frynity.Gen
                 if (_activeDoors[i])
                 {
                     Vector2 pos = (Vector2)transform.position + (Vector2)_localCells[_localDoors[i].cellId] * _cellSize + new Vector2(_cellSize, _cellSize) / 2;
-                    pos += _localDoors[i].face == Face.Left ? new Vector2(-_cellSize / 2, 0) :
-                        _localDoors[i].face == Face.Top ? new Vector2(0, _cellSize / 2) :
-                        _localDoors[i].face == Face.Bottom ? new Vector2(0, -_cellSize / 2) : new Vector2(_cellSize / 2, 0);
+                    pos += _localDoors[i].face == FaceDoor.Left ? new Vector2(-_cellSize / 2, 0) :
+                        _localDoors[i].face == FaceDoor.Top ? new Vector2(0, _cellSize / 2) :
+                        _localDoors[i].face == FaceDoor.Bottom ? new Vector2(0, -_cellSize / 2) : new Vector2(_cellSize / 2, 0);
 
                     Gizmos.DrawCube(pos, new Vector2(0.1f, 0.1f));
                 }

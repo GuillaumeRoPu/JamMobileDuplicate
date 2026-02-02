@@ -36,7 +36,7 @@ namespace Frynity.Window
 
         // Doors
         bool _showDoor;
-        List<(int indexCellsWall, int cellId, Face face)> _doors = new List<(int, int, Face)>();
+        List<(int indexCellsWall, int cellId, FaceDoor face)> _doors = new List<(int, int, FaceDoor)>();
         List<bool> _doorShow = new List<bool>();
 
         // Settings
@@ -116,28 +116,28 @@ namespace Frynity.Window
                 _cellsShow.Add(false);
             }
 
-            List<(int id, Face face)> cellsWithWallId = new List<(int, Face)>();
+            List<(int id, FaceDoor face)> cellsWithWallId = new List<(int, FaceDoor)>();
             for (int i = 0; i < _cells.Count; i++)
             {
-                List<Face> faces = new List<Face>();
+                List<FaceDoor> faces = new List<FaceDoor>();
                 bool wallRight = !_cells.Contains(_cells[i] + Vector2Int.right);
                 bool wallLeft = !_cells.Contains(_cells[i] + Vector2Int.left);
                 bool wallDown = !_cells.Contains(_cells[i] + Vector2Int.up);
                 bool wallUp = !_cells.Contains(_cells[i] + Vector2Int.down);
 
-                if (wallRight) faces.Add(Face.Right);
-                if (wallDown) faces.Add(Face.Bottom);
-                if (wallLeft) faces.Add(Face.Left);
-                if (wallUp) faces.Add(Face.Top);
+                if (wallRight) faces.Add(FaceDoor.Right);
+                if (wallDown) faces.Add(FaceDoor.Bottom);
+                if (wallLeft) faces.Add(FaceDoor.Left);
+                if (wallUp) faces.Add(FaceDoor.Top);
 
-                foreach (Face face in faces)
+                foreach (FaceDoor face in faces)
                 {
                     cellsWithWallId.Add((i, face));
                 }
             }
 
 
-            foreach ((int, Face) door in room.GetDoors)
+            foreach ((int, FaceDoor) door in room.GetDoors)
             {
                 int id = 0;
                 foreach(var cell in cellsWithWallId)
@@ -391,7 +391,7 @@ namespace Frynity.Window
             _showDoor = EditorGUILayout.BeginFoldoutHeaderGroup(_showDoor, "Doors");
             if (GUILayout.Button("+"))
             {
-                _doors.Add((0, 0, Face.Left));
+                _doors.Add((0, 0, FaceDoor.Left));
                 _doorShow.Add(false);
                 _showDoor = true;
 
@@ -437,21 +437,21 @@ namespace Frynity.Window
                     }
                     GUILayout.FlexibleSpace();
 
-                    List<(int id, Face face)> cellsWithWallId = new List<(int, Face)>();
+                    List<(int id, FaceDoor face)> cellsWithWallId = new List<(int, FaceDoor)>();
                     for(int j = 0; j < _cells.Count; j++)
                     {
-                        List<Face> faces = new List<Face>();
+                        List<FaceDoor> faces = new List<FaceDoor>();
                         bool wallRight = !_cells.Contains(_cells[j] + Vector2Int.right);
                         bool wallLeft = !_cells.Contains(_cells[j] + Vector2Int.left);
                         bool wallDown = !_cells.Contains(_cells[j] + Vector2Int.up);
                         bool wallUp = !_cells.Contains(_cells[j] + Vector2Int.down);
 
-                        if (wallRight) faces.Add(Face.Right);
-                        if (wallDown) faces.Add(Face.Bottom);
-                        if (wallLeft) faces.Add(Face.Left);
-                        if (wallUp) faces.Add(Face.Top);
+                        if (wallRight) faces.Add(FaceDoor.Right);
+                        if (wallDown) faces.Add(FaceDoor.Bottom);
+                        if (wallLeft) faces.Add(FaceDoor.Left);
+                        if (wallUp) faces.Add(FaceDoor.Top);
 
-                        foreach (Face face in faces)
+                        foreach (FaceDoor face in faces)
                         {
                             cellsWithWallId.Add((j, face));
                         }
@@ -623,7 +623,7 @@ namespace Frynity.Window
 
                         room.SetCells = cells;
 
-                        List<(int, Face)> newDoors = new List<(int, Face)>();
+                        List<(int, FaceDoor)> newDoors = new List<(int, FaceDoor)>();
                         for (int i = 0; i < _doors.Count; i++)
                         {
                             newDoors.Add((_doors[i].cellId, _doors[i].face));
@@ -631,6 +631,8 @@ namespace Frynity.Window
                         room.SetDoors = newDoors;
                         room.SetCellSize = _cellSize;
                         room.CreateRoom(renderers, prefabs);
+
+                        PrefabUtility.SaveAsPrefabAssetAndConnect(fab, _selectedPath, InteractionMode.AutomatedAction);
                         Debug.Log("Prefab created");
                     }
                 }
@@ -738,7 +740,7 @@ namespace Frynity.Window
 
                         _room.SetCells = cells;
 
-                        List<(int, Face)> newDoors = new List<(int, Face)>();
+                        List<(int, FaceDoor)> newDoors = new List<(int, FaceDoor)>();
                         for (int i = 0; i < _doors.Count; i++)
                         {
                             newDoors.Add((_doors[i].cellId, _doors[i].face));
@@ -836,9 +838,9 @@ namespace Frynity.Window
             for (int i = 0; i < _doors.Count; i++)
             {
                 Vector2 pos = (Vector2)_cells[_doors[i].cellId] * _cellSize;
-                pos += _doors[i].face == Face.Top ? new Vector2(_cellSize / 2, -_cellSize) :
-                    _doors[i].face == Face.Bottom ? new Vector2(_cellSize / 2, 0) :
-                    _doors[i].face == Face.Right ? new Vector2(_cellSize, -_cellSize/2) : new Vector2(0, -_cellSize / 2);
+                pos += _doors[i].face == FaceDoor.Top ? new Vector2(_cellSize / 2, -_cellSize) :
+                    _doors[i].face == FaceDoor.Bottom ? new Vector2(_cellSize / 2, 0) :
+                    _doors[i].face == FaceDoor.Right ? new Vector2(_cellSize, -_cellSize/2) : new Vector2(0, -_cellSize / 2);
 
                 Handles.DrawSolidRectangleWithOutline(new Rect(centerPos + pos * _zoom - new Vector2(5, 5), new Vector2(10, 10)), Color.blueViolet, Color.cyan);
             }
