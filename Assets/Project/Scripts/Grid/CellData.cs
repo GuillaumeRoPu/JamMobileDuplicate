@@ -11,12 +11,12 @@ public enum Face
 
 public class CellData
 {
-    public Vector2Int _gridPosition;
-    public Vector2Int _mainRoomCell;
-    public bool _isSpawnPoint = false;
+    public Vector2Int GridPosition;
+    public Vector2Int MainRoomCell;
+    public bool IsSpawnPoint = false;
     //public Trap _trap;
-    public Face _doorPosition = Face.None;
-    public Entity _entity;
+    public Face DoorPosition = Face.None;
+    public Entity Entity;
 
 
     public bool CanPass(Face face, CellData originalCell)
@@ -29,7 +29,9 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
-        if (_mainRoomCell == originalCell._mainRoomCell || _doorPosition == receptFace)
+        if (Entity != null) return false;
+
+        if (MainRoomCell == originalCell.MainRoomCell || DoorPosition == receptFace)
         {
             return true;
         }

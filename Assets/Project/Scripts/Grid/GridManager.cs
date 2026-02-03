@@ -24,6 +24,9 @@ public class GridManager : MonoBehaviour
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
     private static Vector2Int _spawnPointTile = new Vector2Int();
 
+    public static Dictionary<Vector2Int, Tile> Tiles => _tiles;
+
+
     //END OF ALL THE DATA
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin

@@ -30,14 +30,14 @@ public class Tile : MonoBehaviour, IHoverable
         }
         _isOffset = isOffset;
         SetColor();
-        _cellData._gridPosition = gridPosition;
+        _cellData.GridPosition = gridPosition;
     }
 
     private void SetColor()
     {
         //_renderer.color = _isOffset ? _offsetColor : _baseColor;
         _renderer.color = _baseColor;
-        if (_cellData._isSpawnPoint)
+        if (_cellData.IsSpawnPoint)
         {
             _renderer.color = Color.red;
         }
@@ -46,7 +46,7 @@ public class Tile : MonoBehaviour, IHoverable
     public void OnHover()
     {
         _highlight.SetActive(true);
-        Debug.Log(_cellData._gridPosition);
+        Debug.Log(_cellData.GridPosition);
     }
 
     public void StopHover()
@@ -78,7 +78,7 @@ public class Tile : MonoBehaviour, IHoverable
 
     public void SetAsSpawnTile(bool isSpawn)
     {
-        _cellData._isSpawnPoint = isSpawn;
+        _cellData.IsSpawnPoint = isSpawn;
         SetColor();
     }
 }

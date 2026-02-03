@@ -623,7 +623,7 @@ MonoBehaviour:
   _eraseGridHeight: 2
   _eraseGridOrigin: {x: -3, y: 1}
   _gridLevelName: francko
-  _gridLevelData: {fileID: 11400000, guid: 2cb3eb5204a24494bb542f88ee29629b, type: 2}
+  _gridLevelData: {fileID: 0}
   _chooseSpawnPoint: {x: 6, y: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
