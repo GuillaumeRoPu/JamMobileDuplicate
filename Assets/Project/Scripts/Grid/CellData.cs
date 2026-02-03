@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum Face
@@ -11,12 +12,24 @@ public enum Face
 
 public class CellData
 {
-    public Vector2Int _gridPosition;
-    public Vector2Int _mainRoomCell;
-    public bool _isSpawnPoint = false;
+    [Flags] public enum SpawnPointType
+    {
+        None = 0,
+        Player = 1,
+        Zombie = 2,
+        Ghost = 4,
+        Echo = 8,
+        Werewolf = 16,
+        Mimic = 32,
+    }
+
+    public Vector2Int gridPosition;
+    public Vector2Int mainRoomCell;
+    public bool isSpawnPoint = false;
+    public SpawnPointType spawnPointType = SpawnPointType.None;
     //public Trap _trap;
-    public Face _doorPosition = Face.None;
-    public Entity _entity;
+    public Face doorPosition = Face.None;
+    public Entity entity;
 
 
     public bool CanPass(Face face, CellData originalCell)
@@ -29,7 +42,7 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
-        if (_mainRoomCell == originalCell._mainRoomCell || _doorPosition == receptFace)
+        if (mainRoomCell == originalCell.mainRoomCell || doorPosition == receptFace)
         {
             return true;
         }

@@ -22,7 +22,6 @@ public class GridManager : MonoBehaviour
     //ALL THE DATA FOR THE GRID IS HERE
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
-    private static Vector2Int _spawnPointTile = new Vector2Int();
 
     //END OF ALL THE DATA
 
@@ -95,7 +94,6 @@ public class GridManager : MonoBehaviour
         Debug.Log(_tiles.Count);
         if (_generateGridOnPlay && _gridLevelData != null)
         {
-            _spawnPointTile = _gridLevelData.spawnTile;
             _limitsMax = _gridLevelData.limitsMax;
             _limitsMin = _gridLevelData.limitsMin;
             GenerateGrid(_gridLevelData.allTilesPosition);
@@ -141,9 +139,9 @@ public class GridManager : MonoBehaviour
             var spawnedTile = Instantiate(_tilesPrefab, new Vector2((float)position.x + 0.5f, (float)position.y + 0.5f), Quaternion.identity, _tilesParent);
             spawnedTile.name = $"Tile X:{position.x}, Y:{position.y}";
             var isOffset = ((position.x % 2 == 0 && position.y % 2 != 0) || (position.x % 2 != 0 && position.y % 2 == 0));
-            if (position == _gridLevelData.spawnTile)
+            if (_gridLevelData.spawnPointsTiles[position] != CellData.SpawnPointType.None)
             {
-                spawnedTile.SetAsSpawnTile(true);
+                spawnedTile.SetAsSpawnTile(_gridLevelData.spawnPointsTiles[position]);
             }
             spawnedTile.Initialize(isOffset, position);
             _tiles[position] = spawnedTile;
@@ -181,15 +179,26 @@ public class GridManager : MonoBehaviour
     {
         if (_gridLevelData != null) 
         {
-            Gizmos.color = Color.cyan;
             foreach (var tile in _gridLevelData.allTilesPosition)
             {
+                Gizmos.color = Color.cyan;
                 Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                if (_gridLevelData.spawnPointsTiles.ContainsKey(tile))
+                {
+                    if (_gridLevelData.spawnPointsTiles[tile].HasFlag(CellData.SpawnPointType.Player))
+                    {
+                        Gizmos.color = Color.orangeRed;
+                        Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                    }
+                    else if (_gridLevelData.spawnPointsTiles[tile] != CellData.SpawnPointType.None)
+                    {
+                        Gizmos.color = Color.blue;
+                        Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                    }
+                }
             }
             Gizmos.color = Color.yellowNice;
             Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_gridLevelData.limitsMax.x + _gridLevelData.limitsMin.x) / 2) * _tilesSize, (0.5f + (float)(_gridLevelData.limitsMax.y + _gridLevelData.limitsMin.y) / 2) * _tilesSize), new Vector2((float)(Mathf.Abs(_gridLevelData.limitsMax.x) + Mathf.Abs(_gridLevelData.limitsMin.x) + 1) * _tilesSize, (float)(Mathf.Abs(_gridLevelData.limitsMax.y) + Mathf.Abs(_gridLevelData.limitsMin.y) + 1) * _tilesSize));
-            Gizmos.color = Color.orangeRed;
-            Gizmos.DrawWireCube(new Vector2((0.5f + _gridLevelData.spawnTile.x) * _tilesSize, (0.5f + _gridLevelData.spawnTile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
         }
     }
 }

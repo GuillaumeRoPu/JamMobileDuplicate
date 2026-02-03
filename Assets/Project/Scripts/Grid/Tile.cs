@@ -30,23 +30,30 @@ public class Tile : MonoBehaviour, IHoverable
         }
         _isOffset = isOffset;
         SetColor();
-        _cellData._gridPosition = gridPosition;
+        _cellData.gridPosition = gridPosition;
     }
 
     private void SetColor()
     {
         //_renderer.color = _isOffset ? _offsetColor : _baseColor;
         _renderer.color = _baseColor;
-        if (_cellData._isSpawnPoint)
+        if (_cellData.isSpawnPoint)
         {
-            _renderer.color = Color.red;
+            if (_cellData.spawnPointType.HasFlag(CellData.SpawnPointType.Player))
+            {
+                _renderer.color = Color.red;
+            }
+            else
+            {
+                _renderer.color = Color.blue;
+            }
         }
     }
 
     public void OnHover()
     {
         _highlight.SetActive(true);
-        Debug.Log(_cellData._gridPosition);
+        Debug.Log(_cellData.gridPosition);
     }
 
     public void StopHover()
@@ -76,9 +83,17 @@ public class Tile : MonoBehaviour, IHoverable
         }
     }
 
-    public void SetAsSpawnTile(bool isSpawn)
+    public void SetAsSpawnTile(CellData.SpawnPointType type)
     {
-        _cellData._isSpawnPoint = isSpawn;
+        _cellData.isSpawnPoint = true;
+        _cellData.spawnPointType = type;
+        SetColor();
+    }
+
+    public void RemoveSpawnTile()
+    {
+        _cellData.isSpawnPoint = false;
+        _cellData.spawnPointType = CellData.SpawnPointType.None;
         SetColor();
     }
 }
