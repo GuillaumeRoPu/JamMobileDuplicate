@@ -1,4 +1,3 @@
-using Frynity.Window;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,41 +8,79 @@ namespace Frynity.Gen
         Top, Bottom, Left, Right
     }
 
+    [System.Serializable]
+    public struct CellDoor
+    {
+        [MinValue(0)] public int cellId;
+        public FaceDoor face;
+
+        public CellDoor(int cellId, FaceDoor faceDoor)
+        {
+            this.cellId = cellId;
+            face = faceDoor;
+        }
+    }
+
+    [System.Serializable]
+    public struct PrefabsRoom
+    {
+        public GameObject prefab;
+        public GameObject obj;
+
+        public PrefabsRoom(GameObject prefab, GameObject obj)
+        {
+            this.obj = obj;
+            this.prefab = prefab;
+        }
+    }
+
+    [System.Serializable]
+    public struct Cell
+    {
+        [MinValue(0)] public int id;
+        public Vector2Int localPos;
+
+        public Cell(int id, Vector2Int localPos)
+        {
+            this.id = id;
+            this.localPos = localPos;
+        }
+    }
+
     public class RoomCells : MonoBehaviour
     {
-        float _cellSize;
-        List<SpriteRenderer> _renderers = new List<SpriteRenderer>();
-        List<(GameObject prefab, GameObject obj)> _objects = new List<(GameObject, GameObject)>();
-        Dictionary<int, Vector2Int> _localCells = new Dictionary<int, Vector2Int>();
-        List<(int cellId, FaceDoor face)> _localDoors = new List<(int, FaceDoor)>();
-        List<bool> _activeDoors = new List<bool>();
+        [SerializeField] float _cellSize;
+        [SerializeField] List<SpriteRenderer> _renderers = new List<SpriteRenderer>();
+        [SerializeField] List<PrefabsRoom> _prefabs = new List<PrefabsRoom>();
+        [SerializeField] List<Cell> _localCells = new List<Cell>();
+        [SerializeField] List<CellDoor> _localDoors = new List<CellDoor>();
+        [SerializeField, HideInInspector] List<bool> _activeDoors = new List<bool>();
 
         public float GetCellSize => _cellSize;
         public float SetCellSize { set { _cellSize = value; } }
         public List<SpriteRenderer> GetRenderers => _renderers;
-        public List<(GameObject prefab, GameObject obj)> GetPrefabs => _objects;
-        public Dictionary<int, Vector2Int> GetCells => _localCells;
-        public Dictionary<int, Vector2Int> SetCells { set { _localCells = value; }  }
-        public List<(int cell, FaceDoor face)> GetDoors => _localDoors;
-        public List<(int, FaceDoor)> SetDoors 
-        { 
-            set 
-            { 
-                _localDoors = value; 
-                _activeDoors = new List<bool>();
-                for (int i = 0; i < _localDoors.Count; i++)
-                {
-                    _activeDoors.Add(true);
-                }
-            } 
+        public List<PrefabsRoom> GetPrefabs => _prefabs;
+        public List<Cell> GetCells => _localCells;
+        public List<Cell> SetCells { set { _localCells = value; }  }
+        public List<CellDoor> GetDoors => _localDoors;
+        public void SetDoors(List<CellDoor> doors)
+        {
+            _localDoors = doors;
+            _activeDoors = new List<bool>();
+            for (int i = 0; i < _localDoors.Count; i++)
+            {
+                _activeDoors.Add(true);
+            }
+
         }
 
         public List<bool> GetActiveDoors => _activeDoors;
 
-        public void CreateRoom(List<SpriteRenderer> renderers, List<(GameObject, GameObject)> prefabs)
+        public void CreateRoom(List<SpriteRenderer> renderers, List<PrefabsRoom> prefabs)
         {
             _renderers = renderers;
-            _objects = prefabs;
+
+            _prefabs = prefabs;
         }
 
         public void ActiveDoor(int cell, FaceDoor face)
@@ -57,12 +94,24 @@ namespace Frynity.Gen
             }
         }
 
+        public bool CellHaveDoor(int id)
+        {
+            bool value = false;
+            foreach (CellDoor door in _localDoors)
+            {
+                value = door.cellId == id;
+                if (value) break;
+            }
+
+            return value;
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            foreach (var cell in _localCells)
+            foreach (Cell cell in _localCells)
             {
-                Gizmos.DrawWireCube((Vector2)transform.position + (Vector2)cell.Value * _cellSize + new Vector2(_cellSize, _cellSize)/2, new Vector2(_cellSize, _cellSize));
+                Gizmos.DrawWireCube((Vector2)transform.position + (Vector2)cell.localPos * _cellSize + new Vector2(_cellSize, _cellSize)/2, new Vector2(_cellSize, _cellSize));
                 
             }
 
@@ -71,7 +120,7 @@ namespace Frynity.Gen
             {
                 if (_activeDoors[i])
                 {
-                    Vector2 pos = (Vector2)transform.position + (Vector2)_localCells[_localDoors[i].cellId] * _cellSize + new Vector2(_cellSize, _cellSize) / 2;
+                    Vector2 pos = (Vector2)transform.position + (Vector2)_localCells[_localDoors[i].cellId].localPos * _cellSize + new Vector2(_cellSize, _cellSize) / 2;
                     pos += _localDoors[i].face == FaceDoor.Left ? new Vector2(-_cellSize / 2, 0) :
                         _localDoors[i].face == FaceDoor.Top ? new Vector2(0, _cellSize / 2) :
                         _localDoors[i].face == FaceDoor.Bottom ? new Vector2(0, -_cellSize / 2) : new Vector2(_cellSize / 2, 0);

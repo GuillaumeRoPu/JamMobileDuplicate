@@ -39,17 +39,18 @@ namespace Frynity.Gen
                 EditorGUI.indentLevel++;
                 for (int i = 0; i < room.GetCells.Count; i++)
                 {
+                    if (!room.CellHaveDoor(room.GetCells[i].id)) continue;
                     _showCellFoldout[i] = EditorGUILayout.Foldout(_showCellFoldout[i], "Cell " + i, true);
                     if (_showCellFoldout[i])
                     {
                         for (int j = 0; j < room.GetDoors.Count; j++)
                         {
-                            if (room.GetDoors[j].cell != i) continue;
+                            if (room.GetDoors[j].cellId != i) continue;
                             room.GetActiveDoors[j] = EditorGUILayout.Toggle("Door", room.GetActiveDoors[j]);
 
                             if (room.GetActiveDoors[j])
                             {
-                                room.ActiveDoor(room.GetDoors[j].cell, room.GetDoors[j].face);
+                                room.ActiveDoor(room.GetDoors[j].cellId, room.GetDoors[j].face);
                             }
 
                         }
@@ -57,11 +58,14 @@ namespace Frynity.Gen
                 }
                 EditorGUI.indentLevel--;
             }
+            EditorGUILayout.EndFoldoutHeaderGroup();
 
             if (GUILayout.Button("Modify Prefab"))
             {
                 RoomCreator.ShowWindow(room);
             }
+
+            base.OnInspectorGUI();
 
             serializedObject.ApplyModifiedProperties();
         }
