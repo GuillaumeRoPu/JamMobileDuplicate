@@ -9,6 +9,7 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
     [ReadOnly] public List<CellData.SpawnPointType> values = new List<CellData.SpawnPointType>();
     [ReadOnly] public Vector2Int limitsMin;
     [ReadOnly] public Vector2Int limitsMax;
+
     public void OnBeforeSerialize()
     {
         keys.Clear();

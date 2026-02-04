@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
-using Frynity.Utils;
 
 
 #if UNITY_EDITOR
