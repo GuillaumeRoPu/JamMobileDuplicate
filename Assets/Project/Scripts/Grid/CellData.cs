@@ -28,7 +28,7 @@ public class CellData
     public Vector2Int GridPosition;
     public Vector2Int MainRoomCell;
     public bool IsSpawnPoint = false;
-    public SpawnPointType SpawnPointType = SpawnPointType.None;
+    public SpawnPointType spawnPointType = SpawnPointType.None;
     //public Trap _trap;
     public Face DoorPosition = Face.None;
     public Entity Entity;
