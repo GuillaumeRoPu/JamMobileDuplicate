@@ -2,11 +2,24 @@ using Frynity.Gen;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Frynity.Window
 {
     public class RoomCreator : EditorWindow
     {
+        struct ObjectTypeC
+        {
+            public int cellId;
+            public ObjectType type;
+
+            public ObjectTypeC(int cellId, ObjectType type)
+            {
+                this.cellId = cellId;
+                this.type = type;
+            }
+        }
+
         RoomCells _room = null;
 
         float _zoom = 100;
@@ -22,10 +35,10 @@ namespace Frynity.Window
         }
 
         List<bool> _showObjects = new List<bool>();
-        List<(Sprite sprite, Vector2 position, float size)> _sprites = new List<(Sprite, Vector2, float)>();
+        List<(int cellId, Sprite sprite, Vector2 position, float size)> _sprites = new List<(int, Sprite, Vector2, float)>();
         List<bool> _spriteShow = new List<bool>();
 
-        List<(GameObject prefab, Vector2 position, float size)> _prefabs = new List<(GameObject, Vector2, float)>();
+        List<(int cellId, GameObject prefab, Vector2 position, float size)> _prefabs = new List<(int, GameObject, Vector2, float)>();
         List<bool> _prefabShow = new List<bool>();
 
         // Cells
@@ -93,29 +106,29 @@ namespace Frynity.Window
 
             _showCells = true;
             _showDoor = true;
-
-            foreach (SpriteRenderer renderer in room.GetRenderers)
-            {
-                Vector2 pos = renderer.transform.position;
-                pos.y *= -1;
-                _sprites.Add((renderer.sprite, pos, renderer.transform.lossyScale.x));
-                _spriteShow.Add(false);
-            }
-
-            foreach (var pref in room.GetPrefabs)
-            {
-                Vector2 pos = pref.obj.transform.position;
-                pos.y *= -1;
-                _prefabs.Add((pref.prefab, pos, pref.obj.transform.lossyScale.x/ pref.prefab.transform.lossyScale.x));
-                _prefabShow.Add(false);
-            }
-
             foreach (var cell in room.GetCells)
             {
                 Vector2Int pos = cell.localPos;
                 pos.y *= -1;
                 _cells.Add(pos);
                 _cellsShow.Add(false);
+                _showObjects.Add(false);
+            }
+
+            foreach (RendererRoom renderer in room.GetRenderers)
+            {
+                Vector2 posSprite = renderer.renderer.transform.position;
+                posSprite.y *= -1;
+                _sprites.Add((renderer.cellId, renderer.renderer.sprite, posSprite, renderer.renderer.transform.lossyScale.x));
+                _spriteShow.Add(false);
+            }
+
+            foreach (var pref in room.GetPrefabs)
+            {
+                Vector2 posPrefab = pref.obj.transform.position;
+                posPrefab.y *= -1;
+                _prefabs.Add((pref.cellId, pref.prefab, posPrefab, pref.obj.transform.lossyScale.x / pref.prefab.transform.lossyScale.x));
+                _prefabShow.Add(false);
             }
 
             List<(int id, FaceDoor face)> cellsWithWallId = new List<(int, FaceDoor)>();
@@ -225,39 +238,47 @@ namespace Frynity.Window
                     GUILayout.FlexibleSpace();
 
                     GUILayout.EndHorizontal();
+
+
+
                     if (_cellsShow[i])
                     {
-                        GUILayout.BeginHorizontal();
-                        GUILayout.Space(30);
-                        if (GUILayout.Button("Up", GUILayout.Width(50))) // up = -1
+                        if (i == 0)
                         {
-                            _cells[i] += Vector2Int.down;
+                            _cells[i] = Vector2Int.zero;
                         }
-                        GUILayout.EndHorizontal();
-
-                        GUILayout.BeginHorizontal();
-                        if (GUILayout.Button("Left", GUILayout.Width(50)))
+                        else
                         {
-                            _cells[i] += Vector2Int.left;
+                            GUILayout.BeginHorizontal();
+                            GUILayout.Space(30);
+                            if (GUILayout.Button("Up", GUILayout.Width(50))) // up = -1
+                            {
+                                _cells[i] += Vector2Int.down;
+                            }
+                            GUILayout.EndHorizontal();
+
+                            GUILayout.BeginHorizontal();
+                            if (GUILayout.Button("Left", GUILayout.Width(50)))
+                            {
+                                _cells[i] += Vector2Int.left;
+                            }
+                            if (GUILayout.Button("Right", GUILayout.Width(50)))
+                            {
+                                _cells[i] += Vector2Int.right;
+                            }
+                            GUILayout.EndHorizontal();
+
+                            GUILayout.BeginHorizontal();
+                            GUILayout.Space(30);
+                            if (GUILayout.Button("Down", GUILayout.Width(50))) // Down = +1
+                            {
+                                _cells[i] += Vector2Int.up;
+                            }
+                            GUILayout.EndHorizontal();
                         }
-                        if (GUILayout.Button("Right", GUILayout.Width(50)))
-                        {
-                            _cells[i] += Vector2Int.right;
-                        }
-                        GUILayout.EndHorizontal();
-
-                        GUILayout.BeginHorizontal();
-                        GUILayout.Space(30);
-                        if (GUILayout.Button("Down", GUILayout.Width(50))) // Down = +1
-                        {
-                            _cells[i] += Vector2Int.up;
-                        }
-                        GUILayout.EndHorizontal();
-                        Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
-
-
-
+                        
                         // Objects
+
                         GUILayout.BeginHorizontal();
                         _showObjects[i] = EditorGUILayout.Foldout(_showObjects[i], "Objects", true);
                         GUILayout.Space(30);
@@ -265,8 +286,8 @@ namespace Frynity.Window
                         {
                             GenericMenu menu = new GenericMenu();
 
-                            menu.AddItem(new GUIContent("Sprite"), false, OnCreateObject, ObjectType.Sprite);
-                            menu.AddItem(new GUIContent("Prefab"), false, OnCreateObject, ObjectType.Prefab);
+                            menu.AddItem(new GUIContent("Sprite"), false, OnCreateObject, new ObjectTypeC(i, ObjectType.Sprite));
+                            menu.AddItem(new GUIContent("Prefab"), false, OnCreateObject, new ObjectTypeC(i, ObjectType.Prefab));
 
                             menu.ShowAsContext();
 
@@ -307,6 +328,7 @@ namespace Frynity.Window
 
                             for (int j = 0; j < _sprites.Count; j++)
                             {
+                                if (_sprites[j].cellId != i) continue;
                                 GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
                                 _spriteShow[j] = EditorGUILayout.Foldout(_spriteShow[j], _sprites[j].sprite == null ? "Sprite" : _sprites[j].sprite.name, true);
                                 if (GUILayout.Button("-", GUILayout.Width(20)))
@@ -328,22 +350,22 @@ namespace Frynity.Window
                                     {
                                         newPos = EditorGUILayout.Vector2Field("Position", _sprites[j].position);
                                         newPos.x = Mathf.Clamp(newPos.x, _cells[i].x * _cellSize, _cells[i].x * _cellSize + _cellSize - newSprite.bounds.size.x * _sprites[j].size);
-                                        newPos.y = Mathf.Clamp(newPos.y, _cells[i].y * _cellSize, _cells[i].y * _cellSize - newSprite.bounds.size.y * _sprites[j].size);
+                                        newPos.y = Mathf.Clamp(newPos.y, _cells[i].y * _cellSize - _cellSize + newSprite.bounds.size.y * _sprites[j].size, _cells[i].y * _cellSize);
 
                                         newSize = EditorGUILayout.FloatField("Size", _sprites[j].size);
-                                        newSize = Mathf.Max(0, newSize);
+                                        newSize = Mathf.Clamp(newSize, 0, _cellSize / Mathf.Max(newSprite.bounds.size.x, newSprite.bounds.size.y));
                                     }
 
-                                    _sprites[j] = (newSprite, newPos, newSize);
+                                    _sprites[j] = (i, newSprite, newPos, newSize);
+                                    Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
                                     EditorGUI.DrawRect(rect, Color.black);
                                 }
-
                             }
-
 
 
                             for (int j = 0; j < _prefabs.Count; j++)
                             {
+                                if (_prefabs[j].cellId != i) continue;
                                 GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
                                 _prefabShow[j] = EditorGUILayout.Foldout(_prefabShow[j], _prefabs[j].prefab == null ? "Prefab" : _prefabs[j].prefab.name, true);
                                 if (GUILayout.Button("-", GUILayout.Width(20)))
@@ -369,7 +391,8 @@ namespace Frynity.Window
                                         newSize = Mathf.Max(0, newSize);
                                     }
 
-                                    _prefabs[j] = (newObject, newPos, newSize);
+                                    _prefabs[j] = (i, newObject, newPos, newSize);
+                                    Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
                                     EditorGUI.DrawRect(rect, Color.black);
                                 }
                             }
@@ -378,8 +401,14 @@ namespace Frynity.Window
                         }
                         GUILayout.EndVertical();
                     }
-                }
 
+                    if (_cells.Count > 1)
+                    {
+                        Rect box = GUILayoutUtility.GetRect(position.width / 3, 2);
+                        EditorGUI.DrawRect(box, Color.black);
+                    }
+
+                }
                 EditorGUI.indentLevel--;
 
             }
@@ -426,6 +455,8 @@ namespace Frynity.Window
                 int id = cellsWithWallId[index].id;
                 _doors[i] = (index, id, cellsWithWallId[index].face);
             }
+
+            // Doors
 
             GUILayout.BeginHorizontal();
             _showDoor = EditorGUILayout.BeginFoldoutHeaderGroup(_showDoor, "Doors");
@@ -566,7 +597,7 @@ namespace Frynity.Window
                         GameObject fab = new GameObject("Room");
 
                         // Sprites & Prefabs
-                        List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+                        List<RendererRoom> renderers = new List<RendererRoom>();
                         if (_sprites.Count > 0)
                         {
                             GameObject skin = new GameObject("Skin");
@@ -583,7 +614,7 @@ namespace Frynity.Window
                                 sprite.transform.localScale = new Vector2(_sprites[i].size, _sprites[i].size);
                                 sprite.transform.SetParent(skin.transform);
 
-                                renderers.Add(renderer);
+                                renderers.Add(new RendererRoom(_sprites[i].cellId, renderer));
                             }
                             skin.transform.SetParent(fab.transform);
                         }
@@ -611,7 +642,7 @@ namespace Frynity.Window
 
                                 obj.transform.SetParent(prefab.transform);
 
-                                prefabs.Add(new PrefabsRoom(_prefabs[i].prefab, obj));
+                                prefabs.Add(new PrefabsRoom(_prefabs[i].cellId, _prefabs[i].prefab, obj));
                             }
                             prefab.transform.SetParent(fab.transform);
                         }
@@ -637,7 +668,7 @@ namespace Frynity.Window
                         }
                         room.SetDoors(new List<CellDoor>(newDoors));
                         room.SetCellSize = _cellSize;
-                        room.CreateRoom(new List<SpriteRenderer>(renderers), new List<PrefabsRoom>(prefabs));
+                        room.CreateRoom(new List<RendererRoom>(renderers), new List<PrefabsRoom>(prefabs));
 
                         string localPath = _selectedPath + "/" + _roomName + ".prefab";
 
@@ -662,7 +693,7 @@ namespace Frynity.Window
                         bool nouv = false;
                         if (_room.GetRenderers.Count > 0)
                         {
-                            sprites = _room.GetRenderers[0].transform.parent.gameObject;
+                            sprites = _room.GetRenderers[0].renderer.transform.parent.gameObject;
                         }
                         else if (_sprites.Count > 0)
                         {
@@ -672,11 +703,11 @@ namespace Frynity.Window
 
                         while (_room.GetRenderers.Count > 0)
                         {
-                            DestroyImmediate(_room.GetRenderers[0].gameObject);
+                            DestroyImmediate(_room.GetRenderers[0].renderer.gameObject);
                             _room.GetRenderers.RemoveAt(0);
                         }
 
-                        List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+                        List<RendererRoom> renderers = new List<RendererRoom>();
                         for (int i = 0; i < _sprites.Count; i++)
                         {
                             GameObject sprite = new GameObject("Sprite " + i);
@@ -690,7 +721,7 @@ namespace Frynity.Window
                             sprite.transform.localScale = new Vector2(_sprites[i].size, _sprites[i].size);
 
                             sprite.transform.SetParent(sprites.transform);
-                            renderers.Add(renderer);
+                            renderers.Add(new RendererRoom(_sprites[i].cellId, renderer));
                         }
                         if (nouv)
                             sprites.transform.SetParent(_room.transform);
@@ -731,7 +762,7 @@ namespace Frynity.Window
                             }
 
                             obj.transform.SetParent(prefabs.transform);
-                            prefabsList.Add(new PrefabsRoom(_prefabs[i].prefab, obj));
+                            prefabsList.Add(new PrefabsRoom(_prefabs[i].cellId, _prefabs[i].prefab, obj));
 
                         }
                         if (nouv)
@@ -756,7 +787,7 @@ namespace Frynity.Window
                         }
                         _room.SetDoors(new List<CellDoor>(newDoors));
                         _room.SetCellSize = _cellSize;
-                        _room.CreateRoom(new List<SpriteRenderer>(renderers), new List<PrefabsRoom>(prefabsList));
+                        _room.CreateRoom(new List<RendererRoom>(renderers), new List<PrefabsRoom>(prefabsList));
                         Debug.Log("Prefab modified");
                     }
                 }
@@ -814,7 +845,6 @@ namespace Frynity.Window
                         parent = world - origin;
                         world = Vector2.zero;
                     }
-
                     
                     Vector2 pivot = renderer.sprite.pivot / (renderer.sprite.pixelsPerUnit * (Vector2)renderer.sprite.bounds.size);
                     pivot.y = 1 - pivot.y;
@@ -857,18 +887,19 @@ namespace Frynity.Window
             GUILayout.EndArea();
         }
 
-        void OnCreateObject(object type)    
+        void OnCreateObject(object type)
         {
-            //_showObjects[0] = true;
-            switch (type)
+            ObjectTypeC jsp = (ObjectTypeC)type;
+            _showObjects[jsp.cellId] = true;
+            switch (jsp.type)
             {
                 case ObjectType.Sprite:
-                    _sprites.Add((null, Vector2.zero, 1));
+                    _sprites.Add((jsp.cellId, null, Vector2.zero, 1));
                     _spriteShow.Add(false);
                     break;
 
                 case ObjectType.Prefab:
-                    _prefabs.Add((null, Vector2.zero, 1));
+                    _prefabs.Add((jsp.cellId, null, Vector2.zero, 1));
                     _prefabShow.Add(false);
                     break;
             }
