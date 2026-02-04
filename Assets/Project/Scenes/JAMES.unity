@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: 2cb3eb5204a24494bb542f88ee29629b, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: 283a9e18c1b57d242a25b3af31c5b223, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1420296221}
   _tilesSize: 1
@@ -530,13 +530,14 @@ MonoBehaviour:
   _limitsMaxY: 7
   _drawGridWidth: 7
   _drawGridHeight: 5
-  _drawGridOrigin: {x: 2, y: 0}
+  _drawGridOrigin: {x: 5, y: -2}
   _eraseGridWidth: 9
   _eraseGridHeight: 2
   _eraseGridOrigin: {x: -3, y: 1}
-  _gridLevelName: francko
+  _gridLevelName: JamesTest
   _gridLevelData: {fileID: 0}
-  _chooseSpawnPoint: {x: 4, y: 3}
+  _spawnPointPosition: {x: -5, y: -2}
+  _spawnPointTypes: 2
 --- !u!1 &1420296220
 GameObject:
   m_ObjectHideFlags: 0

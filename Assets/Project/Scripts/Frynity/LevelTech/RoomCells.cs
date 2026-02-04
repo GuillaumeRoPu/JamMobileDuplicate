@@ -22,13 +22,28 @@ namespace Frynity.Gen
     }
 
     [System.Serializable]
+    public struct RendererRoom
+    {
+        public int cellId;
+        public SpriteRenderer renderer;
+
+        public RendererRoom(int cellId, SpriteRenderer renderer)
+        {
+            this.cellId = cellId;
+            this.renderer = renderer;
+        }
+    }
+
+    [System.Serializable]
     public struct PrefabsRoom
     {
+        public int cellId;
         public GameObject prefab;
         public GameObject obj;
 
-        public PrefabsRoom(GameObject prefab, GameObject obj)
+        public PrefabsRoom(int celldId, GameObject prefab, GameObject obj)
         {
+            this.cellId = celldId;
             this.obj = obj;
             this.prefab = prefab;
         }
@@ -50,7 +65,7 @@ namespace Frynity.Gen
     public class RoomCells : MonoBehaviour
     {
         [SerializeField] float _cellSize;
-        [SerializeField] List<SpriteRenderer> _renderers = new List<SpriteRenderer>();
+        [SerializeField] List<RendererRoom> _renderers = new List<RendererRoom>();
         [SerializeField] List<PrefabsRoom> _prefabs = new List<PrefabsRoom>();
         [SerializeField] List<Cell> _localCells = new List<Cell>();
         [SerializeField] List<CellDoor> _localDoors = new List<CellDoor>();
@@ -58,7 +73,7 @@ namespace Frynity.Gen
 
         public float GetCellSize => _cellSize;
         public float SetCellSize { set { _cellSize = value; } }
-        public List<SpriteRenderer> GetRenderers => _renderers;
+        public List<RendererRoom> GetRenderers => _renderers;
         public List<PrefabsRoom> GetPrefabs => _prefabs;
         public List<Cell> GetCells => _localCells;
         public List<Cell> SetCells { set { _localCells = value; }  }
@@ -76,7 +91,7 @@ namespace Frynity.Gen
 
         public List<bool> GetActiveDoors => _activeDoors;
 
-        public void CreateRoom(List<SpriteRenderer> renderers, List<PrefabsRoom> prefabs)
+        public void CreateRoom(List<RendererRoom> renderers, List<PrefabsRoom> prefabs)
         {
             _renderers = renderers;
 
