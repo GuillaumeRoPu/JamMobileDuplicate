@@ -7,6 +7,8 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
     [ReadOnly] public Dictionary<Vector2Int, CellData.SpawnPointType> spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
     [ReadOnly] public List<Vector2Int> keys = new List<Vector2Int>();
     [ReadOnly] public List<CellData.SpawnPointType> values = new List<CellData.SpawnPointType>();
+    [ReadOnly] public List<RoomData> allRooms = new List<RoomData>();
+    [ReadOnly] public List<Vector2Int> allRoomsPosition = new List<Vector2Int>();
     [ReadOnly] public Vector2Int limitsMin;
     [ReadOnly] public Vector2Int limitsMax;
 

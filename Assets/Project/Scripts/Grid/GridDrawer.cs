@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Frynity.Gen;
+
 
 
 #if UNITY_EDITOR
@@ -14,7 +16,8 @@ public class GridDrawer : MonoBehaviour
         Config = 0,
         Tiles = 1,
         SpawnPoints = 2,
-        Save = 4,
+        Room = 4,
+        Save = 8,
     }
 
     [SerializeField] private LevelCreationSteps _levelCreationSteps;
@@ -22,6 +25,7 @@ public class GridDrawer : MonoBehaviour
     [Space(5)]
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Config)] private Tile _tilesPrefab;
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Config)] private Transform _tilesParent;
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Config)] private Transform _roomsParent;
 
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Config)] private float _tilesSize;
 
@@ -43,10 +47,14 @@ public class GridDrawer : MonoBehaviour
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.SpawnPoints)] private Vector2Int _spawnPointPosition;
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.SpawnPoints)] private CellData.SpawnPointType _spawnPointTypes;
 
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private GameObject _roomPrefab;
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private Vector2Int _roomPosition;
+
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Save), Tooltip("The name given to your entier Grid Layout")] private string _gridLevelName;
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
     private static Dictionary<Vector2Int, CellData.SpawnPointType> _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
+    private static List<RoomData> _allRoomDatas = new List<RoomData>();
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -201,52 +209,54 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Generate Tiles (Green)")]
-    public void GenerateTilesButton()
+    private void PlaceRoom(GameObject room, Vector2Int position)
     {
-        GenerateGrid(_drawGridWidth, _drawGridHeight, _drawGridOrigin);
-    }
-
-    [Button("Generate Grid From Data (Blue)")]
-    public void GenerateGridDataButton()
-    {
-        if (_gridLevelData != null)
+        var roomCells = room.GetComponent<RoomCells>();
+        if (roomCells != null)
         {
-            GenerateGrid(_gridLevelData.allTilesPosition);
-            if (_gridLevelData.spawnPointsTiles != null)
+            List<Vector2Int> allTilesInTheRoom = new List<Vector2Int>();
+            Vector2Int mainCellPosition = new Vector2Int();
+            foreach(var cell in roomCells.GetCells)
             {
-                foreach (var spawn in _gridLevelData.spawnPointsTiles)
+                if (_tiles.ContainsKey(cell.localPos + position))
                 {
-                    SetAsSpawnPoint(spawn.Key, spawn.Value);
+                    if (!_tiles[cell.localPos + position].IsInARoom())
+                    {
+                        allTilesInTheRoom.Add(cell.localPos + position);
+                        if (cell.localPos == new Vector2(0, 0))
+                        {
+                            mainCellPosition = cell.localPos + position;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("One of the tiles already has a room");
+                        return;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Your room doesn't fit in the grid");
+                    return;
                 }
             }
+            RoomData roomData = new RoomData();
+            roomData.SetMainCell(mainCellPosition);
+            roomData.SetAllCellsInRoom(allTilesInTheRoom);
+            _allRoomDatas.Add(roomData);
+            foreach (var tile in allTilesInTheRoom)
+            {
+                _tiles[tile].SetAsInARoom(mainCellPosition, roomData);
+            }
+            GameObject newRoom = Instantiate(room, (Vector2)mainCellPosition, Quaternion.identity, _roomsParent);
         }
-    }
-
-    [Button("Erase Tiles (Red)")]
-    public void EraseGridButton()
-    {
-        EraseGrid(_eraseGridWidth, _eraseGridHeight, _eraseGridOrigin);
-    }
-
-    [Button("Make Tile A Spawn Point (Orange)")]
-    public void SetAsSpawnPointButton()
-    {
-        SetAsSpawnPoint(_spawnPointPosition, _spawnPointTypes);
-    }
-
-    [Button("Update Grid Size")]
-    void UpdateSizeAll()
-    {
-        foreach (var tile in _tiles)
+        else
         {
-            tile.Value.transform.position = new Vector2(tile.Key.x * _tilesSize + 0.5f * _tilesSize, tile.Key.y * _tilesSize + 0.5f * _tilesSize);
-            tile.Value.transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
+            Debug.LogError("You didn't select a valid Room");
         }
     }
 
-    [Button("Erase All Tiles")]
-    public void RemoveAllTiles()
+    private void RemoveAllTiles()
     {
         List<Vector2Int> list = new List<Vector2Int>();
         foreach (var tile in _tiles.Keys)
@@ -265,58 +275,182 @@ public class GridDrawer : MonoBehaviour
             tile.AnnihilateTile();
         }
 
+        RoomCells[] cells = _roomsParent.GetComponentsInChildren<RoomCells>();
+        foreach (var cell in cells)
+        {
+            DestroyImmediate(cell.gameObject);
+        }
+
         _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
+        _allRoomDatas = new List<RoomData>();
+    }
+
+    [Button("Generate Tiles (Green)")]
+    private void GenerateTilesButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Tiles)
+        {
+            GenerateGrid(_drawGridWidth, _drawGridHeight, _drawGridOrigin);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Generate Grid From Data (Blue)")]
+    private void GenerateGridDataButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Tiles)
+        {
+            if (_gridLevelData != null)
+            {
+                GenerateGrid(_gridLevelData.allTilesPosition);
+                if (_gridLevelData.spawnPointsTiles != null)
+                {
+                    foreach (var spawn in _gridLevelData.spawnPointsTiles)
+                    {
+                        SetAsSpawnPoint(spawn.Key, spawn.Value);
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Erase Tiles (Red)")]
+    private void EraseGridButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Tiles)
+        {
+            EraseGrid(_eraseGridWidth, _eraseGridHeight, _eraseGridOrigin);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Make Tile A Spawn Point (Orange)")]
+    private void SetAsSpawnPointButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Tiles)
+        {
+            SetAsSpawnPoint(_spawnPointPosition, _spawnPointTypes);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Update Grid Size")]
+    private void UpdateSizeAll()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Tiles)
+        {
+            foreach (var tile in _tiles)
+            {
+                tile.Value.transform.position = new Vector2(tile.Key.x * _tilesSize + 0.5f * _tilesSize, tile.Key.y * _tilesSize + 0.5f * _tilesSize);
+                tile.Value.transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Erase All Tiles")]
+    private void RemoveAllTilesButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Tiles)
+        {
+            RemoveAllTiles();
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Place Room")]
+    private void PlaceRoomButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Room)
+        {
+            PlaceRoom(_roomPrefab, _roomPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
     }
 
     [Button("Save The Grid layout")]
-    public void CommitValue()
+    private void CommitValue()
     {
 #if UNITY_EDITOR
-        var data = GridLevelDataBase.GetOrCreate(_gridLevelName);
-
-        Undo.RecordObject(data, "Commit Tool Value");
-
-        //WRITE DATA YOU WANT TO SAVE
-
-        List<Vector2Int> valueToSave = new List<Vector2Int>();
-        Vector2Int _limitsMin = new Vector2Int();
-        Vector2Int _limitsMax = new Vector2Int();
-        foreach (var tile in _tiles.Keys)
+        if (_levelCreationSteps == LevelCreationSteps.Save)
         {
-            valueToSave.Add(tile);
-            if(_limitsMin.x > tile.x)
+            var data = GridLevelDataBase.GetOrCreate(_gridLevelName);
+
+            Undo.RecordObject(data, "Commit Tool Value");
+
+            //WRITE DATA YOU WANT TO SAVE
+
+            List<Vector2Int> valueToSave = new List<Vector2Int>();
+            Vector2Int _limitsMin = new Vector2Int();
+            Vector2Int _limitsMax = new Vector2Int();
+            foreach (var tile in _tiles.Keys)
             {
-                _limitsMin.x = tile.x;
+                valueToSave.Add(tile);
+                if (_limitsMin.x > tile.x)
+                {
+                    _limitsMin.x = tile.x;
+                }
+                if (_limitsMin.y > tile.y)
+                {
+                    _limitsMin.y = tile.y;
+                }
+                if (_limitsMax.x < tile.x)
+                {
+                    _limitsMax.x = tile.x;
+                }
+                if (_limitsMax.y < tile.y)
+                {
+                    _limitsMax.y = tile.y;
+                }
             }
-            if (_limitsMin.y > tile.y)
+            data.allTilesPosition = valueToSave;
+            data.spawnPointsTiles = _spawnPointsTiles;
+            foreach (var value in data.spawnPointsTiles)
             {
-                _limitsMin.y = tile.y;
+                data.keys.Add(value.Key);
+                data.values.Add(value.Value);
             }
-            if (_limitsMax.x < tile.x)
+            data.allRooms = _allRoomDatas;
+            foreach(var value in data.allRooms)
             {
-                _limitsMax.x = tile.x;
+                data.allRoomsPosition.Add(value.GetMainCell());
             }
-            if (_limitsMax.y < tile.y)
-            {
-                _limitsMax.y = tile.y;
-            }
+            data.limitsMin = _limitsMin;
+            data.limitsMax = _limitsMax;
+            Debug.Log("Min X : " + data.limitsMin.x + " | Min Y : " + data.limitsMin.y + " | Max X : " + data.limitsMax.x + " | Max Y : " + data.limitsMin.y);
+
+            //END OF WRITING DATA EZ
+
+            GridLevelDataBase.Save(data);
+
+            RemoveAllTiles();
         }
-        data.allTilesPosition = valueToSave;
-        data.spawnPointsTiles = _spawnPointsTiles;
-        foreach (var value in data.spawnPointsTiles)
+        else
         {
-            data.keys.Add(value.Key);
-            data.values.Add(value.Value);
+            Debug.LogWarning("Change Creation Step");
         }
-        data.limitsMin = _limitsMin;
-        data.limitsMax = _limitsMax;
-        Debug.Log("Min X : " + data.limitsMin.x + " | Min Y : " + data.limitsMin.y + " | Max X : " + data.limitsMax.x + " | Max Y : " + data.limitsMin.y);
-
-        //END OF WRITING DATA EZ
-
-        GridLevelDataBase.Save(data);
-
-        RemoveAllTiles();
 #endif
     }
 
@@ -345,6 +479,21 @@ public class GridDrawer : MonoBehaviour
         {
             Gizmos.color = Color.orangeRed;
             Gizmos.DrawWireCube(new Vector2((_spawnPointPosition.x + 0.5f) * _tilesSize, (_spawnPointPosition.y + 0.5f) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+        }
+        if (_levelCreationSteps == LevelCreationSteps.Room)
+        {
+            if (_roomPrefab != null) 
+            {
+                var roomCells = _roomPrefab.GetComponent<RoomCells>();
+                if (roomCells != null)
+                {
+                    foreach (var cell in roomCells.GetCells) 
+                    {
+                        Gizmos.color = Color.black;
+                        Gizmos.DrawWireCube(new Vector2((float)cell.localPos.x + (float)_roomPosition.x + 0.5f, (float)cell.localPos.y + (float)_roomPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                    }
+                }
+            }
         }
     }
 }

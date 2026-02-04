@@ -162,18 +162,18 @@ public class GridManager : MonoBehaviour
             {
                 Gizmos.color = Color.cyan;
                 Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
-                if (_gridLevelData.spawnPointsTiles.ContainsKey(tile))
+            }
+            foreach (var tile in _gridLevelData.spawnPointsTiles)
+            {
+                if (_gridLevelData.spawnPointsTiles[tile.Key].HasFlag(CellData.SpawnPointType.Player))
                 {
-                    if (_gridLevelData.spawnPointsTiles[tile].HasFlag(CellData.SpawnPointType.Player))
-                    {
-                        Gizmos.color = Color.orangeRed;
-                        Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
-                    }
-                    else if (_gridLevelData.spawnPointsTiles[tile] != CellData.SpawnPointType.None)
-                    {
-                        Gizmos.color = Color.blue;
-                        Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
-                    }
+                    Gizmos.color = Color.orangeRed;
+                    Gizmos.DrawWireCube(new Vector2((0.5f + tile.Key.x) * _tilesSize, (0.5f + tile.Key.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                }
+                else if (_gridLevelData.spawnPointsTiles[tile.Key] != CellData.SpawnPointType.None)
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawWireCube(new Vector2((0.5f + tile.Key.x) * _tilesSize, (0.5f + tile.Key.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
                 }
             }
             Gizmos.color = Color.yellowNice;

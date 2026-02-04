@@ -119,6 +119,68 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &365590960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 365590961}
+  m_Layer: 0
+  m_Name: '- DRAW ROOMS - '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &365590961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365590960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &467802022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 467802023}
+  m_Layer: 0
+  m_Name: '- ROOMS - '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &467802023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467802022}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 719275609}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.18537, y: 3.16187, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -460,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 819476301}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.18537, y: 3.16187, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -511,7 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: 7fb3e567637150d499c4cb8c2fd4ff97, type: 2}
+  _gridLevelData: {fileID: 0}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 572938236}
   _tilesSize: 1
@@ -591,7 +653,7 @@ Transform:
   m_GameObject: {fileID: 1339171966}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.18537, y: -3.16187, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -609,9 +671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
-  _levelCreationSteps: 4
+  _levelCreationSteps: 8
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 819476302}
+  _roomsParent: {fileID: 365590961}
   _tilesSize: 1
   _limitsMinX: -10
   _limitsMaxX: 11
@@ -626,6 +689,8 @@ MonoBehaviour:
   _gridLevelData: {fileID: 0}
   _spawnPointPosition: {x: -7, y: 0}
   _spawnPointTypes: 1
+  _roomPrefab: {fileID: 3284975847924201917, guid: 8bc817e7a119d50419cf7d5d245b53c6, type: 3}
+  _roomPosition: {x: -9, y: 0}
   _gridLevelName: TheTesting
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -638,3 +703,5 @@ SceneRoots:
   - {fileID: 608111352}
   - {fileID: 572938236}
   - {fileID: 819476302}
+  - {fileID: 467802023}
+  - {fileID: 365590961}
