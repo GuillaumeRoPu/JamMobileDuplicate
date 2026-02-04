@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Entity : MonoBehaviour
 {
@@ -50,12 +51,25 @@ public class Entity : MonoBehaviour
             }
             else
             {
+                _currentTile = GridManager.Tiles[_path[_pathIndex]];
                 _pathIndex++;
                 _initPosition = transform.position;
                 _isMoving = true;
 
                 if (_pathIndex == _path.Count) _reachTarget = true;
+                else Turn(_path[_pathIndex].x * GameManager.Of.Grid.TileSize);
             }
+        }
+    }
+
+    void Turn(float xDirection)
+    {
+        Transform spriteTransform = GetComponentInChildren<SpriteRenderer>().transform;
+        if ((xDirection < spriteTransform.position.x && spriteTransform.localScale.x > 0) || (xDirection > spriteTransform.position.x && spriteTransform.localScale.x < 0))
+        {
+            Vector3 scale = spriteTransform.localScale;
+            scale.x *= -1;
+            spriteTransform.localScale = scale;
         }
     }
 }

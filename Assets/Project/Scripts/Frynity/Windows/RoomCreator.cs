@@ -1,6 +1,7 @@
 using Frynity.Gen;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -674,6 +675,7 @@ namespace Frynity.Window
 
                         PrefabUtility.SaveAsPrefabAssetAndConnect(room.gameObject, AssetDatabase.GenerateUniqueAssetPath(localPath), InteractionMode.AutomatedAction);
                         Debug.Log("Prefab created");
+                        Close();
                     }
                 }
             }
@@ -688,12 +690,36 @@ namespace Frynity.Window
                     }
                     else
                     {
+
+                        string assetPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(_room.gameObject);
+
+                        PrefabStage stage = PrefabStageUtility.GetCurrentPrefabStage();
+                        if (stage != null)
+                        {
+                            assetPath = stage.assetPath;
+                        }
+
+                        if (string.IsNullOrEmpty(assetPath))
+                        {
+                            assetPath = AssetDatabase.GetAssetPath(_room.gameObject);
+                        }
+
+                        if (string.IsNullOrEmpty(assetPath))
+                        {
+                            Debug.LogError("Impossible de trouver le chemin du prefab !");
+                            return;
+                        }
+
+                        GameObject prefabRoot = PrefabUtility.LoadPrefabContents(assetPath);
+                        RoomCells roomRoot = prefabRoot.GetComponent<RoomCells>();
+
+
                         // Sprites
                         GameObject sprites = null;
                         bool nouv = false;
-                        if (_room.GetRenderers.Count > 0)
+                        if (roomRoot.GetRenderers.Count > 0)
                         {
-                            sprites = _room.GetRenderers[0].renderer.transform.parent.gameObject;
+                            sprites = roomRoot.GetRenderers[0].renderer.transform.parent.gameObject;
                         }
                         else if (_sprites.Count > 0)
                         {
@@ -701,10 +727,10 @@ namespace Frynity.Window
                             nouv = true;
                         }
 
-                        while (_room.GetRenderers.Count > 0)
+                        while (roomRoot.GetRenderers.Count > 0)
                         {
-                            DestroyImmediate(_room.GetRenderers[0].renderer.gameObject);
-                            _room.GetRenderers.RemoveAt(0);
+                            DestroyImmediate(roomRoot.GetRenderers[0].renderer.gameObject);
+                            roomRoot.GetRenderers.RemoveAt(0);
                         }
 
                         List<RendererRoom> renderers = new List<RendererRoom>();
@@ -724,15 +750,15 @@ namespace Frynity.Window
                             renderers.Add(new RendererRoom(_sprites[i].cellId, renderer));
                         }
                         if (nouv)
-                            sprites.transform.SetParent(_room.transform);
+                            sprites.transform.SetParent(prefabRoot.transform);
 
                         // prefabs
                         GameObject prefabs = null;
                         nouv = false;
                         List<PrefabsRoom> prefabsList = new List<PrefabsRoom>();
-                        if (_room.GetPrefabs.Count > 0)
+                        if (roomRoot.GetPrefabs.Count > 0)
                         {
-                            prefabs = _room.GetPrefabs[0].obj.transform.parent.gameObject;
+                            prefabs = roomRoot.GetPrefabs[0].obj.transform.parent.gameObject;
                         }
                         else if (_prefabs.Count > 0)
                         {
@@ -740,10 +766,18 @@ namespace Frynity.Window
                             nouv = true;
                         }
 
-                        while (_room.GetPrefabs.Count > 0)
+                        while (roomRoot.GetPrefabs.Count > 0)
                         {
-                            DestroyImmediate(_room.GetPrefabs[0].obj);
-                            _room.GetPrefabs.RemoveAt(0);
+                            DestroyImmediate(roomRoot.GetPrefabs[0].obj);
+                            roomRoot.GetPrefabs.RemoveAt(0);
+                        }
+
+                        if (_prefabs.Count == 0)
+                        {
+                            if (prefabs != null)
+                            {
+                                DestroyImmediate(prefabs);
+                            }
                         }
 
                         for (int i = 0; i < _prefabs.Count; i++)
@@ -766,7 +800,7 @@ namespace Frynity.Window
 
                         }
                         if (nouv)
-                            prefabs.transform.SetParent(_room.transform);
+                            prefabs.transform.SetParent(prefabRoot.transform);
 
                         // Cells
                         List<Cell> cells = new List<Cell>();
@@ -778,17 +812,22 @@ namespace Frynity.Window
                             cells.Add(new Cell(i, pos));
                         }
 
-                        _room.SetCells = new List<Cell>(cells);
+                        roomRoot.SetCells = new List<Cell>(cells);
 
                         List<CellDoor> newDoors = new List<CellDoor>();
                         for (int i = 0; i < _doors.Count; i++)
                         {
                             newDoors.Add(new CellDoor(_doors[i].cellId, _doors[i].face));
                         }
-                        _room.SetDoors(new List<CellDoor>(newDoors));
-                        _room.SetCellSize = _cellSize;
-                        _room.CreateRoom(new List<RendererRoom>(renderers), new List<PrefabsRoom>(prefabsList));
+                        roomRoot.SetDoors(new List<CellDoor>(newDoors));
+                        roomRoot.SetCellSize = _cellSize;
+                        roomRoot.CreateRoom(new List<RendererRoom>(renderers), new List<PrefabsRoom>(prefabsList));
+
+                        PrefabUtility.SaveAsPrefabAsset(prefabRoot, assetPath);
+                        PrefabUtility.UnloadPrefabContents(prefabRoot);
+                        
                         Debug.Log("Prefab modified");
+                        Close();
                     }
                 }
             }
