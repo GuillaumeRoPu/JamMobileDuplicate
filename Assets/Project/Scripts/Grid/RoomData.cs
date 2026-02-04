@@ -5,6 +5,7 @@ public class RoomData
 {
     private Vector2Int _mainCell;
     private List<Vector2Int> _allCells;
+    private GameObject _roomPrefab;
 
     public Vector2Int GetMainCell()
     {
@@ -24,5 +25,15 @@ public class RoomData
     public void SetAllCellsInRoom(List<Vector2Int> list)
     {
         _allCells = list;
+    }
+
+    public GameObject GetRoomPrefab()
+    {
+        return _roomPrefab;
+    }
+
+    public void SetRoomPrefab(GameObject room)
+    {
+        _roomPrefab = room;
     }
 }

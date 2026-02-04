@@ -59,7 +59,8 @@ public class Tile : MonoBehaviour, IHoverable
     public void OnHover()
     {
         _highlight.SetActive(true);
-        Debug.Log(_cellData.GridPosition);
+        Debug.Log(_isInARoom);
+        Debug.Log("Main Cell Position | X : " + _roomData.GetMainCell().x + ", Y : " + _roomData.GetMainCell().y);
     }
 
     public void StopHover()
@@ -131,7 +132,7 @@ public class Tile : MonoBehaviour, IHoverable
 
     public void SetAsNotInARoom()
     {
-        if (IsInARoom())
+        if (_isInARoom)
         {
             _isInARoom = false;
             _mainRoomCell = new Vector2Int();
@@ -139,7 +140,33 @@ public class Tile : MonoBehaviour, IHoverable
         }
         else
         {
-            Debug.Log("This Tile is already in a room");
+            Debug.Log("This Tile is already not in a room");
+        }
+    }
+
+    public RoomData GetRoomData()
+    {
+        if (_mainRoomCell == CellData.GridPosition)
+        {
+            return _roomData;
+        }
+        else
+        {
+            Debug.LogError("This isn't the main room cell");
+            return null;
+        }
+    }
+
+    public Vector2Int GetMainRoomCell()
+    {
+        if (!_isInARoom)
+        {
+            Debug.LogError("This cell isn't a room");
+            return new Vector2Int();
+        }
+        else
+        {
+            return _mainRoomCell;
         }
     }
 }

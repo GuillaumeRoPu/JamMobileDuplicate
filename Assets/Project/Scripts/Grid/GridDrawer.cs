@@ -49,12 +49,14 @@ public class GridDrawer : MonoBehaviour
 
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private GameObject _roomPrefab;
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private Vector2Int _roomPosition;
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private Vector2Int _eraseRoomPosition;
 
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Save), Tooltip("The name given to your entier Grid Layout")] private string _gridLevelName;
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
     private static Dictionary<Vector2Int, CellData.SpawnPointType> _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
     private static List<RoomData> _allRoomDatas = new List<RoomData>();
+    private static Dictionary<Vector2Int, GameObject> _roomDeletionTracker = new Dictionary<Vector2Int, GameObject>();
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -137,7 +139,6 @@ public class GridDrawer : MonoBehaviour
             _tiles[position] = spawnedTile;
             UpdateSize(position);
             Color newcol = new Color(Mathf.Lerp(0, 1, (float)(position.x + Mathf.Abs(_limitsMinX)) / (float)(Mathf.Abs(_limitsMinX) + _limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)(position.y + Mathf.Abs(_limitsMinY)) / (float)(Mathf.Abs(_limitsMinY) + _limitsMaxY)));
-            Debug.Log(newcol.r);
             if (_tiles.ContainsKey(position))
             {
                 _tiles[position].SetColor(newcol);
@@ -149,6 +150,25 @@ public class GridDrawer : MonoBehaviour
     {
         if (_tiles.ContainsKey(position))
         {
+            EraseRoom(position);
+            SetAsSpawnPoint(position, CellData.SpawnPointType.None);
+            _tiles[position].AnnihilateTile();
+            _tiles.Remove(position);
+        }
+        else
+        {
+            if (Application.isPlaying)
+            {
+                Debug.Log("There Isn't A Tile Here : X - " + position.x + " | Y - " + position.y);
+            }
+        }
+    }
+
+    public void RemoveTileBis(Vector2Int position)
+    {
+        if (_tiles.ContainsKey(position))
+        {
+            EraseRoom(position);
             _tiles[position].AnnihilateTile();
             _tiles.Remove(position);
         }
@@ -177,7 +197,7 @@ public class GridDrawer : MonoBehaviour
                     if (spawn.Value.HasFlag(CellData.SpawnPointType.Player))
                     {
                         _tiles[spawn.Key].RemoveSpawnTile();
-                        Color newcol = new Color(Mathf.Lerp(0, 1, (float)spawn.Key.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)spawn.Key.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
+                        Color newcol = new Color(Mathf.Lerp(0, 1, (float)(spawn.Key.x + Mathf.Abs(_limitsMinX)) / (float)(Mathf.Abs(_limitsMinX) + _limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)(spawn.Key.y + Mathf.Abs(_limitsMinY)) / (float)(Mathf.Abs(_limitsMinY) + _limitsMaxY)));
                         if (_tiles.ContainsKey(spawn.Key))
                         {
                             _tiles[spawn.Key].SetColor(newcol);
@@ -190,8 +210,9 @@ public class GridDrawer : MonoBehaviour
             if (type == CellData.SpawnPointType.None)
             {
                 _tiles[position].RemoveSpawnTile();
-                Color newcol = new Color(Mathf.Lerp(0, 1, (float)position.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)position.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
+                Color newcol = new Color(Mathf.Lerp(0, 1, (float)(position.x + Mathf.Abs(_limitsMinX)) / (float)(Mathf.Abs(_limitsMinX) + _limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)(position.y + Mathf.Abs(_limitsMinY)) / (float)(Mathf.Abs(_limitsMinY) + _limitsMaxY)));
                 _tiles[position].SetColor(newcol);
+                _spawnPointsTiles.Remove(position);
             }
             else
             {
@@ -243,12 +264,14 @@ public class GridDrawer : MonoBehaviour
             RoomData roomData = new RoomData();
             roomData.SetMainCell(mainCellPosition);
             roomData.SetAllCellsInRoom(allTilesInTheRoom);
+            roomData.SetRoomPrefab(room);
             _allRoomDatas.Add(roomData);
             foreach (var tile in allTilesInTheRoom)
             {
                 _tiles[tile].SetAsInARoom(mainCellPosition, roomData);
             }
             GameObject newRoom = Instantiate(room, (Vector2)mainCellPosition, Quaternion.identity, _roomsParent);
+            _roomDeletionTracker[mainCellPosition] = newRoom;
         }
         else
         {
@@ -256,8 +279,61 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
+    private void EraseRoom(Vector2Int position)
+    {
+        if (_tiles.ContainsKey(position))
+        {
+            if (_tiles[position].IsInARoom())
+            {
+                Vector2Int mainCell = _tiles[position].GetMainRoomCell();
+                RoomData roomData = _tiles[mainCell].GetRoomData();
+                List<Vector2Int> allTilesInRoom = roomData.GetAllCellsInRoom();
+                foreach (var tile in allTilesInRoom)
+                {
+                    _tiles[tile].SetAsNotInARoom();
+                    Debug.Log("Removed X : " + tile.x + ", Y : " + tile.y + " from the room");
+                }
+                DestroyImmediate(_roomDeletionTracker[mainCell]);
+                _roomDeletionTracker.Remove(mainCell);
+            }
+            else
+            {
+                Debug.LogWarning("This tile isn't tied to any room");
+                return;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("There isn't a tile here");
+            return;
+        }
+    }
+
+    private void EraseAllRooms()
+    {
+        foreach(var roomData in _allRoomDatas)
+        {
+            List<Vector2Int> allTilesInRoom = roomData.GetAllCellsInRoom();
+            foreach (var tile in allTilesInRoom)
+            {
+                _tiles[tile].SetAsNotInARoom();
+            }
+        }
+
+        RoomCells[] cells = _roomsParent.GetComponentsInChildren<RoomCells>();
+        foreach (var cell in cells)
+        {
+            DestroyImmediate(cell.gameObject);
+        }
+
+        _allRoomDatas = new List<RoomData>();
+        _roomDeletionTracker.Clear();
+    }
+
     private void RemoveAllTiles()
     {
+        EraseAllRooms();
+
         List<Vector2Int> list = new List<Vector2Int>();
         foreach (var tile in _tiles.Keys)
         {
@@ -265,7 +341,7 @@ public class GridDrawer : MonoBehaviour
         }
         foreach (var tile in list)
         {
-            RemoveTile(tile);
+            RemoveTileBis(tile); // I had to create a new RemoveTile method cuz the first one also deleted the data from the dictionnary of spawn points when you saved for some unknown reason ????
         }
         _tiles.Clear();
 
@@ -275,14 +351,7 @@ public class GridDrawer : MonoBehaviour
             tile.AnnihilateTile();
         }
 
-        RoomCells[] cells = _roomsParent.GetComponentsInChildren<RoomCells>();
-        foreach (var cell in cells)
-        {
-            DestroyImmediate(cell.gameObject);
-        }
-
         _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
-        _allRoomDatas = new List<RoomData>();
     }
 
     [Button("Generate Tiles (Green)")]
@@ -313,6 +382,13 @@ public class GridDrawer : MonoBehaviour
                         SetAsSpawnPoint(spawn.Key, spawn.Value);
                     }
                 }
+                if (_gridLevelData.allRooms != null)
+                {
+                    foreach (var room in _gridLevelData.allRooms)
+                    {
+                        PlaceRoom(room.GetRoomPrefab(), room.GetMainCell());
+                    }
+                }
             }
         }
         else
@@ -327,19 +403,6 @@ public class GridDrawer : MonoBehaviour
         if (_levelCreationSteps == LevelCreationSteps.Tiles)
         {
             EraseGrid(_eraseGridWidth, _eraseGridHeight, _eraseGridOrigin);
-        }
-        else
-        {
-            Debug.LogWarning("Change Creation Step");
-        }
-    }
-
-    [Button("Make Tile A Spawn Point (Orange)")]
-    private void SetAsSpawnPointButton()
-    {
-        if (_levelCreationSteps == LevelCreationSteps.Tiles)
-        {
-            SetAsSpawnPoint(_spawnPointPosition, _spawnPointTypes);
         }
         else
         {
@@ -377,12 +440,51 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
+    [Button("Make Tile A Spawn Point (Orange)")]
+    private void SetAsSpawnPointButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.SpawnPoints)
+        {
+            SetAsSpawnPoint(_spawnPointPosition, _spawnPointTypes);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
     [Button("Place Room")]
     private void PlaceRoomButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Room)
         {
             PlaceRoom(_roomPrefab, _roomPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Erase Room")]
+    private void EraseRoomButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Room)
+        {
+            EraseRoom(_eraseRoomPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Erase All Room")]
+    private void EraseAllRoomsButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Room)
+        {
+            EraseAllRooms();
         }
         else
         {
@@ -397,6 +499,7 @@ public class GridDrawer : MonoBehaviour
         if (_levelCreationSteps == LevelCreationSteps.Save)
         {
             var data = GridLevelDataBase.GetOrCreate(_gridLevelName);
+            Debug.Log("First Count : " + data.spawnPointsTiles.Count);
 
             Undo.RecordObject(data, "Commit Tool Value");
 
@@ -439,13 +542,14 @@ public class GridDrawer : MonoBehaviour
             }
             data.limitsMin = _limitsMin;
             data.limitsMax = _limitsMax;
-            Debug.Log("Min X : " + data.limitsMin.x + " | Min Y : " + data.limitsMin.y + " | Max X : " + data.limitsMax.x + " | Max Y : " + data.limitsMin.y);
+
 
             //END OF WRITING DATA EZ
-
+            Debug.Log("Second Count : " + data.spawnPointsTiles.Count);
             GridLevelDataBase.Save(data);
-
+            Debug.Log("Third Count : " + data.spawnPointsTiles.Count);
             RemoveAllTiles();
+            Debug.Log("Fourth Count : " + data.spawnPointsTiles.Count);
         }
         else
         {
@@ -494,6 +598,8 @@ public class GridDrawer : MonoBehaviour
                     }
                 }
             }
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(new Vector2((float)_eraseRoomPosition.x + 0.5f, (float)_eraseRoomPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
         }
     }
 }
