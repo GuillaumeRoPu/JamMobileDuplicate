@@ -173,7 +173,7 @@ public class GridDrawer : MonoBehaviour
                         }
                     }
                     _tiles[spawn.Key].SetAsSpawnTile(spawn.Value);
-                    if (_tiles[spawn.Key].CellData.spawnPointType != CellData.SpawnPointType.None)
+                    if (_tiles[spawn.Key].CellData.SpawnPointType != CellData.SpawnPointType.None)
                     {
                         _tiles[spawn.Key].RemoveSpawnTile();
                     }
@@ -223,7 +223,7 @@ public class GridDrawer : MonoBehaviour
             }
             else
             {
-                if (_tiles[_spawnPointPosition].CellData.spawnPointType != CellData.SpawnPointType.None)
+                if (_tiles[_spawnPointPosition].CellData.SpawnPointType != CellData.SpawnPointType.None)
                 {
                     _tiles[_spawnPointPosition].RemoveSpawnTile();
                 }

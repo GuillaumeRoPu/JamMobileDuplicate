@@ -39,7 +39,14 @@ public class Tile : MonoBehaviour, IHoverable
         _renderer.color = _baseColor;
         if (_cellData.IsSpawnPoint)
         {
-            _renderer.color = Color.red;
+            if (_cellData.SpawnPointType.HasFlag(CellData.SpawnPointType.Player))
+            {
+                _renderer.color = Color.red;
+            }
+            else
+            {
+                _renderer.color = Color.blue;
+            }
         }
     }
 
@@ -76,9 +83,17 @@ public class Tile : MonoBehaviour, IHoverable
         }
     }
 
-    public void SetAsSpawnTile(bool isSpawn)
+    public void SetAsSpawnTile(CellData.SpawnPointType type)
     {
-        _cellData.IsSpawnPoint = isSpawn;
+        _cellData.IsSpawnPoint = true;
+        _cellData.SpawnPointType = type;
+        SetColor();
+    }
+
+    public void RemoveSpawnTile()
+    {
+        _cellData.IsSpawnPoint = false;
+        _cellData.SpawnPointType = CellData.SpawnPointType.None;
         SetColor();
     }
 }
