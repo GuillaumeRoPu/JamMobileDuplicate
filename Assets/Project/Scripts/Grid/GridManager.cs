@@ -25,10 +25,19 @@ public class GridManager : MonoBehaviour
 
     public static Dictionary<Vector2Int, Tile> Tiles => _tiles;
 
+    public GridLevelData GridLevelData => _gridLevelData;
+    public float TileSize => _tilesSize;
+
 
     //END OF ALL THE DATA
 
+
     //Fills the whole grid with tiles depending on width and height, as well as the origin
+
+    public Vector2Int WorldPositionToTilePosition(Vector2 position)
+    {
+        return Vector2Int.FloorToInt(position / _tilesSize);
+    }
 
     void GenerateGrid(List<Vector2Int> tiles)
     {
@@ -59,7 +68,7 @@ public class GridManager : MonoBehaviour
         _tiles[position].transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
     }
 
-    private void Start()
+    public void Init()
     {
         Debug.Log(_tiles.Count);
         foreach (var help in _gridLevelData.spawnPointsTiles)

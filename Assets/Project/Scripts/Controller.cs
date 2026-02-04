@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     [SerializeField] InputActionReference _pressInput;
     [SerializeField] InputActionReference _tapInput;
 
-    [SerializeField, Foldout("Events")] UnityEvent _onPress;
+    [SerializeField, Foldout("Events")] UnityEvent<Vector2Int> _onPress;
     [SerializeField, Foldout("Events")] UnityEvent _onTap;
 
     GameObject _grabObject;
@@ -37,6 +37,8 @@ public class Controller : MonoBehaviour
     {
         if (_isPressed && _posChange)
         {
+            _onPress?.Invoke(GameManager.Of.Grid.WorldPositionToTilePosition(_pressPosition));
+
             RaycastHit2D hit = Physics2D.Raycast(_pressPosition, Vector2.zero);
             if (hit)
             {
@@ -73,7 +75,6 @@ public class Controller : MonoBehaviour
         if (ctx.started)
         {
             _isPressed = true;
-            _onPress?.Invoke();
             Debug.Log("TOUCH");
         }
 

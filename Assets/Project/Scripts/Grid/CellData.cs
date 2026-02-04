@@ -33,7 +33,6 @@ public class CellData
     public Face DoorPosition = Face.None;
     public Entity Entity;
 
-
     public bool CanPass(Face face, CellData originalCell)
     {
 
@@ -46,7 +45,7 @@ public class CellData
 
         if (Entity != null) return false;
 
-        if (MainRoomCell == originalCell.MainRoomCell || DoorPosition == receptFace)
+        if (MainRoomCell == originalCell.MainRoomCell || DoorPosition == receptFace || originalCell.DoorPosition == face)
         {
             return true;
         }

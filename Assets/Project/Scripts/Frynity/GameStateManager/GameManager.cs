@@ -1,9 +1,17 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
-    
-    // Add your variables here
+
+    [SerializeField] GameObject _player;
+    Entity _playerEntity;
+    public GameObject Player => _player;
+
+    [Header("Manager")]
+    [SerializeField] TurnManager _turnManager;
+    [SerializeField] GridManager _gridManager;
+    public GridManager Grid => _gridManager;
 
     public GameStateMachine stateMachine { get; private set; }
     public IntroState introState {get; private set;}
@@ -29,7 +37,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        stateMachine.InitState(introState);
+        Grid.Init();
+        stateMachine.InitState(playState);
     }
 
     private void Update()
@@ -50,5 +59,20 @@ public class GameManager : MonoBehaviour
         playState = new PlayState();
         cinematicState = new CinematicState();
         pauseState = new PauseState();
+    }
+
+    public void CreatePlayer(Vector2Int tile)
+    {
+        GameObject player = Instantiate(Player, (Vector2)tile * Grid.TileSize, Quaternion.identity);
+        _playerEntity = player.GetComponent<Entity>();
+        _playerEntity.SetCurrentTile(tile);
+        Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
+    }
+
+    public void SetPlayerDestination(Vector2Int tile)
+    {
+        Debug.Log(tile);
+        if (GridManager.Tiles.ContainsKey(tile))
+            _playerEntity.GetComponent<AIPathfinding>().CreatePath(GridManager.Tiles[tile]);
     }
 }
