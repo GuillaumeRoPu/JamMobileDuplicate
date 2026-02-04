@@ -132,8 +132,8 @@ MonoBehaviour:
   - {x: 11, y: 0}
   - {x: 11, y: 1}
   - {x: 11, y: 2}
-  spawnPointsTilesPosition:
-  - {x: -5, y: -2}
-  spawnPointsTilesTypes: 02000000
+  keys:
+  - {x: -6, y: -2}
+  values: 01000000
   limitsMin: {x: -7, y: -4}
   limitsMax: {x: 11, y: 3}

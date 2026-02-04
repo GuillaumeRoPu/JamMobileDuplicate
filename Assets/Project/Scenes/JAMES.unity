@@ -153,7 +153,19 @@ MonoBehaviour:
   _tapInput: {fileID: -3549732786362219781, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _onPress:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1155825359}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetPlayerDestination
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onTap:
     m_PersistentCalls:
       m_Calls: []
@@ -521,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
+  _levelCreationSteps: 1
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1477165159}
   _tilesSize: 1
@@ -534,10 +547,70 @@ MonoBehaviour:
   _eraseGridWidth: 9
   _eraseGridHeight: 2
   _eraseGridOrigin: {x: -3, y: 1}
+  _gridLevelData: {fileID: 11400000, guid: 283a9e18c1b57d242a25b3af31c5b223, type: 2}
+  _spawnPointPosition: {x: -6, y: -2}
+  _spawnPointTypes: 1
   _gridLevelName: JamesTest
-  _gridLevelData: {fileID: 0}
-  _spawnPointPosition: {x: -5, y: -2}
-  _spawnPointTypes: 2
+--- !u!1 &1155825357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1155825360}
+  - component: {fileID: 1155825359}
+  - component: {fileID: 1155825358}
+  m_Layer: 0
+  m_Name: '- MANAGER -'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1155825358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155825357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d32045960f1b9d41a48b07934fade16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnManager
+--- !u!114 &1155825359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155825357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13df4766bfeffc240bcceba90432b322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  _player: {fileID: 2879787377744229297, guid: 165e9d83a9b4288408d766c1f09a2e79, type: 3}
+  _turnManager: {fileID: 1155825358}
+  _gridManager: {fileID: 607022964}
+--- !u!4 &1155825360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155825357}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420296220
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +711,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
+  - {fileID: 1155825360}
   - {fileID: 32858467}
   - {fileID: 580948834}
   - {fileID: 1814340991}
