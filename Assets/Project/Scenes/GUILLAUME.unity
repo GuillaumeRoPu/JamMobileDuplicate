@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 0}
+  _gridLevelData: {fileID: 11400000, guid: 7fb3e567637150d499c4cb8c2fd4ff97, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 572938236}
   _tilesSize: 1
@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
+  _levelCreationSteps: 4
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 819476302}
   _tilesSize: 1
@@ -622,10 +623,10 @@ MonoBehaviour:
   _eraseGridWidth: 9
   _eraseGridHeight: 2
   _eraseGridOrigin: {x: -3, y: 1}
-  _gridLevelName: francko
-  _gridLevelData: {fileID: 11400000, guid: 2cb3eb5204a24494bb542f88ee29629b, type: 2}
-  _spawnPointPosition: {x: -6, y: -4}
+  _gridLevelData: {fileID: 0}
+  _spawnPointPosition: {x: -7, y: 0}
   _spawnPointTypes: 1
+  _gridLevelName: TheTesting
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
