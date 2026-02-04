@@ -21,7 +21,7 @@ namespace Frynity.Window
             Sprite, Prefab
         }
 
-        bool _showObject;
+        List<bool> _showObjects = new List<bool>();
         List<(Sprite sprite, Vector2 position, float size)> _sprites = new List<(Sprite, Vector2, float)>();
         List<bool> _spriteShow = new List<bool>();
 
@@ -91,7 +91,6 @@ namespace Frynity.Window
 
             _cellSize = _room.GetCellSize;
 
-            _showObject = true;
             _showCells = true;
             _showDoor = true;
 
@@ -175,133 +174,7 @@ namespace Frynity.Window
             _cellSize = EditorGUILayout.FloatField("Cell Size", _cellSize, GUILayout.Width(width));
             if (_cellSize < 1) _cellSize = 1;
 
-
-            // Objects
-
-            GUILayout.BeginHorizontal();
-            _showObject = EditorGUILayout.BeginFoldoutHeaderGroup(_showObject, "Objects");
-            if (GUILayout.Button("+"))
-            {
-                GenericMenu menu = new GenericMenu();
-
-                menu.AddItem(new GUIContent("Sprite"), false, OnCreateObject, ObjectType.Sprite);
-                menu.AddItem(new GUIContent("Prefab"), false, OnCreateObject, ObjectType.Prefab);
-
-                menu.ShowAsContext();
-
-            }
-            GUILayout.Space(position.width / 3);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginVertical(_objectsStyle, GUILayout.MaxWidth(viewWidth));
-            if (_showObject)
-            {
-                EditorGUI.indentLevel++;
-
-                GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
-                if (GUILayout.Button("Show All"))
-                {
-                    for (int i = 0; i < _spriteShow.Count; i++)
-                    {
-                        _spriteShow[i] = true;
-                    }
-                    for (int i = 0; i < _prefabShow.Count; i++)
-                    {
-                        _prefabShow[i] = true;
-                    }
-                }
-                if (GUILayout.Button("Hide All"))
-                {
-                    for (int i = 0; i < _spriteShow.Count; i++)
-                    {
-                        _spriteShow[i] = false;
-                    }
-
-                    for (int i = 0; i < _prefabShow.Count; i++)
-                    {
-                        _prefabShow[i] = false;
-                    }
-                }
-                GUILayout.EndHorizontal();
-
-                for (int i = 0; i < _sprites.Count; i++)
-                {
-                    GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
-                    _spriteShow[i] = EditorGUILayout.Foldout(_spriteShow[i], _sprites[i].sprite == null ? "Sprite" : _sprites[i].sprite.name, true);
-                    if (GUILayout.Button("-", GUILayout.Width(20)))
-                    {
-                        _sprites.RemoveAt(i);
-                        _spriteShow.RemoveAt(i);
-                        i--;
-                        GUILayout.EndHorizontal();
-                        continue;
-                    }
-                    GUILayout.EndHorizontal();
-
-                    if (_spriteShow[i])
-                    {
-                        Sprite newSprite = EditorGUILayout.ObjectField("Sprite", _sprites[i].sprite, typeof(Sprite), false) as Sprite;
-                        Vector2 newPos = Vector2.zero;
-                        float newSize = 1;
-                        if (newSprite != null)
-                        {
-                            newPos = EditorGUILayout.Vector2Field("Position", _sprites[i].position);
-
-                            newSize = EditorGUILayout.FloatField("Size", _sprites[i].size);
-                            newSize = Mathf.Max(0, newSize);
-                        }
-
-                        _sprites[i] = (newSprite, newPos, newSize);
-                        Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
-                        EditorGUI.DrawRect(rect, Color.black);
-                    }
-
-                }
-
-                
-
-                for (int i = 0; i < _prefabs.Count; i++)
-                {
-                    GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
-                    _prefabShow[i] = EditorGUILayout.Foldout(_prefabShow[i], _prefabs[i].prefab == null ? "Prefab" : _prefabs[i].prefab.name, true);
-                    if (GUILayout.Button("-", GUILayout.Width(20)))
-                    {
-                        _prefabs.RemoveAt(i);
-                        _prefabShow.RemoveAt(i);
-                        i--;
-                        GUILayout.EndHorizontal();
-                        continue;
-                    }
-                    GUILayout.EndHorizontal();
-
-                    if (_prefabShow[i])
-                    {
-                        GameObject newObject = EditorGUILayout.ObjectField("Prefab", _prefabs[i].prefab, typeof(GameObject), false) as GameObject;
-                        Vector2 newPos = Vector2.zero;
-                        float newSize = 1;
-                        if (newObject != null)
-                        {
-                            newPos = EditorGUILayout.Vector2Field("Position", _prefabs[i].position);
-
-                            newSize = EditorGUILayout.FloatField("Size", _prefabs[i].size);
-                            newSize = Mathf.Max(0, newSize);
-                        }
-
-                        _prefabs[i] = (newObject, newPos, newSize);
-                        Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
-                        EditorGUI.DrawRect(rect, Color.black);
-                    }
-                        
-                }
-
-                EditorGUI.indentLevel--;
-            }
-
-            GUILayout.EndVertical();
-            EditorGUILayout.EndFoldoutHeaderGroup();
-
-            GUILayout.Space(30);
-
+            // Cells
             GUILayout.BeginHorizontal();
             _showCells = EditorGUILayout.BeginFoldoutHeaderGroup(_showCells, "Cells");
             if (GUILayout.Button("+"))
@@ -309,10 +182,10 @@ namespace Frynity.Window
                 _cells.Add(Vector2Int.zero);
                 _cellsShow.Add(false);
                 _showCells = true;
+                _showObjects.Add(false);
             }
             GUILayout.Space(position.width / 3);
             GUILayout.EndHorizontal();
-
 
             if (_showCells)
             {
@@ -381,7 +254,129 @@ namespace Frynity.Window
                         }
                         GUILayout.EndHorizontal();
                         Rect rect = GUILayoutUtility.GetRect(viewWidth, 2);
-                        EditorGUI.DrawRect(rect, Color.black);
+
+
+
+                        // Objects
+                        GUILayout.BeginHorizontal();
+                        _showObjects[i] = EditorGUILayout.Foldout(_showObjects[i], "Objects", true);
+                        GUILayout.Space(30);
+                        if (GUILayout.Button("+"))
+                        {
+                            GenericMenu menu = new GenericMenu();
+
+                            menu.AddItem(new GUIContent("Sprite"), false, OnCreateObject, ObjectType.Sprite);
+                            menu.AddItem(new GUIContent("Prefab"), false, OnCreateObject, ObjectType.Prefab);
+
+                            menu.ShowAsContext();
+
+                        }
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+
+                        GUILayout.BeginVertical(_objectsStyle, GUILayout.MaxWidth(viewWidth));
+                        if (_showObjects[i])
+                        {
+                            EditorGUI.indentLevel++;
+
+                            GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
+                            if (GUILayout.Button("Show All"))
+                            {
+                                for (int j = 0; j < _spriteShow.Count; j++)
+                                {
+                                    _spriteShow[j] = true;
+                                }
+                                for (int j = 0; j < _prefabShow.Count; j++)
+                                {
+                                    _prefabShow[j] = true;
+                                }
+                            }
+                            if (GUILayout.Button("Hide All"))
+                            {
+                                for (int j = 0; j < _spriteShow.Count; j++)
+                                {
+                                    _spriteShow[j] = false;
+                                }
+
+                                for (int j = 0; j < _prefabShow.Count; j++)
+                                {
+                                    _prefabShow[j] = false;
+                                }
+                            }
+                            GUILayout.EndHorizontal();
+
+                            for (int j = 0; j < _sprites.Count; j++)
+                            {
+                                GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
+                                _spriteShow[j] = EditorGUILayout.Foldout(_spriteShow[j], _sprites[j].sprite == null ? "Sprite" : _sprites[j].sprite.name, true);
+                                if (GUILayout.Button("-", GUILayout.Width(20)))
+                                {
+                                    _sprites.RemoveAt(j);
+                                    _spriteShow.RemoveAt(j);
+                                    j--;
+                                    GUILayout.EndHorizontal();
+                                    continue;
+                                }
+                                GUILayout.EndHorizontal();
+
+                                if (_spriteShow[j])
+                                {
+                                    Sprite newSprite = EditorGUILayout.ObjectField("Sprite", _sprites[j].sprite, typeof(Sprite), false) as Sprite;
+                                    Vector2 newPos = Vector2.zero;
+                                    float newSize = 1;
+                                    if (newSprite != null)
+                                    {
+                                        newPos = EditorGUILayout.Vector2Field("Position", _sprites[j].position);
+                                        newPos.x = Mathf.Clamp(newPos.x, _cells[i].x * _cellSize, _cells[i].x * _cellSize + _cellSize - newSprite.bounds.size.x * _sprites[j].size);
+                                        newPos.y = Mathf.Clamp(newPos.y, _cells[i].y * _cellSize, _cells[i].y * _cellSize - newSprite.bounds.size.y * _sprites[j].size);
+
+                                        newSize = EditorGUILayout.FloatField("Size", _sprites[j].size);
+                                        newSize = Mathf.Max(0, newSize);
+                                    }
+
+                                    _sprites[j] = (newSprite, newPos, newSize);
+                                    EditorGUI.DrawRect(rect, Color.black);
+                                }
+
+                            }
+
+
+
+                            for (int j = 0; j < _prefabs.Count; j++)
+                            {
+                                GUILayout.BeginHorizontal(GUILayout.MaxWidth(viewWidth));
+                                _prefabShow[j] = EditorGUILayout.Foldout(_prefabShow[j], _prefabs[j].prefab == null ? "Prefab" : _prefabs[j].prefab.name, true);
+                                if (GUILayout.Button("-", GUILayout.Width(20)))
+                                {
+                                    _prefabs.RemoveAt(j);
+                                    _prefabShow.RemoveAt(j);
+                                    j--;
+                                    GUILayout.EndHorizontal();
+                                    continue;
+                                }
+                                GUILayout.EndHorizontal();
+
+                                if (_prefabShow[j])
+                                {
+                                    GameObject newObject = EditorGUILayout.ObjectField("Prefab", _prefabs[j].prefab, typeof(GameObject), false) as GameObject;
+                                    Vector2 newPos = Vector2.zero;
+                                    float newSize = 1;
+                                    if (newObject != null)
+                                    {
+                                        newPos = EditorGUILayout.Vector2Field("Position", _prefabs[j].position);
+
+                                        newSize = EditorGUILayout.FloatField("Size", _prefabs[j].size);
+                                        newSize = Mathf.Max(0, newSize);
+                                    }
+
+                                    _prefabs[j] = (newObject, newPos, newSize);
+                                    EditorGUI.DrawRect(rect, Color.black);
+                                }
+                            }
+
+                            EditorGUI.indentLevel--;
+                        }
+                        GUILayout.EndVertical();
                     }
                 }
 
@@ -864,7 +859,7 @@ namespace Frynity.Window
 
         void OnCreateObject(object type)    
         {
-            _showObject = true;
+            //_showObjects[0] = true;
             switch (type)
             {
                 case ObjectType.Sprite:

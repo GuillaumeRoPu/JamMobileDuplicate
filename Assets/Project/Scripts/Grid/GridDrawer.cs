@@ -1,8 +1,10 @@
+using UnityEngine;
 using System.Collections.Generic;
+using System;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class GridDrawer : MonoBehaviour
@@ -33,11 +35,12 @@ public class GridDrawer : MonoBehaviour
     [SerializeField, Foldout("Draw Tool"), Tooltip("The button 'Generate Grid from Data' can create Tiles using the grid's shape")] private GridLevelData _gridLevelData;
 
     [Space(5)]
-    [SerializeField, Foldout("Draw Tool")] private Vector2Int _chooseSpawnPoint;
+    [SerializeField, Foldout("Draw Tool")] private Vector2Int _spawnPointPosition;
+    [SerializeField, Foldout("Draw Tool")] private CellData.SpawnPointType _spawnPointTypes;
 
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
-    private static Vector2Int _spawnTile;
+    private static Dictionary<Vector2Int, CellData.SpawnPointType> _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -153,21 +156,31 @@ public class GridDrawer : MonoBehaviour
     [Button("Generate Grid From Data (Blue)")]
     public void GenerateGridDataButton()
     {
-        if (_gridLevelData != null) 
+        if (_gridLevelData != null)
         {
             GenerateGrid(_gridLevelData.allTilesPosition);
-            if (_tiles.ContainsKey(_gridLevelData.spawnTile))
+            if (_gridLevelData.spawnPointsTiles != null)
             {
-                _tiles[_spawnTile].SetAsSpawnTile(false);
-                Color newcol = new Color(Mathf.Lerp(0, 1, (float)(_spawnTile.x + Mathf.Abs(_limitsMinX)) / (float)(Mathf.Abs(_limitsMinX) + _limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)(_spawnTile.y + Mathf.Abs(_limitsMinY)) / (float)(Mathf.Abs(_limitsMinY) + _limitsMaxY)));
-                Debug.Log(newcol.r);
-                if (_tiles.ContainsKey(_spawnTile))
+                foreach (var spawn in _gridLevelData.spawnPointsTiles)
                 {
-                    _tiles[_spawnTile].SetColor(newcol);
+                    if (_tiles.ContainsKey(spawn.Key))
+                    {
+                        if (spawn.Value.HasFlag(CellData.SpawnPointType.Player))
+                        {
+                            _tiles[spawn.Key].RemoveSpawnTile();
+                            Color newcol = new Color(Mathf.Lerp(0, 1, (float)spawn.Key.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)spawn.Key.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
+                            _tiles[spawn.Key].SetColor(newcol);
+                        }
+                    }
+                    _tiles[spawn.Key].SetAsSpawnTile(spawn.Value);
+                    if (_tiles[spawn.Key].CellData.spawnPointType != CellData.SpawnPointType.None)
+                    {
+                        _tiles[spawn.Key].RemoveSpawnTile();
+                    }
+                    _spawnPointsTiles[spawn.Key] = spawn.Value;
+                    _tiles[spawn.Key].SetAsSpawnTile(spawn.Value);
                 }
             }
-            _spawnTile = _gridLevelData.spawnTile;
-            _tiles[_spawnTile].SetAsSpawnTile(true);
         }
     }
 
@@ -177,23 +190,46 @@ public class GridDrawer : MonoBehaviour
         EraseGrid(_eraseGridWidth, _eraseGridHeight, _eraseGridOrigin);
     }
 
-    [Button("Make Tile The Spawn Point (Orange)")]
+    [Button("Make Tile A Spawn Point (Orange)")]
     public void SetAsSpawnPoint()
     {
-        if (_tiles.ContainsKey(_chooseSpawnPoint))
+        if (_tiles.ContainsKey(_spawnPointPosition))
         {
-            if (_tiles.ContainsKey(_spawnTile))
+            if (_spawnPointTypes.HasFlag(CellData.SpawnPointType.Player))
             {
-                _tiles[_spawnTile].SetAsSpawnTile(false);
-                Color newcol = new Color(Mathf.Lerp(0, 1, (float)_spawnTile.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)_spawnTile.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
-                Debug.Log(newcol.r);
-                if (_tiles.ContainsKey(_spawnTile))
+                foreach (var spawn in _spawnPointsTiles)
                 {
-                    _tiles[_spawnTile].SetColor(newcol);
+                    if (spawn.Value.HasFlag(CellData.SpawnPointType.Player))
+                    {
+                        _tiles[spawn.Key].RemoveSpawnTile();
+                        Color newcol = new Color(Mathf.Lerp(0, 1, (float)spawn.Key.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)spawn.Key.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
+                        if (_tiles.ContainsKey(spawn.Key))
+                        {
+                            _tiles[spawn.Key].SetColor(newcol);
+                        }
+                        _spawnPointsTiles.Remove(spawn.Key);
+                        break;
+                    }
                 }
             }
-            _spawnTile = _chooseSpawnPoint;
-            _tiles[_spawnTile].SetAsSpawnTile(true);
+            if (_spawnPointTypes == CellData.SpawnPointType.None)
+            {
+                _tiles[_spawnPointPosition].RemoveSpawnTile();
+                Color newcol = new Color(Mathf.Lerp(0, 1, (float)_spawnPointPosition.x + (float)Mathf.Abs(_limitsMinX) / ((float)Mathf.Abs(_limitsMinX) + (float)_limitsMaxX)), 0.5f, Mathf.Lerp(0, 1, (float)_spawnPointPosition.y + (float)Mathf.Abs(_limitsMinY) / ((float)Mathf.Abs(_limitsMinY) + (float)_limitsMaxY)));
+                if (_tiles.ContainsKey(_spawnPointPosition))
+                {
+                    _tiles[_spawnPointPosition].SetColor(newcol);
+                }
+            }
+            else
+            {
+                if (_tiles[_spawnPointPosition].CellData.spawnPointType != CellData.SpawnPointType.None)
+                {
+                    _tiles[_spawnPointPosition].RemoveSpawnTile();
+                }
+                _spawnPointsTiles[_spawnPointPosition] = _spawnPointTypes;
+                _tiles[_spawnPointPosition].SetAsSpawnTile(_spawnPointTypes);
+            }
         }
         else
         {
@@ -231,13 +267,13 @@ public class GridDrawer : MonoBehaviour
             tile.AnnihilateTile();
         }
 
-        _spawnTile = new Vector2Int();
+        _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
     }
 
     [Button("Save The Grid layout")]
     public void CommitValue()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         var data = GridLevelDataBase.GetOrCreate(_gridLevelName);
 
         Undo.RecordObject(data, "Commit Tool Value");
@@ -268,7 +304,12 @@ public class GridDrawer : MonoBehaviour
             }
         }
         data.allTilesPosition = valueToSave;
-        data.spawnTile = _spawnTile;
+        data.spawnPointsTiles = _spawnPointsTiles;
+        foreach (var value in _spawnPointsTiles)
+        {
+            data.spawnPointsTilesPosition.Add(value.Key);
+            data.spawnPointsTilesTypes.Add(value.Value);
+        }
         data.limitsMin = _limitsMin;
         data.limitsMax = _limitsMax;
         Debug.Log("Min X : " + data.limitsMin.x + " | Min Y : " + data.limitsMin.y + " | Max X : " + data.limitsMax.x + " | Max Y : " + data.limitsMin.y);
@@ -278,13 +319,13 @@ public class GridDrawer : MonoBehaviour
         GridLevelDataBase.Save(data);
 
         RemoveAllTiles();
-        #endif
+#endif
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellowNice;
-        Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_limitsMaxX + _limitsMinX) /2) * _tilesSize, (0.5f + (float)(_limitsMaxY + _limitsMinY) /2) * _tilesSize), new Vector2( (float)(Mathf.Abs(_limitsMaxX) + Mathf.Abs(_limitsMinX) + 1) * _tilesSize, (float)(Mathf.Abs(_limitsMaxY) + Mathf.Abs(_limitsMinY) + 1) * _tilesSize ));
+        Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_limitsMaxX + _limitsMinX) / 2) * _tilesSize, (0.5f + (float)(_limitsMaxY + _limitsMinY) / 2) * _tilesSize), new Vector2((float)(Mathf.Abs(_limitsMaxX) + Mathf.Abs(_limitsMinX) + 1) * _tilesSize, (float)(Mathf.Abs(_limitsMaxY) + Mathf.Abs(_limitsMinY) + 1) * _tilesSize));
         if (_gridLevelData != null)
         {
             Gizmos.color = Color.cyan;
@@ -292,14 +333,14 @@ public class GridDrawer : MonoBehaviour
             {
                 Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
             }
-            Gizmos.color = Color.softYellow;
-            Gizmos.DrawWireCube(new Vector2((0.5f + _gridLevelData.spawnTile.x) * _tilesSize, (0.5f + _gridLevelData.spawnTile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            //Gizmos.color = Color.softYellow;
+            //Gizmos.DrawWireCube(new Vector2((0.5f + _gridLevelData.spawnTile.x) * _tilesSize, (0.5f + _gridLevelData.spawnTile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
         }
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(new Vector2((_drawGridOrigin.x + (float)_drawGridWidth / 2) * _tilesSize, (_drawGridOrigin.y + (float)_drawGridHeight / 2) * _tilesSize), new Vector3(_drawGridWidth * _tilesSize, _drawGridHeight * _tilesSize, 1));
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(new Vector2((_eraseGridOrigin.x + (float)_eraseGridWidth / 2) * _tilesSize, (_eraseGridOrigin.y + (float)_eraseGridHeight / 2) * _tilesSize), new Vector3(_eraseGridWidth * _tilesSize, _eraseGridHeight * _tilesSize, 1));
         Gizmos.color = Color.orangeRed;
-        Gizmos.DrawWireCube(new Vector2((_chooseSpawnPoint.x + 0.5f) * _tilesSize, (_chooseSpawnPoint.y + 0.5f) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+        Gizmos.DrawWireCube(new Vector2((_spawnPointPosition.x + 0.5f) * _tilesSize, (_spawnPointPosition.y + 0.5f) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
     }
 }

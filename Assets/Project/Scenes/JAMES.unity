@@ -536,7 +536,7 @@ MonoBehaviour:
   _eraseGridOrigin: {x: -3, y: 1}
   _gridLevelName: francko
   _gridLevelData: {fileID: 0}
-  _chooseSpawnPoint: {x: 6, y: 3}
+  _chooseSpawnPoint: {x: 4, y: 3}
 --- !u!1 &1420296220
 GameObject:
   m_ObjectHideFlags: 0
