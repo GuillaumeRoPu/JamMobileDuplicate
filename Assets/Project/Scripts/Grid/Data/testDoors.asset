@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a7d48b69c1b84f9926c51917fb1c9, type: 3}
+  m_Name: testDoors
+  m_EditorClassIdentifier: Assembly-CSharp::GridLevelData
+  allTilesPosition:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 0, y: 3}
+  - {x: 1, y: 1}
+  - {x: 1, y: 3}
+  keys: []
+  values: 
+  allRoomsPosition:
+  - {x: 0, y: 1}
+  - {x: 0, y: 3}
+  _allRoomsCellsBis:
+  - items:
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: 0, y: 0}
+  - items:
+    - {x: 0, y: 3}
+    - {x: 1, y: 3}
+    - {x: 0, y: 2}
+  allRoomsPrefab:
+  - {fileID: 4976765290307031059, guid: 69f4465517ebd344e96ac2c3eb0a7a2c, type: 3}
+  - {fileID: 4976765290307031059, guid: 69f4465517ebd344e96ac2c3eb0a7a2c, type: 3}
+  keysD:
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  valuesD: 010000000000000001000000
+  limitsMin: {x: 0, y: 0}
+  limitsMax: {x: 1, y: 3}

@@ -55,7 +55,7 @@ public class CellData
 
     public void SetDoor(Face face)
     {
-        if(face == Face.None)
+        if (face != Face.None)
         {
             DoorPosition = face;
             HasDoor = true;

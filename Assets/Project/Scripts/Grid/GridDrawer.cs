@@ -268,15 +268,15 @@ public class GridDrawer : MonoBehaviour
         }
         else if (face == Face.Right)
         {
-            return Face.Right;
+            return Face.Left;
         }
         else if (face == Face.Down)
         {
-            return Face.Right;
+            return Face.Up;
         }
         else if (face == Face.Up)
         {
-            return Face.Right;
+            return Face.Down;
         }
         else
         {
@@ -288,7 +288,7 @@ public class GridDrawer : MonoBehaviour
     {
         if (doorFace == FaceDoor.Left)
         {
-            return Face.Right;
+            return Face.Left;
         }
         else if (doorFace == FaceDoor.Right)
         {
@@ -296,11 +296,11 @@ public class GridDrawer : MonoBehaviour
         }
         else if (doorFace == FaceDoor.Bottom)
         {
-            return Face.Right;
+            return Face.Down;
         }
         else if (doorFace == FaceDoor.Top)
         {
-            return Face.Right;
+            return Face.Up;
         }
         else
         {
@@ -344,29 +344,27 @@ public class GridDrawer : MonoBehaviour
                 }
             }
             //Checks if each tile has a valid door to place
-            foreach(var cellWorldPos in allTilesInTheRoom)
+            foreach (var cell in roomCells.GetCells)
             {
+                var cellWorldPos = cell.localPos + position;
                 Face doorFace = Face.None;
                 for (int i = 0; i < roomCells.GetActiveDoors.Count; i++)
                 {
-                    if (roomCells.GetActiveDoors[i])
+                    if (roomCells.GetDoors[i].cellId == cell.id && roomCells.GetActiveDoors[i])
                     {
                         doorFace = GetFaceDoor(roomCells.GetDoors[i].face);
-                    }
-                    else
-                    {
-                        doorFace = Face.None;
+                        Debug.Log("Been there");
                     }
                 }
                 if (doorFace != Face.None)
                 {
-                    var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
                     if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)))
                     {
                         var tileCellData = _tiles[new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)].CellData;
                         if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Left && tileCellData.DoorPosition != GetOppositeFace(doorFace))
                         {
                             Debug.LogError("One of the tiles has more than 1 door");
+                            Debug.Log("This is the problem Right");
                             return;
                         }
                     }
@@ -376,6 +374,7 @@ public class GridDrawer : MonoBehaviour
                         if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
                         {
                             Debug.LogError("One of the tiles has more than 1 door");
+                            Debug.Log("This is the problem Left");
                             return;
                         }
                     }
@@ -385,6 +384,7 @@ public class GridDrawer : MonoBehaviour
                         if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Down && tileCellData.DoorPosition != GetOppositeFace(doorFace))
                         {
                             Debug.LogError("One of the tiles has more than 1 door");
+                            Debug.Log("This is the problem Up");
                             return;
                         }
                     }
@@ -394,14 +394,17 @@ public class GridDrawer : MonoBehaviour
                         if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Up && tileCellData.DoorPosition != GetOppositeFace(doorFace))
                         {
                             Debug.LogError("One of the tiles has more than 1 door");
+                            Debug.Log("This is the problem Down");
                             return;
                         }
                     }
+                    Debug.Log("Went there");
+                    var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
                     if (_tiles.ContainsKey(oppositeDoor.Item1))
                     {
-                        if (!_tiles[oppositeDoor.Item1].CellData.HasADoor() && _tiles[oppositeDoor.Item1].CellData.DoorPosition == GetOppositeFace(doorFace))
+                        if (!_tiles[oppositeDoor.Item1].CellData.HasADoor() || _tiles[oppositeDoor.Item1].CellData.DoorPosition == GetOppositeFace(doorFace))
                         {
-                            temporaryAllDoors.Add(oppositeDoor.Item1, oppositeDoor.Item2);
+                            temporaryAllDoors[oppositeDoor.Item1] = oppositeDoor.Item2;
                         }
                         else
                         {
@@ -410,7 +413,7 @@ public class GridDrawer : MonoBehaviour
                         }
                     }
                     allDoors.Add(cellWorldPos, doorFace);
-                    temporaryAllDoors.Add(cellWorldPos, doorFace);
+                    temporaryAllDoors[cellWorldPos] = doorFace;
                 }
             }
 
@@ -418,7 +421,7 @@ public class GridDrawer : MonoBehaviour
             foreach(var door in temporaryAllDoors)
             {
                 SetDoor(door.Key, door.Value);
-                _allDoors.Add(door.Key, door.Value);
+                _allDoors[door.Key] = door.Value;
             }
 
             RoomData roomData = new RoomData();
@@ -539,9 +542,16 @@ public class GridDrawer : MonoBehaviour
                 foreach (var tile in allTilesInRoom)
                 {
                     _tiles[tile].SetAsNotInARoom();
-                    if (_allDoors.ContainsKey(tile))
+                    if (_allDoors.ContainsKey(tile) && roomData.GetAllDoorsinRoom().ContainsKey(tile))
                     {
+                        var opposite = GetOppositeDoor(tile, _allDoors[tile]);
+                        if (_tiles.ContainsKey(opposite.Item1))
+                        {
+                            _allDoors.Remove(opposite.Item1);
+                            _tiles[opposite.Item1].CellData.SetDoor(Face.None);
+                        }
                         _allDoors.Remove(tile);
+                        _tiles[tile].CellData.SetDoor(Face.None);
                     }
                     Debug.Log("Removed X : " + tile.x + ", Y : " + tile.y + " from the room");
                 }
@@ -549,7 +559,7 @@ public class GridDrawer : MonoBehaviour
                 _roomDeletionTracker.Remove(mainCell);
                 _allRoomDatas.Remove(roomData);
             }
-            else if (specialDelete == false)
+            else if (specialDelete == true)
             {
                 Debug.LogWarning("This tile isn't tied to any room");
                 return;
@@ -791,6 +801,13 @@ public class GridDrawer : MonoBehaviour
             {
                 data.allRoomsPosition.Add(value.GetMainCell());
             }
+            data.allDoors = new Dictionary<Vector2Int, Face>(_allDoors);
+            foreach (var value in data.allDoors)
+            {
+                data.keysD.Add(value.Key);
+                data.valuesD.Add(value.Value);
+            }
+
             data.limitsMin = _limitsMin;
             data.limitsMax = _limitsMax;
 
@@ -854,6 +871,30 @@ public class GridDrawer : MonoBehaviour
             Gizmos.DrawWireCube(new Vector2((float)_eraseRoomPosition.x + 0.5f, (float)_eraseRoomPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
             Gizmos.DrawLine(new Vector2((float)_eraseRoomPosition.x, (float)_eraseRoomPosition.y), new Vector2((float)_eraseRoomPosition.x + 1, (float)_eraseRoomPosition.y + 1));
             Gizmos.DrawLine(new Vector2((float)_eraseRoomPosition.x + 1, (float)_eraseRoomPosition.y), new Vector2((float)_eraseRoomPosition.x, (float)_eraseRoomPosition.y + 1));
+        }
+
+        foreach(var door in _allDoors)
+        {
+            Gizmos.color = Color.black;
+            Vector2 pos = door.Key;
+            switch (door.Value)
+            {
+                case Face.Up:
+                    pos = new Vector2(pos.x + 0.5f, pos.y + 0.9f);
+                    break;
+                case Face.Down:
+                    pos = new Vector2(pos.x + 0.5f, pos.y + 0.1f);
+                    break;
+                case Face.Left:
+                    pos = new Vector2(pos.x + 0.1f, pos.y + 0.5f);
+                    break;
+                case Face.Right:
+                    pos = new Vector2(pos.x + 0.9f, pos.y + 0.5f);
+                    break;
+                default:
+                    break;
+            }
+            Gizmos.DrawWireSphere(pos, 0.25f);
         }
     }
 }

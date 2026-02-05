@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -22,6 +23,10 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
     public IReadOnlyList<Vector2IntList> allRoomsCells => _allRoomsCellsBis;
     [ReadOnly] public List<GameObject> allRoomsPrefab = new List<GameObject>();
 
+    [ReadOnly] public Dictionary<Vector2Int, Face> allDoors = new Dictionary<Vector2Int, Face>();
+    [ReadOnly] public List<Vector2Int> keysD = new List<Vector2Int>();
+    [ReadOnly] public List<Face> valuesD = new List<Face>();
+
     [ReadOnly] public Vector2Int limitsMin;
     [ReadOnly] public Vector2Int limitsMax;
 
@@ -34,6 +39,7 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
             keys.Add(kvp.Key);
             values.Add(kvp.Value);
         }
+
         allRoomsPosition.Clear();
         _allRoomsCellsBis.Clear();
         allRoomsPrefab.Clear();
@@ -51,6 +57,14 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
 
             allRoomsPrefab.Add(a.GetRoomPrefab());
         }
+
+        keysD.Clear();
+        valuesD.Clear();
+        foreach (var kvp in allDoors)
+        {
+            keysD.Add(kvp.Key);
+            valuesD.Add(kvp.Value);
+        }
     }
 
     public void OnAfterDeserialize()
@@ -60,6 +74,7 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
         {
             spawnPointsTiles.Add(keys[i], values[i]);
         }
+
         allRooms = new List<RoomData>();
         for (int i = 0; i < allRoomsPosition.Count; i++)
         {
@@ -68,6 +83,12 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
             data.SetAllCellsInRoom(new List<Vector2Int>(_allRoomsCellsBis[i].items));
             data.SetRoomPrefab(allRoomsPrefab[i]);
             allRooms.Add(data);
+        }
+
+        allDoors = new Dictionary<Vector2Int, Face>();
+        for (int i = 0; i < keysD.Count; i++)
+        {
+            allDoors.Add(keysD[i], valuesD[i]);
         }
     }
 }
