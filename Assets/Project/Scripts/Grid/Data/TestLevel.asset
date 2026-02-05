@@ -31,6 +31,6 @@ MonoBehaviour:
     - {x: 2, y: 1}
     - {x: 1, y: 0}
   allRoomsPrefab:
-  - {fileID: 3284975847924201917, guid: 8bc817e7a119d50419cf7d5d245b53c6, type: 3}
+  - {fileID: 5253747431288570786, guid: 0e98f2cbdfe78be4cacf6ef4c87c6ddd, type: 3}
   limitsMin: {x: 0, y: 0}
   limitsMax: {x: 2, y: 2}

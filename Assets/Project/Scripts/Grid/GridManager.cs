@@ -68,6 +68,16 @@ public class GridManager : MonoBehaviour
         _tiles[position].transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
     }
 
+    private void Start()
+    {
+        if (_generateGridOnPlay && _gridLevelData != null)
+        {
+            _limitsMax = _gridLevelData.limitsMax;
+            _limitsMin = _gridLevelData.limitsMin;
+            GenerateGrid(_gridLevelData.allTilesPosition);
+        }
+    }
+
     public void Init()
     {
         Debug.Log(_tiles.Count);
@@ -75,7 +85,7 @@ public class GridManager : MonoBehaviour
         {
             Debug.Log("X : " + help.Key.x + ", Y : " + help.Key.y);
         }
-        if (_generateGridOnPlay && _gridLevelData != null)
+        if (_gridLevelData != null)
         {
             _limitsMax = _gridLevelData.limitsMax;
             _limitsMin = _gridLevelData.limitsMin;
