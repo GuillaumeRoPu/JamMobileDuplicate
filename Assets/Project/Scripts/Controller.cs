@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour
     [SerializeField] InputActionReference _tapInput;
 
     [SerializeField, Foldout("Events")] UnityEvent<Vector2Int> _onPress;
+    [SerializeField, Foldout("Events")] UnityEvent _onPressCanceled;
     [SerializeField, Foldout("Events")] UnityEvent _onTap;
 
     GameObject _grabObject;
@@ -39,19 +40,6 @@ public class Controller : MonoBehaviour
         {
             _onPress?.Invoke(GameManager.Of.Grid.WorldPositionToTilePosition(_pressPosition));
 
-            RaycastHit2D hit = Physics2D.Raycast(_pressPosition, Vector2.zero);
-            if (hit)
-            {
-                IGrabble grab = hit.collider.GetComponent<IGrabble>();
-                if (grab != null)
-                {
-                    grab.OnGrab();
-                    _grabObject = hit.collider.gameObject;
-                    _grabLocalPress = (Vector2)_grabObject.transform.position - _pressPosition;
-                }
-            }
-
-            _isPressed = false;
             _posChange = false;
         }
 
@@ -81,6 +69,7 @@ public class Controller : MonoBehaviour
         if (ctx.canceled)
         {
             _grabObject = null;
+            _onPressCanceled?.Invoke();
         }
     }
 

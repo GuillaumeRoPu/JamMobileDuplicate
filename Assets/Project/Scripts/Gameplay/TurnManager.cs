@@ -8,7 +8,7 @@ public class TurnManager : MonoBehaviour
     public void NextTurn()
     {
         _currentTurn++;
+        GameManager.Of.Player.MoveToNextTileInPath();
     }
-
     
 }

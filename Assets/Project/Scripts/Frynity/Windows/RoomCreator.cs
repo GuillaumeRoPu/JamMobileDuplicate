@@ -197,6 +197,8 @@ namespace Frynity.Window
                 _cellsShow.Add(false);
                 _showCells = true;
                 _showObjects.Add(false);
+
+                
             }
             GUILayout.Space(position.width / 3);
             GUILayout.EndHorizontal();
@@ -229,6 +231,24 @@ namespace Frynity.Window
                     GUILayout.Space(30);
                     if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
+                        for (int j = 0; j < _sprites.Count; j++)
+                        {
+                            if (_sprites[j].cellId == i)
+                            {
+                                _sprites.RemoveAt(j);
+                                j--;
+                            }
+                        }
+
+                        for (int j = 0; j < _prefabs.Count; j++)
+                        {
+                            if (_prefabs[j].cellId == i)
+                            {
+                                _prefabs.RemoveAt(j);
+                                j--;
+                            }
+                        }
+
                         _cells.RemoveAt(i);
                         _cellsShow.RemoveAt(i);
                         i--;
@@ -445,6 +465,15 @@ namespace Frynity.Window
                 for (int j = 0; j < _doors.Count; j++)
                 {
                     if (i == j) continue;
+
+                    if (index >= cellsWithWallId.Count)
+                    {
+                        _doors.RemoveAt(j);
+                        index--;
+                        if (index < 0) index = cellsWithWallId.Count - 1;
+                        continue;
+                    }
+
                     if (_doors[j] == (index, cellsWithWallId[index].id, cellsWithWallId[index].face))
                     {
                         index++;
