@@ -12,6 +12,8 @@ public class Entity : MonoBehaviour
     int _pathIndex;
     float _currentMoveTime;
 
+    public bool IsMoving => _isMoving;
+
     Vector3 _initPosition;
 
     public Tile CurrentTile => _currentTile;
@@ -25,10 +27,8 @@ public class Entity : MonoBehaviour
     {
         _path = path;
         _reachTarget = false;
-        _isMoving = true;
         _pathIndex = 0;
         _currentMoveTime = 0;
-        _initPosition = transform.position;
     }
 
     void Update()
@@ -45,27 +45,30 @@ public class Entity : MonoBehaviour
 
                 if (_currentMoveTime > 1)
                 {
+                    _currentTile = GridManager.Tiles[_path[_pathIndex]];
                     _isMoving = false;
                     _currentMoveTime = 0;
                 }
             }
-            else
-            {
-                _currentTile = GridManager.Tiles[_path[_pathIndex]];
-                _pathIndex++;
-                _initPosition = transform.position;
-                _isMoving = true;
-
-                if (_pathIndex == _path.Count) _reachTarget = true;
-                else Turn(_path[_pathIndex].x * GameManager.Of.Grid.TileSize);
-            }
         }
+    }
+
+    public void MoveToNextTileInPath()
+    {
+        if (_reachTarget) return;
+
+        _pathIndex++;
+        _initPosition = transform.position;
+        _isMoving = true;
+
+        if (_pathIndex == _path.Count) _reachTarget = true;
+        else Turn(_path[_pathIndex].x);
     }
 
     void Turn(float xDirection)
     {
         Transform spriteTransform = GetComponentInChildren<SpriteRenderer>().transform;
-        if ((xDirection < spriteTransform.position.x && spriteTransform.localScale.x > 0) || (xDirection > spriteTransform.position.x && spriteTransform.localScale.x < 0))
+        if ((xDirection < _currentTile.CellData.GridPosition.x && spriteTransform.localScale.x > 0) || (xDirection > _currentTile.CellData.GridPosition.x && spriteTransform.localScale.x < 0))
         {
             Vector3 scale = spriteTransform.localScale;
             scale.x *= -1;

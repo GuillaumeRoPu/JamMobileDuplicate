@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject _player;
     Entity _playerEntity;
-    public GameObject Player => _player;
+    public Entity Player => _playerEntity;
+    public bool CanPlay => !_playerEntity.IsMoving;
 
     [Header("Manager")]
     [SerializeField] TurnManager _turnManager;
@@ -63,16 +64,9 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer(Vector2Int tile)
     {
-        GameObject player = Instantiate(Player, (Vector2)tile * Grid.TileSize, Quaternion.identity);
+        GameObject player = Instantiate(_player, (Vector2)tile * Grid.TileSize, Quaternion.identity);
         _playerEntity = player.GetComponent<Entity>();
         _playerEntity.SetCurrentTile(tile);
         Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
-    }
-
-    public void SetPlayerDestination(Vector2Int tile)
-    {
-        Debug.Log(tile);
-        if (GridManager.Tiles.ContainsKey(tile))
-            _playerEntity.GetComponent<AIPathfinding>().CreatePath(GridManager.Tiles[tile]);
     }
 }
