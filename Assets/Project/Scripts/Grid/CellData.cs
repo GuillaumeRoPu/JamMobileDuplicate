@@ -31,6 +31,7 @@ public class CellData
     public SpawnPointType spawnPointType = SpawnPointType.None;
     //public Trap _trap;
     public Face DoorPosition = Face.None;
+    public bool HasDoor = false;
     public Entity Entity;
 
     public bool CanPass(Face face, CellData originalCell)
@@ -50,5 +51,24 @@ public class CellData
             return true;
         }
         return false;
+    }
+
+    public void SetDoor(Face face)
+    {
+        if(face == Face.None)
+        {
+            DoorPosition = face;
+            HasDoor = true;
+        }
+        else
+        {
+            DoorPosition = face;
+            HasDoor = false;
+        }
+    }
+
+    public bool HasADoor()
+    {
+        return HasDoor;
     }
 }

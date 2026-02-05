@@ -1,5 +1,6 @@
-using UnityEngine;
+using Frynity.Gen;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Tile _tilesPrefab;
     [SerializeField] private Transform _tilesParent;
+    [SerializeField] private Transform _roomsParent;
 
     [SerializeField] private float _tilesSize;
 
@@ -22,6 +24,9 @@ public class GridManager : MonoBehaviour
     //ALL THE DATA FOR THE GRID IS HERE
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
+
+    private List<RoomData> _allRoomDatas = new List<RoomData>();
+    private Dictionary<Vector2Int, GameObject> _roomDeletionTracker = new Dictionary<Vector2Int, GameObject>();
 
     public static Dictionary<Vector2Int, Tile> Tiles => _tiles;
 
@@ -45,8 +50,15 @@ public class GridManager : MonoBehaviour
         {
             AddTile(tile);
         }
-        UpdateSizeAll();
+    }
 
+    void PlaceAllRooms(List<RoomData> data)
+    {
+        foreach(var room in data)
+        {
+            PlaceRoom(room.GetRoomPrefab(), room.GetMainCell());
+        }
+        UpdateSizeAll();
     }
 
     void GenerateTiles(List<Vector2Int> tiles, Vector2Int origin)
@@ -68,18 +80,22 @@ public class GridManager : MonoBehaviour
         _tiles[position].transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
     }
 
+    private void Start()
+    {
+        if (_generateGridOnPlay && _gridLevelData != null)
+        {
+            Init();
+        }
+    }
+
     public void Init()
     {
-        Debug.Log(_tiles.Count);
-        foreach (var help in _gridLevelData.spawnPointsTiles)
-        {
-            Debug.Log("X : " + help.Key.x + ", Y : " + help.Key.y);
-        }
-        if (_generateGridOnPlay && _gridLevelData != null)
+        if (_gridLevelData != null)
         {
             _limitsMax = _gridLevelData.limitsMax;
             _limitsMin = _gridLevelData.limitsMin;
             GenerateGrid(_gridLevelData.allTilesPosition);
+            PlaceAllRooms(_gridLevelData.allRooms);
         }
     }
 
@@ -150,6 +166,55 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private void PlaceRoom(GameObject room, Vector2Int roomPosition)
+    {
+        var roomCells = room.GetComponent<RoomCells>();
+        if (roomCells != null)
+        {
+            List<Vector2Int> allTilesInTheRoom = new List<Vector2Int>();
+            Vector2Int mainCellPosition = new Vector2Int();
+            foreach (var cell in roomCells.GetCells)
+            {
+                if (_tiles.ContainsKey(cell.localPos + roomPosition))
+                {
+                    if (!_tiles[cell.localPos + roomPosition].IsInARoom())
+                    {
+                        allTilesInTheRoom.Add(cell.localPos + roomPosition);
+                        if (cell.localPos == new Vector2(0, 0))
+                        {
+                            mainCellPosition = cell.localPos + roomPosition;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("One of the tiles already has a room");
+                        return;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Your room doesn't fit in the grid");
+                    return;
+                }
+            }
+            RoomData roomData = new RoomData();
+            roomData.SetMainCell(mainCellPosition);
+            roomData.SetAllCellsInRoom(allTilesInTheRoom);
+            roomData.SetRoomPrefab(room);
+            _allRoomDatas.Add(roomData);
+            foreach (var tile in allTilesInTheRoom)
+            {
+                _tiles[tile].SetAsInARoom(mainCellPosition, roomData);
+            }
+            GameObject newRoom = Instantiate(room, (Vector2)mainCellPosition, Quaternion.identity, _roomsParent);
+            _roomDeletionTracker[mainCellPosition] = newRoom;
+        }
+        else
+        {
+            Debug.LogError("You didn't select a valid Room");
+        }
+    }
+
     [Button("Update Grid Size")]
     void UpdateSizeAll()
     {
@@ -167,26 +232,27 @@ public class GridManager : MonoBehaviour
     {
         if (_gridLevelData != null) 
         {
+            Gizmos.color = Color.yellowNice;
+            Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_gridLevelData.limitsMax.x + _gridLevelData.limitsMin.x) / 2) * _tilesSize, (0.5f + (float)(_gridLevelData.limitsMax.y + _gridLevelData.limitsMin.y) / 2) * _tilesSize), new Vector2((float)(Mathf.Abs(_gridLevelData.limitsMax.x) + Mathf.Abs(_gridLevelData.limitsMin.x) + 1) * _tilesSize, (float)(Mathf.Abs(_gridLevelData.limitsMax.y) + Mathf.Abs(_gridLevelData.limitsMin.y) + 1) * _tilesSize));
             foreach (var tile in _gridLevelData.allTilesPosition)
             {
                 Gizmos.color = Color.cyan;
                 Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
-                if (_gridLevelData.spawnPointsTiles.ContainsKey(tile))
+                Gizmos.DrawWireSphere(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), 0.25f);
+            }
+            foreach (var tile in _gridLevelData.spawnPointsTiles)
+            {
+                if (_gridLevelData.spawnPointsTiles[tile.Key].HasFlag(CellData.SpawnPointType.Player))
                 {
-                    if (_gridLevelData.spawnPointsTiles[tile].HasFlag(CellData.SpawnPointType.Player))
-                    {
-                        Gizmos.color = Color.orangeRed;
-                        Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
-                    }
-                    else if (_gridLevelData.spawnPointsTiles[tile] != CellData.SpawnPointType.None)
-                    {
-                        Gizmos.color = Color.blue;
-                        Gizmos.DrawWireCube(new Vector2((0.5f + tile.x) * _tilesSize, (0.5f + tile.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
-                    }
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawWireCube(new Vector2((0.5f + tile.Key.x) * _tilesSize, (0.5f + tile.Key.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                }
+                else if (_gridLevelData.spawnPointsTiles[tile.Key] != CellData.SpawnPointType.None)
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawWireCube(new Vector2((0.5f + tile.Key.x) * _tilesSize, (0.5f + tile.Key.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
                 }
             }
-            Gizmos.color = Color.yellowNice;
-            Gizmos.DrawWireCube(new Vector2((0.5f + (float)(_gridLevelData.limitsMax.x + _gridLevelData.limitsMin.x) / 2) * _tilesSize, (0.5f + (float)(_gridLevelData.limitsMax.y + _gridLevelData.limitsMin.y) / 2) * _tilesSize), new Vector2((float)(Mathf.Abs(_gridLevelData.limitsMax.x) + Mathf.Abs(_gridLevelData.limitsMin.x) + 1) * _tilesSize, (float)(Mathf.Abs(_gridLevelData.limitsMax.y) + Mathf.Abs(_gridLevelData.limitsMin.y) + 1) * _tilesSize));
         }
     }
 }

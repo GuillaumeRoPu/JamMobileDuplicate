@@ -14,6 +14,10 @@ public class Tile : MonoBehaviour, IHoverable
 
     private CellData _cellData = new CellData();
 
+    private bool _isInARoom = false;
+    private Vector2Int _mainRoomCell = new Vector2Int();
+    private RoomData _roomData = new RoomData();
+
     public CellData CellData { get { return _cellData; } }
 
     private bool _isOffset;
@@ -23,10 +27,13 @@ public class Tile : MonoBehaviour, IHoverable
         if (Application.isPlaying)
         {
             _renderer.sprite = _inGameSprite;
+            _renderer.sortingOrder = 1;
         }
         else
         {
             _renderer.sprite = _inEditorSprite;
+            _renderer.sortingOrder = -1;
+            _highlight.SetActive(true);
         }
         _isOffset = isOffset;
         SetColor();
@@ -37,15 +44,31 @@ public class Tile : MonoBehaviour, IHoverable
     {
         //_renderer.color = _isOffset ? _offsetColor : _baseColor;
         _renderer.color = _baseColor;
+        var rend = _highlight.GetComponent<SpriteRenderer>();
+        if (rend != null && !Application.isPlaying)
+        {
+            rend.color = new Color (0, 0, 0, 0);
+            rend.sortingOrder = 100;
+        }
         if (_cellData.IsSpawnPoint)
         {
             if (_cellData.spawnPointType.HasFlag(CellData.SpawnPointType.Player))
             {
                 _renderer.color = Color.red;
+                if (rend != null && !Application.isPlaying) 
+                { 
+                    rend.color = Color.red;
+                    rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.5f);
+                }
             }
             else
             {
                 _renderer.color = Color.blue;
+                if (rend != null && !Application.isPlaying)
+                {
+                    rend.color = Color.blue;
+                    rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.5f);
+                }
             }
         }
     }
@@ -53,7 +76,8 @@ public class Tile : MonoBehaviour, IHoverable
     public void OnHover()
     {
         _highlight.SetActive(true);
-        Debug.Log(_cellData.GridPosition);
+        Debug.Log(_isInARoom);
+        Debug.Log("Main Cell Position | X : " + _roomData.GetMainCell().x + ", Y : " + _roomData.GetMainCell().y);
     }
 
     public void StopHover()
@@ -95,5 +119,71 @@ public class Tile : MonoBehaviour, IHoverable
         _cellData.IsSpawnPoint = false;
         _cellData.spawnPointType = CellData.SpawnPointType.None;
         SetColor();
+    }
+
+    public bool IsInARoom()
+    {
+        if (_isInARoom)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void SetAsInARoom(Vector2Int mainRoomCellData, RoomData roomData)
+    {
+        if (!IsInARoom())
+        {
+            _isInARoom = true;
+            _mainRoomCell = mainRoomCellData;
+            if (CellData.GridPosition == mainRoomCellData)
+            {
+                _roomData = roomData;
+            }
+        }
+        else
+        {
+            Debug.Log("This Tile is not in a room");
+        }
+    }
+
+    public void SetAsNotInARoom()
+    {
+        if (_isInARoom)
+        {
+            _isInARoom = false;
+            _mainRoomCell = new Vector2Int();
+            _roomData = new RoomData();
+        }
+        else
+        {
+            Debug.Log("This Tile is already not in a room");
+        }
+    }
+
+    public RoomData GetRoomData()
+    {
+        if (_mainRoomCell == CellData.GridPosition)
+        {
+            return _roomData;
+        }
+        else
+        {
+            Debug.LogError("This isn't the main room cell");
+            return null;
+        }
+    }
+
+    public Vector2Int GetMainRoomCell()
+    {
+        if (!_isInARoom)
+        {
+            Debug.LogError("This cell isn't a room");
+            return new Vector2Int();
+        }
+        else
+        {
+            return _mainRoomCell;
+        }
     }
 }
