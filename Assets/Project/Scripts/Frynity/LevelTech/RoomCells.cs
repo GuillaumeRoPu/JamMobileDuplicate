@@ -121,7 +121,7 @@ namespace Frynity.Gen
             return value;
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
             foreach (Cell cell in _localCells)

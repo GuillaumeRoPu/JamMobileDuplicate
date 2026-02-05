@@ -33,6 +33,7 @@ public class Tile : MonoBehaviour, IHoverable
         {
             _renderer.sprite = _inEditorSprite;
             _renderer.sortingOrder = -1;
+            _highlight.SetActive(true);
         }
         _isOffset = isOffset;
         SetColor();
@@ -43,15 +44,31 @@ public class Tile : MonoBehaviour, IHoverable
     {
         //_renderer.color = _isOffset ? _offsetColor : _baseColor;
         _renderer.color = _baseColor;
+        var rend = _highlight.GetComponent<SpriteRenderer>();
+        if (rend != null && !Application.isPlaying)
+        {
+            rend.color = new Color (0, 0, 0, 0);
+            rend.sortingOrder = 100;
+        }
         if (_cellData.IsSpawnPoint)
         {
             if (_cellData.spawnPointType.HasFlag(CellData.SpawnPointType.Player))
             {
                 _renderer.color = Color.red;
+                if (rend != null && !Application.isPlaying) 
+                { 
+                    rend.color = Color.red;
+                    rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.5f);
+                }
             }
             else
             {
                 _renderer.color = Color.blue;
+                if (rend != null && !Application.isPlaying)
+                {
+                    rend.color = Color.blue;
+                    rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.5f);
+                }
             }
         }
     }

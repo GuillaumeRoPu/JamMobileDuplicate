@@ -11,14 +11,17 @@ public class Vector2IntList
 public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
 {
     [ReadOnly] public List<Vector2Int> allTilesPosition = new List<Vector2Int>();
+
     [ReadOnly] public Dictionary<Vector2Int, CellData.SpawnPointType> spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
     [ReadOnly] public List<Vector2Int> keys = new List<Vector2Int>();
     [ReadOnly] public List<CellData.SpawnPointType> values = new List<CellData.SpawnPointType>();
+
     [ReadOnly] public List<RoomData> allRooms = new List<RoomData>();
     [ReadOnly] public List<Vector2Int> allRoomsPosition = new List<Vector2Int>();
-    [SerializeField, ReadOnly] private List<Vector2IntList> _allRoomsCellsWrapped = new();
-    public IReadOnlyList<Vector2IntList> allRoomsCells => _allRoomsCellsWrapped;
+    [SerializeField, ReadOnly] private List<Vector2IntList> _allRoomsCellsBis = new();
+    public IReadOnlyList<Vector2IntList> allRoomsCells => _allRoomsCellsBis;
     [ReadOnly] public List<GameObject> allRoomsPrefab = new List<GameObject>();
+
     [ReadOnly] public Vector2Int limitsMin;
     [ReadOnly] public Vector2Int limitsMax;
 
@@ -32,7 +35,7 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
             values.Add(kvp.Value);
         }
         allRoomsPosition.Clear();
-        _allRoomsCellsWrapped.Clear();
+        _allRoomsCellsBis.Clear();
         allRoomsPrefab.Clear();
         foreach(var a in allRooms)
         {
@@ -44,7 +47,7 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
             {
                 wrapped.items.AddRange(cells);
             }
-            _allRoomsCellsWrapped.Add(wrapped);
+            _allRoomsCellsBis.Add(wrapped);
 
             allRoomsPrefab.Add(a.GetRoomPrefab());
         }
@@ -62,7 +65,7 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
         {
             RoomData data = new RoomData();
             data.SetMainCell(allRoomsPosition[i]);
-            data.SetAllCellsInRoom(new List<Vector2Int>(_allRoomsCellsWrapped[i].items));
+            data.SetAllCellsInRoom(new List<Vector2Int>(_allRoomsCellsBis[i].items));
             data.SetRoomPrefab(allRoomsPrefab[i]);
             allRooms.Add(data);
         }

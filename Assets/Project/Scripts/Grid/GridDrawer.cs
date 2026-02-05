@@ -57,6 +57,7 @@ public class GridDrawer : MonoBehaviour
     private static Dictionary<Vector2Int, CellData.SpawnPointType> _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
     private static List<RoomData> _allRoomDatas = new List<RoomData>();
     private static Dictionary<Vector2Int, GameObject> _roomDeletionTracker = new Dictionary<Vector2Int, GameObject>();
+    private static Dictionary<Vector2Int, Face> _allDoors = new Dictionary<Vector2Int, Face>();
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -150,10 +151,11 @@ public class GridDrawer : MonoBehaviour
     {
         if (_tiles.ContainsKey(position))
         {
-            EraseRoom(position);
+            EraseRoom(position, true);
             SetAsSpawnPoint(position, CellData.SpawnPointType.None);
             _tiles[position].AnnihilateTile();
             _tiles.Remove(position);
+            Debug.Log("Is inside ");
         }
         else
         {
@@ -230,23 +232,171 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
+    private (Vector2Int, Face) GetOppositeDoor(Vector2Int position, Face doorFace)
+    {
+        if (doorFace == Face.None)
+        {
+            return (position, doorFace);
+        }
+        else if (doorFace == Face.Left)
+        {
+            return (new Vector2Int(position.x - 1, position.y), Face.Right);
+        }
+        else if (doorFace == Face.Right)
+        {
+            return (new Vector2Int(position.x + 1, position.y), Face.Left);
+        }
+        else if (doorFace == Face.Down)
+        {
+            return (new Vector2Int(position.x, position.y - 1), Face.Up);
+        }
+        else if (doorFace == Face.Up)
+        {
+            return (new Vector2Int(position.x, position.y + 1), Face.Down);
+        }
+        else
+        {
+            return (position, doorFace);
+        }
+    }
+
+    private Face GetOppositeFace(Face face)
+    {
+        if (face == Face.Left)
+        {
+            return Face.Right;
+        }
+        else if (face == Face.Right)
+        {
+            return Face.Right;
+        }
+        else if (face == Face.Down)
+        {
+            return Face.Right;
+        }
+        else if (face == Face.Up)
+        {
+            return Face.Right;
+        }
+        else
+        {
+            return Face.None;
+        }
+    }
+
+    private Face GetFaceDoor(FaceDoor doorFace)
+    {
+        if (doorFace == FaceDoor.Left)
+        {
+            return Face.Right;
+        }
+        else if (doorFace == FaceDoor.Right)
+        {
+            return Face.Right;
+        }
+        else if (doorFace == FaceDoor.Bottom)
+        {
+            return Face.Right;
+        }
+        else if (doorFace == FaceDoor.Top)
+        {
+            return Face.Right;
+        }
+        else
+        {
+            return Face.None;
+        }
+    }
+
     private void PlaceRoom(GameObject room, Vector2Int position)
     {
         var roomCells = room.GetComponent<RoomCells>();
         if (roomCells != null)
         {
             List<Vector2Int> allTilesInTheRoom = new List<Vector2Int>();
+            Dictionary<Vector2Int, Face> allDoors = new Dictionary<Vector2Int, Face>();
             Vector2Int mainCellPosition = new Vector2Int();
             foreach(var cell in roomCells.GetCells)
             {
-                if (_tiles.ContainsKey(cell.localPos + position))
+                var cellWorldPos = cell.localPos + position;
+                if (_tiles.ContainsKey(cellWorldPos))
                 {
-                    if (!_tiles[cell.localPos + position].IsInARoom())
+                    if (!_tiles[cellWorldPos].IsInARoom())
                     {
-                        allTilesInTheRoom.Add(cell.localPos + position);
+                        allTilesInTheRoom.Add(cellWorldPos);
+
                         if (cell.localPos == new Vector2(0, 0))
                         {
-                            mainCellPosition = cell.localPos + position;
+                            mainCellPosition = cellWorldPos;
+                        }
+
+                        Face doorFace = Face.None;
+                        for (int i = 0; i < roomCells.GetActiveDoors.Count; i++)
+                        {
+                            if (roomCells.GetActiveDoors[i])
+                            {
+                                doorFace = GetFaceDoor(roomCells.GetDoors[i].face);
+                            }
+                            else
+                            {
+                                doorFace = Face.None;
+                            }
+                        }
+                        if (doorFace != Face.None)
+                        {
+                            _tiles[cellWorldPos].CellData.SetDoor(doorFace);
+                            var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
+                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)))
+                            {
+                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)].CellData;
+                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Left && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                                {
+                                    Debug.LogError("One of the tiles has more than 1 door");
+                                    return;
+                                }
+                            }
+                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x - 1, cellWorldPos.y)))
+                            {
+                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x - 1, cellWorldPos.y)].CellData;
+                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                                {
+                                    Debug.LogError("One of the tiles has more than 1 door");
+                                    return;
+                                }
+                            }
+                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x, cellWorldPos.y + 1)))
+                            {
+                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x, cellWorldPos.y + 1)].CellData;
+                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                                {
+                                    Debug.LogError("One of the tiles has more than 1 door");
+                                    return;
+                                }
+                            }
+                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x, cellWorldPos.y - 1)))
+                            {
+                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x, cellWorldPos.y - 1)].CellData;
+                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                                {
+                                    Debug.LogError("One of the tiles has more than 1 door");
+                                    return;
+                                }
+                            }
+                            if (_tiles.ContainsKey(oppositeDoor.Item1))
+                            {
+                                if (!_tiles[oppositeDoor.Item1].CellData.HasADoor() && _tiles[oppositeDoor.Item1].CellData.DoorPosition == GetOppositeFace(doorFace))
+                                {
+                                    _tiles[oppositeDoor.Item1].CellData.SetDoor(oppositeDoor.Item2);
+                                    _allDoors[oppositeDoor.Item1] = oppositeDoor.Item2;
+                                }
+                                else
+                                {
+                                    Debug.LogError("One of the tiles has more than 1 door");
+                                    return;
+                                }
+                            }
+                            allDoors.Add(cell.localPos + position, doorFace);
+                            _allDoors.Add(cell.localPos + position, doorFace);
                         }
                     }
                     else
@@ -261,10 +411,12 @@ public class GridDrawer : MonoBehaviour
                     return;
                 }
             }
+
             RoomData roomData = new RoomData();
             roomData.SetMainCell(mainCellPosition);
             roomData.SetAllCellsInRoom(allTilesInTheRoom);
             roomData.SetRoomPrefab(room);
+            roomData.SetAllDoorsinRoom(allDoors);
             _allRoomDatas.Add(roomData);
             foreach (var tile in allTilesInTheRoom)
             {
@@ -279,7 +431,58 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    private void EraseRoom(Vector2Int position)
+    private void PlaceRoom(RoomData room)
+    {
+        if (room != null)
+        {
+            List<Vector2Int> allTilesInTheRoom = new List<Vector2Int>();
+            Dictionary<Vector2Int, Face> allDoors = new Dictionary<Vector2Int, Face>();
+            Vector2Int mainCellPosition = new Vector2Int();
+            foreach (var cell in room.GetAllCellsInRoom())
+            {
+                if (_tiles.ContainsKey(cell))
+                {
+                    if (!_tiles[cell].IsInARoom())
+                    {
+                        allTilesInTheRoom.Add(cell);
+                        if (cell == new Vector2(0, 0))
+                        {
+                            mainCellPosition = cell;
+                        }
+                        //if (roomCells.)
+                        //{
+                        //
+                        //}
+                        //allDoors.Add(cell, );
+                    }
+                    else
+                    {
+                        Debug.LogError("One of the tiles already has a room");
+                        return;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Your room doesn't fit in the grid");
+                    return;
+                }
+            }
+            RoomData roomData = room;
+            _allRoomDatas.Add(roomData);
+            foreach (var tile in allTilesInTheRoom)
+            {
+                _tiles[tile].SetAsInARoom(mainCellPosition, roomData);
+            }
+            GameObject newRoom = Instantiate(room.GetRoomPrefab(), (Vector2)mainCellPosition, Quaternion.identity, _roomsParent);
+            _roomDeletionTracker[mainCellPosition] = newRoom;
+        }
+        else
+        {
+            Debug.LogError("You didn't select a valid Room");
+        }
+    }
+
+    private void EraseRoom(Vector2Int position, bool specialDelete = false)
     {
         if (_tiles.ContainsKey(position))
         {
@@ -295,8 +498,9 @@ public class GridDrawer : MonoBehaviour
                 }
                 DestroyImmediate(_roomDeletionTracker[mainCell]);
                 _roomDeletionTracker.Remove(mainCell);
+                _allRoomDatas.Remove(roomData);
             }
-            else
+            else if (specialDelete == false)
             {
                 Debug.LogWarning("This tile isn't tied to any room");
                 return;
@@ -311,13 +515,10 @@ public class GridDrawer : MonoBehaviour
 
     private void EraseAllRooms()
     {
-        foreach(var roomData in _allRoomDatas)
+        List<RoomData> allRooms = new List<RoomData>(_allRoomDatas);
+        foreach(var roomData in allRooms)
         {
-            List<Vector2Int> allTilesInRoom = roomData.GetAllCellsInRoom();
-            foreach (var tile in allTilesInRoom)
-            {
-                _tiles[tile].SetAsNotInARoom();
-            }
+            EraseRoom(roomData.GetMainCell());
         }
 
         RoomCells[] cells = _roomsParent.GetComponentsInChildren<RoomCells>();
@@ -529,13 +730,13 @@ public class GridDrawer : MonoBehaviour
                 }
             }
             data.allTilesPosition = valueToSave;
-            data.spawnPointsTiles = _spawnPointsTiles;
+            data.spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>(_spawnPointsTiles);
             foreach (var value in data.spawnPointsTiles)
             {
                 data.keys.Add(value.Key);
                 data.values.Add(value.Value);
             }
-            data.allRooms = _allRoomDatas;
+            data.allRooms = new List<RoomData>(_allRoomDatas);
             foreach(var value in data.allRooms)
             {
                 data.allRoomsPosition.Add(value.GetMainCell());
@@ -545,11 +746,10 @@ public class GridDrawer : MonoBehaviour
 
 
             //END OF WRITING DATA EZ
-            Debug.Log("Second Count : " + data.spawnPointsTiles.Count);
+
             GridLevelDataBase.Save(data);
-            Debug.Log("Third Count : " + data.spawnPointsTiles.Count);
+
             RemoveAllTiles();
-            Debug.Log("Fourth Count : " + data.spawnPointsTiles.Count);
         }
         else
         {
@@ -583,6 +783,7 @@ public class GridDrawer : MonoBehaviour
         {
             Gizmos.color = Color.orangeRed;
             Gizmos.DrawWireCube(new Vector2((_spawnPointPosition.x + 0.5f) * _tilesSize, (_spawnPointPosition.y + 0.5f) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.DrawWireSphere(new Vector2((_spawnPointPosition.x + 0.5f) * _tilesSize, (_spawnPointPosition.y + 0.5f) * _tilesSize), 0.25f);
         }
         if (_levelCreationSteps == LevelCreationSteps.Room)
         {
@@ -593,13 +794,16 @@ public class GridDrawer : MonoBehaviour
                 {
                     foreach (var cell in roomCells.GetCells) 
                     {
-                        Gizmos.color = Color.black;
+                        Gizmos.color = Color.darkGreen;
                         Gizmos.DrawWireCube(new Vector2((float)cell.localPos.x + (float)_roomPosition.x + 0.5f, (float)cell.localPos.y + (float)_roomPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+                        Gizmos.DrawWireSphere(new Vector2((float)cell.localPos.x + (float)_roomPosition.x + 0.5f, (float)cell.localPos.y + (float)_roomPosition.y + 0.5f), 0.25f);
                     }
                 }
             }
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(new Vector2((float)_eraseRoomPosition.x + 0.5f, (float)_eraseRoomPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.DrawLine(new Vector2((float)_eraseRoomPosition.x, (float)_eraseRoomPosition.y), new Vector2((float)_eraseRoomPosition.x + 1, (float)_eraseRoomPosition.y + 1));
+            Gizmos.DrawLine(new Vector2((float)_eraseRoomPosition.x + 1, (float)_eraseRoomPosition.y), new Vector2((float)_eraseRoomPosition.x, (float)_eraseRoomPosition.y + 1));
         }
     }
 }

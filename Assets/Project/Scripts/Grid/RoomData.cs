@@ -6,6 +6,7 @@ public class RoomData
     private Vector2Int _mainCell;
     private List<Vector2Int> _allCells;
     private GameObject _roomPrefab;
+    private Dictionary<Vector2Int, Face> _allDoors;
 
     public Vector2Int GetMainCell()
     {
@@ -35,5 +36,15 @@ public class RoomData
     public void SetRoomPrefab(GameObject room)
     {
         _roomPrefab = room;
+    }
+
+    public Dictionary<Vector2Int, Face> GetAllDoorsinRoom()
+    {
+        return _allDoors;
+    }
+
+    public void SetAllDoorsinRoom(Dictionary<Vector2Int, Face> allDoors)
+    {
+        _allDoors = allDoors;
     }
 }
