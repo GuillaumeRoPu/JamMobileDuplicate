@@ -315,6 +315,7 @@ public class GridDrawer : MonoBehaviour
         {
             List<Vector2Int> allTilesInTheRoom = new List<Vector2Int>();
             Dictionary<Vector2Int, Face> allDoors = new Dictionary<Vector2Int, Face>();
+            Dictionary<Vector2Int, Face> temporaryAllDoors = new Dictionary<Vector2Int, Face>();
             Vector2Int mainCellPosition = new Vector2Int();
             foreach(var cell in roomCells.GetCells)
             {
@@ -329,75 +330,6 @@ public class GridDrawer : MonoBehaviour
                         {
                             mainCellPosition = cellWorldPos;
                         }
-
-                        Face doorFace = Face.None;
-                        for (int i = 0; i < roomCells.GetActiveDoors.Count; i++)
-                        {
-                            if (roomCells.GetActiveDoors[i])
-                            {
-                                doorFace = GetFaceDoor(roomCells.GetDoors[i].face);
-                            }
-                            else
-                            {
-                                doorFace = Face.None;
-                            }
-                        }
-                        if (doorFace != Face.None)
-                        {
-                            _tiles[cellWorldPos].CellData.SetDoor(doorFace);
-                            var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
-                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)))
-                            {
-                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)].CellData;
-                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Left && tileCellData.DoorPosition != GetOppositeFace(doorFace))
-                                {
-                                    Debug.LogError("One of the tiles has more than 1 door");
-                                    return;
-                                }
-                            }
-                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x - 1, cellWorldPos.y)))
-                            {
-                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x - 1, cellWorldPos.y)].CellData;
-                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
-                                {
-                                    Debug.LogError("One of the tiles has more than 1 door");
-                                    return;
-                                }
-                            }
-                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x, cellWorldPos.y + 1)))
-                            {
-                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x, cellWorldPos.y + 1)].CellData;
-                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
-                                {
-                                    Debug.LogError("One of the tiles has more than 1 door");
-                                    return;
-                                }
-                            }
-                            if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x, cellWorldPos.y - 1)))
-                            {
-                                var tileCellData = _tiles[new Vector2Int(cellWorldPos.x, cellWorldPos.y - 1)].CellData;
-                                if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
-                                {
-                                    Debug.LogError("One of the tiles has more than 1 door");
-                                    return;
-                                }
-                            }
-                            if (_tiles.ContainsKey(oppositeDoor.Item1))
-                            {
-                                if (!_tiles[oppositeDoor.Item1].CellData.HasADoor() && _tiles[oppositeDoor.Item1].CellData.DoorPosition == GetOppositeFace(doorFace))
-                                {
-                                    _tiles[oppositeDoor.Item1].CellData.SetDoor(oppositeDoor.Item2);
-                                    _allDoors[oppositeDoor.Item1] = oppositeDoor.Item2;
-                                }
-                                else
-                                {
-                                    Debug.LogError("One of the tiles has more than 1 door");
-                                    return;
-                                }
-                            }
-                            allDoors.Add(cell.localPos + position, doorFace);
-                            _allDoors.Add(cell.localPos + position, doorFace);
-                        }
                     }
                     else
                     {
@@ -410,6 +342,83 @@ public class GridDrawer : MonoBehaviour
                     Debug.LogError("Your room doesn't fit in the grid");
                     return;
                 }
+            }
+            //Checks if each tile has a valid door to place
+            foreach(var cellWorldPos in allTilesInTheRoom)
+            {
+                Face doorFace = Face.None;
+                for (int i = 0; i < roomCells.GetActiveDoors.Count; i++)
+                {
+                    if (roomCells.GetActiveDoors[i])
+                    {
+                        doorFace = GetFaceDoor(roomCells.GetDoors[i].face);
+                    }
+                    else
+                    {
+                        doorFace = Face.None;
+                    }
+                }
+                if (doorFace != Face.None)
+                {
+                    var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
+                    if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)))
+                    {
+                        var tileCellData = _tiles[new Vector2Int(cellWorldPos.x + 1, cellWorldPos.y)].CellData;
+                        if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Left && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                        {
+                            Debug.LogError("One of the tiles has more than 1 door");
+                            return;
+                        }
+                    }
+                    if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x - 1, cellWorldPos.y)))
+                    {
+                        var tileCellData = _tiles[new Vector2Int(cellWorldPos.x - 1, cellWorldPos.y)].CellData;
+                        if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Right && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                        {
+                            Debug.LogError("One of the tiles has more than 1 door");
+                            return;
+                        }
+                    }
+                    if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x, cellWorldPos.y + 1)))
+                    {
+                        var tileCellData = _tiles[new Vector2Int(cellWorldPos.x, cellWorldPos.y + 1)].CellData;
+                        if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Down && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                        {
+                            Debug.LogError("One of the tiles has more than 1 door");
+                            return;
+                        }
+                    }
+                    if (_tiles.ContainsKey(new Vector2Int(cellWorldPos.x, cellWorldPos.y - 1)))
+                    {
+                        var tileCellData = _tiles[new Vector2Int(cellWorldPos.x, cellWorldPos.y - 1)].CellData;
+                        if (tileCellData.HasADoor() && tileCellData.DoorPosition == Face.Up && tileCellData.DoorPosition != GetOppositeFace(doorFace))
+                        {
+                            Debug.LogError("One of the tiles has more than 1 door");
+                            return;
+                        }
+                    }
+                    if (_tiles.ContainsKey(oppositeDoor.Item1))
+                    {
+                        if (!_tiles[oppositeDoor.Item1].CellData.HasADoor() && _tiles[oppositeDoor.Item1].CellData.DoorPosition == GetOppositeFace(doorFace))
+                        {
+                            temporaryAllDoors.Add(oppositeDoor.Item1, oppositeDoor.Item2);
+                        }
+                        else
+                        {
+                            Debug.LogError("One of the tiles has more than 1 door");
+                            return;
+                        }
+                    }
+                    allDoors.Add(cellWorldPos, doorFace);
+                    temporaryAllDoors.Add(cellWorldPos, doorFace);
+                }
+            }
+
+            //Then sets all the doors at the tiles that need to get a new door
+            foreach(var door in temporaryAllDoors)
+            {
+                SetDoor(door.Key, door.Value);
+                _allDoors.Add(door.Key, door.Value);
             }
 
             RoomData roomData = new RoomData();
@@ -428,6 +437,42 @@ public class GridDrawer : MonoBehaviour
         else
         {
             Debug.LogError("You didn't select a valid Room");
+        }
+    }
+
+    private void SetDoor(Vector2Int position, Face face)
+    {
+        if (_tiles.ContainsKey(position))
+        {
+            if (!_tiles[position].CellData.HasADoor() && face != Face.None)
+            {
+                _tiles[position].CellData.SetDoor(face);
+                switch (face)
+                {
+                    case Face.Up:
+                        Debug.Log("Add a door to the top of Cell | X : " + position.x + ", Y : " + position.y);
+                        break;
+                    case Face.Down:
+                        Debug.Log("Add a door to the bottom of Cell | X : " + position.x + ", Y : " + position.y);
+                        break;
+                    case Face.Left:
+                        Debug.Log("Add a door to the left of Cell | X : " + position.x + ", Y : " + position.y);
+                        break;
+                    case Face.Right:
+                        Debug.Log("Add a door to the right of Cell | X : " + position.x + ", Y : " + position.y);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("The Tile you are trying to put a door on already has a door");
+            }
+        }
+        else
+        {
+            Debug.Log("Can't set a door if there isn't a tile");
         }
     }
 
@@ -494,6 +539,10 @@ public class GridDrawer : MonoBehaviour
                 foreach (var tile in allTilesInRoom)
                 {
                     _tiles[tile].SetAsNotInARoom();
+                    if (_allDoors.ContainsKey(tile))
+                    {
+                        _allDoors.Remove(tile);
+                    }
                     Debug.Log("Removed X : " + tile.x + ", Y : " + tile.y + " from the room");
                 }
                 DestroyImmediate(_roomDeletionTracker[mainCell]);
@@ -529,6 +578,7 @@ public class GridDrawer : MonoBehaviour
 
         _allRoomDatas = new List<RoomData>();
         _roomDeletionTracker.Clear();
+        _allDoors.Clear();
     }
 
     private void RemoveAllTiles()
