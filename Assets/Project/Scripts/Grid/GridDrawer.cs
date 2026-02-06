@@ -353,7 +353,6 @@ public class GridDrawer : MonoBehaviour
                     if (roomCells.GetDoors[i].cellId == cell.id && roomCells.GetActiveDoors[i])
                     {
                         doorFace = GetFaceDoor(roomCells.GetDoors[i].face);
-                        Debug.Log("Been there");
                     }
                 }
                 if (doorFace != Face.None)
@@ -398,7 +397,6 @@ public class GridDrawer : MonoBehaviour
                             return;
                         }
                     }
-                    Debug.Log("Went there");
                     var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
                     if (_tiles.ContainsKey(oppositeDoor.Item1))
                     {
@@ -547,11 +545,29 @@ public class GridDrawer : MonoBehaviour
                         var opposite = GetOppositeDoor(tile, _allDoors[tile]);
                         if (_tiles.ContainsKey(opposite.Item1))
                         {
-                            _allDoors.Remove(opposite.Item1);
-                            _tiles[opposite.Item1].CellData.SetDoor(Face.None);
+                            if (_tiles[opposite.Item1].IsInARoom())
+                            {
+                                if (!_tiles[_tiles[opposite.Item1].GetMainRoomCell()].GetRoomData().GetAllDoorsinRoom().ContainsKey(opposite.Item1))
+                                {
+                                    _allDoors.Remove(opposite.Item1);
+                                    _tiles[opposite.Item1].CellData.SetDoor(Face.None);
+                                    _allDoors.Remove(tile);
+                                    _tiles[tile].CellData.SetDoor(Face.None);
+                                }
+                            }
+                            else
+                            {
+                                _allDoors.Remove(opposite.Item1);
+                                _tiles[opposite.Item1].CellData.SetDoor(Face.None);
+                                _allDoors.Remove(tile);
+                                _tiles[tile].CellData.SetDoor(Face.None);
+                            }
                         }
-                        _allDoors.Remove(tile);
-                        _tiles[tile].CellData.SetDoor(Face.None);
+                        else
+                        {
+                            _allDoors.Remove(tile);
+                            _tiles[tile].CellData.SetDoor(Face.None);
+                        }
                     }
                     Debug.Log("Removed X : " + tile.x + ", Y : " + tile.y + " from the room");
                 }
