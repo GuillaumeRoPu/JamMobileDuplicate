@@ -134,6 +134,12 @@ MonoBehaviour:
   - {x: 11, y: 2}
   keys:
   - {x: -6, y: -2}
-  values: 01000000
+  - {x: 5, y: -4}
+  values: 0100000002000000
+  allRoomsPosition: []
+  _allRoomsCellsBis: []
+  allRoomsPrefab: []
+  keysD: []
+  valuesD: 
   limitsMin: {x: -7, y: -4}
   limitsMax: {x: 11, y: 3}

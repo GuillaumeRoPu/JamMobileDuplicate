@@ -64,6 +64,7 @@ namespace Frynity.Gen
 
     public class RoomCells : MonoBehaviour
     {
+        [SerializeField] AssetList _assets;
         [SerializeField] float _cellSize;
         [SerializeField] List<RendererRoom> _renderers = new List<RendererRoom>();
         [SerializeField] List<PrefabsRoom> _prefabs = new List<PrefabsRoom>();
@@ -71,6 +72,8 @@ namespace Frynity.Gen
         [SerializeField] List<CellDoor> _localDoors = new List<CellDoor>();
         [SerializeField, HideInInspector] List<bool> _activeDoors = new List<bool>();
 
+        public AssetList GetAssetList => _assets;
+        public AssetList SetAssetList { set  { _assets = value; } }
         public float GetCellSize => _cellSize;
         public float SetCellSize { set { _cellSize = value; } }
         public List<RendererRoom> GetRenderers => _renderers;

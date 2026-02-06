@@ -20,15 +20,17 @@ public class TurnChronoUI : MonoBehaviour
         if (_changing)
         {
             float ratio = _currentTime / _duration;
-            float now = _currentTurn - 1;
-            now = Mathf.Clamp01(now);
 
-            _turnPos = Mathf.Lerp(now / _turnMax, _currentTurn/_turnMax, ratio);
+            float now = _currentTurn - 1;
+            now = Mathf.Clamp(now, 0, _turnMax);
+
+
+            _turnPos = Mathf.Lerp(now / _turnMax, (float)_currentTurn /_turnMax, ratio);
 
             _playerTurn.GetComponent<RectTransform>().anchorMin = new Vector2(_turnPos, 0.5f);
             _playerTurn.GetComponent<RectTransform>().anchorMax = new Vector2(_turnPos, 0.5f);
 
-            if (_currentTime > _duration)
+            if (_currentTime >= _duration)
             {
                 _changing = false;
             }
@@ -44,5 +46,14 @@ public class TurnChronoUI : MonoBehaviour
         _changing = true;
         _currentTurn = currentTurn;
         _turnMax = turnMax;
+        _currentTime = 0;
+    }
+
+    public void PlaceZombieTurn(int turn, int turnMax)
+    {
+        GameObject zombie = Instantiate(_zombieTurn, _playerTurn.transform.parent);
+        float pos = (float)turn / turnMax;
+        zombie.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
+        zombie.GetComponent<RectTransform>().anchorMax = new Vector2(pos, 0.5f);
     }
 }

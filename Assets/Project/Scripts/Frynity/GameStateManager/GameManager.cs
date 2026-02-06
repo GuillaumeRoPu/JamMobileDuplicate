@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -5,8 +6,11 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] GameObject _player;
+    [SerializeField] GameObject _zombie;
     Entity _playerEntity;
+    List<Entity> _zombieEntity = new List<Entity>();
     public Entity Player => _playerEntity;
+    public List<Entity> Zombies => _zombieEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
     [Header("Manager")]
@@ -69,5 +73,23 @@ public class GameManager : MonoBehaviour
         _playerEntity = player.GetComponent<Entity>();
         _playerEntity.SetCurrentTile(tile);
         Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
+    }
+
+    public void SpawnZombie()
+    {
+        foreach (Vector2Int posTile in Grid.GridLevelData.allTilesPosition)
+        {
+            CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
+            Grid.GridLevelData.spawnPointsTiles.TryGetValue(posTile, out spawn);
+
+            if (spawn.HasFlag(CellData.SpawnPointType.Zombie))
+            {
+                GameObject zombie = Instantiate(_zombie, (Vector2)posTile * Grid.TileSize, Quaternion.identity);
+                _zombieEntity.Add(zombie.GetComponent<Entity>());
+                _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(posTile);
+                Grid.GetTileAtPosition(posTile).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
+                break;
+            }
+        }
     }
 }

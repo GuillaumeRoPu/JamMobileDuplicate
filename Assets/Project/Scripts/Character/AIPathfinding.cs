@@ -1,6 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class PathFeedback
+{
+    public Sprite Arrow;
+    public Sprite Row;
+    public Sprite Turn;
+}
+
 public class AIPathfinding : MonoBehaviour
 {
     Tile _target;
@@ -11,9 +19,8 @@ public class AIPathfinding : MonoBehaviour
     Vector2Int[] _posTests = {new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1) };
     Face[] _faceTests = {Face.Right, Face.Left, Face.Up, Face.Down };
 
-    public void CreatePath(Tile target)
+    public List<Vector2Int> CreatePath(Tile target)
     {
-        Debug.Log("Path calcul...");
         _target = target;
         _paths = new List<List<Vector2Int>>();
         _paths.Add(new List<Vector2Int>());
@@ -23,14 +30,10 @@ public class AIPathfinding : MonoBehaviour
         if (GetComponent<Entity>().CurrentTile == null)
         {
             Debug.LogError("CURRENT TILE IS NULL !!!");
-            return;
+            return null;
         }
 
         _paths = GetAllPaths(new List<List<Vector2Int>>(_paths), 0, GetComponent<Entity>().CurrentTile);
-
-        Debug.Log("Better path calcul...");
-
-        Debug.Log(_paths.Count);
 
         List<Vector2Int> selectPath = _paths[0];
         foreach (var path in _paths)
@@ -38,10 +41,7 @@ public class AIPathfinding : MonoBehaviour
             if (path.Count < selectPath.Count) selectPath = path;
         }
 
-        Debug.Log(selectPath.Count);
-        Debug.Log("Moving calcul...");
-
-        GetComponent<Entity>().SetPath(selectPath);
+        return selectPath;
     }
 
     List<List<Vector2Int>> GetAllPaths(List<List<Vector2Int>> paths, int pathIndex, Tile nextTile)

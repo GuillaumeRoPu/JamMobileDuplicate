@@ -9,12 +9,14 @@ public class PlayState : GameState
             CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
             GameManager.Of.Grid.GridLevelData.spawnPointsTiles.TryGetValue(posTile, out spawn);
 
-            if (spawn == CellData.SpawnPointType.Player)
+            if (spawn.HasFlag(CellData.SpawnPointType.Player))
             {
                 GameManager.Of.CreatePlayer(posTile);
                 break;
             }
         }
+
+        GameManager.Of.Turn.Init();
     }
 
     public override void LogicsUpdate()
