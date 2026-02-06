@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Drag",
+                    "type": "Value",
+                    "id": "2b1af986-5782-4124-b48b-c609505df736",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -65,6 +74,17 @@
                     "processors": "",
                     "groups": ";Touch",
                     "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "545d3f8e-336a-4741-aaed-db152e6a97ee",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

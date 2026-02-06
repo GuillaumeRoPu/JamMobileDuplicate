@@ -1,3 +1,6 @@
+
+
+#if UNITY_EDITOR
 using Frynity.Window;
 using UnityEditor;
 using UnityEngine;
@@ -29,3 +32,4 @@ namespace Frynity.Window
         }
     }
 }
+#endif

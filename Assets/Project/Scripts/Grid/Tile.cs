@@ -97,6 +97,7 @@ public class Tile : MonoBehaviour, IHoverable
 
     public void AnnihilateTile()
     {
+        #if UNITY_EDITOR
         if (!EditorApplication.isPlaying)
         {
             DestroyImmediate(gameObject);
@@ -105,6 +106,10 @@ public class Tile : MonoBehaviour, IHoverable
         {
             Destroy(gameObject);
         }
+        #else
+        Destroy(gameObject);
+        #endif
+
     }
 
     public void SetAsSpawnTile(CellData.SpawnPointType type)

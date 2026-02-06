@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] PathFeedback _pathFeedback;
-
+    [SerializeField] GameObject _pathOver;
+    List<GameObject> _pathOverList = new List<GameObject>();
+ 
     List<GameObject> _feedbacks = new List<GameObject>();
     List<Vector2Int> _diffFeedbacks = new List<Vector2Int>();
     List<Vector2Int> _selectPath = new List<Vector2Int>();
@@ -29,9 +31,16 @@ public class Player : MonoBehaviour
             {
                 if (GridManager.Tiles[tile] != _last)
                 {
-                    _last = GridManager.Tiles[tile];
-                    _selectPath.Add(tile);
-                    CreateFeddback();
+                    if (_last.CellData.hasNeighbour(GridManager.Tiles[tile].CellData.GridPosition))
+                    {
+                        _last = GridManager.Tiles[tile];
+                        _selectPath.Add(tile);
+                        CreateFeddback();
+                    }
+                    else
+                    {
+                        SendSelectedPath();
+                    }
                 }
             }
             else
@@ -52,11 +61,29 @@ public class Player : MonoBehaviour
     public void SendSelectedPath()
     {
         if (!_selected) return;
-        GameManager.Of.Player.SetPath(new List<Vector2Int>(_selectPath));
-        _selected = false;
+        if (_selectPath.Count > 1)
+        {
+            GameManager.Of.Turn.PassTurn(_selectPath.Count - 1);
+            GameManager.Of.Player.SetPath(new List<Vector2Int>(_selectPath), ReachedTarget);
+        }
+        else
+        {
+            GameManager.Of.Player.StopPath();
+            ReachedTarget();
+        }
+
+
+            _selected = false;
+
+        foreach(GameObject over in _pathOverList)
+        {
+            Destroy(over);
+        }
+        _pathOverList.Clear();
 
         foreach (GameObject go in _feedbacks)
         {
+            _pathOverList.Add(Instantiate(_pathOver, go.transform.position, Quaternion.identity));
             Destroy(go);
         }
 
@@ -203,6 +230,7 @@ public class Player : MonoBehaviour
     {
         GameObject feed = new GameObject("Granny Feedback's");
         SpriteRenderer renderer = feed.AddComponent<SpriteRenderer>();
+        renderer.sortingOrder = 100;
         renderer.flipX = xFlip;
         renderer.flipY = yFlip;
         renderer.sprite = sprite;
@@ -255,5 +283,14 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+
+    void ReachedTarget()
+    {
+        foreach (GameObject over in _pathOverList)
+        {
+            Destroy(over);
+        }
+        _pathOverList.Clear();
     }
 }
