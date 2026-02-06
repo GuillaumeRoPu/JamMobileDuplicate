@@ -353,7 +353,6 @@ public class GridDrawer : MonoBehaviour
                     if (roomCells.GetDoors[i].cellId == cell.id && roomCells.GetActiveDoors[i])
                     {
                         doorFace = GetFaceDoor(roomCells.GetDoors[i].face);
-                        Debug.Log("Been there");
                     }
                 }
                 if (doorFace != Face.None)
@@ -398,7 +397,6 @@ public class GridDrawer : MonoBehaviour
                             return;
                         }
                     }
-                    Debug.Log("Went there");
                     var oppositeDoor = GetOppositeDoor(cellWorldPos, doorFace);
                     if (_tiles.ContainsKey(oppositeDoor.Item1))
                     {
