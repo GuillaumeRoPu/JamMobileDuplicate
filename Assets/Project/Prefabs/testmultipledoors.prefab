@@ -73,4 +73,4 @@ MonoBehaviour:
     face: 3
   - cellId: 0
     face: 2
-  _activeDoors: 0101010101010101
+  _activeDoors: 0100000100010100
