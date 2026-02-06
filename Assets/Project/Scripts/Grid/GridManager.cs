@@ -61,6 +61,14 @@ public class GridManager : MonoBehaviour
         UpdateSizeAll();
     }
 
+    void PlaceAllDoors(Dictionary<Vector2Int, Face> allDoors)
+    {
+        foreach(var door in allDoors)
+        {
+            SetDoor(door.Key, door.Value);
+        }
+    }
+
     void GenerateTiles(List<Vector2Int> tiles, Vector2Int origin)
     {
         foreach (var tile in tiles)
@@ -96,6 +104,7 @@ public class GridManager : MonoBehaviour
             _limitsMin = _gridLevelData.limitsMin;
             GenerateGrid(_gridLevelData.allTilesPosition);
             PlaceAllRooms(_gridLevelData.allRooms);
+            PlaceAllDoors(_gridLevelData.allDoors);
         }
     }
 
@@ -215,6 +224,31 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private void SetDoor(Vector2Int position, Face face)
+    {
+        if (_tiles.ContainsKey(position))
+        {
+            _tiles[position].CellData.SetDoor(face);
+            switch (face)
+            {
+                case Face.Up:
+                    Debug.Log("Add a door to the top of Cell | X : " + position.x + ", Y : " + position.y);
+                    break;
+                case Face.Down:
+                    Debug.Log("Add a door to the bottom of Cell | X : " + position.x + ", Y : " + position.y);
+                    break;
+                case Face.Left:
+                    Debug.Log("Add a door to the left of Cell | X : " + position.x + ", Y : " + position.y);
+                    break;
+                case Face.Right:
+                    Debug.Log("Add a door to the right of Cell | X : " + position.x + ", Y : " + position.y);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     [Button("Update Grid Size")]
     void UpdateSizeAll()
     {
@@ -252,6 +286,29 @@ public class GridManager : MonoBehaviour
                     Gizmos.color = Color.blue;
                     Gizmos.DrawWireCube(new Vector2((0.5f + tile.Key.x) * _tilesSize, (0.5f + tile.Key.y) * _tilesSize), new Vector3(_tilesSize, _tilesSize, _tilesSize));
                 }
+            }
+            foreach (var door in _gridLevelData.allDoors)
+            {
+                Gizmos.color = Color.black;
+                Vector2 pos = door.Key;
+                switch (door.Value)
+                {
+                    case Face.Up:
+                        pos = new Vector2(pos.x + 0.5f, pos.y + 0.9f);
+                        break;
+                    case Face.Down:
+                        pos = new Vector2(pos.x + 0.5f, pos.y + 0.1f);
+                        break;
+                    case Face.Left:
+                        pos = new Vector2(pos.x + 0.1f, pos.y + 0.5f);
+                        break;
+                    case Face.Right:
+                        pos = new Vector2(pos.x + 0.9f, pos.y + 0.5f);
+                        break;
+                    default:
+                        break;
+                }
+                Gizmos.DrawWireSphere(pos, 0.25f);
             }
         }
     }
