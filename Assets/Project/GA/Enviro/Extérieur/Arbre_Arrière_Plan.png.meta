@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: be784ac6f34b5b348a4177f634d5cde4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 436802476230933732
+    second: "Arbre_Arri\xE8re_Plan_0"
+  - first:
+      213: 4271537406500119438
+    second: "Arbre_Arri\xE8re_Plan_1"
+  - first:
+      213: -679543470875514283
+    second: "Arbre_Arri\xE8re_Plan_2"
+  - first:
+      213: 3276643517386091924
+    second: "Arbre_Arri\xE8re_Plan_3"
+  - first:
+      213: 501105504284454595
+    second: "Arbre_Arri\xE8re_Plan_4"
+  - first:
+      213: 1619769212041455244
+    second: "Arbre_Arri\xE8re_Plan_5"
+  - first:
+      213: 2601050860598761968
+    second: "Arbre_Arri\xE8re_Plan_6"
+  - first:
+      213: 4113692002336023503
+    second: "Arbre_Arri\xE8re_Plan_7"
+  - first:
+      213: 3879206929836845821
+    second: "Arbre_Arri\xE8re_Plan_8"
+  - first:
+      213: 873513091518709945
+    second: "Arbre_Arri\xE8re_Plan_9"
+  - first:
+      213: -5093074706649269549
+    second: "Arbre_Arri\xE8re_Plan_10"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_0"
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 574
+        width: 249
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ec71c0b985df0600800000000000000
+      internalID: 436802476230933732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_1"
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 976
+        width: 113
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83ab3fb3ac874b30800000000000000
+      internalID: 4271537406500119438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_2"
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 1003
+        width: 158
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55a670940d6c196f0800000000000000
+      internalID: -679543470875514283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_3"
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 998
+        width: 113
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49d626d2be9f87d20800000000000000
+      internalID: 3276643517386091924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_4"
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 0
+        width: 281
+        height: 1080
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ce2ed91dc844f600800000000000000
+      internalID: 501105504284454595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_5"
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 977
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8668d534839a7610800000000000000
+      internalID: 1619769212041455244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_6"
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 260
+        height: 464
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f996bc0af9c81420800000000000000
+      internalID: 2601050860598761968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_7"
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 0
+        width: 235
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc3aa92b415c61930800000000000000
+      internalID: 4113692002336023503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_8"
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 59
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfaa8275626b5d530800000000000000
+      internalID: 3879206929836845821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_9"
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 0
+        width: 120
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b040a657875f1c00800000000000000
+      internalID: 873513091518709945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Arbre_Arri\xE8re_Plan_10"
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 0
+        width: 246
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dab4afd983c159b0800000000000000
+      internalID: -5093074706649269549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Arbre_Arri\xE8re_Plan_0": 436802476230933732
+      "Arbre_Arri\xE8re_Plan_1": 4271537406500119438
+      "Arbre_Arri\xE8re_Plan_10": -5093074706649269549
+      "Arbre_Arri\xE8re_Plan_2": -679543470875514283
+      "Arbre_Arri\xE8re_Plan_3": 3276643517386091924
+      "Arbre_Arri\xE8re_Plan_4": 501105504284454595
+      "Arbre_Arri\xE8re_Plan_5": 1619769212041455244
+      "Arbre_Arri\xE8re_Plan_6": 2601050860598761968
+      "Arbre_Arri\xE8re_Plan_7": 4113692002336023503
+      "Arbre_Arri\xE8re_Plan_8": 3879206929836845821
+      "Arbre_Arri\xE8re_Plan_9": 873513091518709945
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
