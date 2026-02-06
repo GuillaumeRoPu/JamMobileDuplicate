@@ -12,9 +12,13 @@ namespace Frynity.Gen
         bool _cells;
         List<bool> _showCellFoldout = new List<bool>();
 
+        SerializedProperty doors;
+
         private void OnEnable()
         {
             RoomCells room = (RoomCells)target;
+
+            doors = serializedObject.FindProperty("_activeDoors");
         }
 
         public override void OnInspectorGUI()
@@ -46,19 +50,31 @@ namespace Frynity.Gen
                         for (int j = 0; j < room.GetDoors.Count; j++)
                         {
                             if (room.GetDoors[j].cellId != i) continue;
-                            room.GetActiveDoors[j] = EditorGUILayout.Toggle("Door", room.GetActiveDoors[j]);
 
-                            if (room.GetActiveDoors[j])
+                            SerializedProperty elementProp = doors.GetArrayElementAtIndex(j);
+                            EditorGUILayout.PropertyField(elementProp, new GUIContent("Door"));
+
+                            if (elementProp.boolValue)
                             {
-                                room.ActiveDoor(room.GetDoors[j].cellId, room.GetDoors[j].face);
+                                for (int a = 0; a < room.GetDoors.Count; a++)
+                                {
+                                    if (room.GetDoors[a].cellId == room.GetCells[i].id)
+                                    {
+                                        SerializedProperty element = doors.GetArrayElementAtIndex(a);
+                                        element.boolValue = a == j;
+                                    }
+                                    
+                                }
                             }
-
                         }
                     }
                 }
                 EditorGUI.indentLevel--;
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
+
+            serializedObject.ApplyModifiedProperties();
+
 
             if (GUILayout.Button("Modify Prefab"))
             {
@@ -67,7 +83,6 @@ namespace Frynity.Gen
 
             base.OnInspectorGUI();
 
-            serializedObject.ApplyModifiedProperties();
         }
     }
 

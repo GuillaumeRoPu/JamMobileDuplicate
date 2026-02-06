@@ -52,7 +52,7 @@ public class AIPathfinding : MonoBehaviour
         List<List<Vector2Int>> newPaths = new List<List<Vector2Int>>(paths);
 
         List<Tile> searchTiles = new List<Tile>();
-        int lastDistance = (int)Vector2Int.Distance(nextTile.CellData.GridPosition, _target.CellData.GridPosition); ;
+        int lastDistance = (int)Vector2Int.Distance(nextTile.CellData.GridPosition, _target.CellData.GridPosition);
         for (int i = 0; i < 4; i++)
         {
             Tile tile = null;

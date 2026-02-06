@@ -1,8 +1,8 @@
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-
 namespace Frynity.Window
 {
     public class EntityCreator : EditorWindow
@@ -210,3 +210,4 @@ namespace Frynity.Window
         }
     }
 }
+#endif

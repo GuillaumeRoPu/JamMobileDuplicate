@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Manager")]
     [SerializeField] TurnManager _turnManager;
     [SerializeField] GridManager _gridManager;
+    public TurnManager Turn => _turnManager;
     public GridManager Grid => _gridManager;
 
     public GameStateMachine stateMachine { get; private set; }

@@ -1,9 +1,10 @@
+
+#if UNITY_EDITOR
 using Frynity.Gen;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Frynity.Window
 {
@@ -974,3 +975,4 @@ namespace Frynity.Window
         }
     }
 }
+#endif

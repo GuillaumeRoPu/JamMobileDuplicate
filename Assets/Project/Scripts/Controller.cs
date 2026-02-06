@@ -7,10 +7,12 @@ public class Controller : MonoBehaviour
     [SerializeField] InputActionReference _pressPositionInput;
     [SerializeField] InputActionReference _pressInput;
     [SerializeField] InputActionReference _tapInput;
+    [SerializeField] InputActionReference _dragInput;
 
     [SerializeField, Foldout("Events")] UnityEvent<Vector2Int> _onPress;
     [SerializeField, Foldout("Events")] UnityEvent _onPressCanceled;
     [SerializeField, Foldout("Events")] UnityEvent _onTap;
+    [SerializeField, Foldout("Events")] UnityEvent _onDrag;
 
     GameObject _grabObject;
     Vector2 _grabLocalPress;
@@ -24,6 +26,7 @@ public class Controller : MonoBehaviour
         _pressInput.action.started += OnPress;
         _pressInput.action.canceled += OnPress;
         _tapInput.action.started += OnTap;
+        _dragInput.action.performed += OnDrag;
     }
 
     void OnDisable()
@@ -32,6 +35,7 @@ public class Controller : MonoBehaviour
         _pressInput.action.started -= OnPress;
         _pressInput.action.canceled -= OnPress;
         _tapInput.action.started -= OnTap;
+        _dragInput.action.performed -= OnDrag;
     }
 
     void Update()
@@ -79,6 +83,13 @@ public class Controller : MonoBehaviour
         {
             _onTap?.Invoke();
             Debug.Log("TEST");
+        }
+    }
+
+    void OnDrag(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
         }
     }
 }

@@ -71,4 +71,10 @@ public class CellData
     {
         return HasDoor;
     }
+
+    public bool hasNeighbour(Vector2Int tile)
+    {
+        return tile == GridPosition + Vector2Int.right || tile == GridPosition + Vector2Int.left ||
+            tile == GridPosition + Vector2Int.up || tile == GridPosition + Vector2Int.down;
+    }
 }
