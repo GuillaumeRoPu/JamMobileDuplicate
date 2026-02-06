@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: 2f907909f11d0034983d0f169e446684
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5297382938288019302
+    second: "Chemin_Arri\xE8re_Plan_0"
+  - first:
+      213: -9130257188251659003
+    second: "Chemin_Arri\xE8re_Plan_1"
+  - first:
+      213: 7879890739046389391
+    second: "Chemin_Arri\xE8re_Plan_2"
+  - first:
+      213: 1161126145623861657
+    second: "Chemin_Arri\xE8re_Plan_3"
+  - first:
+      213: -1668887149262530365
+    second: "Chemin_Arri\xE8re_Plan_4"
+  - first:
+      213: -1020126167667937835
+    second: "Chemin_Arri\xE8re_Plan_5"
+  - first:
+      213: 8932363337207327242
+    second: "Chemin_Arri\xE8re_Plan_6"
+  - first:
+      213: -4857126606002085681
+    second: "Chemin_Arri\xE8re_Plan_7"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_0"
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 265
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a98a02cc84aeb76b0800000000000000
+      internalID: -5297382938288019302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_1"
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 301
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5059d42267fca4180800000000000000
+      internalID: -9130257188251659003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_2"
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 227
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8610c1b0eefa5d60800000000000000
+      internalID: 7879890739046389391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_3"
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 232
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9992459d3162d1010800000000000000
+      internalID: 1161126145623861657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_4"
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 251
+        width: 37
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c81ef9dafbe6d8e0800000000000000
+      internalID: -1668887149262530365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_5"
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 173
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dd6216c7a8c7d1f0800000000000000
+      internalID: -1020126167667937835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_6"
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 182
+        width: 44
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0a27f6212126fb70800000000000000
+      internalID: 8932363337207327242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Chemin_Arri\xE8re_Plan_7"
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 144
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc0a5240615089cb0800000000000000
+      internalID: -4857126606002085681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Chemin_Arri\xE8re_Plan_0": -5297382938288019302
+      "Chemin_Arri\xE8re_Plan_1": -9130257188251659003
+      "Chemin_Arri\xE8re_Plan_2": 7879890739046389391
+      "Chemin_Arri\xE8re_Plan_3": 1161126145623861657
+      "Chemin_Arri\xE8re_Plan_4": -1668887149262530365
+      "Chemin_Arri\xE8re_Plan_5": -1020126167667937835
+      "Chemin_Arri\xE8re_Plan_6": 8932363337207327242
+      "Chemin_Arri\xE8re_Plan_7": -4857126606002085681
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
