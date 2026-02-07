@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public enum EventType
 {
@@ -23,6 +22,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField] LevelData _level;
 
     [SerializeField] PathFeedback _pathFeedback;
+    [SerializeField] GameObject _zombieSpawnWarning;
+    List<GameObject> _warnings = new List<GameObject>();
     public PathFeedback GetPathFeedback => _pathFeedback;
 
     [SerializeField] TurnChronoUI _ui;
@@ -36,6 +37,7 @@ public class TurnManager : MonoBehaviour
 
     public void Init()
     {
+        _level.Init();
         foreach (var evnt in _level.Events)
         {
             if (evnt.EventType == EventType.Zombie)
@@ -73,7 +75,9 @@ public class TurnManager : MonoBehaviour
         {
             if (evnt.Turn == _currentTurn)
             {
-                GameManager.Of.SpawnZombie();
+                Destroy(_warnings[0]);
+                _warnings.RemoveAt(0);
+                GameManager.Of.SpawnZombie(_level.GetNextSpawn(_currentTurn));
             }
         }
 
@@ -99,6 +103,7 @@ public class TurnManager : MonoBehaviour
 
     public void CalculZombiePath(List<Vector2Int> playerPath)
     {
+        WarningZombieSpawn(playerPath.Count > 1 ? playerPath.Count - 1 : 1);
         _zombiePaths.Clear();
         ResetFeedback();
         int zIndex = 0;
@@ -288,7 +293,6 @@ public class TurnManager : MonoBehaviour
         renderer.flipX = xFlip;
         renderer.flipY = yFlip;
     }
-
     void ResetFeedback()
     {
         foreach (var feed in _zombieFeedbacks)
@@ -300,5 +304,22 @@ public class TurnManager : MonoBehaviour
         }
 
         _zombieFeedbacks.Clear();
+    }
+
+    void WarningZombieSpawn(int turnWillMake)
+    {
+        foreach (var go in _warnings)
+        {
+            Destroy(go);
+        }
+        _warnings.Clear();
+
+        foreach (var evnt in _level.Events)
+        {
+            if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn)
+            {
+                _warnings.Add(Instantiate(_zombieSpawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
+            }
+        }
     }
 }

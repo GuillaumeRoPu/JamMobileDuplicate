@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public List<Entity> Zombies => _zombieEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
+    [Header("Sound Data")]
+    [SerializeField] SoundData _zombieSounds;
+    public SoundData ZombieAudio => _zombieSounds;
+
     [Header("Manager")]
     [SerializeField] TurnManager _turnManager;
     [SerializeField] GridManager _gridManager;
@@ -75,24 +79,11 @@ public class GameManager : MonoBehaviour
         Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
     }
 
-    public void SpawnZombie()
+    public void SpawnZombie(Vector2Int spawnPos)
     {
-        List<Vector2Int> tilesPos = new List<Vector2Int>();
-        foreach (Vector2Int posTile in Grid.GridLevelData.allTilesPosition)
-        {
-            CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
-            Grid.GridLevelData.spawnPointsTiles.TryGetValue(posTile, out spawn);
-
-            if (spawn.HasFlag(CellData.SpawnPointType.Zombie))
-            {
-                tilesPos.Add(posTile);
-            }
-        }
-
-        Vector2Int pos = tilesPos[Random.Range(0, tilesPos.Count)];
-        GameObject zombie = Instantiate(_zombie, (Vector2)pos * Grid.TileSize, Quaternion.identity);
+        GameObject zombie = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _zombieEntity.Add(zombie.GetComponent<Entity>());
-        _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(pos);
-        Grid.GetTileAtPosition(pos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
+        _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
     }
 }

@@ -1140,6 +1140,7 @@ MonoBehaviour:
     Arrow: {fileID: 21300000, guid: bba66293533e783478aaa5d39166fbfb, type: 3}
     Row: {fileID: 21300000, guid: bee1fb288e47f3e4ebbaba314dad4b3a, type: 3}
     Turn: {fileID: 21300000, guid: 544dd0cf56062684195980038bca30e7, type: 3}
+  _zombieSpawnWarning: {fileID: 2562190512436590311, guid: c8321e403d85802409358ce52cfdf4bc, type: 3}
   _ui: {fileID: 1856386783}
 --- !u!114 &1155825359
 MonoBehaviour:
@@ -1155,6 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _player: {fileID: 2879787377744229297, guid: 165e9d83a9b4288408d766c1f09a2e79, type: 3}
   _zombie: {fileID: 2147997998945218763, guid: c953c7e41aef78d4ca1547a1aeef6486, type: 3}
+  _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   _turnManager: {fileID: 1155825358}
   _gridManager: {fileID: 1155825361}
 --- !u!4 &1155825360
@@ -1208,10 +1210,15 @@ MonoBehaviour:
   music:
   - clip: {fileID: 8300000, guid: 5db319f36a71b714e8ef64ab469a9439, type: 3}
     startTime: 0
+    endTime: 0
     volume: 0.25
-  fx: []
+  fx:
+  - clip: {fileID: 8300000, guid: e37520654c22fc049b16f05b4641b3de, type: 3}
+    startTime: 0
+    endTime: 1.5
+    volume: 0.304
   musicEffectMixer: {fileID: -6707401127656026385, guid: bd3ab056d7c917240a9debfb6a5f891d, type: 2}
-  fxEffectMixer: {fileID: 0}
+  fxEffectMixer: {fileID: 1760957101577796974, guid: bd3ab056d7c917240a9debfb6a5f891d, type: 2}
 --- !u!1 &1197120229
 GameObject:
   m_ObjectHideFlags: 0

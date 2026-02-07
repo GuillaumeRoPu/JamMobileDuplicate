@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0e91c31bde15746af6d4104f5a2e79, type: 3}
+  m_Name: Zombie
+  m_EditorClassIdentifier: Assembly-CSharp::SoundData
+  <Sounds>k__BackingField:
+  - clip: {fileID: 8300000, guid: 16028eae61f99394886c8294d5ef57c3, type: 3}
+    startTime: 0
+    endTime: 0.5
+    volume: 0.317
+  - clip: {fileID: 8300000, guid: dac2203ea1102d74883c1785d673d1d0, type: 3}
+    startTime: 0
+    endTime: 0.5
+    volume: 0.317
+  - clip: {fileID: 8300000, guid: f89c19d0581680b498c6298a1f31debe, type: 3}
+    startTime: 0
+    endTime: 0.6
+    volume: 0.317
+  - clip: {fileID: 8300000, guid: d1463158877bb38439bc849abaffdcd0, type: 3}
+    startTime: 0
+    endTime: 0.5
+    volume: 0.317
+  - clip: {fileID: 8300000, guid: f656b6657dc2f2047bc1578912564a20, type: 3}
+    startTime: 0
+    endTime: 0.5
+    volume: 0.317
+  <Loop>k__BackingField: 0
+  <PlayType>k__BackingField: 0

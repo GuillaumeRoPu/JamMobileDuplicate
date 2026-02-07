@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.Universal;
 
 [System.Serializable]
 public struct AudioParameter
 {
     public AudioClip clip;
     public float startTime;
+    public float endTime;
     [Range(0, 1)] public float volume;
 }
 
@@ -41,7 +43,7 @@ public class AudioManager : MonoBehaviour
         audioSource.outputAudioMixerGroup = fx ? fxEffectMixer : musicEffectMixer;
         audioSource.Play();
         if (fx)
-            Destroy(tempGO, param.clip.length - param.startTime);
+            Destroy(tempGO, param.clip.length - param.startTime - param.endTime);
         else
             audioSource.loop = true;
         return audioSource;
@@ -56,6 +58,14 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = param.volume;
         audioSource.outputAudioMixerGroup = fxEffectMixer;
         audioSource.Play();
-        Destroy(tempGO, param.clip.length - param.startTime);
+        Destroy(tempGO, param.clip.length - param.startTime - param.endTime);
+    }
+
+    public void PlayDataAudio(SoundData data)
+    {
+        if (data.PlayType == PlayType.RANDOMLY)
+        {
+            PlayClipAt(data.Sounds[Random.Range(0, data.Sounds.Length)], Vector2.zero, !data.Loop);
+        }
     }
 }

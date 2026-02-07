@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayState : GameState
 {
+    bool playSound;
     public override void Enter()
     {
         AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
@@ -17,7 +18,11 @@ public class PlayState : GameState
             }
         }
 
+        AudioManager.Of.PlayClipAt(AudioManager.Of.fx[0], Vector3.zero, true);
+
         GameManager.Of.Turn.Init();
+        playSound = true;
+        PlayRandomAmbiantSound();
     }
 
     public override void LogicsUpdate()
@@ -32,6 +37,21 @@ public class PlayState : GameState
 
     public override void Exit()
     {
-        // Sortie du jeu
+        playSound = false;
+    }
+
+    async void PlayRandomAmbiantSound()
+    {
+        await Awaitable.WaitForSecondsAsync(Random.Range(10, 20));
+        if (playSound)
+        {
+            for (int i = 0; i < GameManager.Of.Zombies.Count; i++)
+            {
+                AudioManager.Of.PlayDataAudio(GameManager.Of.ZombieAudio);
+                await Awaitable.WaitForSecondsAsync(3f);
+
+            }
+            PlayRandomAmbiantSound();
+        }
     }
 }
