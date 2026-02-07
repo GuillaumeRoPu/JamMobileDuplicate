@@ -4,10 +4,13 @@ using Frynity.Gen;
 
 
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine.UIElements;
+
+#if UNITY_EDITOR
 
 public class GridDrawer : MonoBehaviour
 {
@@ -432,7 +435,8 @@ public class GridDrawer : MonoBehaviour
             {
                 _tiles[tile].SetAsInARoom(mainCellPosition, roomData);
             }
-            GameObject newRoom = Instantiate(room, (Vector2)mainCellPosition, Quaternion.identity, _roomsParent);
+            GameObject newRoom = PrefabUtility.InstantiatePrefab(room, _roomsParent) as GameObject;
+            newRoom.transform.position = (Vector2)mainCellPosition;
             _roomDeletionTracker[mainCellPosition] = newRoom;
         }
         else
@@ -519,7 +523,8 @@ public class GridDrawer : MonoBehaviour
             {
                 _tiles[tile].SetAsInARoom(mainCellPosition, roomData);
             }
-            GameObject newRoom = Instantiate(room.GetRoomPrefab(), (Vector2)mainCellPosition, Quaternion.identity, _roomsParent);
+            GameObject newRoom = PrefabUtility.InstantiatePrefab(room.GetRoomPrefab(), _roomsParent) as GameObject;
+            newRoom.transform.position = (Vector2)mainCellPosition;
             _roomDeletionTracker[mainCellPosition] = newRoom;
         }
         else
@@ -914,3 +919,5 @@ public class GridDrawer : MonoBehaviour
         }
     }
 }
+
+#endif

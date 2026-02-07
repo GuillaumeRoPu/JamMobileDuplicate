@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnZombie()
     {
+        List<Vector2Int> tilesPos = new List<Vector2Int>();
         foreach (Vector2Int posTile in Grid.GridLevelData.allTilesPosition)
         {
             CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
@@ -84,12 +85,14 @@ public class GameManager : MonoBehaviour
 
             if (spawn.HasFlag(CellData.SpawnPointType.Zombie))
             {
-                GameObject zombie = Instantiate(_zombie, (Vector2)posTile * Grid.TileSize, Quaternion.identity);
-                _zombieEntity.Add(zombie.GetComponent<Entity>());
-                _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(posTile);
-                Grid.GetTileAtPosition(posTile).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
-                break;
+                tilesPos.Add(posTile);
             }
         }
+
+        Vector2Int pos = tilesPos[Random.Range(0, tilesPos.Count)];
+        GameObject zombie = Instantiate(_zombie, (Vector2)pos * Grid.TileSize, Quaternion.identity);
+        _zombieEntity.Add(zombie.GetComponent<Entity>());
+        _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(pos);
+        Grid.GetTileAtPosition(pos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
     }
 }

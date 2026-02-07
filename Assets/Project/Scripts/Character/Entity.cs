@@ -52,7 +52,9 @@ public class Entity : MonoBehaviour
 
                 if (_currentMoveTime > _duration)
                 {
+                    _currentTile.CellData.Entity = null;
                     _currentTile = GridManager.Tiles[_path[_pathIndex]];
+                    _currentTile.CellData.Entity = this;
                     _isMoving = false;
                     _currentMoveTime = 0;
                     _pathIndex++;

@@ -41,6 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tile
+    uniqueID: 728443
+    locked: 0
+  - name: Room
+    uniqueID: 2953008801
+    locked: 0
+  - name: Character
+    uniqueID: 1382731119
+    locked: 0
+  - name: Foreground
+    uniqueID: 3801323181
+    locked: 0
   - name: GUI
     uniqueID: 146449451
     locked: 0

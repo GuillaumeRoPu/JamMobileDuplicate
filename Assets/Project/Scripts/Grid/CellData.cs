@@ -44,7 +44,7 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
-        if (Entity != null) return false;
+        if (Entity != null && !Entity.gameObject.CompareTag("Player")) return false;
 
         if (MainRoomCell == originalCell.MainRoomCell || DoorPosition == receptFace || originalCell.DoorPosition == face)
         {

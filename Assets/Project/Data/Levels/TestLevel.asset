@@ -16,3 +16,7 @@ MonoBehaviour:
   <Events>k__BackingField:
   - Turn: 5
     EventType: 0
+  - Turn: 13
+    EventType: 0
+  - Turn: 20
+    EventType: 0

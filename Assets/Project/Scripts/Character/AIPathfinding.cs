@@ -9,31 +9,33 @@ public class PathFeedback
     public Sprite Turn;
 }
 
-public class AIPathfinding : MonoBehaviour
+public class AIPathfinding
 {
-    Tile _target;
+    static Tile _target;
 
-    List<Vector2Int> _passedTile;
-    List<List<Vector2Int>> _paths;
+    static List<Vector2Int> _passedTile;
+    static List<List<Vector2Int>> _paths;
+    static List<Vector2Int> _notPassOn;
 
-    Vector2Int[] _posTests = {new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1) };
-    Face[] _faceTests = {Face.Right, Face.Left, Face.Up, Face.Down };
+    static Vector2Int[] _posTests = {new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1) };
+    static Face[] _faceTests = {Face.Right, Face.Left, Face.Up, Face.Down };
 
-    public List<Vector2Int> CreatePath(Tile target)
+    public static List<Vector2Int> CreatePath(Tile depart, Tile target, List<Vector2Int> notPassOn = null)
     {
         _target = target;
         _paths = new List<List<Vector2Int>>();
         _paths.Add(new List<Vector2Int>());
+        _notPassOn = notPassOn;
 
         _passedTile = new List<Vector2Int>();
 
-        if (GetComponent<Entity>().CurrentTile == null)
+        if (depart == null)
         {
             Debug.LogError("CURRENT TILE IS NULL !!!");
             return null;
         }
 
-        _paths = GetAllPaths(new List<List<Vector2Int>>(_paths), 0, GetComponent<Entity>().CurrentTile);
+        _paths = GetAllPaths(new List<List<Vector2Int>>(_paths), 0, depart);
 
         List<Vector2Int> selectPath = _paths[0];
         foreach (var path in _paths)
@@ -44,7 +46,7 @@ public class AIPathfinding : MonoBehaviour
         return selectPath;
     }
 
-    List<List<Vector2Int>> GetAllPaths(List<List<Vector2Int>> paths, int pathIndex, Tile nextTile)
+    static List<List<Vector2Int>> GetAllPaths(List<List<Vector2Int>> paths, int pathIndex, Tile nextTile)
     {
         _passedTile.Add(nextTile.CellData.GridPosition);
         paths[pathIndex].Add(nextTile.CellData.GridPosition);
@@ -61,6 +63,11 @@ public class AIPathfinding : MonoBehaviour
             if (tile == null) continue;
 
             if (paths[pathIndex].Contains(tile.CellData.GridPosition)) continue;
+
+            if (_notPassOn != null)
+            {
+                if (_notPassOn.Contains(tile.CellData.GridPosition)) continue;
+            }
 
             if (tile.CellData.CanPass(_faceTests[i], nextTile.CellData))
             {

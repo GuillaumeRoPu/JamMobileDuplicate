@@ -17,17 +17,17 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup musicEffectMixer;
     public AudioMixerGroup fxEffectMixer;
 
-    public static AudioManager instance;
+    public static AudioManager Of;
 
     private void Awake()
     {
-        if (instance != null)
+        if (Of != null)
         {
             Debug.LogWarning("Il y a plus d'une instance de AudioManager dans la scène");
             return;
         }
 
-        instance = this;
+        Of = this;
     }
 
     public AudioSource PlayClipAt(AudioParameter param, Vector3 pos, bool fx = false)
@@ -45,5 +45,17 @@ public class AudioManager : MonoBehaviour
         else
             audioSource.loop = true;
         return audioSource;
+    }
+
+    public void PlayAudioFX(AudioParameter param)
+    {
+        GameObject tempGO = new GameObject("TempAudio");
+        AudioSource audioSource = tempGO.AddComponent<AudioSource>();
+        audioSource.clip = param.clip;
+        audioSource.time = param.startTime;
+        audioSource.volume = param.volume;
+        audioSource.outputAudioMixerGroup = fxEffectMixer;
+        audioSource.Play();
+        Destroy(tempGO, param.clip.length - param.startTime);
     }
 }

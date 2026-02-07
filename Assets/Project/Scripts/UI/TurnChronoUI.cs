@@ -24,8 +24,9 @@ public class TurnChronoUI : MonoBehaviour
             float now = _currentTurn - 1;
             now = Mathf.Clamp(now, 0, _turnMax);
 
+            float taretTurn = Mathf.Min(_currentTurn, _turnMax);
 
-            _turnPos = Mathf.Lerp(now / _turnMax, (float)_currentTurn /_turnMax, ratio);
+            _turnPos = Mathf.Lerp(now / _turnMax, taretTurn / _turnMax, ratio);
 
             _playerTurn.GetComponent<RectTransform>().anchorMin = new Vector2(_turnPos, 0.5f);
             _playerTurn.GetComponent<RectTransform>().anchorMax = new Vector2(_turnPos, 0.5f);
@@ -36,7 +37,6 @@ public class TurnChronoUI : MonoBehaviour
             }
 
             _currentTime += Time.deltaTime;
-
         }
     }
 
@@ -52,6 +52,7 @@ public class TurnChronoUI : MonoBehaviour
     public void PlaceZombieTurn(int turn, int turnMax)
     {
         GameObject zombie = Instantiate(_zombieTurn, _playerTurn.transform.parent);
+        zombie.transform.SetAsFirstSibling();
         float pos = (float)turn / turnMax;
         zombie.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
         zombie.GetComponent<RectTransform>().anchorMax = new Vector2(pos, 0.5f);

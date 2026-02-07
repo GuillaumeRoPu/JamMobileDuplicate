@@ -26,10 +26,13 @@ public class Player : MonoBehaviour
                 {
                     if (_last.CellData.hasNeighbour(GridManager.Tiles[tile].CellData.GridPosition))
                     {
-                        if (_selectPath.Count - 1 == _maxTurnToMove) return;
-                        _last = GridManager.Tiles[tile];
-                        _selectPath.Add(tile);
-                        CreateFeddback();
+                        if (GridManager.Tiles[tile].CellData.CanPass(GridManager.GetFace(tile - _selectPath[_selectPath.Count - 1]), GridManager.Tiles[tile].CellData))
+                        {
+                            if (_selectPath.Count - 1 == _maxTurnToMove && !_selectPath.Contains(tile)) return;
+                            _last = GridManager.Tiles[tile];
+                            _selectPath.Add(tile);
+                            CreateFeddback();
+                        }
                     }
                     else
                     {
@@ -55,9 +58,9 @@ public class Player : MonoBehaviour
     public void SendSelectedPath()
     {
         if (!_selected) return;
+        GameManager.Of.Turn.CalculZombiePath(_selectPath);
         if (_selectPath.Count > 1)
         {
-            GameManager.Of.Turn.CalculZombiePath(_selectPath);
             GameManager.Of.Turn.PassTurn(_selectPath.Count - 1);
             GameManager.Of.Player.SetPath(new List<Vector2Int>(_selectPath), ReachedTarget);
         }
@@ -227,7 +230,7 @@ public class Player : MonoBehaviour
     {
         GameObject feed = new GameObject("Granny Feedback's");
         SpriteRenderer renderer = feed.AddComponent<SpriteRenderer>();
-        renderer.sortingOrder = 100;
+        renderer.sortingLayerName = "Foreground";
         renderer.flipX = xFlip;
         renderer.flipY = yFlip;
         renderer.sprite = sprite;

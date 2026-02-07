@@ -4,6 +4,7 @@ public class PlayState : GameState
 {
     public override void Enter()
     {
+        AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
         foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
         {
             CellData.SpawnPointType spawn = CellData.SpawnPointType.None;

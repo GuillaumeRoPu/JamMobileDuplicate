@@ -36,6 +36,20 @@ public class GridManager : MonoBehaviour
 
     //END OF ALL THE DATA
 
+    public static Face GetFace(Vector2Int face)
+    {
+        if (face == Vector2Int.right)
+            return Face.Right;
+        if (face == Vector2Int.left)
+            return Face.Left;
+        if (face == Vector2Int.up)
+            return Face.Down;
+        if (face == Vector2Int.down)
+            return Face.Down;
+        else
+            return Face.None;
+    }
+
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
 

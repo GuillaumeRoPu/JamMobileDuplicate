@@ -91,6 +91,9 @@ public class TurnManager : MonoBehaviour
         else
         {
             _notNext = false;
+            var playerPos = new List<Vector2Int>();
+            playerPos.Add(GameManager.Of.Player.CurrentTile.CellData.GridPosition);
+            CalculZombiePath(playerPos);
         }
     }
 
@@ -99,19 +102,47 @@ public class TurnManager : MonoBehaviour
         _zombiePaths.Clear();
         ResetFeedback();
         int zIndex = 0;
-        if (playerPath.Count <= 1) return;
+        List<Vector2Int> stop = new List<Vector2Int>();;
         foreach (var zombie in GameManager.Of.Zombies)
         {
             _zombieFeedbacks.Add(new List<GameObject>());
             List<Vector2Int> diff = new List<Vector2Int>();
             List<Vector2Int> tiles = new List<Vector2Int>();
             tiles.Add(zombie.CurrentTile.CellData.GridPosition);
-            for (int i = 1; i < playerPath.Count; i++)
+            for (int i = 0; playerPath.Count > 1 ? i < playerPath.Count - 1 : i < playerPath.Count; i++)
             {
-                List<Vector2Int> path = zombie.GetComponent<AIPathfinding>().CreatePath(GridManager.Tiles[playerPath[i]]);
-                diff.Add(path[i] - tiles[tiles.Count - 1]);
-                tiles.Add(path[i]);
+                if (playerPath[i] == tiles[tiles.Count - 1]) break;
+
+                List<Vector2Int> newStop = new List<Vector2Int>(stop);
+                newStop.AddRange(tiles);
+                List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[tiles[tiles.Count - 1]], GridManager.Tiles[playerPath[i]], newStop);
+
+                if (path.Count <= 1) break;
+                bool pass = false;
+                foreach (var paths in _zombiePaths)
+                {
+                    if (i+1 >= paths.Count) continue;
+                    if (paths[i+1] == path[1])
+                    {
+                        diff.Add(Vector2Int.zero);
+                        tiles.Add(tiles[tiles.Count - 1]);
+                        pass = true;
+                        break;
+                    }
+                }
+                if (pass) continue;
+                diff.Add(path[1] - tiles[tiles.Count - 1]);
+                tiles.Add(path[1]);
+                if (playerPath.Count < i + 1)
+                {
+                    if (path[1] == playerPath[i + 1] && i != 0)
+                    {
+                        break;
+                    }
+                }
             }
+
+            stop.Add(tiles[tiles.Count - 1]);
 
             Vector2Int lastDiff = Vector2Int.zero;
 
@@ -228,6 +259,7 @@ public class TurnManager : MonoBehaviour
         int zombieIndex = 0;
         foreach (var zombie in GameManager.Of.Zombies)
         {
+            if (_zombiePaths[zombieIndex].Count <= 1) continue;
             zombie.GetComponent<Entity>().SetPath(_zombiePaths[zombieIndex]);
             zombieIndex++;
         }
@@ -237,7 +269,7 @@ public class TurnManager : MonoBehaviour
     {
         GameObject feed = new GameObject("Zombie Feedback's");
         SpriteRenderer renderer = feed.AddComponent<SpriteRenderer>();
-        renderer.sortingOrder = 100;
+        renderer.sortingLayerName = "Foreground";
         renderer.flipX = xFlip;
         renderer.flipY = yFlip;
         renderer.sprite = sprite;
