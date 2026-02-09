@@ -916,9 +916,9 @@ MonoBehaviour:
   _gridLevelData: {fileID: 0}
   _spawnPointPosition: {x: 2, y: 0}
   _spawnPointTypes: 1
-  _roomPrefab: {fileID: 1857720025608105958, guid: 083543a169d6e5349b078b63be6853ab, type: 3}
-  _roomPosition: {x: 0, y: 0}
-  _eraseRoomPosition: {x: 1, y: 0}
+  _roomPrefab: {fileID: 5253747431288570786, guid: 0e98f2cbdfe78be4cacf6ef4c87c6ddd, type: 3}
+  _roomPosition: {x: -3, y: 0}
+  _eraseRoomPosition: {x: -3, y: 0}
   _gridLevelName: JamesTest
 --- !u!1 &917632377
 GameObject:
@@ -1156,6 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _player: {fileID: 2879787377744229297, guid: 165e9d83a9b4288408d766c1f09a2e79, type: 3}
   _zombie: {fileID: 2147997998945218763, guid: c953c7e41aef78d4ca1547a1aeef6486, type: 3}
+  _echo: {fileID: 0}
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   _turnManager: {fileID: 1155825358}
   _gridManager: {fileID: 1155825361}

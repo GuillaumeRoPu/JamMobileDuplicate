@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum EventType
 {
-    Zombie
+    Zombie, Echo
 }
 
 [System.Serializable]

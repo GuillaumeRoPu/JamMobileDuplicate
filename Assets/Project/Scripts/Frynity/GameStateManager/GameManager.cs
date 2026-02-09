@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject _player;
     [SerializeField] GameObject _zombie;
+    [SerializeField] GameObject _echo;
     Entity _playerEntity;
     List<Entity> _zombieEntity = new List<Entity>();
     Entity _echoEntity = null;
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Echo déjà crée");
             return;
         }
-        GameObject echo = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
+        GameObject echo = Instantiate(_echo, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(spawnPos);
         Grid.GetTileAtPosition(spawnPos).CellData.Entity = _echoEntity;

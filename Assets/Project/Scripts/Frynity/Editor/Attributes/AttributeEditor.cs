@@ -83,10 +83,18 @@ public class AttributeEditor : Editor
         foreach (var method in methods)
         {
             var buttonAttr = method.GetCustomAttribute<ButtonAttribute>();
+            var showIfAttr = method.GetCustomAttribute<ButtonShowIfAttribute>();
             if (buttonAttr == null) continue;
 
             string label = buttonAttr.text ?? ObjectNames.NicifyVariableName(method.Name);
 
+            bool show = true;
+            if (showIfAttr != null)
+            {
+                show = ShowIf(showIfAttr);
+            }
+
+            if (!show) continue;
             if (GUILayout.Button(label))
             {
                 // Vérifie que la méthode n’a pas de paramètres
@@ -105,5 +113,51 @@ public class AttributeEditor : Editor
 
         serializedObject.ApplyModifiedProperties();
 
+    }
+
+    private bool ShowIf(ButtonShowIfAttribute attr)
+    {
+        SerializedProperty condition = serializedObject.FindProperty(attr.conditionField);
+        bool shouldShow = false;
+
+        if (condition != null)
+        {
+            if (condition.propertyType == SerializedPropertyType.Boolean)
+                shouldShow = condition.boolValue;
+            else if (condition.propertyType == SerializedPropertyType.Enum)
+            {
+                shouldShow = (int)GetValue(condition) == (int)attr.conditionValue;
+                if (!shouldShow)
+                {
+                    shouldShow = ((int)GetValue(condition) & (int)attr.conditionValue) > 0;
+                }
+
+            }
+            else if (attr.conditionValue != null)
+                shouldShow = GetValue(condition).Equals(attr.conditionValue);
+        }
+
+        return shouldShow;
+    }
+
+    private object GetValue(SerializedProperty prop)
+    {
+        switch (prop.propertyType)
+        {
+            case SerializedPropertyType.Integer:
+                return prop.intValue;
+            case SerializedPropertyType.Float:
+                return prop.floatValue;
+            case SerializedPropertyType.Boolean:
+                return prop.boolValue;
+            case SerializedPropertyType.Enum:
+                return prop.enumValueFlag;
+            case SerializedPropertyType.String:
+                return prop.stringValue;
+            case SerializedPropertyType.ObjectReference:
+                return prop.objectReferenceValue;
+            default:
+                return null;
+        }
     }
 }
