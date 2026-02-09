@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _zombie;
     Entity _playerEntity;
     List<Entity> _zombieEntity = new List<Entity>();
+    Entity _echoEntity = null;
     public Entity Player => _playerEntity;
     public List<Entity> Zombies => _zombieEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
@@ -85,5 +85,18 @@ public class GameManager : MonoBehaviour
         _zombieEntity.Add(zombie.GetComponent<Entity>());
         _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(spawnPos);
         Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
+    }
+
+    public void SpawnEcho(Vector2Int spawnPos)
+    {
+        if (_echoEntity)
+        {
+            Debug.LogError("Echo déjà crée");
+            return;
+        }
+        GameObject echo = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
+        _echoEntity = echo.GetComponent<Entity>();
+        _echoEntity.SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _echoEntity;
     }
 }
