@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _player: {fileID: 2879787377744229297, guid: 165e9d83a9b4288408d766c1f09a2e79, type: 3}
   _zombie: {fileID: 2147997998945218763, guid: c953c7e41aef78d4ca1547a1aeef6486, type: 3}
-  _echo: {fileID: 0}
+  _echo: {fileID: 2879787377744229297, guid: 8f75164ce1fcec94ab9f0e5a35b85dc3, type: 3}
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   _turnManager: {fileID: 1155825358}
   _gridManager: {fileID: 1155825361}
@@ -1742,6 +1742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurnChronoUI
   _playerTurn: {fileID: 436340483}
   _zombieTurn: {fileID: 7846847627368860068, guid: bf7fc55a350b59b4cad4fc64a04d93fd, type: 3}
+  _echoEnterTurn: {fileID: 7846847627368860068, guid: 903d5e96c8056d94cba153b2b0e0f776, type: 3}
+  _echoLeaveTurn: {fileID: 7846847627368860068, guid: 70a6b5643ae50c844b8d763888a6b3c8, type: 3}
 --- !u!1 &2131389857
 GameObject:
   m_ObjectHideFlags: 0

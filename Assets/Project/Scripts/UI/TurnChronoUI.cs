@@ -5,6 +5,8 @@ public class TurnChronoUI : MonoBehaviour
     [SerializeField] GameObject _playerTurn;
 
     [SerializeField] GameObject _zombieTurn;
+    [SerializeField] GameObject _echoEnterTurn;
+    [SerializeField] GameObject _echoLeaveTurn;
 
     bool _changing;
     float _duration;
@@ -56,5 +58,15 @@ public class TurnChronoUI : MonoBehaviour
         float pos = (float)turn / turnMax;
         zombie.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
         zombie.GetComponent<RectTransform>().anchorMax = new Vector2(pos, 0.5f);
+    }
+
+    public void PlaceEchoTurn(int turn, int turnMax, bool enter = true)
+    {
+        GameObject echo = Instantiate(enter ? _echoEnterTurn : _echoLeaveTurn, _playerTurn.transform.parent);
+
+        echo.transform.SetAsFirstSibling();
+        float pos = (float)turn / turnMax;
+        echo.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
+        echo.GetComponent<RectTransform>().anchorMax = new Vector2(pos, 0.5f);
     }
 }

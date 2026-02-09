@@ -23,8 +23,7 @@ public class AIPathfinding
     public static List<Vector2Int> CreatePath(Tile depart, Tile target, List<Vector2Int> notPassOn = null)
     {
         _target = target;
-        _paths = new List<List<Vector2Int>>();
-        _paths.Add(new List<Vector2Int>());
+        _paths = new List<List<Vector2Int>>() { new List<Vector2Int>() };
         _notPassOn = notPassOn;
 
         _passedTile = new List<Vector2Int>();

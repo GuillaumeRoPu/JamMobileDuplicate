@@ -18,5 +18,9 @@ MonoBehaviour:
     EventType: 0
   - Turn: 13
     EventType: 0
+  - Turn: 15
+    EventType: 1
   - Turn: 20
     EventType: 0
+  - Turn: 23
+    EventType: 2

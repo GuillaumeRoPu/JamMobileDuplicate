@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum EventType
 {
-    Zombie, Echo
+    Zombie, EchoEnter, EchoLeave
 }
 
 [System.Serializable]
@@ -42,6 +42,13 @@ public class TurnManager : MonoBehaviour
         {
             if (evnt.EventType == EventType.Zombie)
                 _ui.PlaceZombieTurn(evnt.Turn, _level.TurnMax);
+
+            if (evnt.EventType == EventType.EchoEnter)
+                _ui.PlaceEchoTurn(evnt.Turn, _level.TurnMax);
+
+            if (evnt.EventType == EventType.EchoLeave)
+                _ui.PlaceEchoTurn(evnt.Turn, _level.TurnMax, false);
+
         }
     }
 
@@ -64,20 +71,41 @@ public class TurnManager : MonoBehaviour
     {
         _nbPass--;
         _currentTurn++;
+        Vector2Int playerPosition = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
         GameManager.Of.Player.MoveToNextTileInPath(_durationTurn);
         foreach (var zombie in GameManager.Of.Zombies)
         {
             zombie.MoveToNextTileInPath(_durationTurn);
         }
         _ui.UpdateTurn(_durationTurn, _currentTurn, _level.TurnMax);
+        if (GameManager.Of.Echo)
+        {
+            if (GameManager.Of.Echo.CurrentTile.CellData.GridPosition != GameManager.Of.Player.CurrentTile.CellData.GridPosition)
+            {
+                List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, playerPosition };
+                GameManager.Of.Echo.SetPath(path);
+                GameManager.Of.Echo.MoveToNextTileInPath(_durationTurn);
+            }
+        }
 
         foreach(var evnt in _level.Events)
         {
             if (evnt.Turn == _currentTurn)
             {
-                Destroy(_warnings[0]);
-                _warnings.RemoveAt(0);
-                GameManager.Of.SpawnZombie(_level.GetNextSpawn(_currentTurn));
+                if (evnt.EventType == EventType.Zombie)
+                {
+                    Destroy(_warnings[0]);
+                    _warnings.RemoveAt(0);
+                    GameManager.Of.SpawnZombie(_level.GetNextSpawn(_currentTurn));
+                }
+                else if (evnt.EventType == EventType.EchoEnter)
+                {
+                    GameManager.Of.SpawnEcho(playerPosition);
+                }
+                else if (evnt.EventType == EventType.EchoLeave)
+                {
+                    GameManager.Of.DestroyEcho();
+                }
             }
         }
 
@@ -95,8 +123,7 @@ public class TurnManager : MonoBehaviour
         else
         {
             _notNext = false;
-            var playerPos = new List<Vector2Int>();
-            playerPos.Add(GameManager.Of.Player.CurrentTile.CellData.GridPosition);
+            var playerPos = new List<Vector2Int> { GameManager.Of.Player.CurrentTile.CellData.GridPosition };
             CalculZombiePath(playerPos);
         }
     }
@@ -316,9 +343,12 @@ public class TurnManager : MonoBehaviour
 
         foreach (var evnt in _level.Events)
         {
-            if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn)
+            if (evnt.EventType == EventType.Zombie)
             {
-                _warnings.Add(Instantiate(_zombieSpawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
+                if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn)
+                {
+                    _warnings.Add(Instantiate(_zombieSpawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
+                }
             }
         }
     }

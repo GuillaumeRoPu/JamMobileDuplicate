@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     Entity _echoEntity = null;
     public Entity Player => _playerEntity;
     public List<Entity> Zombies => _zombieEntity;
+    public Entity Echo => _echoEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
     [Header("Sound Data")]
@@ -99,5 +100,11 @@ public class GameManager : MonoBehaviour
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(spawnPos);
         Grid.GetTileAtPosition(spawnPos).CellData.Entity = _echoEntity;
+    }
+
+    public void DestroyEcho()
+    {
+        Destroy(_echoEntity.gameObject);
+        _echoEntity = null;
     }
 }
