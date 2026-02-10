@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     public Entity Echo => _echoEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
+    [Header("Room Design")]
+    [SerializeField] Sprite _sideWallSprite;
+    [SerializeField] Sprite _outWallSprite;
+    public Sprite SideWall => _sideWallSprite;
+    public Sprite OutWall => _outWallSprite;
+
     [Header("Sound Data")]
     [SerializeField] SoundData _zombieSounds;
     public SoundData ZombieAudio => _zombieSounds;

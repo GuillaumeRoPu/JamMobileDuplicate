@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000002ba4ba087b1d0b00ad9693e26fcd6a52a15603b0
+  m_ApplyToSortingLayers: 000000002ba4ba087b1d0b00ad9693e2a15603b0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000002ba4ba087b1d0b00ad9693e26fcd6a52a15603b0
+  m_ApplyToSortingLayers: 000000002ba4ba087b1d0b00ad9693e2a15603b0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1157,6 +1157,8 @@ MonoBehaviour:
   _player: {fileID: 2879787377744229297, guid: 165e9d83a9b4288408d766c1f09a2e79, type: 3}
   _zombie: {fileID: 2147997998945218763, guid: c953c7e41aef78d4ca1547a1aeef6486, type: 3}
   _echo: {fileID: 2879787377744229297, guid: 8f75164ce1fcec94ab9f0e5a35b85dc3, type: 3}
+  _sideWallSprite: {fileID: 21300000, guid: 1848cf9de4989ec4a92fd652234b667c, type: 3}
+  _outWallSprite: {fileID: 21300000, guid: cd1f20cf89be7564b954995a728702ea, type: 3}
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   _turnManager: {fileID: 1155825358}
   _gridManager: {fileID: 1155825361}
@@ -1638,7 +1640,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -493644115
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: be784ac6f34b5b348a4177f634d5cde4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

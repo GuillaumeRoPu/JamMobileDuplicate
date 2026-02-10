@@ -15,7 +15,8 @@ MonoBehaviour:
   <Tiles>k__BackingField: []
   <Grounds>k__BackingField:
   - {fileID: 21300000, guid: 0257e9522c240254aa7c8e07efda12a6, type: 3}
-  <Walls>k__BackingField: []
+  <Walls>k__BackingField:
+  - {fileID: 21300000, guid: cd1f20cf89be7564b954995a728702ea, type: 3}
   <Props>k__BackingField:
   - {fileID: 436802476230933732, guid: be784ac6f34b5b348a4177f634d5cde4, type: 3}
   - {fileID: 3276643517386091924, guid: be784ac6f34b5b348a4177f634d5cde4, type: 3}

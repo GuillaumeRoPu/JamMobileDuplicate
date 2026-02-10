@@ -44,11 +44,8 @@ TagManager:
   - name: Tile
     uniqueID: 728443
     locked: 0
-  - name: Room
+  - name: Playground
     uniqueID: 2953008801
-    locked: 0
-  - name: Character
-    uniqueID: 1382731119
     locked: 0
   - name: Foreground
     uniqueID: 3801323181
