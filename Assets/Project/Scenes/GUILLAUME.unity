@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 723032146}
   - component: {fileID: 723032147}
   m_Layer: 0
-  m_Name: TestObject
+  m_Name: TestPosageDePiege
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
