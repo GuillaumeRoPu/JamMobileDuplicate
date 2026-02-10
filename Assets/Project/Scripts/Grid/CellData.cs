@@ -93,9 +93,9 @@ public class CellData
 
     public void RemoveTrap()
     {
+        trap.onDestroy -= RemoveTrap;
         trap = null;
         hasATrap = false;
-
     }
 
     public bool HasATrap()
