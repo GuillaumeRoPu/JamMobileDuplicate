@@ -497,6 +497,53 @@ Transform:
   - {fileID: 1339171967}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &723032145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723032146}
+  - component: {fileID: 723032147}
+  m_Layer: 0
+  m_Name: TestObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &723032146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723032145}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.04083, y: 1.50237, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &723032147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723032145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14b2483c8bde1941ae03d7f935843a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestIfTrapsWork
+  _gridManager: {fileID: 966644182}
+  _trap: {fileID: 1008070204158919008, guid: 10a18281aa9b36b499195e8d9bbf62d0, type: 3}
+  _trapPosition: {x: 2, y: 0}
 --- !u!1 &819476301
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: 40d7eb13efa2c7142b00db6217b477c8, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: 7c7128babb2a8ee4c8fb429e62dd40de, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 572938236}
   _roomsParent: {fileID: 467802023}
@@ -691,7 +738,7 @@ MonoBehaviour:
   _spawnPointPosition: {x: 2, y: 1}
   _spawnPointTypes: 12
   _roomPrefab: {fileID: 5086204099707341832, guid: 1af9bdc4365a4f645965040dd760f8a4, type: 3}
-  _roomPosition: {x: 1, y: 2}
+  _roomPosition: {x: 1, y: 0}
   _eraseRoomPosition: {x: 1, y: 1}
   _gridLevelName: ISTHISTHETEST4
 --- !u!1 &1944287288
@@ -739,3 +786,4 @@ SceneRoots:
   - {fileID: 719275610}
   - {fileID: 608111352}
   - {fileID: 1944287289}
+  - {fileID: 723032146}

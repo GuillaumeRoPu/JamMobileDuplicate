@@ -25,13 +25,20 @@ MonoBehaviour:
   values: 
   allRoomsPosition:
   - {x: 1, y: 2}
+  - {x: 1, y: 0}
   _allRoomsCellsBis:
   - items:
     - {x: 1, y: 2}
     - {x: 1, y: 3}
     - {x: 0, y: 2}
     - {x: 0, y: 3}
+  - items:
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
   allRoomsPrefab:
+  - {fileID: 5086204099707341832, guid: 1af9bdc4365a4f645965040dd760f8a4, type: 3}
   - {fileID: 5086204099707341832, guid: 1af9bdc4365a4f645965040dd760f8a4, type: 3}
   keysD: []
   valuesD: 

@@ -636,7 +636,7 @@ public class GridDrawer : MonoBehaviour
         _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
     }
 
-    [Button("Generate Tiles (Green)")]
+    [Button("Generate Tiles (Green)"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Tiles)]
     private void GenerateTilesButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Tiles)
@@ -649,7 +649,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Generate Grid From Data (Blue)")]
+    [Button("Generate Grid From Data (Blue)"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Tiles)]
     private void GenerateGridDataButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Tiles)
@@ -679,7 +679,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Erase Tiles (Red)")]
+    [Button("Erase Tiles (Red)"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Tiles)]
     private void EraseGridButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Tiles)
@@ -692,7 +692,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Update Grid Size")]
+    [Button("Update Grid Size"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Tiles)]
     private void UpdateSizeAll()
     {
         if (_levelCreationSteps == LevelCreationSteps.Tiles)
@@ -709,7 +709,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Erase All Tiles")]
+    [Button("Erase All Tiles"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Tiles)]
     private void RemoveAllTilesButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Tiles)
@@ -722,7 +722,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Make Tile A Spawn Point (Orange)")]
+    [Button("Make Tile A Spawn Point (Orange)"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.SpawnPoints)]
     private void SetAsSpawnPointButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.SpawnPoints)
@@ -735,7 +735,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Place Room")]
+    [Button("Place Room"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Room)]
     private void PlaceRoomButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Room)
@@ -748,7 +748,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Erase Room")]
+    [Button("Erase Room"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Room)]
     private void EraseRoomButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Room)
@@ -761,7 +761,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Erase All Room")]
+    [Button("Erase All Room"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Room)]
     private void EraseAllRoomsButton()
     {
         if (_levelCreationSteps == LevelCreationSteps.Room)
@@ -774,7 +774,7 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
-    [Button("Save The Grid layout")]
+    [Button("Save The Grid layout"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Save)]
     private void CommitValue()
     {
 #if UNITY_EDITOR

@@ -79,23 +79,43 @@ public class CellData
 
     public void SetTrap(Trap newtrap)
     {
-        trap = newtrap;
-        hasATrap = true;
+        if (!hasATrap)
+        {
+            trap = newtrap;
+            hasATrap = true;
+            trap.onDestroy += RemoveTrap;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to set a trap on another trap");
+        }
     }
 
     public void RemoveTrap()
     {
         trap = null;
         hasATrap = false;
+
     }
 
-    public void HasATrap()
+    public bool HasATrap()
     {
+        return hasATrap;
+    }
 
+    public void ActivateTrap(Entity entity)
+    {
+        if (HasATrap())
+        {
+            trap.ActivateTrap(entity);
+        }
     }
 
     public void ActivateTrap()
     {
-
+        if (HasATrap())
+        {
+            trap.ActivateTrap();
+        }
     }
 }
