@@ -7,12 +7,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _player;
     [SerializeField] GameObject _zombie;
     [SerializeField] GameObject _echo;
+    [SerializeField] GameObject _witch;
+
     Entity _playerEntity;
     List<Entity> _zombieEntity = new List<Entity>();
     Entity _echoEntity = null;
+    List<Entity> _witchEntity = new List<Entity>();
+
     public Entity Player => _playerEntity;
     public List<Entity> Zombies => _zombieEntity;
     public Entity Echo => _echoEntity;
+    public List<Entity> Witches => _witchEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
     [Header("Room Design")]

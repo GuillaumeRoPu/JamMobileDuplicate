@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum EventType
@@ -11,12 +12,15 @@ public class TurnEvent
 {
     public int Turn;
     public EventType EventType;
+    [MinValue(0), ShowIf(nameof(EventType), false, EventType.Zombie)] public int SpawnCellIndex;
 }
 
 public class TurnManager : MonoBehaviour
 {
     int _currentTurn;
     public float Turn => _currentTurn;
+
+    [Link("f", "e")]
 
     [SerializeField] float _durationTurn;
     [SerializeField] LevelData _level;
@@ -34,6 +38,8 @@ public class TurnManager : MonoBehaviour
 
     List<List<GameObject>> _zombieFeedbacks = new List<List<GameObject>>();
     List<List<Vector2Int>> _zombiePaths = new List<List<Vector2Int>>();
+
+    List<List<Vector2Int>> _witchPaths = new List<List<Vector2Int>>();
 
     public void Init()
     {
@@ -282,6 +288,50 @@ public class TurnManager : MonoBehaviour
             }
             zIndex++;
             _zombiePaths.Add(tiles);
+        }
+    }
+    public void CalculWitchPath()
+    {
+        foreach (Entity witch in GameManager.Of.Witches)
+        {
+            Vector2Int playerPos = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
+            Vector2Int witchPos = witch.CurrentTile.CellData.GridPosition;
+
+            List<Vector2Int> path = new List<Vector2Int>();
+            Vector2Int incr = Vector2Int.zero;
+            if (playerPos.x == witchPos.x)
+            {
+                incr = playerPos.y < witchPos.y ? Vector2Int.down : Vector2Int.up;
+            }
+            else if (playerPos.y == witchPos.y)
+            {
+                incr = playerPos.x < witchPos.x ? Vector2Int.left : Vector2Int.right;
+            }
+
+            bool search = true;
+            while (search)
+            {
+                if (!GridManager.Tiles.ContainsKey(witchPos + incr))
+                {
+                    search = false;
+                }
+
+                if (!GridManager.Tiles[witchPos + incr].CellData.DoorKeyClosed)
+                {
+                    if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoom(GridManager.Tiles[witchPos]) ||
+                        GridManager.Tiles[witchPos + incr].CellData.HasDoor)
+                    {
+                        path.Add(witchPos + incr);
+                        witchPos += incr;
+                    }
+                }
+                else
+                {
+                    search = false;
+                }
+            }
+
+            _witchPaths.Add(path);
         }
     }
 

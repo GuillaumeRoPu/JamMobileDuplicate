@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38848b0ab9382ba4cb03b2fb2c366c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frynity.Gen.RoomCells
+  _assets: {fileID: 0}
   _cellSize: 1
   _renderers:
   - cellId: 1
@@ -481,4 +482,4 @@ MonoBehaviour:
     face: 1
   - cellId: 0
     face: 2
-  _activeDoors: 01010101010101010101
+  _activeDoors: 01010100010000000000
