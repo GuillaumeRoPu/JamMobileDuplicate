@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Chambre
   m_EditorClassIdentifier: Assembly-CSharp::AssetList
   <Tiles>k__BackingField: []
-  <Grounds>k__BackingField: []
-  <Walls>k__BackingField: []
+  <Grounds>k__BackingField:
+  - {fileID: 0}
+  <Walls>k__BackingField:
+  - {fileID: 0}
   <Props>k__BackingField: []
