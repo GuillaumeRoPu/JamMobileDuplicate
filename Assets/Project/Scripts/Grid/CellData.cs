@@ -33,6 +33,7 @@ public class CellData
     public bool hasATrap;
     public Face DoorPosition = Face.None;
     public bool HasDoor = false;
+    public bool DoorKeyClosed;
     public Entity Entity;
 
     public bool CanPass(Face face, CellData originalCell)
@@ -75,6 +76,11 @@ public class CellData
     {
         return tile == GridPosition + Vector2Int.right || tile == GridPosition + Vector2Int.left ||
             tile == GridPosition + Vector2Int.up || tile == GridPosition + Vector2Int.down;
+    }
+
+    public bool IsTheSameRoom(Tile tile)
+    {
+        return tile.CellData.MainRoomCell == MainRoomCell;
     }
 
     public void SetTrap(Trap newtrap)

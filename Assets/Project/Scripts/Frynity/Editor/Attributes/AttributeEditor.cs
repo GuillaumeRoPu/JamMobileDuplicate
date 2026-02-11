@@ -77,7 +77,6 @@ public class AttributeEditor : Editor
         var targetObj = target;
         var type = targetObj.GetType();
 
-        // Récupère toutes les méthodes décorées avec [Button]
         var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         foreach (var method in methods)
@@ -110,6 +109,24 @@ public class AttributeEditor : Editor
                 }
             }
         }
+
+        // LINK \\
+
+        property = serializedObject.GetIterator();
+        property.NextVisible(true); // ignorer script
+
+        // Crée un mapping : groupe -> liste de propriétés
+        do
+        {
+            var field = property.serializedObject.targetObject.GetType()
+                .GetField(property.name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            if (field != null)
+            {
+                var attr = field.GetCustomAttribute<LinkAttribute>();
+            }
+
+        } while (property.NextVisible(false));
 
         serializedObject.ApplyModifiedProperties();
 
