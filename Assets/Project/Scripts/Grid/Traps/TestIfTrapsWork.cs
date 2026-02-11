@@ -1,29 +1,213 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TestIfTrapsWork : MonoBehaviour
 {
     [SerializeField] private GridManager _gridManager;
     [SerializeField] private Trap _trap;
-    [SerializeField] private Vector2Int _trapPosition;
+    [SerializeField] private Vector2Int _playerPosition;
+    [SerializeField] private Face _direction;
 
     [Button("Place Trap")]
     private void PlaceTrapButton()
     {
-        if (GridManager.Tiles.ContainsKey(_trapPosition) && _trap != null)
+        PlaceTrap(_trap, _playerPosition, _direction);
+    }
+
+    private void PlaceTrap(Trap newTrap, Vector2Int playerPosition, Face direction)
+    {
+        if (newTrap != null) 
         {
-            if (!GridManager.Tiles[_trapPosition].CellData.HasATrap())
+            if (newTrap.TrapMode == Trap.TrapType.Single)
             {
-                var trap = Instantiate(_trap, (Vector2)_trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
-                trap.PlaceTrap(_trapPosition);
-                GridManager.Tiles[_trapPosition].CellData.SetTrap(trap);
+                var allPositions = new List<Vector2Int>();
+                Vector2Int offset = new Vector2Int();
+                switch (direction)
+                {
+                    case Face.Up:
+                        offset = new Vector2Int(0, 1);
+                        break;
+                    case Face.Down:
+                        offset = new Vector2Int(0, -1);
+                        break;
+                    case Face.Left:
+                        offset = new Vector2Int(-1, 0);
+                        break;
+                    case Face.Right:
+                        offset = new Vector2Int(1, 0);
+                        break;
+                    default:
+                        Debug.LogWarning("You didn't input a valid direction for the trap");
+                        break;
+                }
+                var trapPosition = playerPosition + offset;
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(_trap))
+                    {
+                        var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                        allPositions.Add(trapPosition);
+                        trap.TrapPlaced(trapPosition, direction);
+                        GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                    }
+                }
+            }
+            else if (newTrap.TrapMode == Trap.TrapType.Multiple)
+            {
+                Vector2Int offset = new Vector2Int();
+                switch (direction)
+                {
+                    case Face.Up:
+                        offset = new Vector2Int(0, 1);
+                        break;
+                    case Face.Down:
+                        offset = new Vector2Int(0, -1);
+                        break;
+                    case Face.Left:
+                        offset = new Vector2Int(-1, 0);
+                        break;
+                    case Face.Right:
+                        offset = new Vector2Int(1, 0);
+                        break;
+                    default:
+
+                        Debug.LogWarning("You didn't input a valid direction for the trap");
+                        break;
+                }
+                var trapPosition = playerPosition + offset;
+                bool canPose = true;
+
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(_trap))
+                    {
+                    }
+                    else
+                    {
+                        canPose = false;
+                    }
+                }
+                else
+                {
+                    canPose = false;
+                }
+
+                foreach (var pos in newTrap.AdditionalPosition)
+                {
+                    var trapPositionBis = playerPosition + offset;
+                    if (GridManager.Tiles.ContainsKey(trapPositionBis))
+                    {
+                        if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(_trap))
+                        {
+                        }
+                        else
+                        {
+                            canPose = false;
+                        }
+                    }
+                    else
+                    {
+                        canPose = false;
+                    }
+                }
+
+                if (canPose == true)
+                {
+                    var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                    trap.TrapPlaced(trapPosition, direction);
+                    GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                    foreach (var pos in trap.AdditionalPosition)
+                    {
+                        GridManager.Tiles[pos].CellData.SetTrap(trap);
+                    }
+                }
+            }
+            else if (newTrap.TrapMode == Trap.TrapType.Door)
+            {
+
+            }
+            else
+            {
+                Debug.Log("The Trap Mode isn't finished yet");
             }
         }
-
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere((Vector2)_trapPosition + new Vector2(0.5f, 0.5f), 0.25f);
+        Gizmos.DrawWireSphere((Vector2)_playerPosition + new Vector2(0.5f, 0.5f), 0.25f);
+        if (_trap.TrapMode == Trap.TrapType.Single)
+        {
+            Vector2Int offset = new Vector2Int();
+            switch (_direction)
+            {
+                case Face.Up:
+                    offset = new Vector2Int(0, 1);
+                    break;
+                case Face.Down:
+                    offset = new Vector2Int(0, -1);
+                    break;
+                case Face.Left:
+                    offset = new Vector2Int(-1, 0);
+                    break;
+                case Face.Right:
+                    offset = new Vector2Int(1, 0);
+                    break;
+                default:
+                    offset = new Vector2Int(0, 0);
+                    break;
+            }
+            var trapPosition = _playerPosition + offset;
+            Gizmos.color = Color.blueViolet;
+            Gizmos.DrawWireSphere((Vector2)trapPosition + new Vector2(0.5f, 0.5f), 0.25f);
+        }
+        else if (_trap.TrapMode == Trap.TrapType.Multiple)
+        {
+            Gizmos.color = Color.blueViolet;
+            var offset = new Vector2Int(1, 0);
+            switch (_direction)
+            {
+                case Face.Up:
+                    offset = new Vector2Int(-offset.y, offset.x);
+                    break;
+                case Face.Down:
+                    offset = new Vector2Int(offset.y, -offset.x);
+                    break;
+                case Face.Left:
+                    offset = new Vector2Int(-offset.x, -offset.y);
+                    break;
+                case Face.Right:
+                    break;
+                default:
+                    break;
+            }
+            Gizmos.DrawWireSphere(_playerPosition + offset + new Vector2(0.5f, 0.5f), 0.25f);
+            foreach (var pos in _trap.AdditionalPosition)
+            {
+                var newpos = new Vector2Int(pos.x + 1, pos.y);
+                switch (_direction)
+                {
+                    case Face.Up:
+                        newpos = new Vector2Int(-newpos.y, newpos.x);
+                        break;
+                    case Face.Down:
+                        newpos = new Vector2Int(newpos.y, -newpos.x);
+                        break;
+                    case Face.Left:
+                        newpos = new Vector2Int(-newpos.x, -newpos.y);
+                        break;
+                    case Face.Right:
+                        break;
+                    default:
+                        break;
+                }
+                Gizmos.DrawWireSphere((Vector2)newpos + _playerPosition + new Vector2(0.5f, 0.5f), 0.25f);
+            }
+        }
+        else if (_trap.TrapMode == Trap.TrapType.Door)
+        {
+
+        }
     }
 }

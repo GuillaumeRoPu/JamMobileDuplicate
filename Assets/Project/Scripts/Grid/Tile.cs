@@ -194,9 +194,13 @@ public class Tile : MonoBehaviour, IHoverable
 
     private void OnDestroy()
     {
-        if (CellData.trap != null)
+        if (CellData.tileTrap != null)
         {
-            CellData.trap.onDestroy -= CellData.RemoveTrap;
+            CellData.tileTrap.onDestroy -= CellData.RemoveTileTrap;
+        }
+        if (CellData.doorTrap != null)
+        {
+            CellData.doorTrap.onDestroy -= CellData.RemoveDoorTrap;
         }
     }
 }
