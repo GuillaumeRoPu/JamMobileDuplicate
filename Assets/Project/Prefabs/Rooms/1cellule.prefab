@@ -63,7 +63,7 @@ MonoBehaviour:
     face: 2
   - cellId: 0
     face: 3
-  _activeDoors: 01010101
+  _activeDoors: 01000000
 --- !u!1 &5890661730086983737
 GameObject:
   m_ObjectHideFlags: 0
