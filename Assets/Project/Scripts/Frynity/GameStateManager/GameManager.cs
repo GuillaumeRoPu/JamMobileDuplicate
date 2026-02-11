@@ -118,4 +118,12 @@ public class GameManager : MonoBehaviour
         Destroy(_echoEntity.gameObject);
         _echoEntity = null;
     }
+
+    public void SpawnWitch(Vector2Int spawnPos)
+    {
+        GameObject witch = Instantiate(_witch, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
+        _witchEntity.Add(witch.GetComponent<Entity>());
+        _witchEntity[_witchEntity.Count - 1].SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[_witchEntity.Count - 1];
+    }
 }

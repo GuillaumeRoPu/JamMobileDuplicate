@@ -124,6 +124,40 @@ public class AttributeEditor : Editor
             if (field != null)
             {
                 var attr = field.GetCustomAttribute<LinkAttribute>();
+                if (attr != null)
+                {
+                    if (GUILayout.Button("Link"))
+                    {
+                        SerializedProperty link1 = serializedObject.FindProperty(attr.Link1);
+                        SerializedProperty link2 = serializedObject.FindProperty(attr.Link2);
+
+                        if (link1 != null && link2 != null)
+                        {
+                            if (Selection.objects.Length > 1)
+                            {
+                                if (link1.propertyType == SerializedPropertyType.ObjectReference &&
+                                    link2.propertyType == SerializedPropertyType.ObjectReference)
+                                {
+                                    link1.objectReferenceValue = Selection.objects[0];
+                                    link2.objectReferenceValue = Selection.objects[1];
+                                }
+                                else
+                                {
+                                    Debug.LogError("Link 1 and link 2 need to objects.");
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogError("You have to select more than 1 objects");
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("Link 1 or Link 2 is not good");
+                        }
+                    }
+                }
+
             }
 
         } while (property.NextVisible(false));

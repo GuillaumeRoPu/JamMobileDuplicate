@@ -19,10 +19,8 @@ public class CellData
         None = 0,
         Player = 1,
         Zombie = 2,
-        Ghost = 4,
-        Echo = 8,
-        Werewolf = 16,
-        Mimic = 32,
+        Echo = 4,
+        Witch = 8,
     }
 
     public Vector2Int GridPosition;

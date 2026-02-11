@@ -19,7 +19,7 @@ public class LevelData : ScriptableObject
         _zombieSpawnTiles = new Dictionary<int, Vector2Int>();
         foreach (var evnt in Events)
         {
-            if (evnt.EventType != EventType.Zombie) continue;
+            if (evnt.EventType != EventType.Zombie && evnt.EventType != EventType.Witch) continue;
 
             List<Vector2Int> tilesPos = new List<Vector2Int>();
             foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
@@ -27,7 +27,7 @@ public class LevelData : ScriptableObject
                 CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
                 GameManager.Of.Grid.GridLevelData.spawnPointsTiles.TryGetValue(posTile, out spawn);
 
-                if (spawn.HasFlag(CellData.SpawnPointType.Zombie))
+                if (spawn.HasFlag(CellData.SpawnPointType.Zombie) || spawn.HasFlag(CellData.SpawnPointType.Witch))
                 {
                     tilesPos.Add(posTile);
                 }
