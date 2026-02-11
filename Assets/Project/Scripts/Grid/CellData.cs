@@ -27,8 +27,10 @@ public class CellData
     public Vector2Int MainRoomCell;
     public bool IsSpawnPoint = false;
     public SpawnPointType spawnPointType = SpawnPointType.None;
-    public Trap trap;
-    public bool hasATrap;
+    public Trap tileTrap;
+    public Trap doorTrap;
+    public bool hasATileTrap;
+    public bool hasADoorTrap;
     public Face DoorPosition = Face.None;
     public bool HasDoor = false;
     public bool DoorKeyClosed;
@@ -65,6 +67,18 @@ public class CellData
         }
     }
 
+    public bool HasEntity()
+    {
+        if (Entity != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool HasADoor()
     {
         return HasDoor;
@@ -83,43 +97,117 @@ public class CellData
 
     public void SetTrap(Trap newtrap)
     {
-        if (!hasATrap)
+        if (newtrap.TrapMode == Trap.TrapType.Door)
         {
-            trap = newtrap;
-            hasATrap = true;
-            trap.onDestroy += RemoveTrap;
+            if (!hasATileTrap)
+            {
+                tileTrap = newtrap;
+                hasATileTrap = true;
+                tileTrap.onDestroy += RemoveTileTrap;
+            }
+            else
+            {
+                Debug.LogWarning("Tried to set a trap on another trap");
+            }
         }
         else
         {
-            Debug.LogWarning("Tried to set a trap on another trap");
+            if (!hasATileTrap)
+            {
+                tileTrap = newtrap;
+                hasATileTrap = true;
+                tileTrap.onDestroy += RemoveTileTrap;
+            }
+            else
+            {
+                Debug.LogWarning("Tried to set a trap on another trap");
+            }
         }
     }
 
-    public void RemoveTrap()
+    public void RemoveTileTrap()
     {
-        trap.onDestroy -= RemoveTrap;
-        trap = null;
-        hasATrap = false;
+        tileTrap.onDestroy -= RemoveTileTrap;
+        tileTrap = null;
+        hasATileTrap = false;
+        Debug.Log("Removed a trap");
     }
 
-    public bool HasATrap()
+    public void RemoveDoorTrap()
     {
-        return hasATrap;
+        doorTrap.onDestroy -= RemoveDoorTrap;
+        doorTrap = null;
+        hasADoorTrap = false;
+        Debug.Log("Removed a trap");
     }
 
-    public void ActivateTrap(Entity entity)
+    public bool HasATileTrap()
     {
-        if (HasATrap())
+        return hasATileTrap;
+    }
+
+    public bool HasADoorTrap()
+    {
+        return hasADoorTrap;
+    }
+
+    public void ActivateTileTrap(Entity entity)
+    {
+        if (HasATileTrap())
         {
-            trap.ActivateTrap(entity);
+            tileTrap.ActivateTrap(entity);
         }
     }
 
-    public void ActivateTrap()
+    public void ActivateDoorTrap(Entity entity)
     {
-        if (HasATrap())
+        if (HasADoorTrap())
         {
-            trap.ActivateTrap();
+            doorTrap.ActivateTrap(entity);
+        }
+    }
+
+    /// <summary>
+    /// Returns a bool that tells you wether you can place a trap on the specified tile
+    /// </summary>
+    public bool CanPlaceTrap(Trap newTrap)
+    {
+        if (newTrap.TrapMode == Trap.TrapType.Single)
+        {
+            if (!HasATileTrap() && !HasEntity())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (newTrap.TrapMode == Trap.TrapType.Multiple)
+        {
+            if (!HasATileTrap() && !HasEntity())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (newTrap.TrapMode == Trap.TrapType.Door)
+        {
+            if (!HasATileTrap() && !HasEntity())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
         }
     }
 }
