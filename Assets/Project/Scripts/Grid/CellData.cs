@@ -126,7 +126,7 @@ public class CellData
         tileTrap.onDestroy -= RemoveTileTrap;
         tileTrap = null;
         hasATileTrap = false;
-        Debug.Log("Removed a trap");
+        Debug.Log("Removed a trap at : X = " + GridPosition.x + " | Y = " + GridPosition.y);
     }
 
     public void RemoveDoorTrap()

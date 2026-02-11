@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class TestIfTrapsWork : MonoBehaviour
 {
@@ -75,12 +76,14 @@ public class TestIfTrapsWork : MonoBehaviour
                         break;
                 }
                 var trapPosition = playerPosition + offset;
+                Debug.Log("Pos : X = " + trapPosition.x + " | Y = " + trapPosition.y);
                 bool canPose = true;
 
                 if (GridManager.Tiles.ContainsKey(trapPosition))
                 {
                     if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(_trap))
                     {
+
                     }
                     else
                     {
@@ -92,13 +95,33 @@ public class TestIfTrapsWork : MonoBehaviour
                     canPose = false;
                 }
 
-                foreach (var pos in newTrap.AdditionalPosition)
+                foreach (Vector2Int pos in newTrap.AdditionalPosition)
                 {
-                    var trapPositionBis = playerPosition + offset;
+                    Vector2Int newpos = pos;
+                    switch (direction)
+                    {
+                        case Face.Up:
+                            newpos = new Vector2Int(-pos.y, pos.x);
+                            break;
+                        case Face.Down:
+                            newpos = new Vector2Int(pos.y, -pos.x);
+                            break;
+                        case Face.Left:
+                            newpos = new Vector2Int(-pos.x, -pos.y);
+                            break;
+                        case Face.Right:
+                            newpos = pos;
+                            break;
+                        default:
+                            break;
+                    }
+                    var trapPositionBis = playerPosition + newpos + offset;
+                    Debug.Log("Pos : X = " + trapPositionBis.x + " | Y = " + trapPositionBis.y);
                     if (GridManager.Tiles.ContainsKey(trapPositionBis))
                     {
                         if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(_trap))
                         {
+                            Debug.Log("Been There");
                         }
                         else
                         {
@@ -114,6 +137,22 @@ public class TestIfTrapsWork : MonoBehaviour
                 if (canPose == true)
                 {
                     var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                    switch (direction)
+                    {
+                        case Face.Up:
+                            trap.transform.Rotate(new Vector3(0, 0, 90));
+                            break;
+                        case Face.Down:
+                            trap.transform.Rotate(new Vector3(0, 0, -90));
+                            break;
+                        case Face.Left:
+                            trap.transform.Rotate(new Vector3(0, 0, 180));
+                            break;
+                        case Face.Right:
+                            break;
+                        default:
+                            break;
+                    }
                     trap.TrapPlaced(trapPosition, direction);
                     GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
                     foreach (var pos in trap.AdditionalPosition)
