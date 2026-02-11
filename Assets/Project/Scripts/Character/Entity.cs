@@ -22,6 +22,7 @@ public class Entity : MonoBehaviour
     public void SetCurrentTile(Vector2Int tile)
     {
         _currentTile = GridManager.Tiles[tile];
+        _currentTile.CellData.Entity = this;
     }
 
     public void SetPath(List<Vector2Int> path, System.Action WhenReached = null)
@@ -51,9 +52,7 @@ public class Entity : MonoBehaviour
 
                 if (_currentMoveTime > _duration)
                 {
-                    _currentTile.CellData.Entity = null;
                     _currentTile = GridManager.Tiles[_path[_pathIndex]];
-                    _currentTile.CellData.Entity = this;
                     _isMoving = false;
                     _currentMoveTime = 0;
                     _pathIndex++;

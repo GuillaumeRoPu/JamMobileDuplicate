@@ -12,15 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bacb3bf12ef6042947ede5220d91e8, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  <GridLevel>k__BackingField: {fileID: 0}
   <TurnMax>k__BackingField: 30
   <Events>k__BackingField:
   - Turn: 5
     EventType: 0
+    SpawnCellIndex: 0
   - Turn: 13
     EventType: 0
+    SpawnCellIndex: 1
   - Turn: 15
     EventType: 1
+    SpawnCellIndex: 0
   - Turn: 20
     EventType: 0
+    SpawnCellIndex: 2
   - Turn: 23
     EventType: 2
+    SpawnCellIndex: 0

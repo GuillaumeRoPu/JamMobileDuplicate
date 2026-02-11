@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "Granny/Level Data")]
 public class LevelData : ScriptableObject
 {
+    [field: SerializeField] public GridLevelData GridLevel { get; private set; }
     [field: SerializeField] public int TurnMax { get; private set; }
     [field: SerializeField] public TurnEvent[] Events { get; private set; }
 
@@ -32,7 +33,7 @@ public class LevelData : ScriptableObject
                 }
             }
 
-            Vector2Int pos = tilesPos[Random.Range(0, tilesPos.Count)];
+            Vector2Int pos = tilesPos[evnt.SpawnCellIndex % tilesPos.Count];
             _zombieSpawnTiles.Add(evnt.Turn, pos);
         }
     }
