@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EventType
 {
-    Zombie, EchoEnter, EchoLeave
+    Zombie, EchoEnter, EchoLeave, Witch
 }
 
 [System.Serializable]
@@ -20,12 +20,11 @@ public class TurnManager : MonoBehaviour
     int _currentTurn;
     public float Turn => _currentTurn;
 
-    [Link("f", "e")]
-
     [SerializeField] float _durationTurn;
     [SerializeField] LevelData _level;
 
     [SerializeField] PathFeedback _pathFeedback;
+    [SerializeField] GameObject _witchPathFeedback;
     [SerializeField] GameObject _zombieSpawnWarning;
     List<GameObject> _warnings = new List<GameObject>();
     public PathFeedback GetPathFeedback => _pathFeedback;
@@ -39,6 +38,7 @@ public class TurnManager : MonoBehaviour
     List<List<GameObject>> _zombieFeedbacks = new List<List<GameObject>>();
     List<List<Vector2Int>> _zombiePaths = new List<List<Vector2Int>>();
 
+    List<List<GameObject>> _witchFeedbacks = new List<List<GameObject>>();
     List<List<Vector2Int>> _witchPaths = new List<List<Vector2Int>>();
 
     public void Init()
@@ -94,7 +94,12 @@ public class TurnManager : MonoBehaviour
             }
         }
 
-        foreach(var evnt in _level.Events)
+        foreach (var witch in GameManager.Of.Witches)
+        {
+            witch.MoveToNextTileInPath(_durationTurn);
+        }
+
+        foreach (var evnt in _level.Events)
         {
             if (evnt.Turn == _currentTurn)
             {
@@ -111,6 +116,10 @@ public class TurnManager : MonoBehaviour
                 else if (evnt.EventType == EventType.EchoLeave)
                 {
                     GameManager.Of.DestroyEcho();
+                }
+                else if (evnt.EventType == EventType.Witch)
+                {
+                    GameManager.Of.SpawnWitch(_level.GetNextSpawn(_currentTurn));
                 }
             }
         }
@@ -292,12 +301,15 @@ public class TurnManager : MonoBehaviour
     }
     public void CalculWitchPath()
     {
+        _witchFeedbacks = new List<List<GameObject>>();
+        int wIndex = 0;
         foreach (Entity witch in GameManager.Of.Witches)
         {
+            _witchFeedbacks.Add(new List<GameObject>());
             Vector2Int playerPos = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
             Vector2Int witchPos = witch.CurrentTile.CellData.GridPosition;
 
-            List<Vector2Int> path = new List<Vector2Int>();
+            List<Vector2Int> path = new List<Vector2Int> { witchPos };
             Vector2Int incr = Vector2Int.zero;
             if (playerPos.x == witchPos.x)
             {
@@ -315,23 +327,28 @@ public class TurnManager : MonoBehaviour
                 {
                     search = false;
                 }
-
-                if (!GridManager.Tiles[witchPos + incr].CellData.DoorKeyClosed)
-                {
-                    if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoom(GridManager.Tiles[witchPos]) ||
-                        GridManager.Tiles[witchPos + incr].CellData.HasDoor)
-                    {
-                        path.Add(witchPos + incr);
-                        witchPos += incr;
-                    }
-                }
                 else
                 {
-                    search = false;
+                    if (!GridManager.Tiles[witchPos + incr].CellData.DoorKeyClosed)
+                    {
+                        if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoom(GridManager.Tiles[witchPos]) ||
+                            GridManager.Tiles[witchPos + incr].CellData.HasDoor)
+                        {
+                            witchPos += incr;
+                            GameObject feed = Instantiate(_witchPathFeedback, (Vector2)witchPos * GameManager.Of.Grid.TileSize, Quaternion.identity);
+                            _witchFeedbacks[wIndex].Add(feed);
+                        }
+                    }
+                    else
+                    {
+                        search = false;
+                    }
                 }
             }
 
+            path.Add(witchPos);
             _witchPaths.Add(path);
+            wIndex++;
         }
     }
 
@@ -344,6 +361,24 @@ public class TurnManager : MonoBehaviour
             if (_zombiePaths[zombieIndex].Count <= 1) continue;
             zombie.GetComponent<Entity>().SetPath(_zombiePaths[zombieIndex]);
             zombieIndex++;
+        }
+    }
+
+    public void WitchTurn()
+    {
+        
+        _witchFeedbacks.Clear();
+        int witchIndex = 0;
+        foreach (var witch in GameManager.Of.Witches)
+        {
+            foreach (GameObject feed in _witchFeedbacks[witchIndex])
+            {
+                Destroy(feed);
+            }
+
+            if (_witchPaths[witchIndex].Count <= 1) continue;
+            witch.GetComponent<Entity>().SetPath(_witchPaths[witchIndex]);
+            witchIndex++;
         }
     }
     
