@@ -139,30 +139,57 @@ namespace Frynity.Gen
             {
                 foreach (Cell tile1 in _localCells)
                 {
+                    Sprite sprite = null;
+
                     if (!TileInCells(tile.localPos + Vector2Int.right))
                     {
-                        SpawnWall(GameManager.Of.SideWall, (Vector2)tile.localPos * GameManager.Of.Grid.TileSize + new Vector2(GameManager.Of.Grid.TileSize, GameManager.Of.Grid.TileSize / 2 * 1.5f));
+                        bool flip = false;
+                        if (GridManager.Tiles.ContainsKey(tile.localPos + Vector2Int.right))
+                        {
+                            sprite = GameManager.Of.SideInWall;
+                            flip = true;
+                        }
+                        else
+                        {
+                            sprite = GameManager.Of.SideOutWall;
+                        }
+                        SpawnWall(sprite, (Vector2)(tile.localPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(GameManager.Of.Grid.TileSize / 2, GameManager.Of.Grid.TileSize / 2 * 1.5f), flip);
                     }
 
                     if (!TileInCells(tile.localPos + Vector2Int.left))
                     {
-                        SpawnWall(GameManager.Of.SideWall, (Vector2)tile.localPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize / 2 * 1.5f));
+                        bool flip = false;
+                        if (GridManager.Tiles.ContainsKey(tile.localPos + Vector2Int.left))
+                        {
+                            sprite = GameManager.Of.SideInWall;
+                        }
+                        else
+                        {
+                            sprite = GameManager.Of.SideOutWall;
+                            flip = true;
+                        }
+                        SpawnWall(sprite, (Vector2)(tile.localPos + Vector2Int.left) * GameManager.Of.Grid.TileSize + new Vector2(GameManager.Of.Grid.TileSize / 2, GameManager.Of.Grid.TileSize / 2 * 1.5f), flip);
                     }
 
                     if (!TileInCells(tile.localPos + Vector2Int.up))
                     {
-                        SpawnWall(_assets != null ? _assets.Walls[Random.Range(0, _assets.Walls.Length)] : GameManager.Of.OutWall, (Vector2)tile.localPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize));
+                        SpawnWall(_assets != null ? _assets.Walls[Random.Range(0, _assets.Walls.Length)] : 
+                            GameManager.Of.OutWall[Random.Range(0, GameManager.Of.OutWall.Length)], 
+                            (Vector2)tile.localPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize));
                     }
 
                     if (!TileInCells(tile.localPos + Vector2Int.down))
                     {
-                        SpawnWall(GameManager.Of.OutWall, (Vector2)tile.localPos * GameManager.Of.Grid.TileSize);
+                        if (!GridManager.Tiles.ContainsKey(tile.localPos + Vector2Int.down))
+                        {
+                            SpawnWall(GameManager.Of.OutWall[Random.Range(0, GameManager.Of.OutWall.Length)], (Vector2)tile.localPos * GameManager.Of.Grid.TileSize);
+                        }
                     }
                 }
             }
         }
 
-        void SpawnWall(Sprite sprite, Vector2 localCellPos)
+        void SpawnWall(Sprite sprite, Vector2 localCellPos, bool flipX = false)
         {
             GameObject go = new GameObject("Wall");
             go.transform.parent = gameObject.transform;
@@ -172,6 +199,7 @@ namespace Frynity.Gen
             renderer.sortingLayerName = "Playground";
             renderer.sortingOrder = 5;
             renderer.sprite = sprite;
+            renderer.flipX = flipX;
         }
 
         private void OnDrawGizmosSelected()

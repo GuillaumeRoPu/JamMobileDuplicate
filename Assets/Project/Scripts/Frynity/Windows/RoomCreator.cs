@@ -914,7 +914,7 @@ namespace Frynity.Window
             {
                 if (_sprites[i].sprite == null) continue;
 
-                Texture2D tex = _sprites[i].sprite.texture;
+                Texture2D tex = GetCroppedTextureFromSprite(_sprites[i].sprite);
                 Vector2 pivot = _sprites[i].sprite.pivot / (_sprites[i].sprite.pixelsPerUnit * (Vector2)_sprites[i].sprite.bounds.size);
                 pivot.y = 1 - pivot.y;
                 GUI.DrawTexture(new Rect(centerPos + (_sprites[i].position - (_sprites[i].size * (Vector2)_sprites[i].sprite.bounds.size * pivot)) * _zoom,
@@ -1033,6 +1033,25 @@ namespace Frynity.Window
             }
 
             _sprites[spriteIndex] = (cellIndex, newSprite, newPos, newSize);
+        }
+
+        public Texture2D GetCroppedTextureFromSprite(Sprite sprite)
+        {
+            Texture2D sourceTex = sprite.texture;
+            Rect r = sprite.textureRect;
+            int x = Mathf.FloorToInt(r.x);
+            int y = Mathf.FloorToInt(r.y);
+            int w = Mathf.FloorToInt(r.width);
+            int h = Mathf.FloorToInt(r.height);
+
+            if (sourceTex.isReadable)
+            {
+                Texture2D newTex = new Texture2D(w, h, sourceTex.format, false);
+                newTex.SetPixels(sourceTex.GetPixels(x, y, w, h));
+                newTex.Apply();
+                return newTex;
+            }
+            return sourceTex;
         }
     }
 }
