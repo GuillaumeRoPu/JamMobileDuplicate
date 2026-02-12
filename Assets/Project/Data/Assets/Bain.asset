@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Bain
   m_EditorClassIdentifier: Assembly-CSharp::AssetList
   <Tiles>k__BackingField: []
-  <Grounds>k__BackingField: []
-  <Walls>k__BackingField: []
+  <Grounds>k__BackingField:
+  - {fileID: -711805787, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  <Walls>k__BackingField:
+  - {fileID: 1477067573, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  - {fileID: 1780080726, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
   <Props>k__BackingField: []

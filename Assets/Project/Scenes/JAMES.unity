@@ -1663,8 +1663,12 @@ MonoBehaviour:
   _zombie: {fileID: 2147997998945218763, guid: c953c7e41aef78d4ca1547a1aeef6486, type: 3}
   _echo: {fileID: 2879787377744229297, guid: 8f75164ce1fcec94ab9f0e5a35b85dc3, type: 3}
   _witch: {fileID: 0}
-  _sideWallSprite: {fileID: 21300000, guid: 1848cf9de4989ec4a92fd652234b667c, type: 3}
-  _outWallSprite: {fileID: 21300000, guid: cd1f20cf89be7564b954995a728702ea, type: 3}
+  _sideInWallSprite: {fileID: 2003162828, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  _sideOutWallSprite: {fileID: -123214849, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  _outWallSprite:
+  - {fileID: 1059174294, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  - {fileID: 2107498622, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  - {fileID: 465755793, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   _turnManager: {fileID: 1155825358}
   _gridManager: {fileID: 1155825361}
