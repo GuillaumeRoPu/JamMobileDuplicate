@@ -24,7 +24,7 @@ public class Trap : MonoBehaviour
     public TrapType TrapMode => _type;
     public List<Vector2Int> AdditionalPosition => _additionalPositions;
 
-    private void DestroyTrap()
+    protected void DestroyTrap()
     {
         onDestroy?.Invoke();
         Destroy(this.gameObject);
@@ -42,10 +42,30 @@ public class Trap : MonoBehaviour
         if (_type == TrapType.Multiple)
         {
             var adpos = new List<Vector2Int>();
+            Vector2Int offset = new Vector2Int();
+            switch (face)
+            {
+                case Face.Up:
+                    offset = new Vector2Int(0, 1);
+                    break;
+                case Face.Down:
+                    offset = new Vector2Int(0, -1);
+                    break;
+                case Face.Left:
+                    offset = new Vector2Int(-1, 0);
+                    break;
+                case Face.Right:
+                    offset = new Vector2Int(1, 0);
+                    break;
+                default:
+
+                    Debug.LogWarning("You didn't input a valid direction for the trap");
+                    break;
+            }
             foreach (var pos in _additionalPositions)
             {
                 var newpos = pos;
-                switch (_face)
+                switch (face)
                 {
                     case Face.Up:
                         newpos = new Vector2Int(-pos.y, pos.x);
@@ -62,7 +82,6 @@ public class Trap : MonoBehaviour
                     default:
                         break;
                 }
-                Gizmos.DrawWireSphere((Vector2)newpos + (Vector2)_position, 0.25f);
                 adpos.Add(newpos + _position);
             }
             _additionalPositions = adpos;
