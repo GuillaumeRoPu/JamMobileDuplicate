@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
                 {
                     if (_last.CellData.hasNeighbour(GridManager.Tiles[tile].CellData.GridPosition))
                     {
-                        if (GridManager.Tiles[tile].CellData.CanPass(GridManager.GetFace(tile - _selectPath[_selectPath.Count - 1]), GridManager.Tiles[tile].CellData))
+                        Debug.Log(tile - _selectPath[_selectPath.Count - 1]);
+                        if (GridManager.Tiles[tile].CellData.CanPass(GridManager.GetFace(tile - _selectPath[_selectPath.Count - 1]), GridManager.Tiles[_selectPath[_selectPath.Count - 1]].CellData))
                         {
                             if (_selectPath.Count - 1 == _maxTurnToMove && !_selectPath.Contains(tile)) return;
                             _last = GridManager.Tiles[tile];

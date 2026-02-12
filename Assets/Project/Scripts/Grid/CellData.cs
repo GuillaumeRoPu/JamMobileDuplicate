@@ -27,6 +27,7 @@ public class CellData
     public Vector2Int MainRoomCell;
     public bool IsSpawnPoint = false;
     public SpawnPointType spawnPointType = SpawnPointType.None;
+    public bool HasRoom;
     public Trap tileTrap;
     public Trap doorTrap;
     public bool hasATileTrap;
@@ -38,6 +39,7 @@ public class CellData
 
     public bool CanPass(Face face, CellData originalCell)
     {
+        if (!HasRoom) return false;
 
         Face receptFace = face == Face.Up ? Face.Down :
             face == Face.Left ? Face.Right :
