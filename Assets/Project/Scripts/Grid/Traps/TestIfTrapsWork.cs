@@ -163,7 +163,37 @@ public class TestIfTrapsWork : MonoBehaviour
             }
             else if (newTrap.TrapMode == Trap.TrapType.Door)
             {
-
+                var allPositions = new List<Vector2Int>();
+                Vector2Int offset = new Vector2Int();
+                switch (direction)
+                {
+                    case Face.Up:
+                        offset = new Vector2Int(0, 1);
+                        break;
+                    case Face.Down:
+                        offset = new Vector2Int(0, -1);
+                        break;
+                    case Face.Left:
+                        offset = new Vector2Int(-1, 0);
+                        break;
+                    case Face.Right:
+                        offset = new Vector2Int(1, 0);
+                        break;
+                    default:
+                        Debug.LogWarning("You didn't input a valid direction for the trap");
+                        break;
+                }
+                var trapPosition = playerPosition + offset;
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(_trap))
+                    {
+                        var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                        allPositions.Add(trapPosition);
+                        trap.TrapPlaced(trapPosition, direction);
+                        GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                    }
+                }
             }
             else
             {
