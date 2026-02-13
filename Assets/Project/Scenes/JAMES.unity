@@ -1309,7 +1309,7 @@ Transform:
   m_GameObject: {fileID: 907857865}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.18537, y: -3.16187, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1332,23 +1332,23 @@ MonoBehaviour:
   _tilesParent: {fileID: 1477165159}
   _roomsParent: {fileID: 1233790247}
   _tilesSize: 1
-  _limitsMinX: -10
-  _limitsMaxX: 11
+  _limitsMinX: -7
+  _limitsMaxX: 6
   _limitsMinY: -4
-  _limitsMaxY: 7
+  _limitsMaxY: 4
   _drawGridWidth: 12
-  _drawGridHeight: 7
-  _drawGridOrigin: {x: -6, y: -3}
+  _drawGridHeight: 8
+  _drawGridOrigin: {x: -6, y: -4}
   _eraseGridWidth: 9
   _eraseGridHeight: 2
   _eraseGridOrigin: {x: -3, y: 1}
   _gridLevelData: {fileID: 0}
-  _spawnPointPosition: {x: 2, y: 0}
-  _spawnPointTypes: 1
-  _roomPrefab: {fileID: 5253747431288570786, guid: 0e98f2cbdfe78be4cacf6ef4c87c6ddd, type: 3}
-  _roomPosition: {x: -3, y: 0}
-  _eraseRoomPosition: {x: -3, y: 0}
-  _gridLevelName: JamesTest
+  _spawnPointPosition: {x: 3, y: -2}
+  _spawnPointTypes: 2
+  _roomPrefab: {fileID: 3988906654957366411, guid: f7dd2625d835cdb4484d62aa208fa63c, type: 3}
+  _roomPosition: {x: -1, y: -1}
+  _eraseRoomPosition: {x: -2, y: 0}
+  _gridLevelName: LevelYoann
 --- !u!1 &917632377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: 283a9e18c1b57d242a25b3af31c5b223, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1420296221}
   _roomsParent: {fileID: 1233790247}

@@ -270,8 +270,20 @@ namespace Frynity.Window
                             }
                         }
 
+                        for (int j = 0; j < _doors.Count; j++)
+                        {
+                            if (_doors[j].cellId == i)
+                            {
+                                _doors.RemoveAt(j);
+                                j--;
+                            }
+                        }
+
                         _cells.RemoveAt(i);
                         _cellsShow.RemoveAt(i);
+
+                        if (_cells.Count > 0)
+                            _cells[0] = Vector2Int.zero;
                         i--;
                         GUILayout.EndHorizontal();
                         continue;

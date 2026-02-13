@@ -43,7 +43,7 @@ public class GridManager : MonoBehaviour
         if (face == Vector2Int.left)
             return Face.Left;
         if (face == Vector2Int.up)
-            return Face.Down;
+            return Face.Up;
         if (face == Vector2Int.down)
             return Face.Down;
         else
@@ -68,9 +68,11 @@ public class GridManager : MonoBehaviour
 
     void PlaceAllRooms(List<RoomData> data)
     {
+        int a = 0;
         foreach(var room in data)
         {
             PlaceRoom(room.GetRoomPrefab(), room.GetMainCell());
+            a++;
         }
         UpdateSizeAll();
     }
@@ -100,14 +102,6 @@ public class GridManager : MonoBehaviour
     {
         _tiles[position].transform.position = (Vector2)_tiles[position].transform.position * _tilesSize;
         _tiles[position].transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
-    }
-
-    private void Start()
-    {
-        if (_generateGridOnPlay && _gridLevelData != null)
-        {
-            Init();
-        }
     }
 
     public void Init()
@@ -200,6 +194,7 @@ public class GridManager : MonoBehaviour
             {
                 if (_tiles.ContainsKey(cell.localPos + roomPosition))
                 {
+
                     if (!_tiles[cell.localPos + roomPosition].IsInARoom())
                     {
                         allTilesInTheRoom.Add(cell.localPos + roomPosition);
@@ -243,23 +238,23 @@ public class GridManager : MonoBehaviour
         if (_tiles.ContainsKey(position))
         {
             _tiles[position].CellData.SetDoor(face);
-            switch (face)
-            {
-                case Face.Up:
-                    Debug.Log("Add a door to the top of Cell | X : " + position.x + ", Y : " + position.y);
-                    break;
-                case Face.Down:
-                    Debug.Log("Add a door to the bottom of Cell | X : " + position.x + ", Y : " + position.y);
-                    break;
-                case Face.Left:
-                    Debug.Log("Add a door to the left of Cell | X : " + position.x + ", Y : " + position.y);
-                    break;
-                case Face.Right:
-                    Debug.Log("Add a door to the right of Cell | X : " + position.x + ", Y : " + position.y);
-                    break;
-                default:
-                    break;
-            }
+            //switch (face)
+            //{
+            //    case Face.Up:
+            //        Debug.Log("Add a door to the top of Cell | X : " + position.x + ", Y : " + position.y);
+            //        break;
+            //    case Face.Down:
+            //        Debug.Log("Add a door to the bottom of Cell | X : " + position.x + ", Y : " + position.y);
+            //        break;
+            //    case Face.Left:
+            //        Debug.Log("Add a door to the left of Cell | X : " + position.x + ", Y : " + position.y);
+            //        break;
+            //    case Face.Right:
+            //        Debug.Log("Add a door to the right of Cell | X : " + position.x + ", Y : " + position.y);
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 
