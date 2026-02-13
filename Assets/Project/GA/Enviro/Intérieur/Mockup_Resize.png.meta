@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: 04523489b2d6b99449d9eced558e9ef7
+guid: 19345492d0a06ef47bb068c88d441bff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 688002248533163599
-    second: Tile_map_0
+      213: 6547340504299973525
+    second: Mockup_Resize_0
   - first:
-      213: 4010139166330447882
-    second: Tile_map_1
+      213: 5449185894394990557
+    second: Mockup_Resize_1
   - first:
-      213: -8150981120084198414
-    second: Tile_map_2
+      213: -6503245045204521701
+    second: Mockup_Resize_2
+  - first:
+      213: -4839054250648523721
+    second: Mockup_Resize_3
+  - first:
+      213: -8124043132529205313
+    second: Mockup_Resize_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -57,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1500
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -78,10 +84,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tile_map_0
+      name: Mockup_Resize_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 4500
-        width: 1500
-        height: 1500
+        x: 300
+        y: 630
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,20 +127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f4e3d7c56664c8900800000000000000
-      internalID: 688002248533163599
+      spriteID: 59ba356df73dcda50800000000000000
+      internalID: 6547340504299973525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_1
+      name: Mockup_Resize_1
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 4500
-        width: 1500
-        height: 1500
+        x: 450
+        y: 630
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a08e10d3350e6a730800000000000000
-      internalID: 4010139166330447882
+      spriteID: ddf8b7e23b56f9b40800000000000000
+      internalID: 5449185894394990557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_2
+      name: Mockup_Resize_2
       rect:
         serializedVersion: 2
-        x: 3000
-        y: 4500
-        width: 1500
-        height: 1500
+        x: 600
+        y: 630
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +171,64 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2fb37766bd5e1ee80800000000000000
-      internalID: -8150981120084198414
+      spriteID: b1de3494615dfb5a0800000000000000
+      internalID: -6503245045204521701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_3
+      name: Mockup_Resize_3
       rect:
         serializedVersion: 2
-        x: 4500
-        y: 4500
-        width: 1500
-        height: 1500
+        x: 750
+        y: 630
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73c20452cc938dcb0800000000000000
+      internalID: -4839054250648523721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_4
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 630
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbf15a160d9914f80800000000000000
+      internalID: -8124043132529205313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_5
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 630
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2951531632d75a74aa769d3b6328e610
-      internalID: -711805787
+      spriteID: 39eb3d67cdcce7f4d9b8ee77d2b0690e
+      internalID: -1799258457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_4
+      name: Mockup_Resize_6
       rect:
         serializedVersion: 2
-        x: 6000
-        y: 4500
-        width: 1500
-        height: 1500
+        x: 1200
+        y: 630
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +259,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c3def3bf333074418e681d5481ad1b6
-      internalID: -1622590042
+      spriteID: 6052e96e943987543a258c0b9388ba06
+      internalID: -1388831967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_5
+      name: Mockup_Resize_7
       rect:
         serializedVersion: 2
-        x: 7500
-        y: 4500
-        width: 1500
-        height: 1500
+        x: 300
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,20 +281,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1407e870f9ec5a54ca47f135cc970405
-      internalID: 1478723842
+      spriteID: 364606ed90a255a4b885a6f7b302a856
+      internalID: -1668454366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_6
+      name: Mockup_Resize_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3000
-        width: 1500
-        height: 1500
+        x: 450
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,20 +303,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93708281d5fdaac4c996159198a93fc2
-      internalID: 1048998653
+      spriteID: 3e5d5dbe7d71d104ebdb4c31072a6df0
+      internalID: -1925852634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_7
+      name: Mockup_Resize_9
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 3000
-        width: 1500
-        height: 1500
+        x: 600
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,20 +325,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e6c066e53585c7499bdaae08feaef59
-      internalID: 732267178
+      spriteID: 149c54aef327dec46bf8e56aafef3fbd
+      internalID: 258483510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_8
+      name: Mockup_Resize_10
       rect:
         serializedVersion: 2
-        x: 3000
-        y: 3000
-        width: 1500
-        height: 1500
+        x: 750
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff705254dd58e2b4fb48014d40b4edf0
-      internalID: 1552529873
+      spriteID: 4393c1a306e45aa4aa89464c67aea1f5
+      internalID: 649323952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_9
+      name: Mockup_Resize_11
       rect:
         serializedVersion: 2
-        x: 4500
-        y: 3000
-        width: 1500
-        height: 1500
+        x: 900
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,20 +369,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7475a8841b758e43afd8deba469aba2
-      internalID: 1780080726
+      spriteID: 8af8563026cab0b42b770cc147a78d11
+      internalID: -229726108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_10
+      name: Mockup_Resize_12
       rect:
         serializedVersion: 2
-        x: 6000
-        y: 3000
-        width: 1500
-        height: 1500
+        x: 1050
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,20 +391,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8b712238b1aff14994e2ed7f9afac39
-      internalID: 1477067573
+      spriteID: 2a7b598e0421176449ab5c07f388a282
+      internalID: 199624785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_11
+      name: Mockup_Resize_13
       rect:
         serializedVersion: 2
-        x: 7500
-        y: 3000
-        width: 1500
-        height: 1500
+        x: 1200
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,20 +413,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 647cfe8646fb3ae438848772a0f757e5
-      internalID: 1975707495
+      spriteID: 4706cbe929e8499478cb1775314cdc38
+      internalID: -1270024522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_12
+      name: Mockup_Resize_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1500
-        width: 1500
-        height: 1500
+        x: 1350
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -385,152 +435,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ee799393cde32b47a7aaad5c21f5877
-      internalID: 2003162828
+      spriteID: f362a45090f3cee42b1c5856b65b5f5d
+      internalID: 1822700459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_13
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 1500
-        width: 1500
-        height: 1500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea6035490e136944e963445264e5d0fe
-      internalID: 1519847142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tile_map_14
-      rect:
-        serializedVersion: 2
-        x: 3000
-        y: 1500
-        width: 1500
-        height: 1500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 11f4abf0184ce9744bdcd6c4928c1071
-      internalID: 465755793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tile_map_15
-      rect:
-        serializedVersion: 2
-        x: 4500
-        y: 1500
-        width: 1500
-        height: 1500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 293d34572d895a14a88b9d0a4df40505
-      internalID: 2107498622
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tile_map_16
-      rect:
-        serializedVersion: 2
-        x: 6000
-        y: 1500
-        width: 1500
-        height: 1500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: abcdc34c4013af24c86ff083c52ec055
-      internalID: 1059174294
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tile_map_17
-      rect:
-        serializedVersion: 2
-        x: 7500
-        y: 1500
-        width: 1500
-        height: 1500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37d615c3d3c012a408621a4a58077d35
-      internalID: -123214849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tile_map_18
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1500
-        height: 1500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 231ae3f0f6cf5fc418f0ecb464d148ce
-      internalID: 912622438
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tile_map_19
+      name: Mockup_Resize_15
       rect:
         serializedVersion: 2
         x: 1500
-        y: 0
-        width: 1500
-        height: 1500
+        y: 480
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -539,20 +457,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ff1649efcc59b84696386a702bad027
-      internalID: 1221906678
+      spriteID: 82b8aad56ad5ad94ca398634e8faa091
+      internalID: 692690108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_20
+      name: Mockup_Resize_16
       rect:
         serializedVersion: 2
-        x: 3000
-        y: 0
-        width: 1500
-        height: 1500
+        x: 300
+        y: 330
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -561,20 +479,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b082d05d3565714e9e0c07b014ba9bd
-      internalID: 214452597
+      spriteID: 2624f74fe9f62794f8f40ff03643f070
+      internalID: -1195822532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_21
+      name: Mockup_Resize_17
       rect:
         serializedVersion: 2
-        x: 4500
-        y: 0
-        width: 1500
-        height: 1500
+        x: 450
+        y: 330
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -583,20 +501,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7311554a5f5e34a4bbaaa317c1e669c0
-      internalID: -1982708251
+      spriteID: a48e965cbab65dd43aba616107b43641
+      internalID: -23760498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_22
+      name: Mockup_Resize_18
       rect:
         serializedVersion: 2
-        x: 6000
-        y: 0
-        width: 1500
-        height: 1500
+        x: 600
+        y: 330
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -605,20 +523,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c24adfdfb4be4984b8f376968e915d88
-      internalID: -1829344792
+      spriteID: 35553b73def122c4880663926f6e5431
+      internalID: -1033833564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tile_map_23
+      name: Mockup_Resize_19
       rect:
         serializedVersion: 2
-        x: 7500
-        y: 0
-        width: 1500
-        height: 1500
+        x: 750
+        y: 330
+        width: 150
+        height: 150
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -627,8 +545,250 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 291261022f85ce649b5dba31981918e4
-      internalID: -1185728252
+      spriteID: 851e18ada64614f41a7d436b5760cbf6
+      internalID: 1456787770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_20
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 330
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b4de58a85d334b48b4e5a058c68f463
+      internalID: 1843632183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_21
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 330
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 194f114bdfb8a3941a1b01f4a91d48a6
+      internalID: -1720085737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_22
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 330
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b970a4a84c50c804b842de2e656e023d
+      internalID: -253279086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_23
+      rect:
+        serializedVersion: 2
+        x: 1350
+        y: 330
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4426ae5592983434cb5599150c08a92f
+      internalID: -1729574527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_24
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 330
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2675b6610ead2124089f8175f99fca15
+      internalID: -1567378635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_25
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 180
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce616d1e4e7edc34eb49fc6261a5c9c9
+      internalID: -315401512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_26
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 180
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3c0b1224ad377349928ba2527d3f429
+      internalID: 750874927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_27
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 180
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84318efad5ddc3643846e74cc8c231de
+      internalID: -1835296186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_28
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 180
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceffd737672dfac4389c6f3fb391b1eb
+      internalID: 221234230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_29
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 180
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21469cb69d2c0c54d9a0b2a4ee466485
+      internalID: 1854727404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mockup_Resize_30
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 180
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50924a80d3cf92245a8f509d7f0c0993
+      internalID: 1754163234
       vertices: []
       indices: 
       edges: []
@@ -637,7 +797,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a297ac8a21bfa38449015a8528d33522
+    spriteID: 50d1afa2036af6c45a08c9a6f2c67211
     internalID: 0
     vertices: []
     indices: 
@@ -647,32 +807,39 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1500.0,"y":1500.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":150.0,"y":150.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Tile_map_0: 688002248533163599
-      Tile_map_1: 4010139166330447882
-      Tile_map_10: 1477067573
-      Tile_map_11: 1975707495
-      Tile_map_12: 2003162828
-      Tile_map_13: 1519847142
-      Tile_map_14: 465755793
-      Tile_map_15: 2107498622
-      Tile_map_16: 1059174294
-      Tile_map_17: -123214849
-      Tile_map_18: 912622438
-      Tile_map_19: 1221906678
-      Tile_map_2: -8150981120084198414
-      Tile_map_20: 214452597
-      Tile_map_21: -1982708251
-      Tile_map_22: -1829344792
-      Tile_map_23: -1185728252
-      Tile_map_3: -711805787
-      Tile_map_4: -1622590042
-      Tile_map_5: 1478723842
-      Tile_map_6: 1048998653
-      Tile_map_7: 732267178
-      Tile_map_8: 1552529873
-      Tile_map_9: 1780080726
+      Mockup_Resize_0: 6547340504299973525
+      Mockup_Resize_1: 5449185894394990557
+      Mockup_Resize_10: 649323952
+      Mockup_Resize_11: -229726108
+      Mockup_Resize_12: 199624785
+      Mockup_Resize_13: -1270024522
+      Mockup_Resize_14: 1822700459
+      Mockup_Resize_15: 692690108
+      Mockup_Resize_16: -1195822532
+      Mockup_Resize_17: -23760498
+      Mockup_Resize_18: -1033833564
+      Mockup_Resize_19: 1456787770
+      Mockup_Resize_2: -6503245045204521701
+      Mockup_Resize_20: 1843632183
+      Mockup_Resize_21: -1720085737
+      Mockup_Resize_22: -253279086
+      Mockup_Resize_23: -1729574527
+      Mockup_Resize_24: -1567378635
+      Mockup_Resize_25: -315401512
+      Mockup_Resize_26: 750874927
+      Mockup_Resize_27: -1835296186
+      Mockup_Resize_28: 221234230
+      Mockup_Resize_29: 1854727404
+      Mockup_Resize_3: -4839054250648523721
+      Mockup_Resize_30: 1754163234
+      Mockup_Resize_4: -8124043132529205313
+      Mockup_Resize_5: -1799258457
+      Mockup_Resize_6: -1388831967
+      Mockup_Resize_7: -1668454366
+      Mockup_Resize_8: -1925852634
+      Mockup_Resize_9: 258483510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
