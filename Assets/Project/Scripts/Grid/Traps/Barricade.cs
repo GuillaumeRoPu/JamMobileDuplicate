@@ -13,7 +13,7 @@ public class Barricade : Trap
             _currentHealth -= 1;
             if (_currentHealth <= 0)
             {
-                GridManager.Tiles[_position].CellData.GiveTileAMaterial();
+                GridManager.Tiles[_position].GiveTileAMaterial();
                 DestroyTrap();
             }
         }
