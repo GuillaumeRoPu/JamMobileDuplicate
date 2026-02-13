@@ -17,7 +17,7 @@ public class AIPathfinding
     static List<List<Vector2Int>> _paths;
     static List<Vector2Int> _notPassOn;
 
-    static Vector2Int[] _posTests = {new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, 1), new Vector2Int(0, -1) };
+    static Vector2Int[] _posTests = {new Vector2Int(0, 1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(1, 0) };
     static Face[] _faceTests = {Face.Up, Face.Down, Face.Left, Face.Right };
 
     public static List<Vector2Int> CreatePath(Tile depart, Tile target, List<Vector2Int> notPassOn = null)
