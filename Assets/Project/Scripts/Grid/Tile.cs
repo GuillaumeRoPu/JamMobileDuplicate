@@ -176,8 +176,7 @@ public class Tile : MonoBehaviour, IHoverable
         }
         else
         {
-            Debug.LogError("This isn't the main room cell");
-            return null;
+            return GameManager.Of.Grid.GetTileAtPosition(GetMainRoomCell()).GetRoomData();
         }
     }
 
@@ -185,6 +184,7 @@ public class Tile : MonoBehaviour, IHoverable
     {
         if (!_isInARoom)
         {
+            Debug.Log(CellData.GridPosition);
             Debug.LogError("This cell isn't a room");
             return new Vector2Int();
         }

@@ -682,8 +682,7 @@ namespace Frynity.Window
                                 GameObject sprite = new GameObject("Sprite " + i);
                                 SpriteRenderer renderer = sprite.AddComponent<SpriteRenderer>();
                                 renderer.sprite = _sprites[i].sprite;
-                                renderer.sortingLayerName = "Playground";
-                                renderer.sortingOrder = i;
+                                renderer.sortingOrder = i + 1;
 
                                 Vector2 pos = _sprites[i].position;
                                 pos.y *= -1;
@@ -816,8 +815,7 @@ namespace Frynity.Window
                             GameObject sprite = new GameObject("Sprite " + i);
                             SpriteRenderer renderer = sprite.AddComponent<SpriteRenderer>();
                             renderer.sprite = _sprites[i].sprite;
-                            renderer.sortingLayerName = "Playground";
-                            renderer.sortingOrder = i;
+                            renderer.sortingOrder = i + 1;
 
                             Vector2 pos = _sprites[i].position;
                             pos.y *= -1;

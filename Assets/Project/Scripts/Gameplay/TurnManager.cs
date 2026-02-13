@@ -21,6 +21,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] float _durationTurn;
     [SerializeField] LevelData _level;
+    public void SetLevelData(LevelData level) {  _level = level; }
 
     [SerializeField] PathFeedback _pathFeedback;
     [SerializeField] GameObject _witchPathFeedback;
@@ -92,7 +93,6 @@ public class TurnManager : MonoBehaviour
                 GameManager.Of.Echo.MoveToNextTileInPath(_durationTurn);
             }
         }
-
         foreach (var witch in GameManager.Of.Witches)
         {
             witch.MoveToNextTileInPath(_durationTurn);
@@ -153,8 +153,7 @@ public class TurnManager : MonoBehaviour
         {
             _zombieFeedbacks.Add(new List<GameObject>());
             List<Vector2Int> diff = new List<Vector2Int>();
-            List<Vector2Int> tiles = new List<Vector2Int>();
-            tiles.Add(zombie.CurrentTile.CellData.GridPosition);
+            List<Vector2Int> tiles = new List<Vector2Int> { zombie.CurrentTile.CellData.GridPosition };
             for (int i = 0; playerPath.Count > 1 ? i < playerPath.Count - 1 : i < playerPath.Count; i++)
             {
                 if (playerPath[i] == tiles[tiles.Count - 1]) break;

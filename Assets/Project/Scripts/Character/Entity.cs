@@ -21,8 +21,14 @@ public class Entity : MonoBehaviour
 
     public void SetCurrentTile(Vector2Int tile)
     {
+        if (_currentTile)
+        {
+            GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition, false);
+        }
         _currentTile = GridManager.Tiles[tile];
         _currentTile.CellData.Entity = this;
+        if (_currentTile.CellData.HasRoom)
+            GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition);
     }
 
     public void SetPath(List<Vector2Int> path, System.Action WhenReached = null)
@@ -52,7 +58,7 @@ public class Entity : MonoBehaviour
 
                 if (_currentMoveTime > _duration)
                 {
-                    _currentTile = GridManager.Tiles[_path[_pathIndex]];
+                    SetCurrentTile(_path[_pathIndex]);
                     _isMoving = false;
                     _currentMoveTime = 0;
                     _pathIndex++;

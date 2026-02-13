@@ -1,3 +1,4 @@
+using Frynity.Gen;
 using UnityEngine;
 
 public class PlayState : GameState
@@ -5,6 +6,15 @@ public class PlayState : GameState
     bool playSound;
     public override void Enter()
     {
+        GameManager.Of.ShowGame(true);
+        GameManager.Of.ShowMenu(false);
+        GameManager.Of.Grid.Init();
+
+        foreach (RoomCells room in GameObject.FindObjectsByType<RoomCells>(FindObjectsSortMode.None))
+        {
+            room.CreateWalls();
+        }
+
         AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
         foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
         {

@@ -31,6 +31,7 @@ public class GridManager : MonoBehaviour
     public static Dictionary<Vector2Int, Tile> Tiles => _tiles;
 
     public GridLevelData GridLevelData => _gridLevelData;
+    public void SetLevelData(GridLevelData levelData) {  _gridLevelData = levelData; }
     public float TileSize => _tilesSize;
 
 
@@ -68,11 +69,9 @@ public class GridManager : MonoBehaviour
 
     void PlaceAllRooms(List<RoomData> data)
     {
-        int a = 0;
         foreach(var room in data)
         {
             PlaceRoom(room.GetRoomPrefab(), room.GetMainCell());
-            a++;
         }
         UpdateSizeAll();
     }
@@ -82,6 +81,15 @@ public class GridManager : MonoBehaviour
         foreach(var door in allDoors)
         {
             SetDoor(door.Key, door.Value);
+        }
+    }
+
+    public void EntityInARoom(Vector2Int tile, bool enter = true)
+    {
+        foreach (SpriteRenderer sprite in GetTileAtPosition(tile).GetRoomData().GetWalls)
+        {
+            sprite.color = new Color(1, 1, 1, enter ? 0.5f : 1);
+            sprite.sortingOrder = enter ? 110 : 5;
         }
     }
 
