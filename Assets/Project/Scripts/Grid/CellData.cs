@@ -101,11 +101,11 @@ public class CellData
     {
         if (newtrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!hasATileTrap)
+            if (!hasADoorTrap)
             {
                 doorTrap = newtrap;
                 hasADoorTrap = true;
-                doorTrap.onDestroy += RemoveTileTrap;
+                doorTrap.onDestroy += RemoveDoorTrap;
             }
             else
             {
@@ -151,6 +151,12 @@ public class CellData
     public bool HasADoorTrap()
     {
         return hasADoorTrap;
+    }
+
+    public void KillEntity()
+    {
+        //Entity.Kill();
+        Debug.Log("Killed entity");
     }
 
     public void ActivateTileTrap(Entity entity)

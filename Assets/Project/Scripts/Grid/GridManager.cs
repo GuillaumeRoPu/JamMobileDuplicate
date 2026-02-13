@@ -104,6 +104,14 @@ public class GridManager : MonoBehaviour
         _tiles[position].transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
     }
 
+    private void Start()
+    {
+        if (_gridLevelData != null && _generateGridOnPlay)
+        {
+            Init();
+        }
+    }
+
     public void Init()
     {
         if (_gridLevelData != null)

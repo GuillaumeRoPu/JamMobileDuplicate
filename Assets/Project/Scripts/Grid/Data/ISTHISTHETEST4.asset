@@ -40,7 +40,13 @@ MonoBehaviour:
   allRoomsPrefab:
   - {fileID: 5086204099707341832, guid: 1af9bdc4365a4f645965040dd760f8a4, type: 3}
   - {fileID: 5086204099707341832, guid: 1af9bdc4365a4f645965040dd760f8a4, type: 3}
-  keysD: []
-  valuesD: 
+  keysD:
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 0, y: 3}
+  - {x: 1, y: 0}
+  - {x: 0, y: 2}
+  - {x: 0, y: 1}
+  valuesD: 000000000100000000000000010000000100000000000000
   limitsMin: {x: 0, y: 0}
   limitsMax: {x: 1, y: 3}
