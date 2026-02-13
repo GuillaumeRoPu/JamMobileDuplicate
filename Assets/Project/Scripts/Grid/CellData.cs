@@ -103,9 +103,9 @@ public class CellData
         {
             if (!hasATileTrap)
             {
-                tileTrap = newtrap;
-                hasATileTrap = true;
-                tileTrap.onDestroy += RemoveTileTrap;
+                doorTrap = newtrap;
+                hasADoorTrap = true;
+                doorTrap.onDestroy += RemoveTileTrap;
             }
             else
             {
@@ -198,7 +198,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasADoorTrap())
             {
                 return true;
             }
