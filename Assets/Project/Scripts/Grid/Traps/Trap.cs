@@ -24,7 +24,7 @@ public class Trap : MonoBehaviour
     public TrapType TrapMode => _type;
     public List<Vector2Int> AdditionalPosition => _additionalPositions;
 
-    protected void DestroyTrap()
+    public void DestroyTrap()
     {
         onDestroy?.Invoke();
         Destroy(this.gameObject);

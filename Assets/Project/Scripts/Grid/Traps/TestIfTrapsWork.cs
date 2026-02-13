@@ -23,7 +23,7 @@ public class TestIfTrapsWork : MonoBehaviour
     {
         if (newTrap != null) //checks if the trap exists
         {
-            if (newTrap.TrapMode == Trap.TrapType.Single) //checks if the trap exists
+            if (newTrap.TrapMode == Trap.TrapType.Single) //checks if the trap is Single (lol)
             {
                 var allPositions = new List<Vector2Int>();
                 Vector2Int offset = new Vector2Int();

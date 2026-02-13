@@ -121,6 +121,7 @@ public class GridManager : MonoBehaviour
             GenerateGrid(_gridLevelData.allTilesPosition);
             PlaceAllRooms(_gridLevelData.allRooms);
             PlaceAllDoors(_gridLevelData.allDoors);
+            PlaceAllMaterials(_gridLevelData.allMaterials);
         }
     }
 
@@ -263,6 +264,17 @@ public class GridManager : MonoBehaviour
             //    default:
             //        break;
             //}
+        }
+    }
+
+    private void PlaceAllMaterials(HashSet<Vector2Int> allMaterials)
+    {
+        foreach (var pos in allMaterials)
+        {
+            if (_tiles.ContainsKey(pos)) 
+            {
+                _tiles[pos].GiveTileAMaterial();
+            }
         }
     }
 
