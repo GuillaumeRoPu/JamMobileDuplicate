@@ -24,7 +24,7 @@ public class Trap : MonoBehaviour
     public TrapType TrapMode => _type;
     public List<Vector2Int> AdditionalPosition => _additionalPositions;
 
-    protected void DestroyTrap()
+    public void DestroyTrap()
     {
         onDestroy?.Invoke();
         Destroy(this.gameObject);
@@ -38,7 +38,6 @@ public class Trap : MonoBehaviour
     public virtual void TrapPlaced(Vector2Int position, Face face)
     {
         _position = position;
-        _sprite.sortingOrder = 100;
         if (_type == TrapType.Multiple)
         {
             var adpos = new List<Vector2Int>();

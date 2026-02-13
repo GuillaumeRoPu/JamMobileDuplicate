@@ -7,6 +7,7 @@ public class RoomData
     private List<Vector2Int> _allCells;
     private GameObject _roomPrefab;
     private Dictionary<Vector2Int, Face> _allDoors;
+    private List<SpriteRenderer> _walls = new List<SpriteRenderer>();
 
     public Vector2Int GetMainCell()
     {
@@ -47,4 +48,7 @@ public class RoomData
     {
         _allDoors = allDoors;
     }
+
+    public List<SpriteRenderer> GetWalls => _walls;
+    public void SetNewWall(SpriteRenderer walls) { _walls.Add(walls); }
 }

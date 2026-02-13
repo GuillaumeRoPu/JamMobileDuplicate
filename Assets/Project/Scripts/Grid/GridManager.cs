@@ -13,6 +13,8 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private float _tilesSize;
 
+    [SerializeField] private Trap _barricade;
+
     private Vector2Int _limitsMin;
     private Vector2Int _limitsMax;
 
@@ -31,6 +33,7 @@ public class GridManager : MonoBehaviour
     public static Dictionary<Vector2Int, Tile> Tiles => _tiles;
 
     public GridLevelData GridLevelData => _gridLevelData;
+    public void SetLevelData(GridLevelData levelData) {  _gridLevelData = levelData; }
     public float TileSize => _tilesSize;
 
 
@@ -68,11 +71,9 @@ public class GridManager : MonoBehaviour
 
     void PlaceAllRooms(List<RoomData> data)
     {
-        int a = 0;
         foreach(var room in data)
         {
             PlaceRoom(room.GetRoomPrefab(), room.GetMainCell());
-            a++;
         }
         UpdateSizeAll();
     }
@@ -82,6 +83,15 @@ public class GridManager : MonoBehaviour
         foreach(var door in allDoors)
         {
             SetDoor(door.Key, door.Value);
+        }
+    }
+
+    public void EntityInARoom(Vector2Int tile, bool enter = true)
+    {
+        foreach (SpriteRenderer sprite in GetTileAtPosition(tile).GetRoomData().GetWalls)
+        {
+            sprite.color = new Color(1, 1, 1, enter ? 0.5f : 1);
+            sprite.sortingOrder = enter ? 110 : 5;
         }
     }
 
@@ -104,6 +114,14 @@ public class GridManager : MonoBehaviour
         _tiles[position].transform.localScale = new Vector3(_tilesSize, _tilesSize, _tilesSize);
     }
 
+    private void Start()
+    {
+        if (_gridLevelData != null && _generateGridOnPlay)
+        {
+            Init();
+        }
+    }
+
     public void Init()
     {
         if (_gridLevelData != null)
@@ -113,6 +131,8 @@ public class GridManager : MonoBehaviour
             GenerateGrid(_gridLevelData.allTilesPosition);
             PlaceAllRooms(_gridLevelData.allRooms);
             PlaceAllDoors(_gridLevelData.allDoors);
+            PlaceAllMaterials(_gridLevelData.allMaterials);
+            PlaceAllBarricades(_gridLevelData.allBarricades);
         }
     }
 
@@ -255,6 +275,48 @@ public class GridManager : MonoBehaviour
             //    default:
             //        break;
             //}
+        }
+    }
+
+    private void PlaceAllMaterials(HashSet<Vector2Int> allMaterials)
+    {
+        foreach (var pos in allMaterials)
+        {
+            if (_tiles.ContainsKey(pos)) 
+            {
+                _tiles[pos].GiveTileAMaterial();
+            }
+        }
+    }
+
+    private void PlaceAllBarricades(HashSet<Vector2Int> allBarricades)
+    {
+        foreach (var pos in allBarricades)
+        {
+            if (_tiles.ContainsKey(pos))
+            {
+                var offset = new Vector2(0, 0);
+                switch (GridManager.Tiles[pos].CellData.DoorPosition)
+                {
+                    case Face.Up:
+                        offset = new Vector2(0.5f, 1);
+                        break;
+                    case Face.Down:
+                        offset = new Vector2(0.5f, 0);
+                        break;
+                    case Face.Left:
+                        offset = new Vector2(0, 0.5f);
+                        break;
+                    case Face.Right:
+                        offset = new Vector2(1, 0.5f);
+                        break;
+                    default:
+                        break;
+                }
+                var trap = Instantiate(_barricade, (Vector2)pos + offset, Quaternion.identity);
+                trap.TrapPlaced(pos, GridManager.Tiles[pos].CellData.DoorPosition);
+                GridManager.Tiles[pos].CellData.SetTrap(trap);
+            }
         }
     }
 

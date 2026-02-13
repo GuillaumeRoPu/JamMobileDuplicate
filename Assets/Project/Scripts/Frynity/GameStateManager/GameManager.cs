@@ -1,3 +1,4 @@
+using Frynity.Gen;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,13 +21,21 @@ public class GameManager : MonoBehaviour
     public List<Entity> Witches => _witchEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
+    [Header("Game Scene")]
+    [SerializeField] GameObject _menu;
+    [SerializeField] GameObject _game;
+    public void ShowMenu(bool show) { _menu.SetActive(show); }
+    public void ShowGame(bool show) { _game.SetActive(show); }
+
     [Header("Room Design")]
     [SerializeField] Sprite _sideInWallSprite;
     [SerializeField] Sprite _sideOutWallSprite;
     [SerializeField] Sprite[] _outWallSprite;
+    [SerializeField] Sprite[] _outDoorWallSprite;
     public Sprite SideInWall => _sideInWallSprite;
     public Sprite SideOutWall => _sideOutWallSprite;
     public Sprite[] OutWall => _outWallSprite;
+    public Sprite[] OutDoorWall => _outDoorWallSprite;
 
     [Header("Sound Data")]
     [SerializeField] SoundData _zombieSounds;
@@ -55,15 +64,20 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
 
         InitializeStates();
     }
 
     private void Start()
     {
-        Grid.Init();
-        stateMachine.InitState(playState);
+        //Grid.Init();
+
+        //foreach (RoomCells room in FindObjectsByType<RoomCells>(FindObjectsSortMode.None))
+        //{
+        //    room.CreateWalls();
+        //}
+
+        stateMachine.InitState(menuState);
     }
 
     private void Update()

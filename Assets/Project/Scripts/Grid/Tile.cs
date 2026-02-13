@@ -11,6 +11,8 @@ public class Tile : MonoBehaviour, IHoverable
     [SerializeField] private Sprite _inEditorSprite;
 
     [SerializeField] private GameObject _highlight;
+    [SerializeField] private GameObject _prefabPlank;
+    private GameObject _MATERIAL;
 
     private CellData _cellData = new CellData();
 
@@ -176,8 +178,7 @@ public class Tile : MonoBehaviour, IHoverable
         }
         else
         {
-            Debug.LogError("This isn't the main room cell");
-            return null;
+            return GameManager.Of.Grid.GetTileAtPosition(GetMainRoomCell()).GetRoomData();
         }
     }
 
@@ -185,6 +186,7 @@ public class Tile : MonoBehaviour, IHoverable
     {
         if (!_isInARoom)
         {
+            Debug.Log(CellData.GridPosition);
             Debug.LogError("This cell isn't a room");
             return new Vector2Int();
         }
@@ -192,6 +194,28 @@ public class Tile : MonoBehaviour, IHoverable
         {
             return _mainRoomCell;
         }
+    }
+
+    public void GiveTileAMaterial()
+    {
+        (bool, Vector2Int) hello = CellData.GiveTileAMaterial();
+        if (hello.Item1)
+        {
+            _MATERIAL = Instantiate(_prefabPlank, (Vector2)hello.Item2 + new Vector2(0.5f, 0.5f), Quaternion.identity);
+        }
+    }
+    public void RemoveMaterial()
+    {
+        CellData.RemoveMaterial();
+        if (_MATERIAL != null) 
+        { 
+            Destroy(_MATERIAL);
+        }
+    }
+
+    public bool ContainsMaterial()
+    {
+        return CellData.ContainsMaterial();
     }
 
     private void OnDestroy()

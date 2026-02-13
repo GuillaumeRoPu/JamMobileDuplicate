@@ -1,0 +1,508 @@
+fileFormatVersion: 2
+guid: 255c0c8695ad91d4eb04778450c74b09
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4289164792609600588
+    second: animation_porte_v2_0
+  - first:
+      213: 5241564706001125467
+    second: animation_porte_v2_1
+  - first:
+      213: -5264037421501758470
+    second: animation_porte_v2_2
+  - first:
+      213: -2787730747836592323
+    second: animation_porte_v2_3
+  - first:
+      213: 7019315510269407804
+    second: animation_porte_v2_4
+  - first:
+      213: -6433807154273819869
+    second: animation_porte_v2_5
+  - first:
+      213: -536043005679054281
+    second: animation_porte_v2_6
+  - first:
+      213: 4830993653514910073
+    second: animation_porte_v2_7
+  - first:
+      213: 7143298663361957311
+    second: animation_porte_v2_8
+  - first:
+      213: 2465471432655237222
+    second: animation_porte_v2_9
+  - first:
+      213: 8539138701841850068
+    second: animation_porte_v2_10
+  - first:
+      213: -2848828915511911050
+    second: animation_porte_v2_11
+  - first:
+      213: 2473347048627479245
+    second: animation_porte_v2_12
+  - first:
+      213: -9014816522424142379
+    second: animation_porte_v2_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: animation_porte_v2_0
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 3956
+        width: 1000
+        height: 1007
+      alignment: 9
+      pivot: {x: 0.027094543, y: 0.009131878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c447b9667ac268b30800000000000000
+      internalID: 4289164792609600588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_1
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 3936
+        width: 1000
+        height: 1062
+      alignment: 9
+      pivot: {x: 0.026525635, y: 0.02425475}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b500c604457cdb840800000000000000
+      internalID: 5241564706001125467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_2
+      rect:
+        serializedVersion: 2
+        x: 4052
+        y: 3830
+        width: 1000
+        height: 1123
+      alignment: 9
+      pivot: {x: 0.020593017, y: 0.052257832}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af3460fead162f6b0800000000000000
+      internalID: -5264037421501758470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_3
+      rect:
+        serializedVersion: 2
+        x: 5888
+        y: 3793
+        width: 1000
+        height: 1175
+      alignment: 9
+      pivot: {x: 0.02044629, y: 0.07027697}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3f04c5a7adff49d0800000000000000
+      internalID: -2787730747836592323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_4
+      rect:
+        serializedVersion: 2
+        x: 7772
+        y: 3765
+        width: 1000
+        height: 1165
+      alignment: 9
+      pivot: {x: 0.017642578, y: 0.07858918}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c327ff3444e996160800000000000000
+      internalID: 7019315510269407804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_5
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 2068
+        width: 1000
+        height: 1173
+      alignment: 9
+      pivot: {x: 0.017727906, y: 0.073780626}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32364202b7686b6a0800000000000000
+      internalID: -6433807154273819869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_6
+      rect:
+        serializedVersion: 2
+        x: 2423
+        y: 2048
+        width: 1000
+        height: 1157
+      alignment: 9
+      pivot: {x: 0.010894775, y: 0.070262276}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 732da26f9b79f88f0800000000000000
+      internalID: -536043005679054281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_7
+      rect:
+        serializedVersion: 2
+        x: 4088
+        y: 1947
+        width: 1000
+        height: 1179
+      alignment: 9
+      pivot: {x: 0.013151367, y: 0.09617546}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9793ce5d1232b0340800000000000000
+      internalID: 4830993653514910073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_8
+      rect:
+        serializedVersion: 2
+        x: 5912
+        y: 1966
+        width: 1000
+        height: 1218
+      alignment: 9
+      pivot: {x: 0.01032373, y: 0.09894791}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbd463a9948122360800000000000000
+      internalID: 7143298663361957311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_9
+      rect:
+        serializedVersion: 2
+        x: 7470
+        y: 1960
+        width: 1000
+        height: 1177
+      alignment: 9
+      pivot: {x: 0.010429199, y: 0.09111486}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 660f943943d173220800000000000000
+      internalID: 2465471432655237222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_10
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 250
+        width: 1000
+        height: 1161
+      alignment: 9
+      pivot: {x: 0.016114501, y: 0.07649422}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ded213386d118670800000000000000
+      internalID: 8539138701841850068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_11
+      rect:
+        serializedVersion: 2
+        x: 2503
+        y: 322
+        width: 1000
+        height: 1150
+      alignment: 9
+      pivot: {x: 0.013734131, y: 0.06497184}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67d1d01f13de678d0800000000000000
+      internalID: -2848828915511911050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_12
+      rect:
+        serializedVersion: 2
+        x: 3920
+        y: 349
+        width: 1000
+        height: 1148
+      alignment: 9
+      pivot: {x: 0.011577881, y: 0.09614653}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc2a3bf4908135220800000000000000
+      internalID: 2473347048627479245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_porte_v2_13
+      rect:
+        serializedVersion: 2
+        x: 5151
+        y: 414
+        width: 1000
+        height: 1085
+      alignment: 9
+      pivot: {x: 0.088129394, y: 0.045866318}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d53699a220f4e280800000000000000
+      internalID: -9014816522424142379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4a75656a0a9035d47866e4a5760fff8f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      animation_porte_v2_0: 4289164792609600588
+      animation_porte_v2_1: 5241564706001125467
+      animation_porte_v2_10: 8539138701841850068
+      animation_porte_v2_11: -2848828915511911050
+      animation_porte_v2_12: 2473347048627479245
+      animation_porte_v2_13: -9014816522424142379
+      animation_porte_v2_14: 697409099
+      animation_porte_v2_2: -5264037421501758470
+      animation_porte_v2_3: -2787730747836592323
+      animation_porte_v2_4: 7019315510269407804
+      animation_porte_v2_5: -6433807154273819869
+      animation_porte_v2_6: -536043005679054281
+      animation_porte_v2_7: 4830993653514910073
+      animation_porte_v2_8: 7143298663361957311
+      animation_porte_v2_9: 2465471432655237222
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
