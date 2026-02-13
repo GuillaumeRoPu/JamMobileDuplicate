@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class TestIfTrapsWork : MonoBehaviour
 {
@@ -12,14 +11,19 @@ public class TestIfTrapsWork : MonoBehaviour
     [Button("Place Trap")]
     private void PlaceTrapButton()
     {
-        PlaceTrap(_trap, _playerPosition, _direction);
+        bool canPlace = CheckIfTrapCanBePlaced(_trap, _playerPosition, _direction, false); //Checks if you can place the trap you selected at the position and direction given
+        Debug.Log(canPlace);
+        if (canPlace)
+        {
+            CheckIfTrapCanBePlaced(_trap, _playerPosition, _direction, true); //Checks if you can place the trap you selected at the position and direction given THEN places the trap
+        }
     }
 
-    private void PlaceTrap(Trap newTrap, Vector2Int playerPosition, Face direction)
+    private bool CheckIfTrapCanBePlaced(Trap newTrap, Vector2Int playerPosition, Face direction, bool placeTrap)
     {
-        if (newTrap != null) 
+        if (newTrap != null) //checks if the trap exists
         {
-            if (newTrap.TrapMode == Trap.TrapType.Single)
+            if (newTrap.TrapMode == Trap.TrapType.Single) //checks if the trap is Single (lol)
             {
                 var allPositions = new List<Vector2Int>();
                 Vector2Int offset = new Vector2Int();
@@ -46,12 +50,17 @@ public class TestIfTrapsWork : MonoBehaviour
                 {
                     if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(_trap))
                     {
-                        var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
-                        allPositions.Add(trapPosition);
-                        trap.TrapPlaced(trapPosition, direction);
-                        GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                        if (placeTrap)
+                        {
+                            var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                            allPositions.Add(trapPosition);
+                            trap.TrapPlaced(trapPosition, direction);
+                            GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                        }
+                        return true;
                     }
                 }
+                return false;
             }
             else if (newTrap.TrapMode == Trap.TrapType.Multiple)
             {
@@ -136,30 +145,35 @@ public class TestIfTrapsWork : MonoBehaviour
 
                 if (canPose == true)
                 {
-                    var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
-                    switch (direction)
+                    if (placeTrap)
                     {
-                        case Face.Up:
-                            trap.transform.Rotate(new Vector3(0, 0, 90));
-                            break;
-                        case Face.Down:
-                            trap.transform.Rotate(new Vector3(0, 0, -90));
-                            break;
-                        case Face.Left:
-                            trap.transform.Rotate(new Vector3(0, 0, 180));
-                            break;
-                        case Face.Right:
-                            break;
-                        default:
-                            break;
+                        var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                        switch (direction)
+                        {
+                            case Face.Up:
+                                trap.transform.Rotate(new Vector3(0, 0, 90));
+                                break;
+                            case Face.Down:
+                                trap.transform.Rotate(new Vector3(0, 0, -90));
+                                break;
+                            case Face.Left:
+                                trap.transform.Rotate(new Vector3(0, 0, 180));
+                                break;
+                            case Face.Right:
+                                break;
+                            default:
+                                break;
+                        }
+                        trap.TrapPlaced(trapPosition, direction);
+                        GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                        foreach (var pos in trap.AdditionalPosition)
+                        {
+                            GridManager.Tiles[pos].CellData.SetTrap(trap);
+                        }
                     }
-                    trap.TrapPlaced(trapPosition, direction);
-                    GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
-                    foreach (var pos in trap.AdditionalPosition)
-                    {
-                        GridManager.Tiles[pos].CellData.SetTrap(trap);
-                    }
+                    return true;
                 }
+                return false;
             }
             else if (newTrap.TrapMode == Trap.TrapType.Door)
             {
@@ -197,37 +211,44 @@ public class TestIfTrapsWork : MonoBehaviour
                         }
                         if (canPlace) 
                         {
-                            var offset = new Vector2(0, 0);
-                            switch (GridManager.Tiles[trapPosition].CellData.DoorPosition)
+                            if (placeTrap)
                             {
-                                case Face.Up:
-                                    offset = new Vector2(0.5f, 1);
-                                    break;
-                                case Face.Down:
-                                    offset = new Vector2(0.5f, 0);
-                                    break;
-                                case Face.Left:
-                                    offset = new Vector2(0, 0.5f);
-                                    break;
-                                case Face.Right:
-                                    offset = new Vector2(1, 0.5f);
-                                    break;
-                                default:
-                                    break;
+                                var offset = new Vector2(0, 0);
+                                switch (GridManager.Tiles[trapPosition].CellData.DoorPosition)
+                                {
+                                    case Face.Up:
+                                        offset = new Vector2(0.5f, 1);
+                                        break;
+                                    case Face.Down:
+                                        offset = new Vector2(0.5f, 0);
+                                        break;
+                                    case Face.Left:
+                                        offset = new Vector2(0, 0.5f);
+                                        break;
+                                    case Face.Right:
+                                        offset = new Vector2(1, 0.5f);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                var trap = Instantiate(newTrap, (Vector2)trapPosition + offset, Quaternion.identity);
+                                allPositions.Add(trapPosition);
+                                trap.TrapPlaced(trapPosition, GridManager.Tiles[trapPosition].CellData.DoorPosition);
+                                GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
                             }
-                            var trap = Instantiate(newTrap, (Vector2)trapPosition + offset, Quaternion.identity);
-                            allPositions.Add(trapPosition);
-                            trap.TrapPlaced(trapPosition, direction);
-                            GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                            return true;
                         }
                     }
                 }
+                return false;
             }
             else
             {
                 Debug.Log("The Trap Mode isn't finished yet");
+                return false;
             }
         }
+        return false;
     }
 
     private void OnDrawGizmosSelected()

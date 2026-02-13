@@ -626,6 +626,7 @@ MonoBehaviour:
   _tilesParent: {fileID: 572938236}
   _roomsParent: {fileID: 467802023}
   _tilesSize: 1
+  _barricade: {fileID: 604434712634651360, guid: 10a18281aa9b36b499195e8d9bbf62d0, type: 3}
   _camera: {fileID: 519420032}
   _coolColors: 0
   _coolColorsAnimated: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
-  _levelCreationSteps: 8
+  _levelCreationSteps: 32
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 819476302}
   _roomsParent: {fileID: 365590961}
@@ -741,6 +742,10 @@ MonoBehaviour:
   _roomPrefab: {fileID: 5086204099707341832, guid: 1af9bdc4365a4f645965040dd760f8a4, type: 3}
   _roomPosition: {x: 1, y: 0}
   _eraseRoomPosition: {x: 1, y: 1}
+  _materialPosition: {x: 0, y: 0}
+  _eraseMaterialPosition: {x: 0, y: 1}
+  _barricadePosition: {x: 1, y: 2}
+  _eraseBarricadePosition: {x: 0, y: 1}
   _gridLevelName: ISTHISTHETEST4
 --- !u!1 &1944287288
 GameObject:

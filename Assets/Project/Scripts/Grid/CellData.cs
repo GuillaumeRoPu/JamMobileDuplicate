@@ -36,6 +36,7 @@ public class CellData
     public bool HasDoor = false;
     public bool DoorKeyClosed;
     public Entity Entity;
+    public bool hasAMaterial = false;
 
     public bool CanPass(Face face, CellData originalCell)
     {
@@ -173,6 +174,54 @@ public class CellData
         {
             doorTrap.ActivateTrap(entity);
         }
+    }
+
+    public (bool, Vector2Int) GiveTileAMaterial()
+    {
+        if (!hasAMaterial)
+        {
+            hasAMaterial = true;
+            return (true, GridPosition);
+        }
+        else
+        {
+            if (GridManager.Tiles.ContainsKey(GridPosition + new Vector2Int(0, 1)))
+            {
+                return GridManager.Tiles[GridPosition + new Vector2Int(0, 1)].CellData.GiveTileAMaterial();
+            }
+            else if (GridManager.Tiles.ContainsKey(GridPosition + new Vector2Int(0, -1)))
+            {
+                return GridManager.Tiles[GridPosition + new Vector2Int(0, -1)].CellData.GiveTileAMaterial();
+            }
+            else if (GridManager.Tiles.ContainsKey(GridPosition + new Vector2Int(-1, 0)))
+            {
+                return GridManager.Tiles[GridPosition + new Vector2Int(-1, 0)].CellData.GiveTileAMaterial();
+            }
+            else if (GridManager.Tiles.ContainsKey(GridPosition + new Vector2Int(1, 0)))
+            {
+                return GridManager.Tiles[GridPosition + new Vector2Int(1, 0)].CellData.GiveTileAMaterial();
+            }
+            else
+            {
+                return (false, GridPosition);
+            }
+        }
+    }
+
+    /// <summary>
+    /// ALWAYS CALL IT WHEN THE GRANDMA WALKS ON A TILE, it removes the materials from the tile
+    /// </summary>
+    public void RemoveMaterial()
+    {
+        hasAMaterial = false;
+    }
+
+    /// <summary>
+    /// Tells you if the tile contains a material or not
+    /// </summary>
+    public bool ContainsMaterial()
+    {
+        return hasAMaterial;
     }
 
     /// <summary>
