@@ -163,7 +163,65 @@ public class TestIfTrapsWork : MonoBehaviour
             }
             else if (newTrap.TrapMode == Trap.TrapType.Door)
             {
-
+                var allPositions = new List<Vector2Int>();
+                var trapPosition = playerPosition;
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(_trap) && GridManager.Tiles[trapPosition].CellData.HasADoor())
+                    {
+                        var otherDoorTile = trapPosition;
+                        switch (GridManager.Tiles[trapPosition].CellData.DoorPosition)
+                        {
+                            case Face.Up:
+                                otherDoorTile += new Vector2Int(0, 1);
+                                break;
+                            case Face.Down:
+                                otherDoorTile += new Vector2Int(0, -1);
+                                break;
+                            case Face.Left:
+                                otherDoorTile += new Vector2Int(-1, 0);
+                                break;
+                            case Face.Right:
+                                otherDoorTile += new Vector2Int(1, 0);
+                                break;
+                            default:
+                                break;
+                        }
+                        bool canPlace = true;
+                        if (GridManager.Tiles.ContainsKey(otherDoorTile))
+                        {
+                            if (GridManager.Tiles[otherDoorTile].CellData.HasADoorTrap())
+                            {
+                                canPlace = false;
+                            }
+                        }
+                        if (canPlace) 
+                        {
+                            var offset = new Vector2(0, 0);
+                            switch (GridManager.Tiles[trapPosition].CellData.DoorPosition)
+                            {
+                                case Face.Up:
+                                    offset = new Vector2(0.5f, 1);
+                                    break;
+                                case Face.Down:
+                                    offset = new Vector2(0.5f, 0);
+                                    break;
+                                case Face.Left:
+                                    offset = new Vector2(0, 0.5f);
+                                    break;
+                                case Face.Right:
+                                    offset = new Vector2(1, 0.5f);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            var trap = Instantiate(newTrap, (Vector2)trapPosition + offset, Quaternion.identity);
+                            allPositions.Add(trapPosition);
+                            trap.TrapPlaced(trapPosition, direction);
+                            GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                        }
+                    }
+                }
             }
             else
             {

@@ -38,7 +38,6 @@ public class Trap : MonoBehaviour
     public virtual void TrapPlaced(Vector2Int position, Face face)
     {
         _position = position;
-        _sprite.sortingOrder = 100;
         if (_type == TrapType.Multiple)
         {
             var adpos = new List<Vector2Int>();

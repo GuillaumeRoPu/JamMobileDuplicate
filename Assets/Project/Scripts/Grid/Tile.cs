@@ -141,6 +141,8 @@ public class Tile : MonoBehaviour, IHoverable
         {
             _isInARoom = true;
             _mainRoomCell = mainRoomCellData;
+            CellData.HasRoom = true;
+            CellData.MainRoomCell = _mainRoomCell;
             if (CellData.GridPosition == mainRoomCellData)
             {
                 _roomData = roomData;

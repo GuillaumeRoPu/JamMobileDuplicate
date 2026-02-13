@@ -27,6 +27,7 @@ public class CellData
     public Vector2Int MainRoomCell;
     public bool IsSpawnPoint = false;
     public SpawnPointType spawnPointType = SpawnPointType.None;
+    public bool HasRoom;
     public Trap tileTrap;
     public Trap doorTrap;
     public bool hasATileTrap;
@@ -38,6 +39,7 @@ public class CellData
 
     public bool CanPass(Face face, CellData originalCell)
     {
+        if (!HasRoom) return false;
 
         Face receptFace = face == Face.Up ? Face.Down :
             face == Face.Left ? Face.Right :
@@ -99,11 +101,11 @@ public class CellData
     {
         if (newtrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!hasATileTrap)
+            if (!hasADoorTrap)
             {
-                tileTrap = newtrap;
-                hasATileTrap = true;
-                tileTrap.onDestroy += RemoveTileTrap;
+                doorTrap = newtrap;
+                hasADoorTrap = true;
+                doorTrap.onDestroy += RemoveDoorTrap;
             }
             else
             {
@@ -151,6 +153,12 @@ public class CellData
         return hasADoorTrap;
     }
 
+    public void KillEntity()
+    {
+        //Entity.Kill();
+        Debug.Log("Killed entity");
+    }
+
     public void ActivateTileTrap(Entity entity)
     {
         if (HasATileTrap())
@@ -196,7 +204,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasADoorTrap())
             {
                 return true;
             }
