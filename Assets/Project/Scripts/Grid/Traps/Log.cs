@@ -6,8 +6,13 @@ public class Log : Trap
     public override void ActivateTrap(Entity entity)
     {
         base.ActivateTrap(entity);
-        if (entity.CurrentTile.CellData.GridPosition == _position)
+        if (entity.CurrentTile.CellData.GridPosition == _position && entity != GameManager.Of.Player)
         {
+            GridManager.Tiles[_position].CellData.KillEntity();
+            foreach(var pos in AdditionalPosition)
+            {
+                GridManager.Tiles[pos].CellData.KillEntity();
+            }
             DestroyTrap();
         }
     }

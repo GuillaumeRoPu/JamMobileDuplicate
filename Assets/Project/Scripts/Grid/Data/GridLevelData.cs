@@ -27,6 +27,12 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
     [ReadOnly] public List<Vector2Int> keysD = new List<Vector2Int>();
     [ReadOnly] public List<Face> valuesD = new List<Face>();
 
+    [ReadOnly] public HashSet<Vector2Int> allMaterials = new HashSet<Vector2Int>();
+    [ReadOnly] public List<Vector2Int> allMaterialsList = new List<Vector2Int>();
+
+    [ReadOnly] public HashSet<Vector2Int> allBarricades = new HashSet<Vector2Int>();
+    [ReadOnly] public List<Vector2Int> allBarricadesList = new List<Vector2Int>();
+
     [ReadOnly] public Vector2Int limitsMin;
     [ReadOnly] public Vector2Int limitsMax;
 
@@ -65,6 +71,18 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
             keysD.Add(kvp.Key);
             valuesD.Add(kvp.Value);
         }
+
+        allMaterialsList.Clear();
+        foreach(var a in allMaterials)
+        {
+            allMaterialsList.Add(a);
+        }
+
+        allBarricadesList.Clear();
+        foreach (var a in allBarricades)
+        {
+            allBarricadesList.Add(a);
+        }
     }
 
     public void OnAfterDeserialize()
@@ -89,6 +107,18 @@ public class GridLevelData : ScriptableObject, ISerializationCallbackReceiver
         for (int i = 0; i < keysD.Count; i++)
         {
             allDoors.Add(keysD[i], valuesD[i]);
+        }
+
+        allMaterials = new HashSet<Vector2Int>();
+        for (int i = 0; i < allMaterialsList.Count; i++)
+        {
+            allMaterials.Add(allMaterialsList[i]);
+        }
+
+        allBarricades = new HashSet<Vector2Int>();
+        for (int i = 0; i < allBarricadesList.Count; i++)
+        {
+            allBarricades.Add(allBarricadesList[i]);
         }
     }
 }

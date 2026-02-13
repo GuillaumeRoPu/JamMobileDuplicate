@@ -20,7 +20,9 @@ public class GridDrawer : MonoBehaviour
         Tiles = 1,
         SpawnPoints = 2,
         Room = 4,
-        Save = 8,
+        Materials = 8,
+        Barricades = 16,
+        Save = 32,
     }
 
     [SerializeField] private LevelCreationSteps _levelCreationSteps;
@@ -54,6 +56,12 @@ public class GridDrawer : MonoBehaviour
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private Vector2Int _roomPosition;
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Room)] private Vector2Int _eraseRoomPosition;
 
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Materials)] private Vector2Int _materialPosition;
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Materials)] private Vector2Int _eraseMaterialPosition;
+
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Barricades)] private Vector2Int _barricadePosition;
+    [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Barricades)] private Vector2Int _eraseBarricadePosition;
+
     [SerializeField, ShowIf(nameof(_levelCreationSteps), true, LevelCreationSteps.Save), Tooltip("The name given to your entier Grid Layout")] private string _gridLevelName;
 
     private static Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
@@ -61,6 +69,8 @@ public class GridDrawer : MonoBehaviour
     private static List<RoomData> _allRoomDatas = new List<RoomData>();
     private static Dictionary<Vector2Int, GameObject> _roomDeletionTracker = new Dictionary<Vector2Int, GameObject>();
     private static Dictionary<Vector2Int, Face> _allDoors = new Dictionary<Vector2Int, Face>();
+    private static HashSet<Vector2Int> _allMaterials = new HashSet<Vector2Int>();
+    private static HashSet<Vector2Int> _allBarricades = new HashSet<Vector2Int>();
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
     void GenerateGrid(int width, int height, Vector2Int origin)
@@ -115,7 +125,6 @@ public class GridDrawer : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(_tiles.Count);
         RemoveAllTiles();
     }
 
@@ -593,6 +602,58 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
+    private void PlaceMaterial(Vector2Int position)
+    {
+        if (_tiles.ContainsKey(position)) 
+        { 
+            _allMaterials.Add(position);
+        }
+        else
+        {
+            Debug.LogWarning("There isn't a tile here");
+        }
+    }
+
+    private void EraseMaterial(Vector2Int position)
+    {
+        if (_allMaterials.Contains(position))
+        {
+            _allMaterials.Remove(position);
+        }
+        else
+        {
+            Debug.LogWarning("There isn't a material here");
+        }
+    }
+
+    private void PlaceBarricade(Vector2Int position)
+    {
+        if (_tiles.ContainsKey(position))
+        {
+            (Vector2Int, Face) oppositeFace = GetOppositeDoor(position, _tiles[position].CellData.DoorPosition);
+            if (!_allBarricades.Contains(oppositeFace.Item1) && _allDoors.ContainsKey(position))
+            {
+                _allBarricades.Add(position);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("There isn't a tile here");
+        }
+    }
+
+    private void EraseBarricade(Vector2Int position)
+    {
+        if (_allBarricades.Contains(position))
+        {
+            _allBarricades.Remove(position);
+        }
+        else
+        {
+            Debug.LogWarning("There isn't a Barricade here");
+        }
+    }
+
     private void EraseAllRooms()
     {
         List<RoomData> allRooms = new List<RoomData>(_allRoomDatas);
@@ -634,6 +695,8 @@ public class GridDrawer : MonoBehaviour
         }
 
         _spawnPointsTiles = new Dictionary<Vector2Int, CellData.SpawnPointType>();
+        _allMaterials = new HashSet<Vector2Int>();
+        _allBarricades = new HashSet<Vector2Int>();
     }
 
     [Button("Generate Tiles (Green)"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Tiles)]
@@ -669,6 +732,20 @@ public class GridDrawer : MonoBehaviour
                     foreach (var room in _gridLevelData.allRooms)
                     {
                         PlaceRoom(room.GetRoomPrefab(), room.GetMainCell());
+                    }
+                }
+                if (_gridLevelData.allMaterials != null)
+                {
+                    foreach (var mat in _gridLevelData.allMaterials)
+                    {
+                        PlaceMaterial(mat);
+                    }
+                }
+                if (_gridLevelData.allBarricades != null)
+                {
+                    foreach (var bar in _gridLevelData.allBarricades)
+                    {
+                        PlaceBarricade(bar);
                     }
                 }
             }
@@ -761,6 +838,58 @@ public class GridDrawer : MonoBehaviour
         }
     }
 
+    [Button("Place Material"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Materials)]
+    private void PlaceMaterialButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Materials)
+        {
+            PlaceMaterial(_materialPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Erase Material"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Materials)]
+    private void EraseMaterialButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Materials)
+        {
+            EraseMaterial(_eraseMaterialPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Place Barricade"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Barricades)]
+    private void PlaceBarricadeButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Barricades)
+        {
+            PlaceBarricade(_barricadePosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
+    [Button("Erase Barricade"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Barricades)]
+    private void EraseBarricadeButton()
+    {
+        if (_levelCreationSteps == LevelCreationSteps.Barricades)
+        {
+            EraseBarricade(_eraseBarricadePosition);
+        }
+        else
+        {
+            Debug.LogWarning("Change Creation Step");
+        }
+    }
+
     [Button("Erase All Room"), ButtonShowIf(nameof(_levelCreationSteps), LevelCreationSteps.Room)]
     private void EraseAllRoomsButton()
     {
@@ -828,6 +957,8 @@ public class GridDrawer : MonoBehaviour
                 data.keysD.Add(value.Key);
                 data.valuesD.Add(value.Value);
             }
+            data.allMaterials = new HashSet<Vector2Int>(_allMaterials);
+            data.allBarricades = new HashSet<Vector2Int>(_allBarricades);
 
             data.limitsMin = _limitsMin;
             data.limitsMax = _limitsMax;
@@ -893,8 +1024,29 @@ public class GridDrawer : MonoBehaviour
             Gizmos.DrawLine(new Vector2((float)_eraseRoomPosition.x, (float)_eraseRoomPosition.y), new Vector2((float)_eraseRoomPosition.x + 1, (float)_eraseRoomPosition.y + 1));
             Gizmos.DrawLine(new Vector2((float)_eraseRoomPosition.x + 1, (float)_eraseRoomPosition.y), new Vector2((float)_eraseRoomPosition.x, (float)_eraseRoomPosition.y + 1));
         }
+        if (_levelCreationSteps == LevelCreationSteps.Materials)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(new Vector2((float)_materialPosition.x + 0.5f, (float)_materialPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.DrawWireSphere(new Vector2((float)_materialPosition.x + 0.5f, (float)_materialPosition.y+ 0.5f), 0.25f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(new Vector2((float)_eraseMaterialPosition.x + 0.5f, (float)_eraseMaterialPosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.DrawLine(new Vector2((float)_eraseMaterialPosition.x, (float)_eraseMaterialPosition.y), new Vector2((float)_eraseMaterialPosition.x + 1, (float)_eraseMaterialPosition.y + 1));
+            Gizmos.DrawLine(new Vector2((float)_eraseMaterialPosition.x + 1, (float)_eraseMaterialPosition.y), new Vector2((float)_eraseMaterialPosition.x, (float)_eraseMaterialPosition.y + 1));
+        }
 
-        foreach(var door in _allDoors)
+        if (_levelCreationSteps == LevelCreationSteps.Barricades)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(new Vector2((float)_barricadePosition.x + 0.5f, (float)_barricadePosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.DrawWireSphere(new Vector2((float)_barricadePosition.x + 0.5f, (float)_barricadePosition.y + 0.5f), 0.25f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(new Vector2((float)_eraseBarricadePosition.x + 0.5f, (float)_eraseBarricadePosition.y + 0.5f), new Vector3(_tilesSize, _tilesSize, _tilesSize));
+            Gizmos.DrawLine(new Vector2((float)_eraseBarricadePosition.x, (float)_eraseBarricadePosition.y), new Vector2((float)_eraseBarricadePosition.x + 1, (float)_eraseBarricadePosition.y + 1));
+            Gizmos.DrawLine(new Vector2((float)_eraseBarricadePosition.x + 1, (float)_eraseBarricadePosition.y), new Vector2((float)_eraseBarricadePosition.x, (float)_eraseBarricadePosition.y + 1));
+        }
+
+        foreach (var door in _allDoors)
         {
             Gizmos.color = Color.black;
             Vector2 pos = door.Key;
@@ -915,7 +1067,17 @@ public class GridDrawer : MonoBehaviour
                 default:
                     break;
             }
+            if (_allBarricades.Contains(door.Key))
+            {
+                Gizmos.color = Color.mediumVioletRed;
+            }
             Gizmos.DrawWireSphere(pos, 0.25f);
+        }
+
+        foreach(var pos in _allMaterials)
+        {
+            Gizmos.color = new Color(255f / 255f, 170f / 255f, 51f / 255f, 1);
+            Gizmos.DrawWireSphere((Vector2)pos + new Vector2(0.5f, 0.5f), 0.25f);
         }
     }
 }

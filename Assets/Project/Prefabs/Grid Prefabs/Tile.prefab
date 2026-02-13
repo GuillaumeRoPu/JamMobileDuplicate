@@ -247,3 +247,4 @@ MonoBehaviour:
   _inGameSprite: {fileID: 21300000, guid: 345870ffd3f0ad346afa13739068d82c, type: 3}
   _inEditorSprite: {fileID: 21300000, guid: 18bd76a2fa6b5524884598377e1c04a1, type: 3}
   _highlight: {fileID: 6645015416975209214}
+  _prefabPlank: {fileID: 373768028489491006, guid: 31b4ec653005fa84f861e64ef2b6ef58, type: 3}
