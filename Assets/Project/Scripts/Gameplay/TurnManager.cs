@@ -130,6 +130,7 @@ public class TurnManager : MonoBehaviour
     {
         await Awaitable.WaitForSecondsAsync(_durationTurn);
 
+        GameManager.Of.UpdateZOrder(false);
         if (_nbPass > 0)
         {
             PlayTurn();

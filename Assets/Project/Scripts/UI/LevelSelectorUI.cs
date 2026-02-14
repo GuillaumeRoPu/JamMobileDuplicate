@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class LevelSelectorUI : MonoBehaviour
 {
+    [SerializeField] Transform _monsterContainer;
+    [SerializeField] GameObject _monsterContent;
+    [SerializeField] TextMeshProUGUI _sizeText;
     [SerializeField] TextMeshProUGUI _levelText;
     [SerializeField] LevelData[] _levels;
-
-    GameObject _preview;
 
     int _index = 0;
 
@@ -23,35 +24,74 @@ public class LevelSelectorUI : MonoBehaviour
         if (_index < 0) _index = _levels.Length - 1;
         if (_index >= _levels.Length) _index = 0;
 
-        Destroy(_preview);
-        ShowLevelGrid();
+        ShowLevelStat();
 
         _levelText.text = string.Format("Level {0}", _index + 1);
     }
 
-    void ShowLevelGrid()
+    void ShowLevelStat()
     {
-        GameObject level = new GameObject("Level");
-        for (int i = 0; i < _levels[_index].GridLevel.allRoomsPosition.Count; i++)
+        int z = 0;
+        int e = 0;
+        int w = 0;
+        foreach (var evnt in _levels[_index].Events)
         {
-            GameObject room = Instantiate(_levels[_index].GridLevel.allRoomsPrefab[i],(Vector2)_levels[_index].GridLevel.allRoomsPosition[i] * GameManager.Of.Grid.TileSize, 
-                Quaternion.identity);
-
-            foreach (var sprite in room.GetComponentsInChildren<SpriteRenderer>())
+            if (evnt.EventType == EventType.Zombie)
             {
-                sprite.sortingLayerName = "GUI";
-                sprite.sortingOrder = 2;
+                z++;
             }
 
-            room.transform.SetParent(level.transform);
+            if (evnt.EventType == EventType.EchoEnter)
+            {
+                e++;
+            }
+
+            if (evnt.EventType == EventType.Witch)
+            {
+                w++;
+            }
         }
-        level.transform.localScale = Vector3.one * 0.3f;
-        _preview = level;
+
+
+        for (int i = 0; i < _monsterContainer.childCount; i++)
+        {
+            Destroy(_monsterContainer.GetChild(i).gameObject);
+        }
+
+        if (z > 0)
+        {
+            GameObject container = Instantiate(_monsterContent, _monsterContainer);
+            MonsterContent script = container.GetComponent<MonsterContent>();
+            script.SetIcon(IconType.ZOMBIE, z);
+        }
+
+        if (e > 0)
+        {
+            GameObject container = Instantiate(_monsterContent, _monsterContainer);
+            MonsterContent script = container.GetComponent<MonsterContent>();
+            script.SetIcon(IconType.ECHO, e);
+        }
+
+        if (w > 0)
+        {
+            GameObject container = Instantiate(_monsterContent, _monsterContainer);
+            MonsterContent script = container.GetComponent<MonsterContent>();
+            script.SetIcon(IconType.WITCH, w);
+        }
+
+        int count = 0;
+        foreach ( var room in _levels[_index].GridLevel.allRoomsCells)
+        {
+            foreach (var tile in room.items)
+            {
+                count++;
+            }
+        }
+        _sizeText.text = string.Format("x{0} tiles", count);
     }
 
     public void PlayLevel()
     {
-        Destroy(_preview);
         GameManager.Of.Turn.SetLevelData(_levels[_index]);
         GameManager.Of.Grid.SetLevelData(_levels[_index].GridLevel);
 

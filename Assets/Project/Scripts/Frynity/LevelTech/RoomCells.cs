@@ -148,32 +148,42 @@ namespace Frynity.Gen
 
                 if (!TileInCells(tile.localPos + Vector2Int.right))
                 {
-                    bool flip = false;
                     if (GridManager.Tiles.ContainsKey(worldPos + Vector2Int.right))
                     {
-                        sprite = GameManager.Of.SideInWall;
-                        flip = true;
+                        if(GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Right)
+                        {
+                            sprite = GameManager.Of.SideInDoorWall;
+                        }
+                        else
+                        {
+                            sprite = GameManager.Of.SideInWall;
+                        }
                     }
                     else
                     {
                         sprite = GameManager.Of.SideOutWall;
                     }
-                    SpawnWall(sprite, (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(GameManager.Of.Grid.TileSize / 2, GameManager.Of.Grid.TileSize / 2 * 1.5f), 6, wallParent.transform, null, flip);
+                    SpawnWall(sprite, (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize, true, wallParent.transform, null, true);
                 }
 
                 if (!TileInCells(tile.localPos + Vector2Int.left))
                 {
-                    bool flip = false;
                     if (GridManager.Tiles.ContainsKey(worldPos + Vector2Int.left))
                     {
-                        sprite = GameManager.Of.SideInWall;
+                        if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Left)
+                        {
+                            sprite = GameManager.Of.SideInDoorWall;
+                        }
+                        else
+                        {
+                            sprite = GameManager.Of.SideInWall;
+                        }
                     }
                     else
                     {
                         sprite = GameManager.Of.SideOutWall;
-                        flip = true;
                     }
-                    SpawnWall(sprite, (Vector2)(worldPos + Vector2Int.left) * GameManager.Of.Grid.TileSize + new Vector2(GameManager.Of.Grid.TileSize / 2, GameManager.Of.Grid.TileSize / 2 * 1.5f), 6, wallParent.transform, null, flip);
+                    SpawnWall(sprite, (Vector2)worldPos * GameManager.Of.Grid.TileSize, true, wallParent.transform, null);
                 }
 
                 if (!TileInCells(tile.localPos + Vector2Int.up))
@@ -182,13 +192,13 @@ namespace Frynity.Gen
                     {
                         SpawnWall(_assets != null && _assets.DoorWalls.Length > 0 ? _assets.DoorWalls[Random.Range(0, _assets.DoorWalls.Length)] :
                         GameManager.Of.OutDoorWall[Random.Range(0, GameManager.Of.OutDoorWall.Length)],
-                        (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize), 5, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos + Vector2Int.up));
+                        (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize), false, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos + Vector2Int.up));
                     }
                     else
                     {
                         SpawnWall(_assets != null && _assets.Walls.Length > 0 ? _assets.Walls[Random.Range(0, _assets.Walls.Length)] :
                         GameManager.Of.OutWall[Random.Range(0, GameManager.Of.OutWall.Length)],
-                        (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize), 5, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos + Vector2Int.up));
+                        (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0, GameManager.Of.Grid.TileSize), false, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos + Vector2Int.up));
                     }
 
                 }
@@ -200,34 +210,35 @@ namespace Frynity.Gen
                     {
                         if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Down)
                         {
-                            SpawnWall(GameManager.Of.OutDoorWall[Random.Range(0, GameManager.Of.OutDoorWall.Length)], (Vector2)worldPos * GameManager.Of.Grid.TileSize, 5, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos));
+                            SpawnWall(GameManager.Of.OutDoorWall[Random.Range(0, GameManager.Of.OutDoorWall.Length)], (Vector2)worldPos * GameManager.Of.Grid.TileSize, false, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos));
                         }
                         else
                         {
-                            SpawnWall(GameManager.Of.OutWall[Random.Range(0, GameManager.Of.OutWall.Length)], (Vector2)worldPos * GameManager.Of.Grid.TileSize, 5, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos));
+                            SpawnWall(GameManager.Of.OutWall[Random.Range(0, GameManager.Of.OutWall.Length)], (Vector2)worldPos * GameManager.Of.Grid.TileSize, false, wallParent.transform, GameManager.Of.Grid.GetTileAtPosition(worldPos));
                         }
                     }
                 }
             }
         }
 
-        void SpawnWall(Sprite sprite, Vector2 cellPos, int layer, Transform parent, Tile tileWallPos = null, bool flipX = false)
+        void SpawnWall(Sprite sprite, Vector2 cellPos, bool side, Transform parent, Tile tileWallPos = null, bool flipX = false)
         {
-            GameObject go = new GameObject("Wall");
+            GameObject go = new GameObject(side ? "Side Wall" : "Wall");
             go.transform.parent = gameObject.transform;
             go.transform.position = cellPos;
             go.transform.localScale = Vector3.one * GameManager.Of.Grid.TileSize;
             go.transform.SetParent(parent);
             SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
             renderer.sortingLayerName = "Playground";
-            renderer.sortingOrder = layer;
             renderer.sprite = sprite;
             renderer.flipX = flipX;
 
             if (tileWallPos != null)
             {
                 if (tileWallPos.CellData.HasRoom)
+                {
                     tileWallPos.GetRoomData().SetNewWall(renderer);
+                }
             }
         }
 

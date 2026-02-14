@@ -88,10 +88,11 @@ public class GridManager : MonoBehaviour
 
     public void EntityInARoom(Vector2Int tile, bool enter = true)
     {
+        if (!Tiles[tile].CellData.HasRoom) return;
         foreach (SpriteRenderer sprite in GetTileAtPosition(tile).GetRoomData().GetWalls)
         {
+            if (sprite == null) continue;
             sprite.color = new Color(1, 1, 1, enter ? 0.5f : 1);
-            sprite.sortingOrder = enter ? 110 : 5;
         }
     }
 
@@ -118,7 +119,7 @@ public class GridManager : MonoBehaviour
     {
         if (_gridLevelData != null && _generateGridOnPlay)
         {
-            Init();
+            //Init();
         }
     }
 
