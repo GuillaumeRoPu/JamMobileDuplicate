@@ -186,7 +186,6 @@ public class Tile : MonoBehaviour, IHoverable
     {
         if (!_isInARoom)
         {
-            Debug.Log(CellData.GridPosition);
             Debug.LogError("This cell isn't a room");
             return new Vector2Int();
         }

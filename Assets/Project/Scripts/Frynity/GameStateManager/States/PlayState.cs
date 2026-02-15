@@ -8,6 +8,7 @@ public class PlayState : GameState
     {
         GameManager.Of.ShowGame(true);
         GameManager.Of.ShowMenu(false);
+
         GameManager.Of.Grid.Init();
 
         foreach (RoomCells room in GameObject.FindObjectsByType<RoomCells>(FindObjectsSortMode.None))
@@ -15,7 +16,8 @@ public class PlayState : GameState
             room.CreateWalls();
         }
 
-        AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
+        //AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
+
         foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
         {
             CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
@@ -28,7 +30,8 @@ public class PlayState : GameState
             }
         }
 
-        AudioManager.Of.PlayClipAt(AudioManager.Of.fx[0], Vector3.zero, true);
+        GameManager.Of.UpdateZOrder();
+
 
         GameManager.Of.Turn.Init();
         playSound = true;

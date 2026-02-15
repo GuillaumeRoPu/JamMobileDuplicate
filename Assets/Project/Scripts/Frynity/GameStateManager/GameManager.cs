@@ -27,12 +27,17 @@ public class GameManager : MonoBehaviour
     public void ShowMenu(bool show) { _menu.SetActive(show); }
     public void ShowGame(bool show) { _game.SetActive(show); }
 
+    [Header("Object With Z Order")]
+    [SerializeField] GameObject _rooms;
+
     [Header("Room Design")]
     [SerializeField] Sprite _sideInWallSprite;
+    [SerializeField] Sprite _sideInDoorWallSprite;
     [SerializeField] Sprite _sideOutWallSprite;
     [SerializeField] Sprite[] _outWallSprite;
     [SerializeField] Sprite[] _outDoorWallSprite;
     public Sprite SideInWall => _sideInWallSprite;
+    public Sprite SideInDoorWall => _sideInDoorWallSprite;
     public Sprite SideOutWall => _sideOutWallSprite;
     public Sprite[] OutWall => _outWallSprite;
     public Sprite[] OutDoorWall => _outDoorWallSprite;
@@ -70,12 +75,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //Grid.Init();
-
-        //foreach (RoomCells room in FindObjectsByType<RoomCells>(FindObjectsSortMode.None))
-        //{
-        //    room.CreateWalls();
-        //}
 
         stateMachine.InitState(menuState);
     }
@@ -141,5 +140,26 @@ public class GameManager : MonoBehaviour
         _witchEntity.Add(witch.GetComponent<Entity>());
         _witchEntity[_witchEntity.Count - 1].SetCurrentTile(spawnPos);
         Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[_witchEntity.Count - 1];
+    }
+
+    public void UpdateZOrder(bool changeStatic = true)
+    {
+        if (changeStatic)
+        {
+            foreach (SpriteRenderer renderer in _rooms.GetComponentsInChildren<SpriteRenderer>())
+            {
+                renderer.sortingOrder = (int)renderer.transform.position.y * -4;
+                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 2;
+            }
+        }
+
+        _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)_playerEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+
+        foreach (var zombie in _zombieEntity)
+        {
+            zombie.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+        }
     }
 }

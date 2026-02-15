@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssetList
   <Tiles>k__BackingField: []
   <Grounds>k__BackingField:
-  - {fileID: -1622590042, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  - {fileID: -1799258457, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
   <Walls>k__BackingField:
-  - {fileID: 214452597, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
-  - {fileID: -1982708251, guid: 04523489b2d6b99449d9eced558e9ef7, type: 3}
+  - {fileID: -229726108, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
+  - {fileID: 199624785, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
+  - {fileID: -315401512, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
+  <DoorWalls>k__BackingField:
+  - {fileID: 750874927, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
   <Props>k__BackingField: []
