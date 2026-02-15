@@ -39,7 +39,7 @@ namespace Frynity.Saves.Binary
             }
         }
 
-        public static void SaveDataProfile(object data, string dataName, string profilName, Action<bool> callback)
+        public static void SaveDataProfile(ISaveData data, string dataName, string profilName, Action<bool> callback)
         {
             CreateProfile(profilName);
 
@@ -65,7 +65,7 @@ namespace Frynity.Saves.Binary
             if (File.Exists(ProfilDirectoryPath(profilName)))
             {
                 data = new();
-                data.SaveFile(SavePath(ProfilDirectoryPath(profilName)), callback);
+                (data as ISaveData).SaveFile(SavePath(ProfilDirectoryPath(profilName)), callback);
             }
             
             return (T)data;

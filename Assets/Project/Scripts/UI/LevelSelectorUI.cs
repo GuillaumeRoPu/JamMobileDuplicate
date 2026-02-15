@@ -1,5 +1,3 @@
-using Frynity.Gen;
-using Frynity.Utils;
 using TMPro;
 using UnityEngine;
 

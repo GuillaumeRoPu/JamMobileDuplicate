@@ -4,8 +4,10 @@ public class MenuState : GameState
 {
     public override void Enter()
     {
-        GameManager.Of.ShowGame(false);
         GameManager.Of.ShowMenu(true);
+        GameManager.Of.ShowSettings(false);
+        GameManager.Of.ShowPause(false);
+        GameManager.Of.ShowGame(false);
     }
 
     public override void LogicsUpdate()

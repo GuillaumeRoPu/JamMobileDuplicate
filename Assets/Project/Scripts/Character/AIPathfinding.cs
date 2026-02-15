@@ -50,10 +50,11 @@ public class AIPathfinding
         _passedTile.Add(nextTile.CellData.GridPosition);
         paths[pathIndex].Add(nextTile.CellData.GridPosition);
 
-        List<List<Vector2Int>> newPaths = new List<List<Vector2Int>>(paths);
+        List<List<Vector2Int>> newPaths = new(paths);
 
         List<Tile> searchTiles = new List<Tile>();
-        int lastDistance = (int)Vector2Int.Distance(nextTile.CellData.GridPosition, _target.CellData.GridPosition);
+        int lastDistance = Mathf.Abs(nextTile.CellData.GridPosition.x - _target.CellData.GridPosition.x)
+             + Mathf.Abs(nextTile.CellData.GridPosition.y - _target.CellData.GridPosition.y);
         for (int i = 0; i < 4; i++)
         {
             Tile tile = null;
@@ -78,14 +79,15 @@ public class AIPathfinding
                 }
                 else
                 {
-                    int distance = (int)Vector2Int.Distance(tile.CellData.GridPosition, _target.CellData.GridPosition);
+                    int distance = Mathf.Abs(tile.CellData.GridPosition.x - _target.CellData.GridPosition.x)
+             + Mathf.Abs(tile.CellData.GridPosition.y - _target.CellData.GridPosition.y);
                     if (distance < lastDistance)
                     {
                         lastDistance = distance;
                         searchTiles.Clear();
                         searchTiles.Add(tile);
                     }
-                    else if (distance == lastDistance)
+                    else if (distance == lastDistance || searchTiles.Count == 0)
                     {
                         lastDistance = distance;
                         searchTiles.Add(tile);

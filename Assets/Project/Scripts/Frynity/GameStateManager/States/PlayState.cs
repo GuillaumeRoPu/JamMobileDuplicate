@@ -6,8 +6,12 @@ public class PlayState : GameState
     bool playSound;
     public override void Enter()
     {
+        GameManager.Of.ShowPause(false);
         GameManager.Of.ShowGame(true);
         GameManager.Of.ShowMenu(false);
+
+        if (GameManager.Of.Player != null) return;
+
 
         GameManager.Of.Grid.Init();
 

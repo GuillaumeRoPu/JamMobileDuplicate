@@ -137,6 +137,29 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void EraseAll()
+    {
+
+        foreach (var tile in _tiles)
+        {
+            tile.Value.RemoveMaterial();
+            tile.Value.CellData.ActivateTileTrap(null);
+            tile.Value.CellData.ActivateDoorTrap(null);
+        }
+
+        for (int i = 0; i < _tilesParent.childCount; i++)
+        {
+            Destroy(_tilesParent.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < _roomsParent.childCount; i++)
+        {
+            Destroy(_roomsParent.GetChild(i).gameObject);
+        }
+
+        _tiles.Clear();
+    }
+
     public Tile GetTileAtPosition(Vector2Int position)
     {
         if (_tiles.TryGetValue(position, out var tile))

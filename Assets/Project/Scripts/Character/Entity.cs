@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
     Tile _currentTile;
     public Tile CurrentTile => _currentTile;
     List<Vector2Int> _path;
+    public List<Vector2Int> Path => _path;
     bool _reachTarget = true;
 
     bool _isMoving;
@@ -24,6 +25,7 @@ public class Entity : MonoBehaviour
         if (_currentTile)
         {
             GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition, false);
+            _currentTile.CellData.Entity = null;
         }
         _currentTile = GridManager.Tiles[tile];
         _currentTile.CellData.Entity = this;

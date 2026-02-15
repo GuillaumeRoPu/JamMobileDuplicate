@@ -14,13 +14,8 @@ namespace Frynity.Saves.Binary
                 Process.Start(path);
         }
 
-        public static void SaveFile(this object data, string path, Action<bool> callback)
-        {
-            if (!(data is ISaveData))
-            {
-                callback?.Invoke(false);
-                return;
-            }    
+        public static void SaveFile(this ISaveData data, string path, Action<bool> callback)
+        {   
 
             try
             {

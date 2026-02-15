@@ -21,6 +21,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] float _durationTurn;
     [SerializeField] LevelData _level;
+    [SerializeField] Player _player;
     public void SetLevelData(LevelData level) {  _level = level; }
 
     [SerializeField] PathFeedback _pathFeedback;
@@ -44,6 +45,17 @@ public class TurnManager : MonoBehaviour
     public void Init()
     {
         _level.Init();
+        _currentTurn = 0;
+
+        _player.ReachedTarget();
+        _player.RemoveMaterials(_player.Materials);
+
+        foreach (var go in _warnings)
+        {
+            Destroy(go);
+        }
+        _warnings.Clear();
+
         foreach (var evnt in _level.Events)
         {
             if (evnt.EventType == EventType.Zombie)
@@ -56,6 +68,8 @@ public class TurnManager : MonoBehaviour
                 _ui.PlaceEchoTurn(evnt.Turn, _level.TurnMax, false);
 
         }
+
+        _ui.UpdateTurn(0.1f, _currentTurn, _level.TurnMax);
     }
 
     public void PassTurn(int nbTurnToPass)
@@ -67,6 +81,7 @@ public class TurnManager : MonoBehaviour
     {
         if (_notNext) return;
 
+        GameManager.Of.CheckEntityAlive();
         _notNext = true;
         ZombieTurn();
         PlayTurn();
@@ -86,11 +101,12 @@ public class TurnManager : MonoBehaviour
         _ui.UpdateTurn(_durationTurn, _currentTurn, _level.TurnMax);
         if (GameManager.Of.Echo)
         {
-            if (GameManager.Of.Echo.CurrentTile.CellData.GridPosition != GameManager.Of.Player.CurrentTile.CellData.GridPosition)
+            if (GameManager.Of.PlayerMovement.Count > 4)
             {
-                List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, playerPosition };
+                List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, GameManager.Of.PlayerMovement[GameManager.Of.PlayerMovement.Count - 5] };
                 GameManager.Of.Echo.SetPath(path);
                 GameManager.Of.Echo.MoveToNextTileInPath(_durationTurn);
+                GameManager.Of.PlayerMovement.Clear();
             }
         }
         foreach (var witch in GameManager.Of.Witches)
@@ -130,6 +146,28 @@ public class TurnManager : MonoBehaviour
     {
         await Awaitable.WaitForSecondsAsync(_durationTurn);
 
+        GameManager.Of.AddMovement(GameManager.Of.Player.CurrentTile.CellData.GridPosition);
+        if (GameManager.Of.Player.CurrentTile.CellData.hasAMaterial)
+        {
+            GameManager.Of.Player.CurrentTile.RemoveMaterial();
+            _player.AddMaterial();
+        }
+
+        foreach (var zombie in GameManager.Of.Zombies)
+        {
+            if (zombie.CurrentTile.CellData.HasATileTrap())
+            {
+                zombie.CurrentTile.CellData.ActivateTileTrap(zombie);
+            }
+        }
+        foreach (var witch in GameManager.Of.Witches)
+        {
+            if (witch.CurrentTile.CellData.HasATileTrap())
+            {
+                witch.CurrentTile.CellData.ActivateTileTrap(witch);
+            }
+        }
+
         GameManager.Of.UpdateZOrder(false);
         if (_nbPass > 0)
         {
@@ -152,6 +190,7 @@ public class TurnManager : MonoBehaviour
         List<Vector2Int> stop = new List<Vector2Int>();;
         foreach (var zombie in GameManager.Of.Zombies)
         {
+            if (GameManager.Of.Deads.Contains(zombie)) continue;
             _zombieFeedbacks.Add(new List<GameObject>());
             List<Vector2Int> diff = new List<Vector2Int>();
             List<Vector2Int> tiles = new List<Vector2Int> { zombie.CurrentTile.CellData.GridPosition };
@@ -358,7 +397,7 @@ public class TurnManager : MonoBehaviour
         foreach (var zombie in GameManager.Of.Zombies)
         {
             if (_zombiePaths[zombieIndex].Count <= 1) continue;
-            zombie.GetComponent<Entity>().SetPath(_zombiePaths[zombieIndex]);
+            zombie.SetPath(_zombiePaths[zombieIndex]);
             zombieIndex++;
         }
     }
@@ -376,7 +415,7 @@ public class TurnManager : MonoBehaviour
             }
 
             if (_witchPaths[witchIndex].Count <= 1) continue;
-            witch.GetComponent<Entity>().SetPath(_witchPaths[witchIndex]);
+            witch.SetPath(_witchPaths[witchIndex]);
             witchIndex++;
         }
     }
@@ -404,7 +443,7 @@ public class TurnManager : MonoBehaviour
         renderer.flipX = xFlip;
         renderer.flipY = yFlip;
     }
-    void ResetFeedback()
+    public void ResetFeedback()
     {
         foreach (var feed in _zombieFeedbacks)
         {

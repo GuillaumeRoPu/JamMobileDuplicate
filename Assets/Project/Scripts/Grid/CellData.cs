@@ -49,6 +49,8 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
+        if (HasADoorTrap()) return false;
+
         if (MainRoomCell == originalCell.MainRoomCell || DoorPosition == receptFace || originalCell.DoorPosition == face)
         {
             return true;
@@ -156,8 +158,7 @@ public class CellData
 
     public void KillEntity()
     {
-        //Entity.Kill();
-        Debug.Log("Killed entity");
+        GameManager.Of.KillAnEntity(Entity);
     }
 
     public void ActivateTileTrap(Entity entity)

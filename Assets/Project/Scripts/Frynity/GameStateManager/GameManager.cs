@@ -1,6 +1,7 @@
-using Frynity.Gen;
+using Frynity.Saves.Binary;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _echo;
     [SerializeField] GameObject _witch;
 
+    List<Vector2Int> _playerMovement = new List<Vector2Int>();
+    public List<Vector2Int> PlayerMovement => _playerMovement;
+    public void AddMovement(Vector2Int playerMovement) {  PlayerMovement.Add(playerMovement); }
+
     Entity _playerEntity;
     List<Entity> _zombieEntity = new List<Entity>();
     Entity _echoEntity = null;
     List<Entity> _witchEntity = new List<Entity>();
+
+    List<Entity> _deadEntity = new List<Entity>();
+    public List<Entity> Deads => _deadEntity;
 
     public Entity Player => _playerEntity;
     public List<Entity> Zombies => _zombieEntity;
@@ -24,11 +32,17 @@ public class GameManager : MonoBehaviour
     [Header("Game Scene")]
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _game;
+    [SerializeField] GameObject _pause;
+    [SerializeField] GameObject _settings;
     public void ShowMenu(bool show) { _menu.SetActive(show); }
     public void ShowGame(bool show) { _game.SetActive(show); }
+    public void ShowPause(bool show) { _pause.SetActive(show); }
+    public void ShowSettings(bool show) { _settings.SetActive(show); }
 
     [Header("Object With Z Order")]
     [SerializeField] GameObject _rooms;
+    [SerializeField] List<GameObject> _other = new List<GameObject>();
+    public void AddObjectRespectZOrder(GameObject obj) { _other.Add(obj); }
 
     [Header("Room Design")]
     [SerializeField] Sprite _sideInWallSprite;
@@ -99,6 +113,31 @@ public class GameManager : MonoBehaviour
         pauseState = new PauseState();
     }
 
+    public void CheckEntityAlive()
+    {
+        for (int i = 0; i < _zombieEntity.Count; i++)
+        {
+            if (_zombieEntity[i] == null)
+            {
+                _zombieEntity.RemoveAt(i);
+                i--;
+                continue;
+            }
+        }
+
+        for (int i = 0; i < _witchEntity.Count; i++)
+        {
+            if (_witchEntity[i] == null)
+            {
+                _witchEntity.RemoveAt(i);
+                i--;
+                continue;
+            }
+        }
+
+        _deadEntity.Clear();
+    }
+
     public void CreatePlayer(Vector2Int tile)
     {
         GameObject player = Instantiate(_player, (Vector2)tile * Grid.TileSize, Quaternion.identity);
@@ -115,17 +154,21 @@ public class GameManager : MonoBehaviour
         Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
     }
 
-    public void SpawnEcho(Vector2Int spawnPos)
+    public void SpawnEcho(Vector2Int playerPos)
     {
         if (_echoEntity)
         {
             Debug.LogError("Echo déjà crée");
             return;
         }
-        GameObject echo = Instantiate(_echo, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
+        Vector2Int pos = playerPos + Vector2Int.left;
+        if (_playerMovement.Count > 0) pos = _playerMovement[_playerMovement.Count - 1];
+
+        GameObject echo = Instantiate(_echo, (Vector2)pos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
-        _echoEntity.SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _echoEntity;
+        _echoEntity.SetCurrentTile(pos);
+        Grid.GetTileAtPosition(pos).CellData.Entity = _echoEntity;
+        PlayerMovement.Clear();
     }
 
     public void DestroyEcho()
@@ -151,6 +194,19 @@ public class GameManager : MonoBehaviour
                 renderer.sortingOrder = (int)renderer.transform.position.y * -4;
                 if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 2;
             }
+
+            for (int i = 0; i < _other.Count; i++)
+            {
+                if (_other[i] == null)
+                {
+                    _other.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+
+                SpriteRenderer renderer = _other[i].GetComponentInChildren<SpriteRenderer>();
+                renderer.sortingOrder = (int)renderer.transform.position.y * -4 - 2;
+            }
         }
 
         _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
@@ -161,5 +217,54 @@ public class GameManager : MonoBehaviour
             zombie.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
             (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
         }
+    }
+
+    public void KillAnEntity(Entity entity)
+    {
+        if (entity == null) return;
+
+        Destroy(entity.gameObject);
+        _deadEntity.Add(entity);
+    }
+
+
+    public void SetPause(bool pause)
+    {
+        stateMachine.ChangeState(pause ? pauseState : playState);
+    }
+
+    public void QuitToHome()
+    {
+        EndLevel();
+        stateMachine.ChangeState(menuState);
+    }
+    public void RetryLevel()
+    {
+        EndLevel();
+        stateMachine.ChangeState(playState);
+    }
+
+    public void EndLevel()
+    {
+        Turn.ResetFeedback();
+
+        for (int i = 0; i < _zombieEntity.Count; i++)
+        {
+            Destroy(_zombieEntity[i].gameObject);
+        }
+        _zombieEntity.Clear();
+
+        for (int i = 0; i < _witchEntity.Count; i++)
+        {
+            Destroy(_witchEntity[i].gameObject);
+        }
+        _witchEntity.Clear();
+
+        if (_echoEntity)
+            Destroy(_echoEntity.gameObject);
+
+        Destroy(_playerEntity.gameObject);
+
+        Grid.EraseAll();
     }
 }

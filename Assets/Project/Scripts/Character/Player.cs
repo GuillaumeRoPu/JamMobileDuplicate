@@ -1,5 +1,8 @@
+using GooglePlayGames.BasicApi;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -11,8 +14,24 @@ public class Player : MonoBehaviour
     List<Vector2Int> _diffFeedbacks = new List<Vector2Int>();
     List<Vector2Int> _selectPath = new List<Vector2Int>();
 
+    public System.Action MaterialChange;
+    int _materials;
+    [SerializeField] TextMeshProUGUI _countMaterialText;
+    public int Materials => _materials;
+    public void AddMaterial() { _materials++; MaterialChange?.Invoke(); _countMaterialText.text = _materials.ToString(); }
+    public void RemoveMaterials(int nb) { _materials -= nb; MaterialChange?.Invoke(); _countMaterialText.text = _materials.ToString(); }
+
     Tile _last;
     bool _selected = false;
+
+    List<Face> _faceForPlaceTrap = new List<Face>();
+    Trap _trap;
+    int _price;
+
+    private void Start()
+    {
+        MaterialChange?.Invoke();
+    }
 
     public void SelectPath(Vector2Int tile)
     {
@@ -48,6 +67,7 @@ public class Player : MonoBehaviour
 
         if (tile == GameManager.Of.Player.CurrentTile.CellData.GridPosition && !_selected)
         {
+            ResetTrapsPlace();
             _last = GridManager.Tiles[tile];
             _selectPath.Clear();
             _selectPath.Add(tile);
@@ -287,12 +307,297 @@ public class Player : MonoBehaviour
         }
     }
 
-    void ReachedTarget()
+    public void ReachedTarget()
     {
         foreach (GameObject over in _pathOverList)
         {
             Destroy(over);
         }
         _pathOverList.Clear();
+    }
+
+    public void ChooseTrapToPlace(Trap trap, int price)
+    {
+        _trap = trap;
+        _price = price;
+        Vector2Int player = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
+        ResetTrapsPlace();
+
+        Face[] faces = {Face.Up, Face.Down, Face.Right, Face.Left};
+        for (int i = 0; i < 4; i++)
+        {
+            bool check = CheckIfTrapCanBePlaced(_trap, player, faces[i], false);
+            if (check)
+                _faceForPlaceTrap.Add(faces[i]);
+        }
+    }
+
+    public void PlaceTrap(Vector2Int tile)
+    {
+        if (_faceForPlaceTrap.Count > 0)
+        {
+            Face face = GridManager.GetFace(tile - GameManager.Of.Player.CurrentTile.CellData.GridPosition);
+            if (_faceForPlaceTrap.Contains(face))
+            {
+                RemoveMaterials(_price);
+                CheckIfTrapCanBePlaced(_trap, GameManager.Of.Player.CurrentTile.CellData.GridPosition, face, true);
+                GameManager.Of.Turn.NextTurn();
+                GameManager.Of.UpdateZOrder();
+                ResetTrapsPlace();
+            }
+            else
+            {
+                ResetTrapsPlace();
+            }
+        }
+    }
+
+    void ResetTrapsPlace()
+    {
+        _faceForPlaceTrap.Clear();
+
+        ReachedTarget();
+    }
+
+    private bool CheckIfTrapCanBePlaced(Trap newTrap, Vector2Int playerPosition, Face direction, bool placeTrap)
+    {
+        if (newTrap != null) //checks if the trap exists
+        {
+            if (newTrap.TrapMode == Trap.TrapType.Single) //checks if the trap is Single (lol)
+            {
+                var allPositions = new List<Vector2Int>();
+                Vector2Int offset = new Vector2Int();
+                switch (direction)
+                {
+                    case Face.Up:
+                        offset = new Vector2Int(0, 1);
+                        break;
+                    case Face.Down:
+                        offset = new Vector2Int(0, -1);
+                        break;
+                    case Face.Left:
+                        offset = new Vector2Int(-1, 0);
+                        break;
+                    case Face.Right:
+                        offset = new Vector2Int(1, 0);
+                        break;
+                    default:
+                        Debug.LogWarning("You didn't input a valid direction for the trap");
+                        break;
+                }
+                var trapPosition = playerPosition + offset;
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(newTrap)
+                        && GridManager.Tiles[trapPosition].CellData.CanPass(direction, GridManager.Tiles[playerPosition].CellData))
+                    {
+                        _pathOverList.Add(Instantiate(_pathOver, (Vector2)trapPosition * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
+
+                        if (placeTrap)
+                        {
+                            var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                            allPositions.Add(trapPosition);
+                            trap.TrapPlaced(trapPosition, direction);
+                            GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                            GameManager.Of.AddObjectRespectZOrder(trap.gameObject);
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else if (newTrap.TrapMode == Trap.TrapType.Multiple)
+            {
+                Vector2Int offset = new Vector2Int();
+                switch (direction)
+                {
+                    case Face.Up:
+                        offset = new Vector2Int(0, 1);
+                        break;
+                    case Face.Down:
+                        offset = new Vector2Int(0, -1);
+                        break;
+                    case Face.Left:
+                        offset = new Vector2Int(-1, 0);
+                        break;
+                    case Face.Right:
+                        offset = new Vector2Int(1, 0);
+                        break;
+                    default:
+
+                        Debug.LogWarning("You didn't input a valid direction for the trap");
+                        break;
+                }
+                var trapPosition = playerPosition + offset;
+                Debug.Log("Pos : X = " + trapPosition.x + " | Y = " + trapPosition.y);
+                bool canPose = true;
+
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(newTrap)
+                        && GridManager.Tiles[trapPosition].CellData.CanPass(direction, GridManager.Tiles[playerPosition].CellData))
+                    {
+                        _pathOverList.Add(Instantiate(_pathOver, (Vector2)trapPosition * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
+
+                    }
+                    else
+                    {
+                        canPose = false;
+                    }
+                }
+                else
+                {
+                    canPose = false;
+                }
+
+                foreach (Vector2Int pos in newTrap.AdditionalPosition)
+                {
+                    Vector2Int newpos = pos;
+                    switch (direction)
+                    {
+                        case Face.Up:
+                            newpos = new Vector2Int(-pos.y, pos.x);
+                            break;
+                        case Face.Down:
+                            newpos = new Vector2Int(pos.y, -pos.x);
+                            break;
+                        case Face.Left:
+                            newpos = new Vector2Int(-pos.x, -pos.y);
+                            break;
+                        case Face.Right:
+                            newpos = pos;
+                            break;
+                        default:
+                            break;
+                    }
+                    var trapPositionBis = playerPosition + newpos + offset;
+                    Debug.Log("Pos : X = " + trapPositionBis.x + " | Y = " + trapPositionBis.y);
+                    if (GridManager.Tiles.ContainsKey(trapPositionBis))
+                    {
+                        if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(newTrap)
+                            && GridManager.Tiles[trapPosition].CellData.CanPass(direction, GridManager.Tiles[playerPosition].CellData))
+                        {
+                            Debug.Log("Been There");
+                        }
+                        else
+                        {
+                            canPose = false;
+                        }
+                    }
+                    else
+                    {
+                        canPose = false;
+                    }
+                }
+
+                if (canPose == true)
+                {
+                    if (placeTrap)
+                    {
+                        var trap = Instantiate(newTrap, (Vector2)trapPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
+                        switch (direction)
+                        {
+                            case Face.Up:
+                                trap.transform.Rotate(new Vector3(0, 0, 90));
+                                break;
+                            case Face.Down:
+                                trap.transform.Rotate(new Vector3(0, 0, -90));
+                                break;
+                            case Face.Left:
+                                trap.transform.Rotate(new Vector3(0, 0, 180));
+                                break;
+                            case Face.Right:
+                                break;
+                            default:
+                                break;
+                        }
+                        trap.TrapPlaced(trapPosition, direction);
+                        GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                        GameManager.Of.AddObjectRespectZOrder(trap.gameObject);
+                        foreach (var pos in trap.AdditionalPosition)
+                        {
+                            GridManager.Tiles[pos].CellData.SetTrap(trap);
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+            else if (newTrap.TrapMode == Trap.TrapType.Door)
+            {
+                var allPositions = new List<Vector2Int>();
+                var trapPosition = playerPosition;
+                if (GridManager.Tiles.ContainsKey(trapPosition))
+                {
+                    if (GridManager.Tiles[trapPosition].CellData.CanPlaceTrap(newTrap) && GridManager.Tiles[trapPosition].CellData.HasADoor())
+                    {
+                        var otherDoorTile = trapPosition;
+                        switch (GridManager.Tiles[trapPosition].CellData.DoorPosition)
+                        {
+                            case Face.Up:
+                                otherDoorTile += new Vector2Int(0, 1);
+                                break;
+                            case Face.Down:
+                                otherDoorTile += new Vector2Int(0, -1);
+                                break;
+                            case Face.Left:
+                                otherDoorTile += new Vector2Int(-1, 0);
+                                break;
+                            case Face.Right:
+                                otherDoorTile += new Vector2Int(1, 0);
+                                break;
+                            default:
+                                break;
+                        }
+                        bool canPlace = true;
+                        if (GridManager.Tiles.ContainsKey(otherDoorTile))
+                        {
+                            if (GridManager.Tiles[otherDoorTile].CellData.HasADoorTrap())
+                            {
+                                canPlace = false;
+                            }
+                        }
+                        if (canPlace)
+                        {
+                            _pathOverList.Add(Instantiate(_pathOver, (Vector2)otherDoorTile * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
+                            if (placeTrap)
+                            {
+                                var offset = new Vector2(0, 0);
+                                switch (GridManager.Tiles[trapPosition].CellData.DoorPosition)
+                                {
+                                    case Face.Up:
+                                        offset = new Vector2(0.5f, 1);
+                                        break;
+                                    case Face.Down:
+                                        offset = new Vector2(0.5f, 0);
+                                        break;
+                                    case Face.Left:
+                                        offset = new Vector2(0, 0.5f);
+                                        break;
+                                    case Face.Right:
+                                        offset = new Vector2(1, 0.5f);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                var trap = Instantiate(newTrap, (Vector2)trapPosition + offset, Quaternion.identity);
+                                allPositions.Add(trapPosition);
+                                trap.TrapPlaced(trapPosition, GridManager.Tiles[trapPosition].CellData.DoorPosition);
+                                GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
+                                GameManager.Of.AddObjectRespectZOrder(trap.gameObject);
+                            }
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            else
+            {
+                Debug.Log("The Trap Mode isn't finished yet");
+                return false;
+            }
+        }
+        return false;
     }
 }
