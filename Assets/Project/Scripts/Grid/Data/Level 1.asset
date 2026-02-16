@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a7d48b69c1b84f9926c51917fb1c9, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: Assembly-CSharp::GridLevelData
+  allTilesPosition:
+  - {x: 0, y: -3}
+  - {x: 0, y: -2}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: 1}
+  - {x: 0, y: -1}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: -1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  keys:
+  - {x: 0, y: -3}
+  - {x: -1, y: 1}
+  values: 0200000001000000
+  allRoomsPosition:
+  - {x: 0, y: -1}
+  - {x: 1, y: 1}
+  - {x: -1, y: 1}
+  _allRoomsCellsBis:
+  - items:
+    - {x: 0, y: -1}
+    - {x: -1, y: -1}
+    - {x: 0, y: -2}
+  - items:
+    - {x: 1, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: -1}
+  - items:
+    - {x: -1, y: 1}
+    - {x: 0, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
+  allRoomsPrefab:
+  - {fileID: 6660256567232548030, guid: 13217bdcce9ab904396c906e851ae7ee, type: 3}
+  - {fileID: 325709994575973174, guid: cdb1a79aeb9d01147a203f9e4698d3d9, type: 3}
+  - {fileID: 3613068318017124037, guid: f19adf506f0c0804fbbccf8f830e8f76, type: 3}
+  keysD:
+  - {x: 1, y: -1}
+  - {x: 0, y: -1}
+  - {x: 0, y: -3}
+  - {x: 0, y: -2}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: -1, y: 1}
+  valuesD: 02000000030000000000000001000000030000000200000000000000
+  allMaterialsList:
+  - {x: 0, y: 0}
+  allBarricadesList: []
+  limitsMin: {x: -1, y: -3}
+  limitsMax: {x: 1, y: 1}

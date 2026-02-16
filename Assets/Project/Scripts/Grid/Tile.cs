@@ -137,6 +137,11 @@ public class Tile : MonoBehaviour, IHoverable
         return false;
     }
 
+    public void MakeInvisible()
+    {
+        SetColor(new Color(_renderer.color.r, _renderer.color.g, _renderer.color.b, 0));
+    }
+
     public void SetAsInARoom(Vector2Int mainRoomCellData, RoomData roomData)
     {
         if (!IsInARoom())
