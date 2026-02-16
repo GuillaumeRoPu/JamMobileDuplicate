@@ -104,7 +104,7 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
-        return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == face || tile.CellData.DoorPosition == receptFace;
+        return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == receptFace || tile.CellData.DoorPosition == face;
     }
 
     public void SetTrap(Trap newtrap)

@@ -3434,8 +3434,7 @@ MonoBehaviour:
   _levelText: {fileID: 1728141873}
   _levels:
   - {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
-  - {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
-  - {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
+  - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
 --- !u!1 &879282962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4145,7 +4144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 0
-  _gridLevelData: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: 91c721285602f5e42b16f1c54e8c8c99, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1420296221}
   _roomsParent: {fileID: 1233790247}
@@ -4154,7 +4153,7 @@ MonoBehaviour:
   _camera: {fileID: 519420032}
   _coolColors: 0
   _coolColorsAnimated: 0
-  _spawnIndex: 1
+  _spawnIndex: 0
 --- !u!114 &1155825362
 MonoBehaviour:
   m_ObjectHideFlags: 0
