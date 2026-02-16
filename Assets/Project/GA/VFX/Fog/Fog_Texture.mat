@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fog
+  m_Name: Fog_Texture
   m_Shader: {fileID: -6465566751694194690, guid: 87c366bf52bb55a40a5471abef3041c7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -57,7 +57,7 @@ Material:
     - _Fogsize: 10
     - _Tiling: 5.05
     m_Colors:
-    - _Fogcolor: {r: 1, g: 1, b: 1, a: 0.1176471}
+    - _Fogcolor: {r: 1, g: 1, b: 1, a: 0.039215688}
     - _Fogspeed: {r: 0.16, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
