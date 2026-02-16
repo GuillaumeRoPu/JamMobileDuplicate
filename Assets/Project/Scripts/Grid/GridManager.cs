@@ -119,7 +119,7 @@ public class GridManager : MonoBehaviour
     {
         if (_gridLevelData != null && _generateGridOnPlay)
         {
-            //Init();
+            Init();
         }
     }
 
@@ -134,6 +134,14 @@ public class GridManager : MonoBehaviour
             PlaceAllDoors(_gridLevelData.allDoors);
             PlaceAllMaterials(_gridLevelData.allMaterials);
             PlaceAllBarricades(_gridLevelData.allBarricades);
+            foreach(var tile in _tiles)
+            {
+                Debug.Log("Kill me");
+                if (!tile.Value.IsInARoom())
+                {
+                    tile.Value.MakeInvisible();
+                }
+            }
         }
     }
 

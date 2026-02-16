@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a7d48b69c1b84f9926c51917fb1c9, type: 3}
+  m_Name: Level 5 (Tuto Barricade)
+  m_EditorClassIdentifier: Assembly-CSharp::GridLevelData
+  allTilesPosition:
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: 1}
+  - {x: -1, y: 2}
+  - {x: 0, y: -1}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 1, y: -1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 2, y: -1}
+  - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  - {x: 2, y: 2}
+  - {x: 0, y: -2}
+  keys:
+  - {x: 0, y: -1}
+  - {x: 0, y: -2}
+  values: 0100000002000000
+  allRoomsPosition:
+  - {x: 1, y: 2}
+  - {x: 0, y: -1}
+  - {x: -1, y: 2}
+  - {x: 0, y: 1}
+  _allRoomsCellsBis:
+  - items:
+    - {x: 1, y: 2}
+    - {x: 2, y: 2}
+    - {x: 0, y: 2}
+    - {x: 2, y: 1}
+  - items:
+    - {x: 0, y: -1}
+    - {x: -1, y: -1}
+    - {x: 1, y: -1}
+    - {x: 2, y: -1}
+    - {x: 2, y: 0}
+  - items:
+    - {x: -1, y: 2}
+    - {x: -1, y: 1}
+    - {x: -1, y: 0}
+  - items:
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+  allRoomsPrefab:
+  - {fileID: 5396503244674537479, guid: 7a2ffbe9d6851fa479c2690152a0ed04, type: 3}
+  - {fileID: 8422689895798552632, guid: 269ac04f9db1dc64b85388d482edd54a, type: 3}
+  - {fileID: 8032649500825494230, guid: 62a893e5c6e316c4d907362b1633cec1, type: 3}
+  - {fileID: 1691036054437477102, guid: 878a14ae6ffb69141b9e26f7d518f8c4, type: 3}
+  keysD:
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: -1, y: 2}
+  - {x: 0, y: 2}
+  - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  - {x: 0, y: -2}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: -1}
+  - {x: 2, y: -1}
+  valuesD: 0000000001000000030000000200000000000000010000000000000001000000010000000000000003000000
+  allMaterialsList:
+  - {x: 2, y: -1}
+  allBarricadesList: []
+  limitsMin: {x: -1, y: -2}
+  limitsMax: {x: 2, y: 2}
