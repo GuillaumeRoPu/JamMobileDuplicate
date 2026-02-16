@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public List<Entity> Witches => _witchEntity;
     public bool CanPlay => !_playerEntity.IsMoving;
 
+    int _currentLevel;
+    public void SetCurrentLevel(int level) { _currentLevel = level; } 
+
     [Header("Game Scene")]
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _game;
@@ -59,6 +62,9 @@ public class GameManager : MonoBehaviour
     [Header("Sound Data")]
     [SerializeField] SoundData _zombieSounds;
     public SoundData ZombieAudio => _zombieSounds;
+
+    [Header("Animation")]
+    [SerializeField] Animator _doorAnim;
 
     [Header("Manager")]
     [SerializeField] TurnManager _turnManager;
@@ -237,11 +243,31 @@ public class GameManager : MonoBehaviour
     {
         EndLevel();
         stateMachine.ChangeState(menuState);
+        _doorAnim.SetTrigger("Open");
     }
     public void RetryLevel()
     {
         EndLevel();
         stateMachine.ChangeState(playState);
+    }
+
+    public async void WinLevel()
+    {
+        await Awaitable.WaitForSecondsAsync(4);
+
+        if (_currentLevel == SaveManager.Of.Level.LevelUnlock)
+        {
+            SaveManager.Of.Level.LevelUnlock++;
+            SaveManager.Of.SaveGame();
+        }
+        QuitToHome();
+    }
+
+    public async void LoseLevel()
+    {
+        await Awaitable.WaitForSecondsAsync(4);
+
+        QuitToHome();
     }
 
     public void EndLevel()

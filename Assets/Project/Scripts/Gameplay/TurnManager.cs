@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum EventType
 {
@@ -16,6 +17,7 @@ public class TurnEvent
 
 public class TurnManager : MonoBehaviour
 {
+    int _lastEventTurn;
     int _currentTurn;
     public float Turn => _currentTurn;
 
@@ -31,6 +33,7 @@ public class TurnManager : MonoBehaviour
     public PathFeedback GetPathFeedback => _pathFeedback;
 
     [SerializeField] TurnChronoUI _ui;
+    [SerializeField] GameObject _gameOverUI;
 
     bool _notNext;
 
@@ -46,6 +49,10 @@ public class TurnManager : MonoBehaviour
     {
         _level.Init();
         _currentTurn = 0;
+
+        _notNext = false;
+
+        _gameOverUI.GetComponent<Image>().color = new Color(255, 255, 255, 0);
 
         _player.ReachedTarget();
         _player.RemoveMaterials(_player.Materials);
@@ -69,6 +76,8 @@ public class TurnManager : MonoBehaviour
 
         }
 
+        _lastEventTurn = _level.Events[_level.Events.Length - 1].Turn;
+
         _ui.UpdateTurn(0.1f, _currentTurn, _level.TurnMax);
     }
 
@@ -81,11 +90,10 @@ public class TurnManager : MonoBehaviour
     {
         if (_notNext) return;
 
-        GameManager.Of.CheckEntityAlive();
+        
         _notNext = true;
         ZombieTurn();
         PlayTurn();
-        
     }
 
     void PlayTurn()
@@ -159,12 +167,49 @@ public class TurnManager : MonoBehaviour
             {
                 zombie.CurrentTile.CellData.ActivateTileTrap(zombie);
             }
+
+            if (zombie.CurrentTile.CellData.GridPosition == GameManager.Of.Player.CurrentTile.CellData.GridPosition)
+            {
+                _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
+                GameManager.Of.LoseLevel();
+                return;
+            }
         }
         foreach (var witch in GameManager.Of.Witches)
         {
             if (witch.CurrentTile.CellData.HasATileTrap())
             {
                 witch.CurrentTile.CellData.ActivateTileTrap(witch);
+            }
+
+            if (witch.CurrentTile.CellData.GridPosition == GameManager.Of.Player.CurrentTile.CellData.GridPosition)
+            {
+                _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
+                GameManager.Of.LoseLevel();
+                return;
+            }
+        }
+
+        if (GameManager.Of.Echo)
+        {
+            if (GameManager.Of.Echo.CurrentTile.CellData.GridPosition == GameManager.Of.Player.CurrentTile.CellData.GridPosition)
+            {
+                _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
+                GameManager.Of.LoseLevel();
+                return;
+            }
+        }
+
+        // Attend la fin de la frame
+        await Awaitable.EndOfFrameAsync();
+
+        GameManager.Of.CheckEntityAlive();
+        if (_currentTurn > _lastEventTurn)
+        {
+            if (GameManager.Of.Zombies.Count == 0 && GameManager.Of.Witches.Count == 0 && !GameManager.Of.Echo)
+            {
+                _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
+                GameManager.Of.WinLevel();
             }
         }
 

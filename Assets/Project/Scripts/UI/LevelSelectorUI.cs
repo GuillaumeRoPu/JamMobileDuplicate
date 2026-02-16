@@ -1,8 +1,11 @@
+using Frynity.Saves.Binary;
 using TMPro;
 using UnityEngine;
 
 public class LevelSelectorUI : MonoBehaviour
 {
+    [SerializeField] GameObject _lockObject;
+    [SerializeField] GameObject _playButtonObject;
     [SerializeField] Transform _monsterContainer;
     [SerializeField] GameObject _monsterContent;
     [SerializeField] TextMeshProUGUI _sizeText;
@@ -16,11 +19,20 @@ public class LevelSelectorUI : MonoBehaviour
         ChangeLevel(0);
     }
 
+    private void Start()
+    {
+        SaveManager.Of.LoadGame();
+    }
+
     public void ChangeLevel(int indentation)
     {
         _index += indentation;
         if (_index < 0) _index = _levels.Length - 1;
         if (_index >= _levels.Length) _index = 0;
+
+        _lockObject.SetActive(SaveManager.Of.Level.LevelUnlock < _index);
+        _playButtonObject.SetActive(SaveManager.Of.Level.LevelUnlock >= _index);
+
 
         ShowLevelStat();
 
@@ -90,6 +102,7 @@ public class LevelSelectorUI : MonoBehaviour
 
     public void PlayLevel()
     {
+        GameManager.Of.SetCurrentLevel(_index);
         GameManager.Of.Turn.SetLevelData(_levels[_index]);
         GameManager.Of.Grid.SetLevelData(_levels[_index].GridLevel);
 

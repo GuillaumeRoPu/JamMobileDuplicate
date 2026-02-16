@@ -39,10 +39,3 @@ public class SettingsController : MonoBehaviour
         SaveManager.Of.SaveSettings();
     }
 }
-
-[System.Serializable]
-public class SettingSave : ISaveData
-{
-    public float fxVolume;
-    public float musicVolume;
-}

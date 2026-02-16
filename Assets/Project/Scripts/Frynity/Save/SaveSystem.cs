@@ -17,7 +17,7 @@ namespace Frynity.Saves.Binary
         const string directoryName = "/Saves";
         static string fileName = "";
 
-        static string DirectoryPath => Application.persistentDataPath + directoryName;
+        public static string DirectoryPath => Application.persistentDataPath + directoryName;
         static string ProfilDirectoryPath(string profilName) => $"{DirectoryPath}/{profilName}";
         static string SavePath(string path) => path + "/" + fileName + extension;
 
@@ -28,7 +28,6 @@ namespace Frynity.Saves.Binary
                 Directory.CreateDirectory(DirectoryPath);
             }
 
-            SaveUtil.OpenDirectory(DirectoryPath);
         }
 
         public static void CreateProfile(string profilName)

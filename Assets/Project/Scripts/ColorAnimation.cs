@@ -54,5 +54,6 @@ public class ColorAnimation : MonoBehaviour
     {
         _play = true;
         _timing = 0;
+        _reverse = true;
     }
 }

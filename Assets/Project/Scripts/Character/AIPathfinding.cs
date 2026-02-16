@@ -81,6 +81,7 @@ public class AIPathfinding
                 {
                     int distance = Mathf.Abs(tile.CellData.GridPosition.x - _target.CellData.GridPosition.x)
              + Mathf.Abs(tile.CellData.GridPosition.y - _target.CellData.GridPosition.y);
+
                     if (distance < lastDistance)
                     {
                         lastDistance = distance;
