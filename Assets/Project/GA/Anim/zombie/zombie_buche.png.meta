@@ -1,0 +1,553 @@
+fileFormatVersion: 2
+guid: 5e3b5ed2fef9a5b4bb06fdfdcae508ad
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7271184068180839150
+    second: zombie_buche_0
+  - first:
+      213: 4132138707659837703
+    second: zombie_buche_1
+  - first:
+      213: 8470316900697398666
+    second: zombie_buche_2
+  - first:
+      213: 7953458278251224668
+    second: zombie_buche_3
+  - first:
+      213: 3692375632781589670
+    second: zombie_buche_4
+  - first:
+      213: 4309040232980680858
+    second: zombie_buche_5
+  - first:
+      213: -6838958488517259817
+    second: zombie_buche_6
+  - first:
+      213: -1101884690345664000
+    second: zombie_buche_7
+  - first:
+      213: -8822320074683564619
+    second: zombie_buche_8
+  - first:
+      213: -5585562706908876409
+    second: zombie_buche_9
+  - first:
+      213: -2685246231883903635
+    second: zombie_buche_10
+  - first:
+      213: -6936057485427819482
+    second: zombie_buche_11
+  - first:
+      213: 6944013832965673187
+    second: zombie_buche_12
+  - first:
+      213: -3993534258131131372
+    second: zombie_buche_13
+  - first:
+      213: -2793899259389058999
+    second: zombie_buche_14
+  - first:
+      213: 8507567662487811742
+    second: zombie_buche_15
+  - first:
+      213: -2139830523940592127
+    second: zombie_buche_16
+  - first:
+      213: 8934330089385113344
+    second: zombie_buche_17
+  - first:
+      213: -5279493867515824430
+    second: zombie_buche_18
+  - first:
+      213: 3146289393487188640
+    second: zombie_buche_19
+  - first:
+      213: 3293199951396223538
+    second: zombie_buche_20
+  - first:
+      213: -3363076574034063287
+    second: zombie_buche_21
+  - first:
+      213: 771071898321155031
+    second: zombie_buche_22
+  - first:
+      213: 5250743634673735789
+    second: zombie_buche_23
+  - first:
+      213: -5421912369145483799
+    second: zombie_buche_24
+  - first:
+      213: 780059615022701314
+    second: zombie_buche_25
+  - first:
+      213: -3147459743039348721
+    second: zombie_buche_26
+  - first:
+      213: -6663933498343298509
+    second: zombie_buche_27
+  - first:
+      213: -587119093831763388
+    second: zombie_buche_28
+  - first:
+      213: -721094366932731826
+    second: zombie_buche_29
+  - first:
+      213: -2430214872972961092
+    second: zombie_buche_30
+  - first:
+      213: 1737459615534913337
+    second: zombie_buche_31
+  - first:
+      213: 791954214598795750
+    second: zombie_buche_32
+  - first:
+      213: -4164297158904511231
+    second: zombie_buche_33
+  - first:
+      213: 6557850702483530062
+    second: zombie_buche_34
+  - first:
+      213: -5421403449624412831
+    second: zombie_buche_35
+  - first:
+      213: 1291451562596107355
+    second: zombie_buche_36
+  - first:
+      213: -112252574752755563
+    second: zombie_buche_37
+  - first:
+      213: 8800213751300354392
+    second: zombie_buche_38
+  - first:
+      213: 588009401982360086
+    second: zombie_buche_39
+  - first:
+      213: 6012363702040832985
+    second: zombie_buche_40
+  - first:
+      213: 6017084164489187687
+    second: zombie_buche_41
+  - first:
+      213: 1148568276869177678
+    second: zombie_buche_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: zombie_buche_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 3230
+        width: 563
+        height: 529
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eea0668b26f68e460800000000000000
+      internalID: 7271184068180839150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_2
+      rect:
+        serializedVersion: 2
+        x: 1241
+        y: 3229
+        width: 574
+        height: 547
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8d5e01f75c9c8570800000000000000
+      internalID: 8470316900697398666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_4
+      rect:
+        serializedVersion: 2
+        x: 2415
+        y: 3230
+        width: 626
+        height: 582
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ac31413314fd3330800000000000000
+      internalID: 3692375632781589670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_6
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 2224
+        width: 694
+        height: 706
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dd49423d732711a0800000000000000
+      internalID: -6838958488517259817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_11
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 2223
+        width: 810
+        height: 786
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62cb26f377c2ebf90800000000000000
+      internalID: -6936057485427819482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_12
+      rect:
+        serializedVersion: 2
+        x: 2375
+        y: 2167
+        width: 1026
+        height: 877
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e051554ac71e5060800000000000000
+      internalID: 6944013832965673187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_24
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 1194
+        width: 1006
+        height: 881
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ed69c14d6f71c4b0800000000000000
+      internalID: -5421912369145483799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_27
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 1201
+        width: 1014
+        height: 859
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33aeb605ac3f483a0800000000000000
+      internalID: -6663933498343298509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_28
+      rect:
+        serializedVersion: 2
+        x: 2383
+        y: 1181
+        width: 1029
+        height: 823
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44afe4b7b422ad7f0800000000000000
+      internalID: -587119093831763388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_39
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 224
+        width: 1005
+        height: 740
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61a9fb98f67092800800000000000000
+      internalID: 588009401982360086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_40
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 235
+        width: 954
+        height: 676
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dba890aee4307350800000000000000
+      internalID: 6012363702040832985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_buche_42
+      rect:
+        serializedVersion: 2
+        x: 2405
+        y: 201
+        width: 1076
+        height: 676
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e41e11f23c880ff00800000000000000
+      internalID: 1148568276869177678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 57575ae1b0541774eab3596b56cde633
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      zombie_buche_0: 7271184068180839150
+      zombie_buche_1: 4132138707659837703
+      zombie_buche_10: -2685246231883903635
+      zombie_buche_11: -6936057485427819482
+      zombie_buche_12: 6944013832965673187
+      zombie_buche_13: -3993534258131131372
+      zombie_buche_14: -2793899259389058999
+      zombie_buche_15: 8507567662487811742
+      zombie_buche_16: -2139830523940592127
+      zombie_buche_17: 8934330089385113344
+      zombie_buche_18: -5279493867515824430
+      zombie_buche_19: 3146289393487188640
+      zombie_buche_2: 8470316900697398666
+      zombie_buche_20: 3293199951396223538
+      zombie_buche_21: -3363076574034063287
+      zombie_buche_22: 771071898321155031
+      zombie_buche_23: 5250743634673735789
+      zombie_buche_24: -5421912369145483799
+      zombie_buche_25: 780059615022701314
+      zombie_buche_26: -3147459743039348721
+      zombie_buche_27: -6663933498343298509
+      zombie_buche_28: -587119093831763388
+      zombie_buche_29: -721094366932731826
+      zombie_buche_3: 7953458278251224668
+      zombie_buche_30: -2430214872972961092
+      zombie_buche_31: 1737459615534913337
+      zombie_buche_32: 791954214598795750
+      zombie_buche_33: -4164297158904511231
+      zombie_buche_34: 6557850702483530062
+      zombie_buche_35: -5421403449624412831
+      zombie_buche_36: 1291451562596107355
+      zombie_buche_37: -112252574752755563
+      zombie_buche_38: 8800213751300354392
+      zombie_buche_39: 588009401982360086
+      zombie_buche_4: 3692375632781589670
+      zombie_buche_40: 6012363702040832985
+      zombie_buche_41: 6017084164489187687
+      zombie_buche_42: 1148568276869177678
+      zombie_buche_5: 4309040232980680858
+      zombie_buche_6: -6838958488517259817
+      zombie_buche_7: -1101884690345664000
+      zombie_buche_8: -8822320074683564619
+      zombie_buche_9: -5585562706908876409
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

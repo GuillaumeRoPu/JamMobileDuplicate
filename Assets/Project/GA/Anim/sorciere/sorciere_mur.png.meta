@@ -1,0 +1,897 @@
+fileFormatVersion: 2
+guid: 9d94fcea399d56a4d9aa4698f918b925
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6775995790091063842
+    second: sorciere_mur_0
+  - first:
+      213: -8877702743012079828
+    second: sorciere_mur_1
+  - first:
+      213: -2140178420501967441
+    second: sorciere_mur_2
+  - first:
+      213: -976783948247485409
+    second: sorciere_mur_3
+  - first:
+      213: -7968450168703977872
+    second: sorciere_mur_4
+  - first:
+      213: -6095418352240448847
+    second: sorciere_mur_5
+  - first:
+      213: -7232666619734136955
+    second: sorciere_mur_6
+  - first:
+      213: 1313728493707718136
+    second: sorciere_mur_7
+  - first:
+      213: -4925572066420250880
+    second: sorciere_mur_8
+  - first:
+      213: 2103997762180382003
+    second: sorciere_mur_9
+  - first:
+      213: -1762709018191850096
+    second: sorciere_mur_10
+  - first:
+      213: 971177768207673691
+    second: sorciere_mur_11
+  - first:
+      213: 1677671951036206606
+    second: sorciere_mur_12
+  - first:
+      213: 5307261515578837480
+    second: sorciere_mur_13
+  - first:
+      213: 2973250841104974639
+    second: sorciere_mur_14
+  - first:
+      213: 3831665788268781294
+    second: sorciere_mur_15
+  - first:
+      213: -4802318904937570483
+    second: sorciere_mur_16
+  - first:
+      213: -6498058542833056338
+    second: sorciere_mur_17
+  - first:
+      213: 7003739197680336389
+    second: sorciere_mur_18
+  - first:
+      213: -3146234785194189298
+    second: sorciere_mur_19
+  - first:
+      213: -2216139523786350651
+    second: sorciere_mur_20
+  - first:
+      213: -7068845180175389795
+    second: sorciere_mur_21
+  - first:
+      213: 7545249259411586947
+    second: sorciere_mur_22
+  - first:
+      213: -7980771947233357017
+    second: sorciere_mur_23
+  - first:
+      213: -3781154689334952065
+    second: sorciere_mur_24
+  - first:
+      213: 8351694236849625833
+    second: sorciere_mur_25
+  - first:
+      213: -7324173757806892348
+    second: sorciere_mur_26
+  - first:
+      213: 7288579543740277939
+    second: sorciere_mur_27
+  - first:
+      213: 2895199274611934682
+    second: sorciere_mur_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1042
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sorciere_mur_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 7387
+        width: 1043
+        height: 617
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edd641ccab3d6f1a0800000000000000
+      internalID: -6775995790091063842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_1
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 7372
+        width: 1033
+        height: 615
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27014d24601cc480800000000000000
+      internalID: -8877702743012079828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_2
+      rect:
+        serializedVersion: 2
+        x: 2342
+        y: 7307
+        width: 1018
+        height: 676
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad0602d01f8c42e0800000000000000
+      internalID: -2140178420501967441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_3
+      rect:
+        serializedVersion: 2
+        x: 3505
+        y: 7248
+        width: 982
+        height: 741
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f14b76e9c24c172f0800000000000000
+      internalID: -976783948247485409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_4
+      rect:
+        serializedVersion: 2
+        x: 4672
+        y: 7198
+        width: 926
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0767ffb4ac06a6190800000000000000
+      internalID: -7968450168703977872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_5
+      rect:
+        serializedVersion: 2
+        x: 5844
+        y: 7158
+        width: 851
+        height: 839
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1baaf45bd49b86ba0800000000000000
+      internalID: -6095418352240448847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_6
+      rect:
+        serializedVersion: 2
+        x: 7020
+        y: 7130
+        width: 758
+        height: 887
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587ebe7970860ab90800000000000000
+      internalID: -7232666619734136955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_7
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 5893
+        width: 664
+        height: 934
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fde1c6ca1d4b3210800000000000000
+      internalID: 1313728493707718136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_8
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 5893
+        width: 647
+        height: 971
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0072f696d4ad4abb0800000000000000
+      internalID: -4925572066420250880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_9
+      rect:
+        serializedVersion: 2
+        x: 2465
+        y: 5891
+        width: 652
+        height: 955
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33d7af631d6e23d10800000000000000
+      internalID: 2103997762180382003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_10
+      rect:
+        serializedVersion: 2
+        x: 3604
+        y: 5892
+        width: 659
+        height: 941
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0951c48bc799987e0800000000000000
+      internalID: -1762709018191850096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_11
+      rect:
+        serializedVersion: 2
+        x: 4743
+        y: 5895
+        width: 673
+        height: 925
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5966cfd8015a7d00800000000000000
+      internalID: 971177768207673691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_12
+      rect:
+        serializedVersion: 2
+        x: 5882
+        y: 5900
+        width: 716
+        height: 908
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0e462330c9484710800000000000000
+      internalID: 1677671951036206606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_13
+      rect:
+        serializedVersion: 2
+        x: 7022
+        y: 5908
+        width: 758
+        height: 887
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e98d26ba3e27a940800000000000000
+      internalID: 5307261515578837480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_14
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 4696
+        width: 797
+        height: 864
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23813413eb134920800000000000000
+      internalID: 2973250841104974639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_15
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 4707
+        width: 833
+        height: 846
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee17cfbbbfcc2530800000000000000
+      internalID: 3831665788268781294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_16
+      rect:
+        serializedVersion: 2
+        x: 2390
+        y: 4721
+        width: 867
+        height: 831
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4f9d05566cba5db0800000000000000
+      internalID: -4802318904937570483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_17
+      rect:
+        serializedVersion: 2
+        x: 3533
+        y: 4737
+        width: 898
+        height: 814
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea54eb8fe2242d5a0800000000000000
+      internalID: -6498058542833056338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_18
+      rect:
+        serializedVersion: 2
+        x: 4676
+        y: 4754
+        width: 926
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e373161b7423160800000000000000
+      internalID: 7003739197680336389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_19
+      rect:
+        serializedVersion: 2
+        x: 5820
+        y: 4773
+        width: 951
+        height: 775
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ed580e1245654d0800000000000000
+      internalID: -3146234785194189298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_20
+      rect:
+        serializedVersion: 2
+        x: 6965
+        y: 4793
+        width: 973
+        height: 754
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cfd20048d0be31e0800000000000000
+      internalID: -2216139523786350651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_21
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 3593
+        width: 991
+        height: 729
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9be96fc2ca66ed90800000000000000
+      internalID: -7068845180175389795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_22
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 3617
+        width: 1005
+        height: 703
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38fb109993c16b860800000000000000
+      internalID: 7545249259411586947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_23
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 3641
+        width: 1017
+        height: 676
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 723d0cba23a9e3190800000000000000
+      internalID: -7980771947233357017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_24
+      rect:
+        serializedVersion: 2
+        x: 3496
+        y: 3666
+        width: 1025
+        height: 648
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7f336de7d3a68bc0800000000000000
+      internalID: -3781154689334952065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_25
+      rect:
+        serializedVersion: 2
+        x: 4645
+        y: 3693
+        width: 1031
+        height: 625
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ea5914c8ad27e370800000000000000
+      internalID: 8351694236849625833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_26
+      rect:
+        serializedVersion: 2
+        x: 5795
+        y: 3720
+        width: 1036
+        height: 605
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4caaeacb5ce4b5a90800000000000000
+      internalID: -7324173757806892348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_27
+      rect:
+        serializedVersion: 2
+        x: 6942
+        y: 3724
+        width: 1040
+        height: 607
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b461dd7a7c362560800000000000000
+      internalID: 7288579543740277939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_mur_28
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 2499
+        width: 1042
+        height: 617
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad5863d9660dd2820800000000000000
+      internalID: 2895199274611934682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sorciere_mur_0: -6775995790091063842
+      sorciere_mur_1: -8877702743012079828
+      sorciere_mur_10: -1762709018191850096
+      sorciere_mur_11: 971177768207673691
+      sorciere_mur_12: 1677671951036206606
+      sorciere_mur_13: 5307261515578837480
+      sorciere_mur_14: 2973250841104974639
+      sorciere_mur_15: 3831665788268781294
+      sorciere_mur_16: -4802318904937570483
+      sorciere_mur_17: -6498058542833056338
+      sorciere_mur_18: 7003739197680336389
+      sorciere_mur_19: -3146234785194189298
+      sorciere_mur_2: -2140178420501967441
+      sorciere_mur_20: -2216139523786350651
+      sorciere_mur_21: -7068845180175389795
+      sorciere_mur_22: 7545249259411586947
+      sorciere_mur_23: -7980771947233357017
+      sorciere_mur_24: -3781154689334952065
+      sorciere_mur_25: 8351694236849625833
+      sorciere_mur_26: -7324173757806892348
+      sorciere_mur_27: 7288579543740277939
+      sorciere_mur_28: 2895199274611934682
+      sorciere_mur_3: -976783948247485409
+      sorciere_mur_4: -7968450168703977872
+      sorciere_mur_5: -6095418352240448847
+      sorciere_mur_6: -7232666619734136955
+      sorciere_mur_7: 1313728493707718136
+      sorciere_mur_8: -4925572066420250880
+      sorciere_mur_9: 2103997762180382003
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

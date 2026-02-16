@@ -1,0 +1,949 @@
+fileFormatVersion: 2
+guid: ff7f5719af8132b45bafca55323cd1e3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8954506392505006813
+    second: sorciere_idle_0
+  - first:
+      213: 846208722404049643
+    second: sorciere_idle_1
+  - first:
+      213: -7789529763797896607
+    second: sorciere_idle_2
+  - first:
+      213: 2031396169237129613
+    second: sorciere_idle_3
+  - first:
+      213: -8497919645427438562
+    second: sorciere_idle_4
+  - first:
+      213: -8290839423879537756
+    second: sorciere_idle_5
+  - first:
+      213: 5373081459637296974
+    second: sorciere_idle_6
+  - first:
+      213: -7190487844871107141
+    second: sorciere_idle_7
+  - first:
+      213: 7303737303445755475
+    second: sorciere_idle_8
+  - first:
+      213: 2314161502278054510
+    second: sorciere_idle_9
+  - first:
+      213: 7444547811645971876
+    second: sorciere_idle_10
+  - first:
+      213: -5985600160654557349
+    second: sorciere_idle_11
+  - first:
+      213: -2561188642089180092
+    second: sorciere_idle_12
+  - first:
+      213: 1078970913344291450
+    second: sorciere_idle_13
+  - first:
+      213: -1242210298848981797
+    second: sorciere_idle_14
+  - first:
+      213: -3807542645609991073
+    second: sorciere_idle_15
+  - first:
+      213: 4990140921896069782
+    second: sorciere_idle_16
+  - first:
+      213: -883633363392530890
+    second: sorciere_idle_17
+  - first:
+      213: -2449136586324214346
+    second: sorciere_idle_18
+  - first:
+      213: -4706037194591920395
+    second: sorciere_idle_19
+  - first:
+      213: 4514471062621131153
+    second: sorciere_idle_20
+  - first:
+      213: 4847541761561166696
+    second: sorciere_idle_21
+  - first:
+      213: -919622212359202971
+    second: sorciere_idle_22
+  - first:
+      213: -8673841500199197860
+    second: sorciere_idle_23
+  - first:
+      213: 2776972015647417380
+    second: sorciere_idle_24
+  - first:
+      213: 5201964987462381727
+    second: sorciere_idle_25
+  - first:
+      213: 7452206182096662732
+    second: sorciere_idle_26
+  - first:
+      213: -2874879629051789642
+    second: sorciere_idle_27
+  - first:
+      213: 4992612649831350055
+    second: sorciere_idle_28
+  - first:
+      213: 863735598371698288
+    second: sorciere_idle_29
+  - first:
+      213: -3998648881038202544
+    second: sorciere_idle_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1042
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sorciere_idle_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 7476
+        width: 990
+        height: 674
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32546c701e33bb380800000000000000
+      internalID: -8954506392505006813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_1
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 7479
+        width: 990
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be20bb089565ebb00800000000000000
+      internalID: 846208722404049643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_2
+      rect:
+        serializedVersion: 2
+        x: 2166
+        y: 7481
+        width: 990
+        height: 671
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1627e7553f706e390800000000000000
+      internalID: -7789529763797896607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_3
+      rect:
+        serializedVersion: 2
+        x: 3243
+        y: 7484
+        width: 990
+        height: 668
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d89e7799d08f03c10800000000000000
+      internalID: 2031396169237129613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_4
+      rect:
+        serializedVersion: 2
+        x: 4320
+        y: 7486
+        width: 990
+        height: 667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ceb7c3b13511a80800000000000000
+      internalID: -8497919645427438562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_5
+      rect:
+        serializedVersion: 2
+        x: 5396
+        y: 7484
+        width: 993
+        height: 664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ab1bd1887501fc80800000000000000
+      internalID: -8290839423879537756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_6
+      rect:
+        serializedVersion: 2
+        x: 6472
+        y: 7482
+        width: 995
+        height: 664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f1be6ae15019a40800000000000000
+      internalID: 5373081459637296974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_7
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 6611
+        width: 996
+        height: 666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbd81b4e661463c90800000000000000
+      internalID: -7190487844871107141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_8
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 6608
+        width: 998
+        height: 668
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35657a071661c5560800000000000000
+      internalID: 7303737303445755475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_9
+      rect:
+        serializedVersion: 2
+        x: 2163
+        y: 6606
+        width: 1000
+        height: 666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e62fa2810ad8d1020800000000000000
+      internalID: 2314161502278054510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_10
+      rect:
+        serializedVersion: 2
+        x: 3240
+        y: 6604
+        width: 1001
+        height: 664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4add192bac8505760800000000000000
+      internalID: 7444547811645971876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_11
+      rect:
+        serializedVersion: 2
+        x: 4317
+        y: 6602
+        width: 1003
+        height: 661
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5ff9a0fd50eeeca0800000000000000
+      internalID: -5985600160654557349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_12
+      rect:
+        serializedVersion: 2
+        x: 5393
+        y: 6599
+        width: 1005
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4446281ff74d47cd0800000000000000
+      internalID: -2561188642089180092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_13
+      rect:
+        serializedVersion: 2
+        x: 6470
+        y: 6597
+        width: 1007
+        height: 658
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a728ddc345649fe00800000000000000
+      internalID: 1078970913344291450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_14
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 5726
+        width: 1009
+        height: 657
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdc46c09058c2cee0800000000000000
+      internalID: -1242210298848981797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_15
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 5723
+        width: 1010
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54f3451324e82bc0800000000000000
+      internalID: -3807542645609991073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_16
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 5721
+        width: 1011
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69a61c4caba804540800000000000000
+      internalID: 4990140921896069782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_17
+      rect:
+        serializedVersion: 2
+        x: 3237
+        y: 5719
+        width: 1013
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 636fd4f3324bcb3f0800000000000000
+      internalID: -883633363392530890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_18
+      rect:
+        serializedVersion: 2
+        x: 4314
+        y: 5717
+        width: 1015
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd7bb5304be20ed0800000000000000
+      internalID: -2449136586324214346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_19
+      rect:
+        serializedVersion: 2
+        x: 5391
+        y: 5715
+        width: 1016
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fe929cea1cc0beb0800000000000000
+      internalID: -4706037194591920395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_20
+      rect:
+        serializedVersion: 2
+        x: 6468
+        y: 5717
+        width: 1014
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1911054438f96ae30800000000000000
+      internalID: 4514471062621131153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_21
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 4850
+        width: 1013
+        height: 662
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86389bb7c8de54340800000000000000
+      internalID: 4847541761561166696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_22
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 4852
+        width: 1010
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56755c06878dc33f0800000000000000
+      internalID: -919622212359202971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_23
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 4853
+        width: 1009
+        height: 665
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c53e59e8c1350a780800000000000000
+      internalID: -8673841500199197860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_24
+      rect:
+        serializedVersion: 2
+        x: 3239
+        y: 4856
+        width: 1006
+        height: 665
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4246ddfc559c98620800000000000000
+      internalID: 2776972015647417380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_25
+      rect:
+        serializedVersion: 2
+        x: 4316
+        y: 4857
+        width: 1005
+        height: 667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f90f6bb4897113840800000000000000
+      internalID: 5201964987462381727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_26
+      rect:
+        serializedVersion: 2
+        x: 5394
+        y: 4859
+        width: 1002
+        height: 669
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc077d40a0e8b6760800000000000000
+      internalID: 7452206182096662732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_27
+      rect:
+        serializedVersion: 2
+        x: 6471
+        y: 4862
+        width: 1000
+        height: 669
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6be7c5a85306a18d0800000000000000
+      internalID: -2874879629051789642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_28
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 3995
+        width: 997
+        height: 670
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72fb156c0c2594540800000000000000
+      internalID: 4992612649831350055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_29
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 3997
+        width: 996
+        height: 671
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 076fdc053fa9cfb00800000000000000
+      internalID: 863735598371698288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_idle_30
+      rect:
+        serializedVersion: 2
+        x: 2165
+        y: 3999
+        width: 993
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05964384702f188c0800000000000000
+      internalID: -3998648881038202544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sorciere_idle_0: -8954506392505006813
+      sorciere_idle_1: 846208722404049643
+      sorciere_idle_10: 7444547811645971876
+      sorciere_idle_11: -5985600160654557349
+      sorciere_idle_12: -2561188642089180092
+      sorciere_idle_13: 1078970913344291450
+      sorciere_idle_14: -1242210298848981797
+      sorciere_idle_15: -3807542645609991073
+      sorciere_idle_16: 4990140921896069782
+      sorciere_idle_17: -883633363392530890
+      sorciere_idle_18: -2449136586324214346
+      sorciere_idle_19: -4706037194591920395
+      sorciere_idle_2: -7789529763797896607
+      sorciere_idle_20: 4514471062621131153
+      sorciere_idle_21: 4847541761561166696
+      sorciere_idle_22: -919622212359202971
+      sorciere_idle_23: -8673841500199197860
+      sorciere_idle_24: 2776972015647417380
+      sorciere_idle_25: 5201964987462381727
+      sorciere_idle_26: 7452206182096662732
+      sorciere_idle_27: -2874879629051789642
+      sorciere_idle_28: 4992612649831350055
+      sorciere_idle_29: 863735598371698288
+      sorciere_idle_3: 2031396169237129613
+      sorciere_idle_30: -3998648881038202544
+      sorciere_idle_4: -8497919645427438562
+      sorciere_idle_5: -8290839423879537756
+      sorciere_idle_6: 5373081459637296974
+      sorciere_idle_7: -7190487844871107141
+      sorciere_idle_8: 7303737303445755475
+      sorciere_idle_9: 2314161502278054510
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

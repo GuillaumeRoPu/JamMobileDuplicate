@@ -1,0 +1,975 @@
+fileFormatVersion: 2
+guid: f9c68b8cfe022124e9e2162fcff890df
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2762009963532199861
+    second: grandmere_marche_0
+  - first:
+      213: -688462857956846906
+    second: grandmere_marche_1
+  - first:
+      213: -4998025903991085383
+    second: grandmere_marche_2
+  - first:
+      213: 593025774903661682
+    second: grandmere_marche_3
+  - first:
+      213: -4983294514902059915
+    second: grandmere_marche_4
+  - first:
+      213: 4430515997844291017
+    second: grandmere_marche_5
+  - first:
+      213: -4152300590588282378
+    second: grandmere_marche_6
+  - first:
+      213: 8938039468602647200
+    second: grandmere_marche_7
+  - first:
+      213: 5127146816326534254
+    second: grandmere_marche_8
+  - first:
+      213: 1854771818144287098
+    second: grandmere_marche_9
+  - first:
+      213: -2319913178022207576
+    second: grandmere_marche_10
+  - first:
+      213: -8649470788411857335
+    second: grandmere_marche_11
+  - first:
+      213: 7909489223455014173
+    second: grandmere_marche_12
+  - first:
+      213: 3869505749081988367
+    second: grandmere_marche_13
+  - first:
+      213: 8574849753810495531
+    second: grandmere_marche_14
+  - first:
+      213: -2452846815866618014
+    second: grandmere_marche_15
+  - first:
+      213: 3781020820772176494
+    second: grandmere_marche_16
+  - first:
+      213: -5501221231555719860
+    second: grandmere_marche_17
+  - first:
+      213: 5293974199273753869
+    second: grandmere_marche_18
+  - first:
+      213: -4977557806860187145
+    second: grandmere_marche_19
+  - first:
+      213: 2434188608533236545
+    second: grandmere_marche_20
+  - first:
+      213: 4716285938748584728
+    second: grandmere_marche_21
+  - first:
+      213: -1652817712999800526
+    second: grandmere_marche_22
+  - first:
+      213: 1232275825851021226
+    second: grandmere_marche_23
+  - first:
+      213: -1311190894581210121
+    second: grandmere_marche_24
+  - first:
+      213: 168121452177068538
+    second: grandmere_marche_25
+  - first:
+      213: 5685870276867022631
+    second: grandmere_marche_26
+  - first:
+      213: 5585283365401358144
+    second: grandmere_marche_27
+  - first:
+      213: 7378674625569330538
+    second: grandmere_marche_28
+  - first:
+      213: 220025537201758165
+    second: grandmere_marche_29
+  - first:
+      213: -1296921322943427551
+    second: grandmere_marche_30
+  - first:
+      213: -7188248902027896879
+    second: grandmere_marche_31
+  - first:
+      213: -2363657459102751135
+    second: grandmere_marche_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: grandmere_marche_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3280
+        width: 591
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b48d299629e5ba9d0800000000000000
+      internalID: -2762009963532199861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_1
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 3280
+        width: 608
+        height: 785
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c29e66ada61276f0800000000000000
+      internalID: -688462857956846906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_2
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 3280
+        width: 624
+        height: 788
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b62966cbe173aab0800000000000000
+      internalID: -4998025903991085383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_3
+      rect:
+        serializedVersion: 2
+        x: 2591
+        y: 3279
+        width: 640
+        height: 791
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27498cfdcc9da3800800000000000000
+      internalID: 593025774903661682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_4
+      rect:
+        serializedVersion: 2
+        x: 3455
+        y: 3279
+        width: 655
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5743c149a08c7dab0800000000000000
+      internalID: -4983294514902059915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_5
+      rect:
+        serializedVersion: 2
+        x: 4319
+        y: 3279
+        width: 671
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cdb13f73da5c7d30800000000000000
+      internalID: 4430515997844291017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_6
+      rect:
+        serializedVersion: 2
+        x: 5183
+        y: 3278
+        width: 686
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f93759dc901066c0800000000000000
+      internalID: -4152300590588282378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_7
+      rect:
+        serializedVersion: 2
+        x: 6047
+        y: 3278
+        width: 701
+        height: 803
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a26b7a7a8b4a0c70800000000000000
+      internalID: 8938039468602647200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_8
+      rect:
+        serializedVersion: 2
+        x: 6911
+        y: 3278
+        width: 717
+        height: 805
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e640b6a5dd8472740800000000000000
+      internalID: 5127146816326534254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2358
+        width: 730
+        height: 809
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7945ef34297db910800000000000000
+      internalID: 1854771818144287098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_10
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 2358
+        width: 747
+        height: 812
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8af1d3a81430ecfd0800000000000000
+      internalID: -2319913178022207576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_11
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 2358
+        width: 761
+        height: 814
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 946e7911528e6f780800000000000000
+      internalID: -8649470788411857335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_12
+      rect:
+        serializedVersion: 2
+        x: 2591
+        y: 2358
+        width: 753
+        height: 812
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1df0deda8624cd60800000000000000
+      internalID: 7909489223455014173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_13
+      rect:
+        serializedVersion: 2
+        x: 3455
+        y: 2358
+        width: 744
+        height: 811
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0d1d5e2afe33b530800000000000000
+      internalID: 3869505749081988367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_14
+      rect:
+        serializedVersion: 2
+        x: 4319
+        y: 2359
+        width: 736
+        height: 808
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28683a6b6cfff670800000000000000
+      internalID: 8574849753810495531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_15
+      rect:
+        serializedVersion: 2
+        x: 5183
+        y: 2359
+        width: 727
+        height: 802
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f72d311dcb5fdd0800000000000000
+      internalID: -2452846815866618014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_16
+      rect:
+        serializedVersion: 2
+        x: 6047
+        y: 2360
+        width: 718
+        height: 795
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e624b7e5762e87430800000000000000
+      internalID: 3781020820772176494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_17
+      rect:
+        serializedVersion: 2
+        x: 6911
+        y: 2360
+        width: 709
+        height: 789
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4dc846cf6cb7a3b0800000000000000
+      internalID: -5501221231555719860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1441
+        width: 699
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0d8bcd4c79f77940800000000000000
+      internalID: 5293974199273753869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_19
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1442
+        width: 691
+        height: 775
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f940210c892ceab0800000000000000
+      internalID: -4977557806860187145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_20
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 1442
+        width: 682
+        height: 770
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14b0def74a9f7c120800000000000000
+      internalID: 2434188608533236545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_21
+      rect:
+        serializedVersion: 2
+        x: 2591
+        y: 1442
+        width: 672
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8137746c21d937140800000000000000
+      internalID: 4716285938748584728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_22
+      rect:
+        serializedVersion: 2
+        x: 3455
+        y: 1442
+        width: 666
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2316c2a0c030019e0800000000000000
+      internalID: -1652817712999800526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_23
+      rect:
+        serializedVersion: 2
+        x: 4319
+        y: 1442
+        width: 659
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa7b621b55ce91110800000000000000
+      internalID: 1232275825851021226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_24
+      rect:
+        serializedVersion: 2
+        x: 5183
+        y: 1442
+        width: 652
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f3a2cf04d6bdcde0800000000000000
+      internalID: -1311190894581210121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_25
+      rect:
+        serializedVersion: 2
+        x: 6047
+        y: 1442
+        width: 646
+        height: 763
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af1132ce199455200800000000000000
+      internalID: 168121452177068538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_26
+      rect:
+        serializedVersion: 2
+        x: 6911
+        y: 1442
+        width: 639
+        height: 766
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f5c9b44e448ee40800000000000000
+      internalID: 5685870276867022631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 523
+        width: 631
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f65a4f0a9e28d40800000000000000
+      internalID: 5585283365401358144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_28
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 523
+        width: 626
+        height: 770
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a659f326a71566660800000000000000
+      internalID: 7378674625569330538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_29
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 523
+        width: 619
+        height: 772
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dfdc627f00bd0300800000000000000
+      internalID: 220025537201758165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_30
+      rect:
+        serializedVersion: 2
+        x: 2591
+        y: 523
+        width: 612
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12cc35c9de8600ee0800000000000000
+      internalID: -1296921322943427551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_31
+      rect:
+        serializedVersion: 2
+        x: 3455
+        y: 523
+        width: 606
+        height: 777
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d7198565b53e3c90800000000000000
+      internalID: -7188248902027896879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandmere_marche_32
+      rect:
+        serializedVersion: 2
+        x: 4319
+        y: 523
+        width: 599
+        height: 779
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1666a7b601a923fd0800000000000000
+      internalID: -2363657459102751135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      grandmere_marche_0: -2762009963532199861
+      grandmere_marche_1: -688462857956846906
+      grandmere_marche_10: -2319913178022207576
+      grandmere_marche_11: -8649470788411857335
+      grandmere_marche_12: 7909489223455014173
+      grandmere_marche_13: 3869505749081988367
+      grandmere_marche_14: 8574849753810495531
+      grandmere_marche_15: -2452846815866618014
+      grandmere_marche_16: 3781020820772176494
+      grandmere_marche_17: -5501221231555719860
+      grandmere_marche_18: 5293974199273753869
+      grandmere_marche_19: -4977557806860187145
+      grandmere_marche_2: -4998025903991085383
+      grandmere_marche_20: 2434188608533236545
+      grandmere_marche_21: 4716285938748584728
+      grandmere_marche_22: -1652817712999800526
+      grandmere_marche_23: 1232275825851021226
+      grandmere_marche_24: -1311190894581210121
+      grandmere_marche_25: 168121452177068538
+      grandmere_marche_26: 5685870276867022631
+      grandmere_marche_27: 5585283365401358144
+      grandmere_marche_28: 7378674625569330538
+      grandmere_marche_29: 220025537201758165
+      grandmere_marche_3: 593025774903661682
+      grandmere_marche_30: -1296921322943427551
+      grandmere_marche_31: -7188248902027896879
+      grandmere_marche_32: -2363657459102751135
+      grandmere_marche_4: -4983294514902059915
+      grandmere_marche_5: 4430515997844291017
+      grandmere_marche_6: -4152300590588282378
+      grandmere_marche_7: 8938039468602647200
+      grandmere_marche_8: 5127146816326534254
+      grandmere_marche_9: 1854771818144287098
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
