@@ -1,0 +1,1339 @@
+fileFormatVersion: 2
+guid: 1057bd92eac024b42a277c2c84f6a8d5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7859346820102716346
+    second: grandlere_idle_0
+  - first:
+      213: -2093490439492918284
+    second: grandlere_idle_1
+  - first:
+      213: -2453932800384764161
+    second: grandlere_idle_2
+  - first:
+      213: -6971800767615368792
+    second: grandlere_idle_3
+  - first:
+      213: -2825283480076867125
+    second: grandlere_idle_4
+  - first:
+      213: 8031652764890017198
+    second: grandlere_idle_5
+  - first:
+      213: -635939959364890616
+    second: grandlere_idle_6
+  - first:
+      213: -2793755263592204192
+    second: grandlere_idle_7
+  - first:
+      213: -5089011384781391340
+    second: grandlere_idle_8
+  - first:
+      213: 7427513569003710210
+    second: grandlere_idle_9
+  - first:
+      213: -6886778841156538622
+    second: grandlere_idle_10
+  - first:
+      213: -526230529496706005
+    second: grandlere_idle_11
+  - first:
+      213: -6728420806584269523
+    second: grandlere_idle_12
+  - first:
+      213: -5019916219657173193
+    second: grandlere_idle_13
+  - first:
+      213: -2744743235805700767
+    second: grandlere_idle_14
+  - first:
+      213: 1431708406914090568
+    second: grandlere_idle_15
+  - first:
+      213: 7512835617139388346
+    second: grandlere_idle_16
+  - first:
+      213: 4489655817912091394
+    second: grandlere_idle_17
+  - first:
+      213: 1267434879054337186
+    second: grandlere_idle_18
+  - first:
+      213: 5912184336157955852
+    second: grandlere_idle_19
+  - first:
+      213: -8486760423399300560
+    second: grandlere_idle_20
+  - first:
+      213: -3595375952990373072
+    second: grandlere_idle_21
+  - first:
+      213: 1598787422155535601
+    second: grandlere_idle_22
+  - first:
+      213: -5783305680044894955
+    second: grandlere_idle_23
+  - first:
+      213: 6729077545234486870
+    second: grandlere_idle_24
+  - first:
+      213: -5760634489823027498
+    second: grandlere_idle_25
+  - first:
+      213: 2856979259002337345
+    second: grandlere_idle_26
+  - first:
+      213: 5406235970010025962
+    second: grandlere_idle_27
+  - first:
+      213: 6786062649233188180
+    second: grandlere_idle_28
+  - first:
+      213: -5406396788574898387
+    second: grandlere_idle_29
+  - first:
+      213: -5565688458177002387
+    second: grandlere_idle_30
+  - first:
+      213: -3785126441859184430
+    second: grandlere_idle_31
+  - first:
+      213: -7742774882365151387
+    second: grandlere_idle_32
+  - first:
+      213: 2500500332552714477
+    second: grandlere_idle_33
+  - first:
+      213: 8952661850194000521
+    second: grandlere_idle_34
+  - first:
+      213: 2278158330087690902
+    second: grandlere_idle_35
+  - first:
+      213: -7758155967150161493
+    second: grandlere_idle_36
+  - first:
+      213: 7999741470365556512
+    second: grandlere_idle_37
+  - first:
+      213: -4877603162320502729
+    second: grandlere_idle_38
+  - first:
+      213: -7315031938233027715
+    second: grandlere_idle_39
+  - first:
+      213: 507459193317726282
+    second: grandlere_idle_40
+  - first:
+      213: -8802233740357226820
+    second: grandlere_idle_41
+  - first:
+      213: -1951477539178685534
+    second: grandlere_idle_42
+  - first:
+      213: -4012991915419814390
+    second: grandlere_idle_43
+  - first:
+      213: -4491030137963429841
+    second: grandlere_idle_44
+  - first:
+      213: 6423109239133849068
+    second: grandlere_idle_45
+  - first:
+      213: 6360264157239580616
+    second: grandlere_idle_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: grandlere_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7387
+        width: 591
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abb71d2da42021d60800000000000000
+      internalID: 7859346820102716346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_1
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 7387
+        width: 592
+        height: 784
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f3295d798d62f2e0800000000000000
+      internalID: -2093490439492918284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_2
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 7388
+        width: 592
+        height: 784
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6f26a9e11e1fdd0800000000000000
+      internalID: -2453932800384764161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_3
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 7388
+        width: 592
+        height: 786
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a18d79d3203f3f90800000000000000
+      internalID: -6971800767615368792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_4
+      rect:
+        serializedVersion: 2
+        x: 2871
+        y: 7388
+        width: 592
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc92d34d4a39ac8d0800000000000000
+      internalID: -2825283480076867125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_5
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 7388
+        width: 593
+        height: 788
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eadad8ad2a9267f60800000000000000
+      internalID: 8031652764890017198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_6
+      rect:
+        serializedVersion: 2
+        x: 4307
+        y: 7388
+        width: 593
+        height: 790
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 800549fe9ffac27f0800000000000000
+      internalID: -635939959364890616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_7
+      rect:
+        serializedVersion: 2
+        x: 5025
+        y: 7388
+        width: 592
+        height: 791
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0687534c3669a39d0800000000000000
+      internalID: -2793755263592204192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_8
+      rect:
+        serializedVersion: 2
+        x: 5743
+        y: 7388
+        width: 592
+        height: 792
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41abf28bb133069b0800000000000000
+      internalID: -5089011384781391340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_9
+      rect:
+        serializedVersion: 2
+        x: 6461
+        y: 7388
+        width: 593
+        height: 793
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2072cd40d34d31760800000000000000
+      internalID: 7427513569003710210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_10
+      rect:
+        serializedVersion: 2
+        x: 7179
+        y: 7388
+        width: 593
+        height: 794
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20f2036b12f3d60a0800000000000000
+      internalID: -6886778841156538622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6484
+        width: 592
+        height: 792
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b24126b1f1472b8f0800000000000000
+      internalID: -526230529496706005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_12
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 6484
+        width: 593
+        height: 790
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d258234dce8df92a0800000000000000
+      internalID: -6728420806584269523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_13
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 6485
+        width: 593
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 737cc1d7bcca55ab0800000000000000
+      internalID: -5019916219657173193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_14
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 6485
+        width: 593
+        height: 785
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16d152eb196b8e9d0800000000000000
+      internalID: -2744743235805700767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_15
+      rect:
+        serializedVersion: 2
+        x: 2871
+        y: 6485
+        width: 593
+        height: 783
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8460e08e5337ed310800000000000000
+      internalID: 1431708406914090568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_16
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 6485
+        width: 593
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abfee776034f24860800000000000000
+      internalID: 7512835617139388346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_17
+      rect:
+        serializedVersion: 2
+        x: 4307
+        y: 6485
+        width: 593
+        height: 778
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2038a6edd267e4e30800000000000000
+      internalID: 4489655817912091394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_18
+      rect:
+        serializedVersion: 2
+        x: 5025
+        y: 6485
+        width: 593
+        height: 775
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a459fdae45d69110800000000000000
+      internalID: 1267434879054337186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_19
+      rect:
+        serializedVersion: 2
+        x: 5743
+        y: 6485
+        width: 593
+        height: 773
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c07d253645c4c0250800000000000000
+      internalID: 5912184336157955852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_20
+      rect:
+        serializedVersion: 2
+        x: 6461
+        y: 6485
+        width: 593
+        height: 771
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 032e0751c58f83a80800000000000000
+      internalID: -8486760423399300560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_21
+      rect:
+        serializedVersion: 2
+        x: 7179
+        y: 6485
+        width: 593
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03bf600be98aa1ec0800000000000000
+      internalID: -3595375952990373072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5581
+        width: 592
+        height: 767
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f471f090b8003610800000000000000
+      internalID: 1598787422155535601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_23
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 5581
+        width: 594
+        height: 767
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 515dc6110229dbfa0800000000000000
+      internalID: -5783305680044894955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_24
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 5581
+        width: 594
+        height: 766
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65652cd006c726d50800000000000000
+      internalID: 6729077545234486870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_25
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 5582
+        width: 595
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6de1c31e37d1e00b0800000000000000
+      internalID: -5760634489823027498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_26
+      rect:
+        serializedVersion: 2
+        x: 2871
+        y: 5582
+        width: 596
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1483e77cf7706a720800000000000000
+      internalID: 2856979259002337345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_27
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 5582
+        width: 597
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aef0364a8fec60b40800000000000000
+      internalID: 5406235970010025962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_28
+      rect:
+        serializedVersion: 2
+        x: 4307
+        y: 5582
+        width: 597
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 455271f7600fc2e50800000000000000
+      internalID: 6786062649233188180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_29
+      rect:
+        serializedVersion: 2
+        x: 5025
+        y: 5582
+        width: 598
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d273e2ed3ce98f4b0800000000000000
+      internalID: -5406396788574898387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_30
+      rect:
+        serializedVersion: 2
+        x: 5743
+        y: 5582
+        width: 599
+        height: 763
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d644ed7e5d3b2c2b0800000000000000
+      internalID: -5565688458177002387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_31
+      rect:
+        serializedVersion: 2
+        x: 6461
+        y: 5582
+        width: 600
+        height: 763
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d88b0b3e87887bc0800000000000000
+      internalID: -3785126441859184430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_32
+      rect:
+        serializedVersion: 2
+        x: 7179
+        y: 5582
+        width: 598
+        height: 764
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 567eec874432c8490800000000000000
+      internalID: -7742774882365151387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4678
+        width: 596
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de8fc82edcf83b220800000000000000
+      internalID: 2500500332552714477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_34
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 4678
+        width: 595
+        height: 766
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98a310ff48e3e3c70800000000000000
+      internalID: 8952661850194000521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_35
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 4678
+        width: 594
+        height: 767
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69259f65ee4ad9f10800000000000000
+      internalID: 2278158330087690902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_36
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 4677
+        width: 593
+        height: 769
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba100f9904e755490800000000000000
+      internalID: -7758155967150161493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_37
+      rect:
+        serializedVersion: 2
+        x: 2871
+        y: 4677
+        width: 593
+        height: 769
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02f991c9b7ac40f60800000000000000
+      internalID: 7999741470365556512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_38
+      rect:
+        serializedVersion: 2
+        x: 3589
+        y: 4677
+        width: 593
+        height: 770
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 730809a34c54f4cb0800000000000000
+      internalID: -4877603162320502729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_39
+      rect:
+        serializedVersion: 2
+        x: 4307
+        y: 4677
+        width: 593
+        height: 771
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73bbf87539cb7a90800000000000000
+      internalID: -7315031938233027715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_40
+      rect:
+        serializedVersion: 2
+        x: 5025
+        y: 4677
+        width: 593
+        height: 772
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4895bb927bda0700800000000000000
+      internalID: 507459193317726282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_41
+      rect:
+        serializedVersion: 2
+        x: 5743
+        y: 4676
+        width: 593
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbeac04ac0f28d580800000000000000
+      internalID: -8802233740357226820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_42
+      rect:
+        serializedVersion: 2
+        x: 6461
+        y: 4676
+        width: 593
+        height: 776
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2abd91a7485fae4e0800000000000000
+      internalID: -1951477539178685534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_43
+      rect:
+        serializedVersion: 2
+        x: 7179
+        y: 4676
+        width: 592
+        height: 777
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0633ea5d1dfe48c0800000000000000
+      internalID: -4012991915419814390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_44
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3772
+        width: 592
+        height: 778
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f20cd1f42e7aca1c0800000000000000
+      internalID: -4491030137963429841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_45
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 3772
+        width: 592
+        height: 779
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce54a1862d7732950800000000000000
+      internalID: 6423109239133849068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grandlere_idle_46
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 3772
+        width: 592
+        height: 780
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c71ae98d82344850800000000000000
+      internalID: 6360264157239580616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      grandlere_idle_0: 7859346820102716346
+      grandlere_idle_1: -2093490439492918284
+      grandlere_idle_10: -6886778841156538622
+      grandlere_idle_11: -526230529496706005
+      grandlere_idle_12: -6728420806584269523
+      grandlere_idle_13: -5019916219657173193
+      grandlere_idle_14: -2744743235805700767
+      grandlere_idle_15: 1431708406914090568
+      grandlere_idle_16: 7512835617139388346
+      grandlere_idle_17: 4489655817912091394
+      grandlere_idle_18: 1267434879054337186
+      grandlere_idle_19: 5912184336157955852
+      grandlere_idle_2: -2453932800384764161
+      grandlere_idle_20: -8486760423399300560
+      grandlere_idle_21: -3595375952990373072
+      grandlere_idle_22: 1598787422155535601
+      grandlere_idle_23: -5783305680044894955
+      grandlere_idle_24: 6729077545234486870
+      grandlere_idle_25: -5760634489823027498
+      grandlere_idle_26: 2856979259002337345
+      grandlere_idle_27: 5406235970010025962
+      grandlere_idle_28: 6786062649233188180
+      grandlere_idle_29: -5406396788574898387
+      grandlere_idle_3: -6971800767615368792
+      grandlere_idle_30: -5565688458177002387
+      grandlere_idle_31: -3785126441859184430
+      grandlere_idle_32: -7742774882365151387
+      grandlere_idle_33: 2500500332552714477
+      grandlere_idle_34: 8952661850194000521
+      grandlere_idle_35: 2278158330087690902
+      grandlere_idle_36: -7758155967150161493
+      grandlere_idle_37: 7999741470365556512
+      grandlere_idle_38: -4877603162320502729
+      grandlere_idle_39: -7315031938233027715
+      grandlere_idle_4: -2825283480076867125
+      grandlere_idle_40: 507459193317726282
+      grandlere_idle_41: -8802233740357226820
+      grandlere_idle_42: -1951477539178685534
+      grandlere_idle_43: -4012991915419814390
+      grandlere_idle_44: -4491030137963429841
+      grandlere_idle_45: 6423109239133849068
+      grandlere_idle_46: 6360264157239580616
+      grandlere_idle_5: 8031652764890017198
+      grandlere_idle_6: -635939959364890616
+      grandlere_idle_7: -2793755263592204192
+      grandlere_idle_8: -5089011384781391340
+      grandlere_idle_9: 7427513569003710210
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

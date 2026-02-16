@@ -1,0 +1,571 @@
+fileFormatVersion: 2
+guid: 0f512a9f1d0062a47a5ceee05972636f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1460014538431601944
+    second: zombie_filet_0
+  - first:
+      213: -8599525186698895154
+    second: zombie_filet_1
+  - first:
+      213: -7484293571765913377
+    second: zombie_filet_2
+  - first:
+      213: -5177003504141888926
+    second: zombie_filet_3
+  - first:
+      213: -158273575257515282
+    second: zombie_filet_4
+  - first:
+      213: -1780755693881669387
+    second: zombie_filet_5
+  - first:
+      213: -5437136837229560882
+    second: zombie_filet_6
+  - first:
+      213: 6249392473714954933
+    second: zombie_filet_7
+  - first:
+      213: -7792537233256760338
+    second: zombie_filet_8
+  - first:
+      213: -216691330695809240
+    second: zombie_filet_9
+  - first:
+      213: -1686223805840509965
+    second: zombie_filet_10
+  - first:
+      213: -7364956954901991786
+    second: zombie_filet_11
+  - first:
+      213: 4901668976978152883
+    second: zombie_filet_12
+  - first:
+      213: -4867252295080630650
+    second: zombie_filet_13
+  - first:
+      213: 5639293396464560154
+    second: zombie_filet_14
+  - first:
+      213: 1073273245529532367
+    second: zombie_filet_15
+  - first:
+      213: -7395731469330293996
+    second: zombie_filet_16
+  - first:
+      213: -1555984346757326471
+    second: zombie_filet_17
+  - first:
+      213: 1376040261761091616
+    second: zombie_filet_18
+  - first:
+      213: 7088986354231816267
+    second: zombie_filet_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: zombie_filet_0
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 3432
+        width: 562
+        height: 530
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e2e0e5438cfcbbe0800000000000000
+      internalID: -1460014538431601944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_1
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 3450
+        width: 664
+        height: 541
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec0a9c9a76958a880800000000000000
+      internalID: -8599525186698895154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_2
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 3465
+        width: 747
+        height: 554
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd8372466a2722890800000000000000
+      internalID: -7484293571765913377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_3
+      rect:
+        serializedVersion: 2
+        x: 2766
+        y: 3481
+        width: 827
+        height: 567
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2629baeedb69728b0800000000000000
+      internalID: -5177003504141888926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_4
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 2786
+        width: 784
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eead1799503bdcdf0800000000000000
+      internalID: -158273575257515282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_5
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 2805
+        width: 751
+        height: 557
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f8cd6a912c7947e0800000000000000
+      internalID: -1780755693881669387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_6
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 2823
+        width: 582
+        height: 537
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecbbdbd8ad86b84b0800000000000000
+      internalID: -5437136837229560882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_8
+      rect:
+        serializedVersion: 2
+        x: 2963
+        y: 2843
+        width: 511
+        height: 514
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eebb9b84ca85bd390800000000000000
+      internalID: -7792537233256760338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_10
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 2150
+        width: 470
+        height: 492
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f3b111f1645998e0800000000000000
+      internalID: -1686223805840509965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_12
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 2170
+        width: 458
+        height: 470
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bdc553e6f9360440800000000000000
+      internalID: 4901668976978152883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_13
+      rect:
+        serializedVersion: 2
+        x: 2026
+        y: 2173
+        width: 458
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 686a38f43db047cb0800000000000000
+      internalID: -4867252295080630650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_14
+      rect:
+        serializedVersion: 2
+        x: 2938
+        y: 2175
+        width: 458
+        height: 470
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a18e970477bc24e40800000000000000
+      internalID: 5639293396464560154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_15
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 1465
+        width: 458
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc7e7b2945805ee00800000000000000
+      internalID: 1073273245529532367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_16
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 1464
+        width: 458
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41bd364b9651d5990800000000000000
+      internalID: -7395731469330293996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_17
+      rect:
+        serializedVersion: 2
+        x: 2097
+        y: 1464
+        width: 387
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97916770b78086ae0800000000000000
+      internalID: -1555984346757326471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_18
+      rect:
+        serializedVersion: 2
+        x: 2938
+        y: 1468
+        width: 458
+        height: 470
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 028c7e6d35da81310800000000000000
+      internalID: 1376040261761091616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: zombie_filet_19
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 762
+        width: 458
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b403495b783216260800000000000000
+      internalID: 7088986354231816267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 28576b8e1c2bbcd48a33852e8f0e0632
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      zombie_filet_0: -1460014538431601944
+      zombie_filet_1: -8599525186698895154
+      zombie_filet_10: -1686223805840509965
+      zombie_filet_11: -7364956954901991786
+      zombie_filet_12: 4901668976978152883
+      zombie_filet_13: -4867252295080630650
+      zombie_filet_14: 5639293396464560154
+      zombie_filet_15: 1073273245529532367
+      zombie_filet_16: -7395731469330293996
+      zombie_filet_17: -1555984346757326471
+      zombie_filet_18: 1376040261761091616
+      zombie_filet_19: 7088986354231816267
+      zombie_filet_2: -7484293571765913377
+      zombie_filet_3: -5177003504141888926
+      zombie_filet_4: -158273575257515282
+      zombie_filet_5: -1780755693881669387
+      zombie_filet_6: -5437136837229560882
+      zombie_filet_7: 6249392473714954933
+      zombie_filet_8: -7792537233256760338
+      zombie_filet_9: -216691330695809240
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

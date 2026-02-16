@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: ada4bf4fc2b24c749b17c30c3fee775d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6957082991898076456
+    second: sorciere_bump_0
+  - first:
+      213: -8369235988456332128
+    second: sorciere_bump_1
+  - first:
+      213: -7617491733463022438
+    second: sorciere_bump_2
+  - first:
+      213: -4159904362733830668
+    second: sorciere_bump_3
+  - first:
+      213: 4348596845991354014
+    second: sorciere_bump_4
+  - first:
+      213: 2454541043217689520
+    second: sorciere_bump_5
+  - first:
+      213: -3979532879015637595
+    second: sorciere_bump_6
+  - first:
+      213: -2307453916685544436
+    second: sorciere_bump_7
+  - first:
+      213: -3473214091235437275
+    second: sorciere_bump_8
+  - first:
+      213: -6285181475551091143
+    second: sorciere_bump_9
+  - first:
+      213: 1633522304524118656
+    second: sorciere_bump_10
+  - first:
+      213: 3891482065105471857
+    second: sorciere_bump_11
+  - first:
+      213: -1190500662778767875
+    second: sorciere_bump_12
+  - first:
+      213: 3438960959919331530
+    second: sorciere_bump_13
+  - first:
+      213: -5058991110163533526
+    second: sorciere_bump_14
+  - first:
+      213: -5227644591085189401
+    second: sorciere_bump_15
+  - first:
+      213: 3576116707191499661
+    second: sorciere_bump_16
+  - first:
+      213: -2379656516180654535
+    second: sorciere_bump_17
+  - first:
+      213: 6964974950111365442
+    second: sorciere_bump_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sorciere_bump_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 3472
+        width: 1042
+        height: 617
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8252ff4fe168c8060800000000000000
+      internalID: 6957082991898076456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_1
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 3472
+        width: 1042
+        height: 617
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a425aae5308adb80800000000000000
+      internalID: -8369235988456332128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_2
+      rect:
+        serializedVersion: 2
+        x: 2294
+        y: 3472
+        width: 1042
+        height: 617
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a94467ba0ab394690800000000000000
+      internalID: -7617491733463022438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_3
+      rect:
+        serializedVersion: 2
+        x: 3429
+        y: 3476
+        width: 1042
+        height: 613
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fdf6afa50d0546c0800000000000000
+      internalID: -4159904362733830668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_4
+      rect:
+        serializedVersion: 2
+        x: 4564
+        y: 3481
+        width: 1042
+        height: 608
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9ed2b4aac1595c30800000000000000
+      internalID: 4348596845991354014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_5
+      rect:
+        serializedVersion: 2
+        x: 5699
+        y: 3485
+        width: 1042
+        height: 604
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb6b97f218401220800000000000000
+      internalID: 2454541043217689520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_6
+      rect:
+        serializedVersion: 2
+        x: 6834
+        y: 3489
+        width: 1041
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ad09465eebd5c8c0800000000000000
+      internalID: -3979532879015637595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_7
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 2633
+        width: 1041
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c04df5063e64affd0800000000000000
+      internalID: -2307453916685544436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_8
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 2633
+        width: 1041
+        height: 596
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 525d7079f2aaccfc0800000000000000
+      internalID: -3473214091235437275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_9
+      rect:
+        serializedVersion: 2
+        x: 2294
+        y: 2634
+        width: 1041
+        height: 595
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93669e09fbc86c8a0800000000000000
+      internalID: -6285181475551091143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_10
+      rect:
+        serializedVersion: 2
+        x: 3429
+        y: 2634
+        width: 1040
+        height: 595
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08a66d591ef6ba610800000000000000
+      internalID: 1633522304524118656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_11
+      rect:
+        serializedVersion: 2
+        x: 4564
+        y: 2634
+        width: 1040
+        height: 595
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1794a6cf152510630800000000000000
+      internalID: 3891482065105471857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_12
+      rect:
+        serializedVersion: 2
+        x: 5700
+        y: 2635
+        width: 1039
+        height: 594
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df5543a64fd7a7fe0800000000000000
+      internalID: -1190500662778767875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_13
+      rect:
+        serializedVersion: 2
+        x: 6835
+        y: 2635
+        width: 1038
+        height: 594
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac89d6cc5c4a9bf20800000000000000
+      internalID: 3438960959919331530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_14
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 1771
+        width: 1040
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a21f7d4936adac9b0800000000000000
+      internalID: -5058991110163533526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_15
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 1768
+        width: 1041
+        height: 601
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e6006011fca377b0800000000000000
+      internalID: -5227644591085189401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_16
+      rect:
+        serializedVersion: 2
+        x: 2294
+        y: 1764
+        width: 1041
+        height: 605
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8b2d77b23be0a130800000000000000
+      internalID: 3576116707191499661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_17
+      rect:
+        serializedVersion: 2
+        x: 3429
+        y: 1760
+        width: 1042
+        height: 609
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 936cb99a103c9fed0800000000000000
+      internalID: -2379656516180654535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sorciere_bump_18
+      rect:
+        serializedVersion: 2
+        x: 4564
+        y: 1756
+        width: 1042
+        height: 613
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249c1eaa0df88a060800000000000000
+      internalID: 6964974950111365442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sorciere_bump_0: 6957082991898076456
+      sorciere_bump_1: -8369235988456332128
+      sorciere_bump_10: 1633522304524118656
+      sorciere_bump_11: 3891482065105471857
+      sorciere_bump_12: -1190500662778767875
+      sorciere_bump_13: 3438960959919331530
+      sorciere_bump_14: -5058991110163533526
+      sorciere_bump_15: -5227644591085189401
+      sorciere_bump_16: 3576116707191499661
+      sorciere_bump_17: -2379656516180654535
+      sorciere_bump_18: 6964974950111365442
+      sorciere_bump_2: -7617491733463022438
+      sorciere_bump_3: -4159904362733830668
+      sorciere_bump_4: 4348596845991354014
+      sorciere_bump_5: 2454541043217689520
+      sorciere_bump_6: -3979532879015637595
+      sorciere_bump_7: -2307453916685544436
+      sorciere_bump_8: -3473214091235437275
+      sorciere_bump_9: -6285181475551091143
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
