@@ -96,6 +96,7 @@ public class TurnManager : MonoBehaviour
         
         _notNext = true;
         ZombieTurn();
+        WitchTurn();
         PlayTurn();
     }
 
@@ -109,7 +110,6 @@ public class TurnManager : MonoBehaviour
         {
             zombie.MoveToNextTileInPath(_durationTurn);
         }
-        _ui.UpdateTurn(_durationTurn, _currentTurn, _level.TurnMax);
         if (GameManager.Of.Echo)
         {
             if (GameManager.Of.PlayerMovement.Count > 4)
@@ -124,6 +124,8 @@ public class TurnManager : MonoBehaviour
         {
             witch.MoveToNextTileInPath(_durationTurn);
         }
+
+        _ui.UpdateTurn(_durationTurn, _currentTurn, _level.TurnMax);
 
         foreach (var evnt in _level.Events)
         {
@@ -226,6 +228,7 @@ public class TurnManager : MonoBehaviour
             _notNext = false;
             var playerPos = new List<Vector2Int> { GameManager.Of.Player.CurrentTile.CellData.GridPosition };
             CalculZombiePath(playerPos);
+            CalculWitchPath();
         }
     }
 
@@ -389,8 +392,10 @@ public class TurnManager : MonoBehaviour
     {
         _witchFeedbacks = new List<List<GameObject>>();
         int wIndex = 0;
+        Debug.Log("CALCUL");
         foreach (Entity witch in GameManager.Of.Witches)
         {
+            Debug.Log("YEP");
             _witchFeedbacks.Add(new List<GameObject>());
             Vector2Int playerPos = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
             Vector2Int witchPos = witch.CurrentTile.CellData.GridPosition;
@@ -406,7 +411,7 @@ public class TurnManager : MonoBehaviour
                 incr = playerPos.x < witchPos.x ? Vector2Int.left : Vector2Int.right;
             }
 
-            bool search = true;
+            bool search = incr == Vector2Int.zero ? false : true;
             while (search)
             {
                 if (!GridManager.Tiles.ContainsKey(witchPos + incr))
@@ -415,15 +420,11 @@ public class TurnManager : MonoBehaviour
                 }
                 else
                 {
-                    if (!GridManager.Tiles[witchPos + incr].CellData.DoorKeyClosed)
+                    if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoomOrHaveDoor(GridManager.Tiles[witchPos], GridManager.GetFace(incr)))
                     {
-                        if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoom(GridManager.Tiles[witchPos]) ||
-                            GridManager.Tiles[witchPos + incr].CellData.HasDoor)
-                        {
-                            witchPos += incr;
-                            GameObject feed = Instantiate(_witchPathFeedback, (Vector2)witchPos * GameManager.Of.Grid.TileSize, Quaternion.identity);
-                            _witchFeedbacks[wIndex].Add(feed);
-                        }
+                        witchPos += incr;
+                        GameObject feed = Instantiate(_witchPathFeedback, ((Vector2)witchPos + Vector2.one / 2) * GameManager.Of.Grid.TileSize, Quaternion.identity);
+                        _witchFeedbacks[wIndex].Add(feed);
                     }
                     else
                     {
@@ -457,9 +458,12 @@ public class TurnManager : MonoBehaviour
         int witchIndex = 0;
         foreach (var witch in GameManager.Of.Witches)
         {
-            foreach (GameObject feed in _witchFeedbacks[witchIndex])
+            if (witchIndex < _witchFeedbacks.Count)
             {
-                Destroy(feed);
+                foreach (GameObject feed in _witchFeedbacks[witchIndex])
+                {
+                    Destroy(feed);
+                }
             }
 
             if (_witchPaths[witchIndex].Count <= 1) continue;
