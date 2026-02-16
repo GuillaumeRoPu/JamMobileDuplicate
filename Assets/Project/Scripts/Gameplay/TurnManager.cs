@@ -34,6 +34,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] TurnChronoUI _ui;
     [SerializeField] GameObject _gameOverUI;
+    [SerializeField] GameObject _gameWinUI;
 
     bool _notNext;
 
@@ -53,6 +54,7 @@ public class TurnManager : MonoBehaviour
         _notNext = false;
 
         _gameOverUI.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+        _gameWinUI.GetComponent<Image>().color = new Color(255, 255, 255, 0);
 
         _player.ReachedTarget();
         _player.RemoveMaterials(_player.Materials);
@@ -213,7 +215,7 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.Zombies.Count == 0 && GameManager.Of.Witches.Count == 0 && !GameManager.Of.Echo)
             {
-                _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
+                _gameWinUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.WinLevel();
             }
         }
