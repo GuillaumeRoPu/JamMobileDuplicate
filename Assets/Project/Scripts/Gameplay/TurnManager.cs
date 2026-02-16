@@ -10,9 +10,9 @@ public enum EventType
 [System.Serializable]
 public class TurnEvent
 {
-    public int Turn;
+    [MinValue(1)] public int Turn;
     public EventType EventType;
-    [MinValue(0), ShowIf(nameof(EventType), false, EventType.Zombie)] public int SpawnCellIndex;
+    [MinValue(0)] public int SpawnCellIndex;
 }
 
 public class TurnManager : MonoBehaviour
@@ -28,7 +28,7 @@ public class TurnManager : MonoBehaviour
 
     [SerializeField] PathFeedback _pathFeedback;
     [SerializeField] GameObject _witchPathFeedback;
-    [SerializeField] GameObject _zombieSpawnWarning;
+    [SerializeField] GameObject _spawnWarning;
     List<GameObject> _warnings = new List<GameObject>();
     public PathFeedback GetPathFeedback => _pathFeedback;
 
@@ -73,6 +73,9 @@ public class TurnManager : MonoBehaviour
 
             if (evnt.EventType == EventType.EchoLeave)
                 _ui.PlaceEchoTurn(evnt.Turn, _level.TurnMax, false);
+
+            if (evnt.EventType == EventType.Witch)
+                _ui.PlaceWicthTurn(evnt.Turn, _level.TurnMax);
 
         }
 
@@ -228,7 +231,7 @@ public class TurnManager : MonoBehaviour
 
     public void CalculZombiePath(List<Vector2Int> playerPath)
     {
-        WarningZombieSpawn(playerPath.Count > 1 ? playerPath.Count - 1 : 1);
+        WarningSpawn(playerPath.Count > 1 ? playerPath.Count - 1 : 1);
         _zombiePaths.Clear();
         ResetFeedback();
         int zIndex = 0;
@@ -501,7 +504,7 @@ public class TurnManager : MonoBehaviour
         _zombieFeedbacks.Clear();
     }
 
-    void WarningZombieSpawn(int turnWillMake)
+    void WarningSpawn(int turnWillMake)
     {
         foreach (var go in _warnings)
         {
@@ -511,11 +514,11 @@ public class TurnManager : MonoBehaviour
 
         foreach (var evnt in _level.Events)
         {
-            if (evnt.EventType == EventType.Zombie)
+            if (evnt.EventType.HasFlag(EventType.Zombie) || evnt.EventType.HasFlag(EventType.Witch))
             {
                 if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn)
                 {
-                    _warnings.Add(Instantiate(_zombieSpawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
+                    _warnings.Add(Instantiate(_spawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
                 }
             }
         }

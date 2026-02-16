@@ -20,6 +20,13 @@ public class Entity : MonoBehaviour
 
     System.Action _onTargetReached;
 
+    Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
+
     public void SetCurrentTile(Vector2Int tile)
     {
         if (_currentTile)

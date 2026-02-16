@@ -17,16 +17,13 @@ MonoBehaviour:
   <Events>k__BackingField:
   - Turn: 5
     EventType: 0
-    SpawnCellIndex: 0
+    SpawnCellIndex: 1
   - Turn: 13
     EventType: 0
-    SpawnCellIndex: 1
+    SpawnCellIndex: 2
   - Turn: 15
-    EventType: 1
-    SpawnCellIndex: 0
+    EventType: 3
+    SpawnCellIndex: 4
   - Turn: 20
     EventType: 0
-    SpawnCellIndex: 2
-  - Turn: 23
-    EventType: 2
-    SpawnCellIndex: 0
+    SpawnCellIndex: 3

@@ -367,5 +367,5 @@ MonoBehaviour:
   _countTxt: {fileID: 3285963901810849843}
   _iconImg: {fileID: 6119022810698235616}
   _zombieIcon: {fileID: -8306974990614377787, guid: 8527e14da8fe8e74f82ccf24e3b4c06f, type: 3}
-  _echoIcon: {fileID: 8840593171148523582, guid: 8527e14da8fe8e74f82ccf24e3b4c06f, type: 3}
-  _witchIcon: {fileID: 0}
+  _echoIcon: {fileID: 7992866323731413152, guid: f77ed40eb0bdf754fb4fa3169064897b, type: 3}
+  _witchIcon: {fileID: -4989098435927613035, guid: f77ed40eb0bdf754fb4fa3169064897b, type: 3}

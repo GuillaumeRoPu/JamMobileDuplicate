@@ -407,4 +407,21 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+
+    [SerializeField] int _spawnIndex;
+    private void OnDrawGizmos()
+    {
+        if (_gridLevelData == null) return;
+
+        _spawnIndex = Mathf.Clamp(_spawnIndex, 0, _gridLevelData.keys.Count - 1);
+
+        if (_gridLevelData.values[_spawnIndex] == CellData.SpawnPointType.Player)
+            _spawnIndex++;
+
+        _spawnIndex = Mathf.Min(_spawnIndex, _gridLevelData.keys.Count - 1);
+
+        Vector2Int pos = _gridLevelData.keys[_spawnIndex];
+
+        Gizmos.DrawCube((Vector2)pos * TileSize + Vector2.one/2, Vector3.one * TileSize);
+    }
 }
