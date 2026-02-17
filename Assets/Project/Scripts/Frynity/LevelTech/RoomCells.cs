@@ -142,48 +142,45 @@ namespace Frynity.Gen
 
             foreach (Cell tile in _localCells)
             {
-                Sprite sprite = null;
+                Sprite sprite = GameManager.Of.SideInWall;
 
                 Vector2Int worldPos = cellRoomPos + tile.localPos;
 
                 if (!TileInCells(tile.localPos + Vector2Int.right))
                 {
-                    if (GridManager.Tiles.ContainsKey(worldPos + Vector2Int.right))
+                    if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Right)
                     {
-                        if(GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Right)
-                        {
-                            sprite = GameManager.Of.SideInDoorWall;
-                        }
-                        else
-                        {
-                            sprite = GameManager.Of.SideInWall;
-                        }
+                        sprite = GameManager.Of.SideInDoorWall;
                     }
                     else
                     {
-                        sprite = GameManager.Of.SideOutWall;
+                        sprite = GameManager.Of.SideInWall;
                     }
+
+                    if (!GridManager.Tiles.ContainsKey(worldPos + Vector2Int.right))
+                    {
+                        SpawnWall(GameManager.Of.SideOutWall, (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize, true, wallParent.transform, null, false);
+                    }
+
                     SpawnWall(sprite, (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize, true, wallParent.transform, null, true);
                 }
 
                 if (!TileInCells(tile.localPos + Vector2Int.left))
                 {
-                    if (GridManager.Tiles.ContainsKey(worldPos + Vector2Int.left))
+                    if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Left)
                     {
-                        if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Left)
-                        {
-                            sprite = GameManager.Of.SideInDoorWall;
-                        }
-                        else
-                        {
-                            sprite = GameManager.Of.SideInWall;
-                        }
+                        sprite = GameManager.Of.SideInDoorWall;
                     }
                     else
                     {
-                        sprite = GameManager.Of.SideOutWall;
+                        sprite = GameManager.Of.SideInWall;
                     }
-                    SpawnWall(sprite, (Vector2)worldPos * GameManager.Of.Grid.TileSize, true, wallParent.transform, null);
+                    if (!GridManager.Tiles.ContainsKey(worldPos + Vector2Int.left))
+                    {
+                        SpawnWall(GameManager.Of.SideOutWall, (Vector2)worldPos * GameManager.Of.Grid.TileSize, true, wallParent.transform, null, true);
+                    }
+
+                    SpawnWall(sprite, (Vector2)worldPos * GameManager.Of.Grid.TileSize, true, wallParent.transform, null, false);
                 }
 
                 if (!TileInCells(tile.localPos + Vector2Int.up))
