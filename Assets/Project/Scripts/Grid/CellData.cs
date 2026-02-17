@@ -239,7 +239,7 @@ public class CellData
     {
         if (newTrap.TrapMode == Trap.TrapType.Single)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
@@ -250,7 +250,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Multiple)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
@@ -261,7 +261,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!HasADoorTrap())
+            if (!HasADoorTrap() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
