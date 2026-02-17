@@ -5,7 +5,7 @@ public class Entity : MonoBehaviour
 {
     Tile _currentTile;
     public Tile CurrentTile => _currentTile;
-    List<Vector2Int> _path;
+    List<Vector2Int> _path = new List<Vector2Int>();
     public List<Vector2Int> Path => _path;
     bool _reachTarget = true;
 

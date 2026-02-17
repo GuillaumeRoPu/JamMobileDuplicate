@@ -334,6 +334,8 @@ public class Player : MonoBehaviour
 
     public void PlaceTrap(Vector2Int tile)
     {
+        if (!GameManager.Of.Turn.CanPlay) return;
+
         if (_faceForPlaceTrap.Count > 0)
         {
             Face face = GridManager.GetFace(tile - GameManager.Of.Player.CurrentTile.CellData.GridPosition);

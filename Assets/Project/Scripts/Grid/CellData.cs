@@ -95,9 +95,16 @@ public class CellData
             tile == GridPosition + Vector2Int.up || tile == GridPosition + Vector2Int.down;
     }
 
-    public bool IsTheSameRoom(Tile tile)
+    public bool IsTheSameRoomOrHaveDoor(Tile tile, Face face)
     {
-        return tile.CellData.MainRoomCell == MainRoomCell;
+        Face receptFace = face == Face.Up ? Face.Down :
+           face == Face.Left ? Face.Right :
+           face == Face.Down ? Face.Up :
+           face == Face.Right ? Face.Left : Face.None;
+
+        if (receptFace == Face.None) return false;
+
+        return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == receptFace || tile.CellData.DoorPosition == face;
     }
 
     public void SetTrap(Trap newtrap)

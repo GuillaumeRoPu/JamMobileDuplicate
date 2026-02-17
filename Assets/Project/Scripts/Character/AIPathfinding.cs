@@ -1,3 +1,4 @@
+using Frynity.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,8 +40,21 @@ public class AIPathfinding
         List<Vector2Int> selectPath = _paths[0];
         foreach (var path in _paths)
         {
+            if (path[^1] != target.CellData.GridPosition) continue;
+
+            if (selectPath[^1] != target.CellData.GridPosition)
+            {
+                selectPath = path;
+                continue;
+            }
+
             if (path.Count < selectPath.Count) selectPath = path;
         }
+
+        //foreach (var oh in selectPath)
+        //{
+        //    oh.Log();
+        //}
 
         return selectPath;
     }
@@ -50,11 +64,12 @@ public class AIPathfinding
         _passedTile.Add(nextTile.CellData.GridPosition);
         paths[pathIndex].Add(nextTile.CellData.GridPosition);
 
-        List<List<Vector2Int>> newPaths = new(paths);
+        List<Vector2Int> newPaths = new(paths[pathIndex]);
+        int lol = paths.Count;
 
         List<Tile> searchTiles = new List<Tile>();
-        int lastDistance = Mathf.Abs(nextTile.CellData.GridPosition.x - _target.CellData.GridPosition.x)
-             + Mathf.Abs(nextTile.CellData.GridPosition.y - _target.CellData.GridPosition.y);
+        int lastDistance = Mathf.Abs(_target.CellData.GridPosition.x - nextTile.CellData.GridPosition.x)
+             + Mathf.Abs(_target.CellData.GridPosition.y - nextTile.CellData.GridPosition.y);
         for (int i = 0; i < 4; i++)
         {
             Tile tile = null;
@@ -79,8 +94,8 @@ public class AIPathfinding
                 }
                 else
                 {
-                    int distance = Mathf.Abs(tile.CellData.GridPosition.x - _target.CellData.GridPosition.x)
-             + Mathf.Abs(tile.CellData.GridPosition.y - _target.CellData.GridPosition.y);
+                    int distance = Mathf.Abs(_target.CellData.GridPosition.x - tile.CellData.GridPosition.x)
+             + Mathf.Abs(_target.CellData.GridPosition.y - tile.CellData.GridPosition.y);
 
                     if (distance < lastDistance)
                     {
@@ -101,20 +116,16 @@ public class AIPathfinding
         foreach (Tile tile in searchTiles)
         {
             int index = pathIndex;
+
             if (pathCount == 0)
             {
-                paths = GetAllPaths(new List<List<Vector2Int>>(paths), pathIndex, tile);
+                GetAllPaths(paths, index, tile);
             }
             else
             {
-                paths.Add(new List<Vector2Int>(newPaths[pathIndex]));
-                index = paths.Count - 1;
-                paths = GetAllPaths(new List<List<Vector2Int>>(paths), index, tile);
-
-                if (paths[index][paths[index].Count - 1] != _target.CellData.GridPosition)
-                {
-                    paths.RemoveAt(index);
-                }
+                index = paths.Count;
+                paths.Add(new List<Vector2Int>(newPaths));
+                GetAllPaths(paths, index, tile);
             }
             pathCount++;
         }
