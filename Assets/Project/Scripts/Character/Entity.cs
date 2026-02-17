@@ -55,12 +55,12 @@ public class Entity : MonoBehaviour
 
     void Update()
     {
+        SendVelocity();
+
         if (!_reachTarget)
         {
             if (_isMoving)
             {
-                SendVelocity();
-
                 float ratio = _currentMoveTime / _duration;
 
                 transform.position = Vector3.Lerp(_initPosition, (Vector2)_path[_pathIndex] * GameManager.Of.Grid.TileSize, ratio);
