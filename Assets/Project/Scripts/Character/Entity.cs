@@ -59,6 +59,8 @@ public class Entity : MonoBehaviour
         {
             if (_isMoving)
             {
+                SendVelocity();
+
                 float ratio = _currentMoveTime / _duration;
 
                 transform.position = Vector3.Lerp(_initPosition, (Vector2)_path[_pathIndex] * GameManager.Of.Grid.TileSize, ratio);
@@ -105,5 +107,11 @@ public class Entity : MonoBehaviour
             scale.x *= -1;
             spriteTransform.localScale = scale;
         }
+    }
+
+    // ANIMATIONS
+    void SendVelocity()
+    {
+        _animator.SetBool("Move", !_reachTarget); 
     }
 }
