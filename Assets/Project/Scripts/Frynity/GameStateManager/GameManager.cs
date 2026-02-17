@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Object With Z Order")]
     [SerializeField] GameObject _rooms;
+    public Transform RoomTransform => _rooms.transform;
     [SerializeField] List<GameObject> _other = new List<GameObject>();
     public void AddObjectRespectZOrder(GameObject obj) { _other.Add(obj); }
 
