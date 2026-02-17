@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5779293279075883316}
   - component: {fileID: 9143890109765667274}
   m_Layer: 0
-  m_Name: Couloir2N4
+  m_Name: Couloir2N3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
