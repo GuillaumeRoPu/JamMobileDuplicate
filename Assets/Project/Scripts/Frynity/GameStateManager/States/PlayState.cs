@@ -37,6 +37,9 @@ public class PlayState : GameState
 
         GameManager.Of.UpdateZOrder();
 
+        Camera.main.transform.position = new Vector3(GameManager.Of.RoomTransform.position.x, 
+            GameManager.Of.RoomTransform.position.y, -10);
+
 
         GameManager.Of.Turn.Init();
         playSound = true;
