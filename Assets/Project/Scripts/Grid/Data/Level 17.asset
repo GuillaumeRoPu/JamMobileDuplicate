@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a7d48b69c1b84f9926c51917fb1c9, type: 3}
+  m_Name: Level 17
+  m_EditorClassIdentifier: Assembly-CSharp::GridLevelData
+  allTilesPosition:
+  - {x: -2, y: -1}
+  - {x: -2, y: 0}
+  - {x: -2, y: 1}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: 1}
+  - {x: 0, y: -1}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: -1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 2, y: -1}
+  - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  - {x: 3, y: -1}
+  - {x: 3, y: 0}
+  - {x: 3, y: 1}
+  - {x: -2, y: -2}
+  - {x: 1, y: 2}
+  - {x: 3, y: -2}
+  keys:
+  - {x: -1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 3, y: -2}
+  values: 010000000200000002000000
+  allRoomsPosition:
+  - {x: -2, y: 1}
+  - {x: 0, y: 1}
+  - {x: 3, y: 1}
+  - {x: 2, y: -1}
+  _allRoomsCellsBis:
+  - items:
+    - {x: -2, y: 1}
+    - {x: -2, y: 0}
+    - {x: -2, y: -1}
+    - {x: -2, y: -2}
+  - items:
+    - {x: 0, y: 1}
+    - {x: -1, y: 1}
+    - {x: 1, y: 1}
+    - {x: -1, y: 0}
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: -1, y: -1}
+    - {x: 0, y: -1}
+  - items:
+    - {x: 3, y: 1}
+    - {x: 3, y: 0}
+    - {x: 2, y: 1}
+    - {x: 2, y: 0}
+  - items:
+    - {x: 2, y: -1}
+    - {x: 1, y: -1}
+    - {x: 3, y: -1}
+  allRoomsPrefab:
+  - {fileID: 8844891694865163611, guid: 80927d361911d8b45abaf188c11a04aa, type: 3}
+  - {fileID: 3265063425170013087, guid: abd4adb6db11ad549ace7c08b56025a4, type: 3}
+  - {fileID: 6520098395848258286, guid: addad70af8ff80444a85f59ed39f7943, type: 3}
+  - {fileID: 8557198564699150841, guid: fc23f24a393853e45860bcaf76fee17c, type: 3}
+  keysD:
+  - {x: -1, y: 1}
+  - {x: -2, y: 1}
+  - {x: 1, y: 2}
+  - {x: 1, y: 1}
+  - {x: 2, y: 0}
+  - {x: 1, y: 0}
+  - {x: 1, y: -1}
+  - {x: 0, y: -1}
+  - {x: 3, y: -2}
+  - {x: 3, y: -1}
+  valuesD: 02000000030000000100000000000000020000000300000002000000030000000000000001000000
+  allMaterialsList:
+  - {x: 3, y: 1}
+  - {x: -2, y: -2}
+  allBarricadesList: []
+  limitsMin: {x: -2, y: -2}
+  limitsMax: {x: 3, y: 2}

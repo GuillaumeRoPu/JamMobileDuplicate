@@ -104,7 +104,7 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
-        return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == face || tile.CellData.DoorPosition == receptFace;
+        return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == receptFace || tile.CellData.DoorPosition == face;
     }
 
     public void SetTrap(Trap newtrap)
@@ -239,7 +239,7 @@ public class CellData
     {
         if (newTrap.TrapMode == Trap.TrapType.Single)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
@@ -250,7 +250,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Multiple)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
@@ -261,7 +261,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!HasADoorTrap())
+            if (!HasADoorTrap() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
