@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     List<Vector2Int> _diffFeedbacks = new List<Vector2Int>();
     List<Vector2Int> _selectPath = new List<Vector2Int>();
 
+    [SerializeField] PathFeedback _pathFeedback;
+
     public System.Action MaterialChange;
     int _materials;
     [SerializeField] TextMeshProUGUI _countMaterialText;
@@ -118,8 +120,6 @@ public class Player : MonoBehaviour
 
         Vector2Int diff = now - last;
 
-        PathFeedback feedback = GameManager.Of.Turn.GetPathFeedback;
-
         if (_diffFeedbacks.Count > 0)
         {
             Vector2Int lastDiff = _diffFeedbacks[_diffFeedbacks.Count - 1];
@@ -129,8 +129,8 @@ public class Player : MonoBehaviour
             {
                 if (diff == Vector2Int.right)
                 {
-                    ModifyLastFeedback(feedback.Row, 0);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
+                    ModifyLastFeedback(_pathFeedback.Row, 0);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
                 }
                 if (diff == Vector2Int.left)
                 {
@@ -139,13 +139,13 @@ public class Player : MonoBehaviour
                 }
                 if (diff == Vector2Int.up)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
                 }
                 if (diff == Vector2Int.down)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0, false, true);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0, false, true);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
                 }
             }
 
@@ -158,18 +158,18 @@ public class Player : MonoBehaviour
                 }
                 if (diff == Vector2Int.left)
                 {
-                    ModifyLastFeedback(feedback.Row, 0);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
+                    ModifyLastFeedback(_pathFeedback.Row, 0);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
                 }
                 if (diff == Vector2Int.up)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0, true);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0, true);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
                 }
                 if (diff == Vector2Int.down)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0, true, true);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0, true, true);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
                 }
             }
 
@@ -177,18 +177,18 @@ public class Player : MonoBehaviour
             {
                 if (diff == Vector2Int.right)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0, true, true);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0, true, true);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
                 }
                 if (diff == Vector2Int.left)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0, false, true);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0, false, true);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
                 }
                 if (diff == Vector2Int.up)
                 {
-                    ModifyLastFeedback(feedback.Row, 90);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
+                    ModifyLastFeedback(_pathFeedback.Row, 90);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
                 }
                 if (diff == Vector2Int.down)
                 {
@@ -201,13 +201,13 @@ public class Player : MonoBehaviour
             {
                 if (diff == Vector2Int.right)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0, true);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0, true);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
                 }
                 if (diff == Vector2Int.left)
                 {
-                    ModifyLastFeedback(feedback.Turn, 0);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
+                    ModifyLastFeedback(_pathFeedback.Turn, 0);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
                 }
                 if (diff == Vector2Int.up)
                 {
@@ -216,8 +216,8 @@ public class Player : MonoBehaviour
                 }
                 if (diff == Vector2Int.down)
                 {
-                    ModifyLastFeedback(feedback.Row, 90);
-                    SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
+                    ModifyLastFeedback(_pathFeedback.Row, 90);
+                    SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
                 }
             }
 
@@ -228,19 +228,19 @@ public class Player : MonoBehaviour
         {
             if (diff == Vector2Int.right)
             {
-                SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
+                SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 0);
             }
             if (diff == Vector2Int.left)
             {
-                SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
+                SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 180);
             }
             if (diff == Vector2Int.up)
             {
-                SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
+                SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), 90);
             }
             if (diff == Vector2Int.down)
             {
-                SpawnFeedback(feedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
+                SpawnFeedback(_pathFeedback.Arrow, (Vector2)now * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), -90);
             }
             _diffFeedbacks.Add(diff);
         }
@@ -280,28 +280,26 @@ public class Player : MonoBehaviour
             _selectPath.RemoveAt(_selectPath.Count - 1);
         _feedbacks.RemoveAt(_feedbacks.Count - 1);
 
-        PathFeedback feedback = GameManager.Of.Turn.GetPathFeedback;
-
         if (_diffFeedbacks.Count > 0)
         {
             if (_diffFeedbacks[_diffFeedbacks.Count - 1] == Vector2.right)
             {
-                ModifyLastFeedback(feedback.Arrow, 0);
+                ModifyLastFeedback(_pathFeedback.Arrow, 0);
             }
 
             if (_diffFeedbacks[_diffFeedbacks.Count - 1] == Vector2.left)
             {
-                ModifyLastFeedback(feedback.Arrow, 180);
+                ModifyLastFeedback(_pathFeedback.Arrow, 180);
             }
 
             if (_diffFeedbacks[_diffFeedbacks.Count - 1] == Vector2.up)
             {
-                ModifyLastFeedback(feedback.Arrow, 90);
+                ModifyLastFeedback(_pathFeedback.Arrow, 90);
             }
 
             if (_diffFeedbacks[_diffFeedbacks.Count - 1] == Vector2.down)
             {
-                ModifyLastFeedback(feedback.Arrow, -90);
+                ModifyLastFeedback(_pathFeedback.Arrow, -90);
             }
 
         }

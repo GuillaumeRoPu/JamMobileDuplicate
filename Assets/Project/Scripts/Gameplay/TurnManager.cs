@@ -28,12 +28,11 @@ public class TurnManager : MonoBehaviour
     [SerializeField] Player _player;
     public void SetLevelData(LevelData level) {  _level = level; }
 
-    [SerializeField] PathFeedback _pathFeedback;
+    [SerializeField] PathFeedback _zombiePathFeedback;
     [SerializeField] GameObject _witchPathFeedback;
     [SerializeField] GameObject _spawnWarning;
     List<GameObject> _warnings = new List<GameObject>();
     List<bool> _witchHasMove = new List<bool>();
-    public PathFeedback GetPathFeedback => _pathFeedback;
 
     [SerializeField] TurnChronoUI _ui;
     [SerializeField] GameObject _gameOverUI;
@@ -301,18 +300,18 @@ public class TurnManager : MonoBehaviour
                 {
                     if (result == Vector2Int.right)
                     {
-                        ModifyLastFeedback(zIndex,_pathFeedback.Row, 0);
-                        SpawnFeedback(zIndex,_pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        ModifyLastFeedback(zIndex,_zombiePathFeedback.Row, 0);
+                        SpawnFeedback(zIndex,_zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
                     }
                     if (result == Vector2Int.up)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
                     }
                     if (result == Vector2Int.down)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0, false, true);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, false, true);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
                     }
                 }
 
@@ -320,18 +319,18 @@ public class TurnManager : MonoBehaviour
                 {
                     if (result == Vector2Int.left)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Row, 0);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 0);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
                     }
                     if (result == Vector2Int.up)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0, true);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
                     }
                     if (result == Vector2Int.down)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0, true, true);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true, true);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
                     }
                 }
 
@@ -339,18 +338,18 @@ public class TurnManager : MonoBehaviour
                 {
                     if (result == Vector2Int.right)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0, true, true);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true, true);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
                     }
                     if (result == Vector2Int.left)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0, false, true);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, false, true);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
                     }
                     if (result == Vector2Int.up)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Row, 90);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 90);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
                     }
                 }
 
@@ -358,18 +357,18 @@ public class TurnManager : MonoBehaviour
                 {
                     if (result == Vector2Int.right)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0, true);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
                     }
                     if (result == Vector2Int.left)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Turn, 0);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
                     }
                     if (result == Vector2Int.down)
                     {
-                        ModifyLastFeedback(zIndex, _pathFeedback.Row, 90);
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 90);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
                     }
                 }
 
@@ -377,19 +376,19 @@ public class TurnManager : MonoBehaviour
                 {
                     if (result == Vector2Int.right)
                     {
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
                     }
                     if (result == Vector2Int.left)
                     {
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
                     }
                     if (result == Vector2Int.up)
                     {
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
                     }
                     if (result == Vector2Int.down)
                     {
-                        SpawnFeedback(zIndex, _pathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
                     }
                 }
 
