@@ -18,6 +18,17 @@ public class TurnChronoUI : MonoBehaviour
 
     float _turnPos;
 
+    public void Init()
+    {
+        if (transform.childCount > 1)
+        {
+            for (int i = 0; i < transform.childCount - 1; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+    }
+
     private void Update()
     {
         if (_changing)

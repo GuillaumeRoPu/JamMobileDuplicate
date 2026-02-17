@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     public void SelectPath(Vector2Int tile)
     {
-        if (!GameManager.Of.CanPlay) return;
+        if (!GameManager.Of.Turn.CanPlay) return;
 
         if (_selected)
         {
@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
     {
         if (!_selected) return;
         GameManager.Of.Turn.CalculZombiePath(_selectPath);
+
         if (_selectPath.Count > 1)
         {
             GameManager.Of.Turn.PassTurn(_selectPath.Count - 1);
@@ -89,12 +90,13 @@ public class Player : MonoBehaviour
         }
         else
         {
+            GameManager.Of.Turn.PassTurn(1);
             GameManager.Of.Player.StopPath();
             ReachedTarget();
         }
 
 
-            _selected = false;
+       _selected = false;
 
         foreach(GameObject over in _pathOverList)
         {
@@ -317,10 +319,20 @@ public class Player : MonoBehaviour
 
     public void ChooseTrapToPlace(Trap trap, int price)
     {
+        if (!GameManager.Of.Turn.CanPlay) return;
+
         _trap = trap;
         _price = price;
         Vector2Int player = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
+
+
         ResetTrapsPlace();
+        _last = GridManager.Tiles[player];
+        _selectPath.Clear();
+        _selectPath.Add(player);
+        _selected = true;
+
+        SendSelectedPath();
 
         Face[] faces = {Face.Up, Face.Down, Face.Right, Face.Left};
         for (int i = 0; i < 4; i++)
@@ -333,7 +345,6 @@ public class Player : MonoBehaviour
 
     public void PlaceTrap(Vector2Int tile)
     {
-        if (!GameManager.Of.Turn.CanPlay) return;
 
         if (_faceForPlaceTrap.Count > 0)
         {

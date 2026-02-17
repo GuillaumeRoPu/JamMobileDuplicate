@@ -1,5 +1,6 @@
 using Frynity.Utils;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,14 +34,13 @@ public class TurnManager : MonoBehaviour
     [SerializeField] GameObject _witchPathFeedback;
     [SerializeField] GameObject _spawnWarning;
     List<GameObject> _warnings = new List<GameObject>();
-    List<bool> _witchHasMove = new List<bool>();
 
     [SerializeField] TurnChronoUI _ui;
     [SerializeField] GameObject _gameOverUI;
     [SerializeField] GameObject _gameWinUI;
 
-    bool _notNext;
     public bool CanPlay => !_notNext;
+    bool _notNext;
 
     int _nbPass;
 
@@ -48,6 +48,7 @@ public class TurnManager : MonoBehaviour
     List<List<Vector2Int>> _zombiePaths = new List<List<Vector2Int>>();
 
     List<List<GameObject>> _witchFeedbacks = new List<List<GameObject>>();
+    List<List<Vector2Int>> _witchAllTilePaths = new List<List<Vector2Int>>();
     List<List<Vector2Int>> _witchPaths = new List<List<Vector2Int>>();
 
     public void Init()
@@ -118,14 +119,14 @@ public class TurnManager : MonoBehaviour
         }
         if (GameManager.Of.Echo)
         {
-            if (GameManager.Of.PlayerMovement.Count > 4)
+            if (GameManager.Of.PlayerMovement.Count > 3)
             {
                 List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, GameManager.Of.PlayerMovement[GameManager.Of.PlayerMovement.Count - 5] };
                 GameManager.Of.Echo.SetPath(path);
                 GameManager.Of.Echo.MoveToNextTileInPath(_durationTurn);
-                GameManager.Of.PlayerMovement.Clear();
             }
         }
+        else
         foreach (var witch in GameManager.Of.Witches)
         {
             witch.MoveToNextTileInPath(_durationTurn);
@@ -188,6 +189,8 @@ public class TurnManager : MonoBehaviour
                 return;
             }
         }
+
+        int w = 0;
         foreach (var witch in GameManager.Of.Witches)
         {
             if (witch.CurrentTile.CellData.HasATileTrap())
@@ -196,14 +199,15 @@ public class TurnManager : MonoBehaviour
             }
             if (witch.Path.Count >= 2)
             {
-                if (Mathf.Abs(witch.Path[0].x) <= Mathf.Abs(player.x) && Mathf.Abs(player.x) <= Mathf.Abs(witch.Path[1].x) ||
-                Mathf.Abs(witch.Path[0].y) <= Mathf.Abs(player.y) && Mathf.Abs(player.y) <= Mathf.Abs(witch.Path[1].y))
+                if (_witchAllTilePaths[w].Contains(player))
                 {
-                    //_gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
-                    //GameManager.Of.LoseLevel();
-                    //return;
+                    _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
+                    GameManager.Of.LoseLevel();
+                    return;
                 }
             }
+
+            w++;
         }
 
         if (GameManager.Of.Echo)
@@ -220,6 +224,7 @@ public class TurnManager : MonoBehaviour
         await Awaitable.EndOfFrameAsync();
 
         GameManager.Of.CheckEntityAlive();
+
         if (_currentTurn > _lastEventTurn)
         {
             if (GameManager.Of.Zombies.Count == 0 && GameManager.Of.Witches.Count == 0 && !GameManager.Of.Echo)
@@ -242,6 +247,8 @@ public class TurnManager : MonoBehaviour
             var playerPos = new List<Vector2Int> { GameManager.Of.Player.CurrentTile.CellData.GridPosition };
             CalculZombiePath(playerPos);
         }
+
+        GameManager.Of.Grid.EntityInARoom();
     }
 
     public void CalculZombiePath(List<Vector2Int> playerPath)
@@ -405,6 +412,7 @@ public class TurnManager : MonoBehaviour
         _witchFeedbacks = new List<List<GameObject>>();
         int wIndex = 0;
         _witchPaths.Clear();
+        _witchAllTilePaths.Clear();
         ResetFeedback();
         foreach (Entity witch in GameManager.Of.Witches)
         {
@@ -413,6 +421,7 @@ public class TurnManager : MonoBehaviour
             Vector2Int witchPos = witch.CurrentTile.CellData.GridPosition;
 
             List<Vector2Int> path = new List<Vector2Int> { witchPos };
+            List<Vector2Int> paths = new List<Vector2Int> { witchPos };
             Vector2Int incr = Vector2Int.zero;
             if (playerPos.x == witchPos.x)
             {
@@ -434,7 +443,16 @@ public class TurnManager : MonoBehaviour
                 {
                     if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoomOrHaveDoor(GridManager.Tiles[witchPos], GridManager.GetFace(incr)))
                     {
+                        foreach (var zombie in GameManager.Of.Zombies)
+                        {
+                            if (zombie.Path[^1] == witchPos + incr)
+                            {
+                                search = false;
+                                break;
+                            }
+                        }
                         witchPos += incr;
+                        paths.Add(witchPos);
                         GameObject feed = Instantiate(_witchPathFeedback, ((Vector2)witchPos + Vector2.one / 2) * GameManager.Of.Grid.TileSize, Quaternion.identity);
                         _witchFeedbacks[wIndex].Add(feed);
                     }
@@ -445,6 +463,7 @@ public class TurnManager : MonoBehaviour
                 }
             }
 
+            _witchAllTilePaths.Add(paths);
             path.Add(witchPos);
             _witchPaths.Add(path);
             wIndex++;

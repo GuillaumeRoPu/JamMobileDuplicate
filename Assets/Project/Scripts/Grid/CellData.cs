@@ -102,7 +102,7 @@ public class CellData
            face == Face.Down ? Face.Up :
            face == Face.Right ? Face.Left : Face.None;
 
-        if (receptFace == Face.None) return false;
+        if (receptFace == Face.None || !HasRoom) return false;
 
         return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == receptFace || tile.CellData.DoorPosition == face;
     }
@@ -165,6 +165,8 @@ public class CellData
 
     public void KillEntity()
     {
+        if (Entity && tileTrap)
+            Entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
         GameManager.Of.KillAnEntity(Entity);
     }
 

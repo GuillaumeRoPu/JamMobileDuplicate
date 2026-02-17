@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     public List<Entity> Zombies => _zombieEntity;
     public Entity Echo => _echoEntity;
     public List<Entity> Witches => _witchEntity;
-    public bool CanPlay => !_playerEntity.IsMoving;
 
     int _currentLevel;
     public void SetCurrentLevel(int level) { _currentLevel = level; } 
@@ -178,7 +177,6 @@ public class GameManager : MonoBehaviour
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(pos);
         Grid.GetTileAtPosition(pos).CellData.Entity = _echoEntity;
-        PlayerMovement.Clear();
     }
 
     public void DestroyEcho()
@@ -219,13 +217,28 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+        if (_playerEntity)
+        {
+            _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
             (int)((Vector2)_playerEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+        }
 
         foreach (var zombie in _zombieEntity)
         {
             zombie.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
             (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+        }
+
+        foreach (var witch in _witchEntity)
+        {
+            witch.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)witch.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+        }
+
+        if (_echoEntity)
+        {
+            _echoEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)_echoEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
         }
     }
 

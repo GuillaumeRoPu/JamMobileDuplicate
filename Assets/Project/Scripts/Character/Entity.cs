@@ -31,13 +31,10 @@ public class Entity : MonoBehaviour
     {
         if (_currentTile)
         {
-            GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition, false);
             _currentTile.CellData.Entity = null;
         }
         _currentTile = GridManager.Tiles[tile];
         _currentTile.CellData.Entity = this;
-        if (_currentTile.CellData.HasRoom)
-            GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition);
     }
 
     public void SetPath(List<Vector2Int> path, System.Action WhenReached = null)
@@ -115,7 +112,7 @@ public class Entity : MonoBehaviour
         _animator.SetBool("Move", _isMoving); 
     }
 
-    void SendDead(bool net)
+    public void SendDead(bool net)
     {
         if (net)
         {
