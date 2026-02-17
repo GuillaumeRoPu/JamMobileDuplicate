@@ -206,7 +206,7 @@ public class Tile : MonoBehaviour, IHoverable
         if (hello.Item1)
         {
             _MATERIAL = Instantiate(_prefabPlank, (Vector2)hello.Item2 + new Vector2(0.5f, 0.5f), Quaternion.identity);
-            GameManager.Of.AddObjectRespectZOrder(_MATERIAL);
+            //GameManager.Of.AddObjectRespectZOrder(_MATERIAL);
         }
     }
     public void RemoveMaterial()

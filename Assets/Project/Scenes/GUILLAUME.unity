@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: f163f986d6956444bb946c8aebcf4ec7, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: efda04303ca2b9d4a982fac866e6408d, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 572938236}
   _roomsParent: {fileID: 467802023}
@@ -733,21 +733,21 @@ MonoBehaviour:
   _limitsMaxY: 7
   _drawGridWidth: 1
   _drawGridHeight: 1
-  _drawGridOrigin: {x: 3, y: -2}
+  _drawGridOrigin: {x: -1, y: -2}
   _eraseGridWidth: 1
   _eraseGridHeight: 1
-  _eraseGridOrigin: {x: 1, y: -1}
+  _eraseGridOrigin: {x: 4, y: 2}
   _gridLevelData: {fileID: 0}
-  _spawnPointPosition: {x: 3, y: -2}
-  _spawnPointTypes: 2
-  _roomPrefab: {fileID: 8557198564699150841, guid: fc23f24a393853e45860bcaf76fee17c, type: 3}
-  _roomPosition: {x: 2, y: -1}
+  _spawnPointPosition: {x: 1, y: 2}
+  _spawnPointTypes: 8
+  _roomPrefab: {fileID: 5413514194409751837, guid: b5f20599f93a29545985a306cc49b167, type: 3}
+  _roomPosition: {x: 1, y: 2}
   _eraseRoomPosition: {x: 0, y: 1}
-  _materialPosition: {x: -2, y: -2}
+  _materialPosition: {x: 4, y: 1}
   _eraseMaterialPosition: {x: 0, y: 1}
-  _barricadePosition: {x: 1, y: 2}
+  _barricadePosition: {x: 1, y: 1}
   _eraseBarricadePosition: {x: 0, y: 1}
-  _gridLevelName: Level 17
+  _gridLevelName: Level 14
 --- !u!1 &1944287288
 GameObject:
   m_ObjectHideFlags: 0
