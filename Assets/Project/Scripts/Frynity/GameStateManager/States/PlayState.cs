@@ -6,6 +6,7 @@ public class PlayState : GameState
     bool playSound;
     public override void Enter()
     {
+        Camera.main.orthographicSize = 3.5f;
         GameManager.Of.ShowPause(false);
         GameManager.Of.ShowGame(true);
         GameManager.Of.ShowMenu(false);
