@@ -1,6 +1,7 @@
 using Frynity.Saves.Binary;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -70,6 +71,8 @@ public class GameManager : MonoBehaviour
     [Header("Manager")]
     [SerializeField] TurnManager _turnManager;
     [SerializeField] GridManager _gridManager;
+
+    [SerializeField, Foldout("Events")] UnityEvent _whenGameOver;
     public TurnManager Turn => _turnManager;
     public GridManager Grid => _gridManager;
 
@@ -243,6 +246,7 @@ public class GameManager : MonoBehaviour
     public void QuitToHome()
     {
         EndLevel();
+        _whenGameOver?.Invoke();
         stateMachine.ChangeState(menuState);
         _doorAnim.SetTrigger("Open");
     }

@@ -1321,42 +1321,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 354443801}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1323898828}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 414379294}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &315882236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3513,34 +3477,6 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.29512
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.05275
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7426227634366915376, guid: c4ac886d1ea275a49ae72e90c191459d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -4852,18 +4788,21 @@ MonoBehaviour:
     <TrapButton>k__BackingField: {fileID: 1697273663}
     <TrapIcon>k__BackingField: {fileID: 1697273661}
     <RequiredTxt>k__BackingField: {fileID: 791599344}
+    <MaterialImage>k__BackingField: {fileID: 206591027}
     <CurrentTrap>k__BackingField: {fileID: -6446350758151231062, guid: d33e87a8190326e47aded6afd23ef3de, type: 3}
     <RequiredMaterials>k__BackingField: 1
   _trap2:
     <TrapButton>k__BackingField: {fileID: 1229427906}
     <TrapIcon>k__BackingField: {fileID: 1229427904}
     <RequiredTxt>k__BackingField: {fileID: 1810743318}
+    <MaterialImage>k__BackingField: {fileID: 1269234900}
     <CurrentTrap>k__BackingField: {fileID: 3037763418370638467, guid: ae083a7264be27a4daa031e7e6d2392d, type: 3}
     <RequiredMaterials>k__BackingField: 2
   _trap3:
     <TrapButton>k__BackingField: {fileID: 612023761}
     <TrapIcon>k__BackingField: {fileID: 612023759}
     <RequiredTxt>k__BackingField: {fileID: 642149515}
+    <MaterialImage>k__BackingField: {fileID: 1888535427}
     <CurrentTrap>k__BackingField: {fileID: 604434712634651360, guid: 10a18281aa9b36b499195e8d9bbf62d0, type: 3}
     <RequiredMaterials>k__BackingField: 1
 --- !u!1 &1040292463
@@ -5170,6 +5109,7 @@ GameObject:
   - component: {fileID: 1155825361}
   - component: {fileID: 1155825362}
   - component: {fileID: 1155825363}
+  - component: {fileID: 1155825364}
   m_Layer: 0
   m_Name: '- MANAGER -'
   m_TagString: Untagged
@@ -5190,7 +5130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurnManager
   _durationTurn: 1
-  _level: {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
+  _level: {fileID: 11400000, guid: fb31117501a5f6545b4342c1897f5997, type: 2}
   _player: {fileID: 32858468}
   _zombiePathFeedback:
     Arrow: {fileID: 21300000, guid: 98b3c5748c94255459815cbf554df73a, type: 3}
@@ -5236,6 +5176,45 @@ MonoBehaviour:
   _doorAnim: {fileID: 93771814}
   _turnManager: {fileID: 1155825358}
   _gridManager: {fileID: 1155825361}
+  _whenGameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 354443801}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1323898828}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 414379294}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!4 &1155825360
 Transform:
   m_ObjectHideFlags: 0
@@ -5264,7 +5243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 0
-  _gridLevelData: {fileID: 11400000, guid: 91c721285602f5e42b16f1c54e8c8c99, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: 72669fc45384e3a42b8e8638f29512b6, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1420296221}
   _roomsParent: {fileID: 1233790247}
@@ -5273,7 +5252,7 @@ MonoBehaviour:
   _camera: {fileID: 519420032}
   _coolColors: 0
   _coolColorsAnimated: 0
-  _spawnIndex: 0
+  _spawnIndex: 1
 --- !u!114 &1155825362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5307,6 +5286,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Frynity.Saves.Binary.SaveManager
   _openDiretoryAtStart: 0
+--- !u!114 &1155825364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155825357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ccd3c38424bbe4494787e8ee214116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayGameManager
 --- !u!1 &1157731781
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField] LevelData _level;
     [SerializeField] Player _player;
     public void SetLevelData(LevelData level) {  _level = level; }
+    public LevelData Level => _level;
 
     [SerializeField] PathFeedback _zombiePathFeedback;
     [SerializeField] GameObject _witchPathFeedback;

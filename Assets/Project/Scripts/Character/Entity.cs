@@ -112,6 +112,21 @@ public class Entity : MonoBehaviour
     // ANIMATIONS
     void SendVelocity()
     {
-        _animator.SetBool("Move", !_reachTarget); 
+        _animator.SetBool("Move", _isMoving); 
     }
+
+    void SendDead(bool net)
+    {
+        if (net)
+        {
+            _animator.SetTrigger("DeadNet");
+        }
+        else
+        {
+            _animator.SetTrigger("DeadLog");
+        }
+
+    }
+
+
 }

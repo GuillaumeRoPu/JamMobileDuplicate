@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using System.Collections.Generic;
 using TMPro;
@@ -341,6 +342,24 @@ public class Player : MonoBehaviour
             {
                 RemoveMaterials(_price);
                 CheckIfTrapCanBePlaced(_trap, GameManager.Of.Player.CurrentTile.CellData.GridPosition, face, true);
+                if (_trap.TrapMode == Trap.TrapType.Single)
+                {
+                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_the_hunt_is_on, 100f, (bool success) => {
+                        Debug.Log(success);
+                    });
+                }
+                else if (_trap.TrapMode == Trap.TrapType.Multiple)
+                {
+                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_charge, 100f, (bool success) => {
+                        Debug.Log(success);
+                    });
+                }
+                else if (_trap.TrapMode == Trap.TrapType.Door)
+                {
+                    PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_you_shall_not_pass, 100f, (bool success) => {
+                        Debug.Log(success);
+                    });
+                }
                 GameManager.Of.Turn.NextTurn();
                 GameManager.Of.UpdateZOrder();
                 ResetTrapsPlace();
