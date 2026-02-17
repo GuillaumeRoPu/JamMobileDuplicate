@@ -136,7 +136,6 @@ public class GridManager : MonoBehaviour
             PlaceAllBarricades(_gridLevelData.allBarricades);
             foreach(var tile in _tiles)
             {
-                Debug.Log("Kill me");
                 if (!tile.Value.IsInARoom())
                 {
                     tile.Value.MakeInvisible();

@@ -4,6 +4,7 @@ public class MenuState : GameState
 {
     public override void Enter()
     {
+        Camera.main.orthographicSize = 5;
         GameManager.Of.ShowMenu(true);
         GameManager.Of.ShowSettings(false);
         GameManager.Of.ShowPause(false);
