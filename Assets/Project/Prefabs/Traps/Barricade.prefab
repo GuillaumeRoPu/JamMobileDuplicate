@@ -107,5 +107,7 @@ MonoBehaviour:
   _sprite: {fileID: 7343177751613433286}
   _face: 4
   _type: 2
+  _up: {fileID: 1832257863145867037, guid: 0a1905965cabba74ba5f35dbac66d401, type: 3}
+  _side: {fileID: 1265562148131417864, guid: 0a1905965cabba74ba5f35dbac66d401, type: 3}
   _additionalPositions: []
   _maxhealth: 2
