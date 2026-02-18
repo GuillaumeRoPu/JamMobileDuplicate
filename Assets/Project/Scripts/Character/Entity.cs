@@ -7,7 +7,8 @@ public class Entity : MonoBehaviour
     public Tile CurrentTile => _currentTile;
     List<Vector2Int> _path = new List<Vector2Int>();
     public List<Vector2Int> Path => _path;
-    public Vector2Int CurrentPath => _path[_pathIndex];
+    public Vector2Int CurrentPath => _pathIndex - 1 >= _path.Count || _pathIndex - 1 < 0 ? CurrentTile.CellData.GridPosition : _path[_pathIndex - 1];
+    public Vector2Int NextPath => _pathIndex >= _path.Count ? CurrentTile.CellData.GridPosition : _path[_pathIndex];
     bool _reachTarget = true;
 
     bool _isMoving;
@@ -22,6 +23,18 @@ public class Entity : MonoBehaviour
     System.Action _onTargetReached;
 
     Animator _animator;
+
+    int _turnBeforeCanMove;
+    public bool CanMove => _turnBeforeCanMove <= 0;
+    public void PassTurn()
+    {
+        _turnBeforeCanMove--; 
+    }
+
+    public void SetTurnBeforeMove(int turn)
+    {
+        _turnBeforeCanMove = turn; 
+    }
 
     private void Awake()
     {
@@ -84,6 +97,8 @@ public class Entity : MonoBehaviour
     public void MoveToNextTileInPath(float duration)
     {
         if (_reachTarget) return;
+
+        if (_turnBeforeCanMove > 0) return;
 
         _duration = duration;
         _initPosition = transform.position;
