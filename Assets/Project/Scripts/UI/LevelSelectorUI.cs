@@ -10,6 +10,7 @@ public class LevelSelectorUI : MonoBehaviour
     [SerializeField] GameObject _monsterContent;
     [SerializeField] TextMeshProUGUI _sizeText;
     [SerializeField] TextMeshProUGUI _levelText;
+    [SerializeField] TutorialMenuManager _tutorialMenuManager;
     [SerializeField] LevelData[] _levels;
 
     int _index = 0;
@@ -107,5 +108,10 @@ public class LevelSelectorUI : MonoBehaviour
         GameManager.Of.Grid.SetLevelData(_levels[_index].GridLevel);
 
         GameManager.Of.stateMachine.ChangeState(GameManager.Of.playState);
+
+        if (_levels[_index].HasTutorial && _tutorialMenuManager != null)
+        {
+            _tutorialMenuManager.ActivateMenu(_levels[_index].TutoImage, _levels[_index].TutoText);
+        }
     }
 }
