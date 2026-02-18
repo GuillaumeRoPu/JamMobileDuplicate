@@ -115,7 +115,8 @@ public class TurnManager : MonoBehaviour
         GameManager.Of.Player.MoveToNextTileInPath(_durationTurn);
         foreach (var zombie in GameManager.Of.Zombies)
         {
-            if (zombie.CurrentPath == playerPosition)
+            zombie.PassTurn();
+            if (zombie.NextPath == GameManager.Of.Player.NextPath)
             {
                 zombie.SendAttack();
             }
@@ -143,15 +144,22 @@ public class TurnManager : MonoBehaviour
 
         foreach (var evnt in _level.Events)
         {
+            if (evnt.Turn == _currentTurn + 2)
+            {
+                if (evnt.EventType == EventType.Zombie)
+                {
+                    GameManager.Of.SpawnZombie(_level.GetNextSpawn(_currentTurn + 2));
+                }
+            }
+
             if (evnt.Turn == _currentTurn)
             {
                 if (evnt.EventType == EventType.Zombie)
                 {
                     Destroy(_warnings[0]);
                     _warnings.RemoveAt(0);
-                    GameManager.Of.SpawnZombie(_level.GetNextSpawn(_currentTurn));
                 }
-                else if (evnt.EventType == EventType.EchoEnter)
+                if (evnt.EventType == EventType.EchoEnter)
                 {
                     GameManager.Of.SpawnEcho(playerPosition);
                 }
@@ -189,8 +197,9 @@ public class TurnManager : MonoBehaviour
                 zombie.CurrentTile.CellData.ActivateTileTrap(zombie);
             }
 
-            if (zombie.CurrentPath == player)
+            if (zombie.NextPath == GameManager.Of.Player.CurrentPath)
             {
+                await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.LoseLevel();
                 return;
@@ -271,145 +280,149 @@ public class TurnManager : MonoBehaviour
             _zombieFeedbacks.Add(new List<GameObject>());
             List<Vector2Int> diff = new List<Vector2Int>();
             List<Vector2Int> tiles = new List<Vector2Int> { zombie.CurrentTile.CellData.GridPosition };
-            for (int i = 0; playerPath.Count > 1 ? i < playerPath.Count - 1 : i < playerPath.Count; i++)
+            if (zombie.CanMove)
             {
-                if (playerPath[i] == tiles[tiles.Count - 1]) break;
-
-                List<Vector2Int> newStop = new List<Vector2Int>(stop);
-                newStop.AddRange(tiles);
-                List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[tiles[tiles.Count - 1]], GridManager.Tiles[playerPath[i]], newStop);
-
-                if (path.Count <= 1) break;
-                bool pass = false;
-                foreach (var paths in _zombiePaths)
+                for (int i = 0; playerPath.Count > 1 ? i < playerPath.Count - 1 : i < playerPath.Count; i++)
                 {
-                    if (i+1 >= paths.Count) continue;
-                    if (paths[i+1] == path[1])
+                    if (playerPath[i] == tiles[tiles.Count - 1]) break;
+
+                    List<Vector2Int> newStop = new List<Vector2Int>(stop);
+                    newStop.AddRange(tiles);
+                    List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[tiles[tiles.Count - 1]], GridManager.Tiles[playerPath[i]], newStop);
+
+                    if (path.Count <= 1) break;
+                    bool pass = false;
+                    foreach (var paths in _zombiePaths)
                     {
-                        diff.Add(Vector2Int.zero);
-                        tiles.Add(tiles[tiles.Count - 1]);
-                        pass = true;
-                        break;
+                        if (i + 1 >= paths.Count) continue;
+                        if (paths[i + 1] == path[1])
+                        {
+                            diff.Add(Vector2Int.zero);
+                            tiles.Add(tiles[tiles.Count - 1]);
+                            pass = true;
+                            break;
+                        }
+                    }
+                    if (pass) continue;
+                    diff.Add(path[1] - tiles[tiles.Count - 1]);
+                    tiles.Add(path[1]);
+                    if (playerPath.Count < i + 1)
+                    {
+                        if (path[1] == playerPath[i + 1] && i != 0)
+                        {
+                            break;
+                        }
                     }
                 }
-                if (pass) continue;
-                diff.Add(path[1] - tiles[tiles.Count - 1]);
-                tiles.Add(path[1]);
-                if (playerPath.Count < i + 1)
+
+                stop.Add(tiles[tiles.Count - 1]);
+
+                Vector2Int lastDiff = Vector2Int.zero;
+
+                int tileIndex = 1;
+                foreach (var result in diff)
                 {
-                    if (path[1] == playerPath[i + 1] && i != 0)
+                    if (lastDiff == Vector2Int.right)
                     {
-                        break;
+                        if (result == Vector2Int.right)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 0);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        }
+                        if (result == Vector2Int.up)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        }
+                        if (result == Vector2Int.down)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, false, true);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        }
                     }
+
+                    if (lastDiff == Vector2Int.left)
+                    {
+                        if (result == Vector2Int.left)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 0);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        }
+                        if (result == Vector2Int.up)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        }
+                        if (result == Vector2Int.down)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true, true);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        }
+                    }
+
+                    if (lastDiff == Vector2Int.up)
+                    {
+                        if (result == Vector2Int.right)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true, true);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        }
+                        if (result == Vector2Int.left)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, false, true);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        }
+                        if (result == Vector2Int.up)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 90);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        }
+                    }
+
+                    if (lastDiff == Vector2Int.down)
+                    {
+                        if (result == Vector2Int.right)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        }
+                        if (result == Vector2Int.left)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        }
+                        if (result == Vector2Int.down)
+                        {
+                            ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 90);
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        }
+                    }
+
+                    if (lastDiff == Vector2Int.zero)
+                    {
+                        if (result == Vector2Int.right)
+                        {
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
+                        }
+                        if (result == Vector2Int.left)
+                        {
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
+                        }
+                        if (result == Vector2Int.up)
+                        {
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
+                        }
+                        if (result == Vector2Int.down)
+                        {
+                            SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
+                        }
+                    }
+
+                    lastDiff = result;
+                    tileIndex++;
                 }
             }
 
-            stop.Add(tiles[tiles.Count - 1]);
-
-            Vector2Int lastDiff = Vector2Int.zero;
-
-            int tileIndex = 1;
-            foreach (var result in diff)
-            {
-                if (lastDiff == Vector2Int.right)
-                {
-                    if (result == Vector2Int.right)
-                    {
-                        ModifyLastFeedback(zIndex,_zombiePathFeedback.Row, 0);
-                        SpawnFeedback(zIndex,_zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
-                    }
-                    if (result == Vector2Int.up)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
-                    }
-                    if (result == Vector2Int.down)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, false, true);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
-                    }
-                }
-
-                if (lastDiff == Vector2Int.left)
-                {
-                    if (result == Vector2Int.left)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 0);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
-                    }
-                    if (result == Vector2Int.up)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
-                    }
-                    if (result == Vector2Int.down)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true, true);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
-                    }
-                }
-
-                if (lastDiff == Vector2Int.up)
-                {
-                    if (result == Vector2Int.right)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true, true);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
-                    }
-                    if (result == Vector2Int.left)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, false, true);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
-                    }
-                    if (result == Vector2Int.up)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 90);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
-                    }
-                }
-
-                if (lastDiff == Vector2Int.down)
-                {
-                    if (result == Vector2Int.right)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0, true);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
-                    }
-                    if (result == Vector2Int.left)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Turn, 0);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
-                    }
-                    if (result == Vector2Int.down)
-                    {
-                        ModifyLastFeedback(zIndex, _zombiePathFeedback.Row, 90);
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
-                    }
-                }
-
-                if (lastDiff == Vector2Int.zero)
-                {
-                    if (result == Vector2Int.right)
-                    {
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 0);
-                    }
-                    if (result == Vector2Int.left)
-                    {
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 180);
-                    }
-                    if (result == Vector2Int.up)
-                    {
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), 90);
-                    }
-                    if (result == Vector2Int.down)
-                    {
-                        SpawnFeedback(zIndex, _zombiePathFeedback.Arrow, tiles[tileIndex] + new Vector2(0.5f, 0.5f), -90);
-                    }
-                }
-
-                lastDiff = result;
-                tileIndex++;
-            }
             zIndex++;
             _zombiePaths.Add(tiles);
         }
