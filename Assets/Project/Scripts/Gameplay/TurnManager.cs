@@ -115,7 +115,14 @@ public class TurnManager : MonoBehaviour
         GameManager.Of.Player.MoveToNextTileInPath(_durationTurn);
         foreach (var zombie in GameManager.Of.Zombies)
         {
-            zombie.MoveToNextTileInPath(_durationTurn);
+            if (zombie.Path.Count == 2 && zombie.Path[^1] == playerPosition)
+            {
+                zombie.SendAttack();
+            }
+            else
+            {
+                zombie.MoveToNextTileInPath(_durationTurn);
+            }
         }
         if (GameManager.Of.Echo)
         {

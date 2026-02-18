@@ -1,9 +1,7 @@
 using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {

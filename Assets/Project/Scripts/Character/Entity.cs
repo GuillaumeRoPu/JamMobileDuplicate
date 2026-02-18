@@ -125,5 +125,11 @@ public class Entity : MonoBehaviour
 
     }
 
+    public void SendAttack()
+    {
+        _animator.SetTrigger("Attack");
+    }
+
+
 
 }
