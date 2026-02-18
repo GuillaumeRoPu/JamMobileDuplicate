@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a7d48b69c1b84f9926c51917fb1c9, type: 3}
+  m_Name: Level 18
+  m_EditorClassIdentifier: Assembly-CSharp::GridLevelData
+  allTilesPosition:
+  - {x: -4, y: -2}
+  - {x: -4, y: -1}
+  - {x: -4, y: 0}
+  - {x: -4, y: 1}
+  - {x: -3, y: -2}
+  - {x: -3, y: -1}
+  - {x: -3, y: 0}
+  - {x: -3, y: 1}
+  - {x: -2, y: -2}
+  - {x: -2, y: -1}
+  - {x: -2, y: 1}
+  - {x: -1, y: -2}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: 1}
+  - {x: 0, y: -2}
+  - {x: 0, y: -1}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: -2}
+  - {x: 1, y: -1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 2, y: -2}
+  - {x: 2, y: -1}
+  - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  - {x: 3, y: -2}
+  - {x: 3, y: -1}
+  - {x: 3, y: 0}
+  - {x: 3, y: 1}
+  - {x: -3, y: 2}
+  - {x: -2, y: 2}
+  - {x: -1, y: 2}
+  - {x: 0, y: 2}
+  - {x: 1, y: 2}
+  - {x: 2, y: 2}
+  - {x: -1, y: 3}
+  - {x: -5, y: 1}
+  keys:
+  - {x: -5, y: 1}
+  - {x: -4, y: -2}
+  - {x: -1, y: 3}
+  - {x: 3, y: -2}
+  - {x: 2, y: 0}
+  - {x: 0, y: 1}
+  values: 020000000200000002000000020000000800000001000000
+  allRoomsPosition:
+  - {x: 1, y: 1}
+  - {x: 2, y: -1}
+  - {x: -1, y: 1}
+  - {x: -3, y: 1}
+  - {x: -1, y: -2}
+  - {x: -3, y: -2}
+  _allRoomsCellsBis:
+  - items:
+    - {x: 1, y: 1}
+    - {x: 0, y: 2}
+    - {x: 1, y: 2}
+    - {x: 2, y: 2}
+    - {x: 2, y: 1}
+    - {x: 3, y: 1}
+  - items:
+    - {x: 2, y: -1}
+    - {x: 3, y: -1}
+    - {x: 3, y: 0}
+    - {x: 2, y: 0}
+    - {x: 1, y: 0}
+    - {x: 1, y: -1}
+    - {x: 1, y: -2}
+    - {x: 2, y: -2}
+  - items:
+    - {x: -1, y: 1}
+    - {x: -1, y: 2}
+    - {x: 0, y: 1}
+    - {x: 0, y: 0}
+    - {x: -1, y: 0}
+  - items:
+    - {x: -3, y: 1}
+    - {x: -3, y: 2}
+    - {x: -2, y: 2}
+    - {x: -2, y: 1}
+    - {x: -3, y: 0}
+    - {x: -4, y: 0}
+    - {x: -4, y: 1}
+  - items:
+    - {x: -1, y: -2}
+    - {x: -2, y: -1}
+    - {x: -1, y: -1}
+    - {x: 0, y: -1}
+    - {x: 0, y: -2}
+  - items:
+    - {x: -3, y: -2}
+    - {x: -4, y: -1}
+    - {x: -3, y: -1}
+    - {x: -2, y: -2}
+  allRoomsPrefab:
+  - {fileID: 6311985516636240747, guid: c8401fffd50ff184bac82cdd664adfa7, type: 3}
+  - {fileID: 6255919785953453329, guid: 0d4972fc92b69a74d8182bb981c3d4cc, type: 3}
+  - {fileID: 549125992056950075, guid: c2a963f364dbbb84e9a6f142dbb8f0e0, type: 3}
+  - {fileID: 1236746295026803604, guid: 1bd6d6c2fac51d841b0b19d3c5ea2cac, type: 3}
+  - {fileID: 4130085730065187106, guid: 02bb0f73642a62145b3fd717e71e3afc, type: 3}
+  - {fileID: 1760020817208077146, guid: 37d0f992742f28e4082f0617b8af530e, type: 3}
+  keysD:
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  - {x: 3, y: -2}
+  - {x: 3, y: -1}
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  - {x: 0, y: -2}
+  - {x: 1, y: -2}
+  - {x: -2, y: 1}
+  - {x: -1, y: 1}
+  - {x: -1, y: 3}
+  - {x: -1, y: 2}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -3, y: -1}
+  - {x: -3, y: 0}
+  - {x: -5, y: 1}
+  - {x: -4, y: 1}
+  - {x: -2, y: -2}
+  - {x: -2, y: -1}
+  - {x: -4, y: -2}
+  - {x: -3, y: -2}
+  valuesD: 000000000100000000000000010000000000000001000000030000000200000003000000020000000300000002000000010000000000000000000000010000000000000001000000030000000200000000000000010000000300000002000000
+  allMaterialsList:
+  - {x: 2, y: 2}
+  - {x: 0, y: -1}
+  - {x: 2, y: -2}
+  - {x: -4, y: -1}
+  - {x: -2, y: 2}
+  allBarricadesList: []
+  limitsMin: {x: -5, y: -2}
+  limitsMax: {x: 3, y: 3}
