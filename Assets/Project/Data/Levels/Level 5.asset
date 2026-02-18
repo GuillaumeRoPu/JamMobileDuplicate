@@ -19,6 +19,6 @@ MonoBehaviour:
     EventType: 0
     SpawnCellIndex: 1
   <TrapToUse>k__BackingField:
-    Net: 0
+    Net: 1
     Log: 0
     Blocker: 1
