@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 30218619}
   - component: {fileID: 30218618}
   m_Layer: 0
-  m_Name: EventSystem (1)
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39507645}
   m_Layer: 0
-  m_Name: '| GAME | (1)'
+  m_Name: '| GAME |'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,6 +399,7 @@ Transform:
   - {fileID: 1689348504}
   - {fileID: 1279247409}
   - {fileID: 748570913}
+  - {fileID: 727614965}
   - {fileID: 1035922763}
   - {fileID: 1459069112}
   m_Father: {fileID: 0}
@@ -553,7 +554,7 @@ GameObject:
   - component: {fileID: 96259455}
   - component: {fileID: 96259454}
   m_Layer: 0
-  m_Name: '- MANAGER - (1)'
+  m_Name: '- MANAGER -'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2971,6 +2972,37 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &727614964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727614965}
+  m_Layer: 0
+  m_Name: '- DRAW ROOMS -'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &727614965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727614964}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 39507645}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &728178538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,7 +3016,7 @@ GameObject:
   - component: {fileID: 728178540}
   - component: {fileID: 728178539}
   m_Layer: 0
-  m_Name: Main Camera (1)
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3507,7 +3539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 808180260}
   m_Layer: 0
-  m_Name: '| MAINMENU | (1)'
+  m_Name: '| MAINMENU |'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6955,7 +6987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456242124}
   m_Layer: 0
-  m_Name: Lights (1)
+  m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8160,7 +8192,7 @@ GameObject:
   - component: {fileID: 1782481622}
   - component: {fileID: 1782481621}
   m_Layer: 5
-  m_Name: PAUSE CANVAS (1)
+  m_Name: PAUSE CANVAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9351,10 +9383,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
-  _levelCreationSteps: 1
+  _levelCreationSteps: 0
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1689348504}
-  _roomsParent: {fileID: 748570913}
+  _roomsParent: {fileID: 727614965}
   _tilesSize: 1
   _limitsMinX: -7
   _limitsMaxX: 6
@@ -9818,10 +9850,10 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 728178542}
   - {fileID: 1456242124}
-  - {fileID: 30218620}
   - {fileID: 96259457}
   - {fileID: 808180260}
   - {fileID: 39507645}
   - {fileID: 1782481625}
-  - {fileID: 728178542}
+  - {fileID: 30218620}
