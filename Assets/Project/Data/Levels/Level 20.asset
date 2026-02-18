@@ -15,15 +15,21 @@ MonoBehaviour:
   <GridLevel>k__BackingField: {fileID: 11400000, guid: 4fb784b85c555404eadeb0cd1c64168d, type: 2}
   <TurnMax>k__BackingField: 30
   <Events>k__BackingField:
-  - Turn: 2
+  - Turn: 8
+    EventType: 0
+    SpawnCellIndex: 2
+  - Turn: 9
+    EventType: 0
+    SpawnCellIndex: 3
+  - Turn: 10
+    EventType: 3
+    SpawnCellIndex: 4
+  - Turn: 14
     EventType: 0
     SpawnCellIndex: 1
-  - Turn: 3
+  - Turn: 20
     EventType: 0
-    SpawnCellIndex: 0
-  - Turn: 3
-    EventType: 0
-    SpawnCellIndex: 1
+    SpawnCellIndex: 5
   <TrapToUse>k__BackingField:
     Net: 1
     Log: 1
