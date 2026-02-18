@@ -81,10 +81,10 @@ public class Player : MonoBehaviour
         if (!_selected) return;
         GameManager.Of.Turn.CalculZombiePath(_selectPath);
 
+        GameManager.Of.Player.SetPath(new List<Vector2Int>(_selectPath), ReachedTarget);
         if (_selectPath.Count > 1)
         {
             GameManager.Of.Turn.PassTurn(_selectPath.Count - 1);
-            GameManager.Of.Player.SetPath(new List<Vector2Int>(_selectPath), ReachedTarget);
         }
         else
         {
