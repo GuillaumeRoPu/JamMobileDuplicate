@@ -33,7 +33,6 @@ public static class GPGSIds
         public const string achievement_nooo_not_my_brain = "CgkI7Mn-g7ILEAIQDg"; // <GPGSID>
         public const string achievement_at_the_stake = "CgkI7Mn-g7ILEAIQBw"; // <GPGSID>
         public const string achievement_humans_are_superior = "CgkI7Mn-g7ILEAIQBg"; // <GPGSID>
-        public const string achievement_vain = "CgkI7Mn-g7ILEAIQCA"; // <GPGSID>
         public const string achievement_level_15_finish = "CgkI7Mn-g7ILEAIQHw"; // <GPGSID>
         public const string achievement_you_shall_not_pass = "CgkI7Mn-g7ILEAIQAw"; // <GPGSID>
         public const string achievement_strike = "CgkI7Mn-g7ILEAIQAQ"; // <GPGSID>
@@ -49,6 +48,7 @@ public static class GPGSIds
         public const string achievement_level_14_finish = "CgkI7Mn-g7ILEAIQHg"; // <GPGSID>
         public const string achievement_level_20_finish = "CgkI7Mn-g7ILEAIQJA"; // <GPGSID>
         public const string achievement_level_6_finish = "CgkI7Mn-g7ILEAIQFg"; // <GPGSID>
+        public const string achievement_greedy = "CgkI7Mn-g7ILEAIQCA"; // <GPGSID>
         public const string achievement_overkill = "CgkI7Mn-g7ILEAIQBA"; // <GPGSID>
         public const string achievement_level_3_finish = "CgkI7Mn-g7ILEAIQEw"; // <GPGSID>
         public const string achievement_level_12_finish = "CgkI7Mn-g7ILEAIQHA"; // <GPGSID>

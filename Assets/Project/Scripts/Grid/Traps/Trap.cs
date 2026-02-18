@@ -14,6 +14,12 @@ public class Trap : MonoBehaviour
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private Face _face;
     [SerializeField] private TrapType _type;
+    [SerializeField, ShowIf(nameof(_type), false, TrapType.Door)] Sprite _up;
+    [SerializeField, ShowIf(nameof(_type), false, TrapType.Door)] Sprite _side;
+
+    public Sprite UpSprite => _up;
+    public Sprite SideSprite => _side;
+
     protected Vector2Int _position;
     private List<Vector2Int> _allPositions;
     [SerializeField] private List<Vector2Int> _additionalPositions;

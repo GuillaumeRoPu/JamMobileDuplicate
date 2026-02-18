@@ -1,7 +1,5 @@
-using Frynity.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +20,7 @@ public class TurnManager : MonoBehaviour
 {
     int _lastEventTurn;
     int _currentTurn;
-    public float Turn => _currentTurn;
+    public int Turn => _currentTurn;
 
     [SerializeField] float _durationTurn;
     [SerializeField] LevelData _level;
@@ -42,6 +40,10 @@ public class TurnManager : MonoBehaviour
     public bool CanPlay => !_notNext;
     bool _notNext;
 
+    public Action onNextTurn;
+    public Action onNewTurn;
+    public Action onAddTurn;
+
     int _nbPass;
 
     List<List<GameObject>> _zombieFeedbacks = new List<List<GameObject>>();
@@ -56,6 +58,7 @@ public class TurnManager : MonoBehaviour
         _level.Init();
         _currentTurn = 0;
 
+        onNewTurn?.Invoke();
         _notNext = false;
 
         _gameOverUI.GetComponent<Image>().color = new Color(255, 255, 255, 0);
@@ -100,7 +103,7 @@ public class TurnManager : MonoBehaviour
     {
         if (_notNext) return;
 
-        
+        onNextTurn?.Invoke();
         _notNext = true;
         ZombieTurn();
         WitchTurn();
@@ -127,7 +130,7 @@ public class TurnManager : MonoBehaviour
         }
         if (GameManager.Of.Echo)
         {
-            if (GameManager.Of.PlayerMovement.Count > 3)
+            if (GameManager.Of.PlayerMovement.Count > 4)
             {
                 List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, GameManager.Of.PlayerMovement[GameManager.Of.PlayerMovement.Count - 5] };
                 GameManager.Of.Echo.SetPath(path);
@@ -180,6 +183,8 @@ public class TurnManager : MonoBehaviour
     async void WaitEndOfTurn()
     {
         await Awaitable.WaitForSecondsAsync(_durationTurn);
+
+        onAddTurn?.Invoke();
 
         var player = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
 
@@ -259,6 +264,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
+            onNewTurn?.Invoke();
             _notNext = false;
             var playerPos = new List<Vector2Int> { GameManager.Of.Player.CurrentTile.CellData.GridPosition };
             CalculZombiePath(playerPos);

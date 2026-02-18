@@ -204,7 +204,7 @@ public class TestIfTrapsWork : MonoBehaviour
                         bool canPlace = true;
                         if (GridManager.Tiles.ContainsKey(otherDoorTile))
                         {
-                            if (GridManager.Tiles[otherDoorTile].CellData.HasADoorTrap())
+                            if (GridManager.Tiles[otherDoorTile].CellData.HasADoorTrap() || !GridManager.Tiles[otherDoorTile].IsInARoom())
                             {
                                 canPlace = false;
                             }

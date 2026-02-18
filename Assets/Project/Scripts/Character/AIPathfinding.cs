@@ -51,11 +51,6 @@ public class AIPathfinding
             if (path.Count < selectPath.Count) selectPath = path;
         }
 
-        //foreach (var oh in selectPath)
-        //{
-        //    oh.Log();
-        //}
-
         return selectPath;
     }
 

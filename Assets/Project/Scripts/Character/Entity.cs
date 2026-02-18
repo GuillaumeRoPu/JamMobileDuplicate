@@ -22,6 +22,8 @@ public class Entity : MonoBehaviour
 
     System.Action _onTargetReached;
 
+    public System.Action onPathChange;
+
     Animator _animator;
 
     int _turnBeforeCanMove;
@@ -54,6 +56,7 @@ public class Entity : MonoBehaviour
     public void SetPath(List<Vector2Int> path, System.Action WhenReached = null)
     {
         _path = path;
+        onPathChange?.Invoke();
         _reachTarget = false;
         _pathIndex = 1;
         _currentMoveTime = 0;

@@ -1,4 +1,5 @@
 using Frynity.Saves.Binary;
+using GooglePlayGames;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
         {
             if (_zombieEntity[i] == null)
             {
+                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_humans_are_superior, 100f, null);
                 _zombieEntity.RemoveAt(i);
                 i--;
                 continue;
@@ -138,6 +140,7 @@ public class GameManager : MonoBehaviour
         {
             if (_witchEntity[i] == null)
             {
+                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_at_the_stake, 100f, null);
                 _witchEntity.RemoveAt(i);
                 i--;
                 continue;
@@ -295,13 +298,15 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < _zombieEntity.Count; i++)
         {
-            Destroy(_zombieEntity[i].gameObject);
+            if (_zombieEntity[i])
+                Destroy(_zombieEntity[i].gameObject);
         }
         _zombieEntity.Clear();
 
         for (int i = 0; i < _witchEntity.Count; i++)
         {
-            Destroy(_witchEntity[i].gameObject);
+            if (_witchEntity[i])
+                Destroy(_witchEntity[i].gameObject);
         }
         _witchEntity.Clear();
 

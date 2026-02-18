@@ -1,3 +1,4 @@
+using GooglePlayGames;
 using System;
 using UnityEngine;
 
@@ -150,7 +151,7 @@ public class CellData
         doorTrap.onDestroy -= RemoveDoorTrap;
         doorTrap = null;
         hasADoorTrap = false;
-        Debug.Log("Removed a trap");
+        Debug.Log("Removed a trap at : X = " + GridPosition.x + " | Y = " + GridPosition.y);
     }
 
     public bool HasATileTrap()
@@ -166,7 +167,13 @@ public class CellData
     public async void KillEntity()
     {
         if (Entity && tileTrap)
+        {
             Entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
+            if (tileTrap.TrapMode == Trap.TrapType.Single)
+            {
+                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_the_prey_in_the_net, 100f, null);
+            }
+        }
 
         await Awaitable.WaitForSecondsAsync(2);
         GameManager.Of.KillAnEntity(Entity);

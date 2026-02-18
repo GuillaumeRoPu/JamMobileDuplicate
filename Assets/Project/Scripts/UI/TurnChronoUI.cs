@@ -66,6 +66,11 @@ public class TurnChronoUI : MonoBehaviour
     public void PlaceZombieTurn(int turn, int turnMax)
     {
         GameObject zombie = Instantiate(_zombieTurn, _playerTurn.transform.parent);
+        IconTurnsLeft turnsText = zombie.GetComponent<IconTurnsLeft>();
+        if (turnsText != null)
+        {
+            turnsText.SetNumber(turn);
+        }
         zombie.transform.SetAsFirstSibling();
         float pos = (float)turn / turnMax;
         zombie.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
@@ -75,7 +80,11 @@ public class TurnChronoUI : MonoBehaviour
     public void PlaceEchoTurn(int turn, int turnMax, bool enter = true)
     {
         GameObject echo = Instantiate(enter ? _echoEnterTurn : _echoLeaveTurn, _playerTurn.transform.parent);
-
+        IconTurnsLeft turnsText = echo.GetComponent<IconTurnsLeft>();
+        if (turnsText != null)
+        {
+            turnsText.SetNumber(turn);
+        }
         echo.transform.SetAsFirstSibling();
         float pos = (float)turn / turnMax;
         echo.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
@@ -85,7 +94,11 @@ public class TurnChronoUI : MonoBehaviour
     public void PlaceWicthTurn(int turn, int turnMax)
     {
         GameObject witch = Instantiate(_witchTurn, _playerTurn.transform.parent);
-
+        IconTurnsLeft turnsText = witch.GetComponent<IconTurnsLeft>();
+        if (turnsText != null)
+        {
+            turnsText.SetNumber(turn);
+        }
         witch.transform.SetAsFirstSibling();
         float pos = (float)turn / turnMax;
         witch.GetComponent<RectTransform>().anchorMin = new Vector2(pos, 0.5f);
