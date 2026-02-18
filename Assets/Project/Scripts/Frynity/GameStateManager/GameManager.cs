@@ -159,8 +159,9 @@ public class GameManager : MonoBehaviour
     {
         GameObject zombie = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _zombieEntity.Add(zombie.GetComponent<Entity>());
-        _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
+        _zombieEntity[^1].SetTurnBeforeMove(2);
+        _zombieEntity[^1].SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[^1];
     }
 
     public void SpawnEcho(Vector2Int playerPos)
@@ -171,7 +172,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Vector2Int pos = playerPos + Vector2Int.left;
-        if (_playerMovement.Count > 0) pos = _playerMovement[_playerMovement.Count - 1];
+        if (_playerMovement.Count > 0) pos = _playerMovement[^1];
 
         GameObject echo = Instantiate(_echo, (Vector2)pos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
@@ -189,8 +190,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject witch = Instantiate(_witch, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _witchEntity.Add(witch.GetComponent<Entity>());
-        _witchEntity[_witchEntity.Count - 1].SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[_witchEntity.Count - 1];
+        _witchEntity[^1].SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[^1];
     }
 
     public void UpdateZOrder(bool changeStatic = true)
