@@ -4278,12 +4278,12 @@ MonoBehaviour:
   _sizeText: {fileID: 1888508410}
   _levelText: {fileID: 1728141873}
   _levels:
-  - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
   - {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
   - {fileID: 11400000, guid: fb31117501a5f6545b4342c1897f5997, type: 2}
   - {fileID: 11400000, guid: be6a4d1e94e7239458af033f3526fe33, type: 2}
   - {fileID: 11400000, guid: 88ccaa5b9eca0394fb4d57af4df4b26a, type: 2}
   - {fileID: 11400000, guid: f0fc9af0a1ca25e49a58d33a8a619072, type: 2}
+  - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
   - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
 --- !u!1 &879282962
 GameObject:
