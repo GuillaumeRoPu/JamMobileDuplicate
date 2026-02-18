@@ -168,7 +168,11 @@ public class GridManager : MonoBehaviour
         {
             tile.Value.RemoveMaterial();
             tile.Value.CellData.ActivateTileTrap(null);
-            tile.Value.CellData.ActivateDoorTrap(null);
+            if (tile.Value.CellData.doorTrap)
+            {
+                Destroy(tile.Value.CellData.doorTrap.gameObject);
+                tile.Value.CellData.hasADoorTrap = false;
+            }
         }
 
         for (int i = 0; i < _tilesParent.childCount; i++)

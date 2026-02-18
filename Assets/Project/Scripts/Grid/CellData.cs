@@ -50,8 +50,6 @@ public class CellData
 
         if (receptFace == Face.None) return false;
 
-        if (HasADoorTrap()) return false;
-
         if (MainRoomCell == originalCell.MainRoomCell || DoorPosition == receptFace || originalCell.DoorPosition == face)
         {
             return true;
@@ -164,18 +162,17 @@ public class CellData
         return hasADoorTrap;
     }
 
-    public async void KillEntity()
+    public void KillEntity()
     {
         if (Entity && tileTrap)
         {
             Entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
             if (tileTrap.TrapMode == Trap.TrapType.Single)
             {
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_the_prey_in_the_net, 100f, null);
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_the_prey_in_the_net);
             }
         }
 
-        await Awaitable.WaitForSecondsAsync(2);
         GameManager.Of.KillAnEntity(Entity);
     }
 

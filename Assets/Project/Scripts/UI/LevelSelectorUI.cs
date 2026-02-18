@@ -90,13 +90,17 @@ public class LevelSelectorUI : MonoBehaviour
         }
 
         int count = 0;
-        foreach ( var room in _levels[_index].GridLevel.allRoomsCells)
+        if (_levels[_index].GridLevel)
         {
-            foreach (var tile in room.items)
+            foreach (var room in _levels[_index].GridLevel.allRoomsCells)
             {
-                count++;
+                foreach (var tile in room.items)
+                {
+                    count++;
+                }
             }
         }
+        
         _sizeText.text = string.Format("x{0} tiles", count);
     }
 
