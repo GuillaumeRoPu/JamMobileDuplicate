@@ -41,6 +41,8 @@ public class PlayState : GameState
             GameManager.Of.RoomTransform.position.y, -10);
 
 
+        GameManager.Of.Grid.EntityInARoom();
+
         GameManager.Of.Turn.Init();
         playSound = true;
         PlayRandomAmbiantSound();

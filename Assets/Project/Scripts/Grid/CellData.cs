@@ -163,10 +163,12 @@ public class CellData
         return hasADoorTrap;
     }
 
-    public void KillEntity()
+    public async void KillEntity()
     {
         if (Entity && tileTrap)
             Entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
+
+        await Awaitable.WaitForSecondsAsync(2);
         GameManager.Of.KillAnEntity(Entity);
     }
 

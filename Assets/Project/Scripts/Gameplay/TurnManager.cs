@@ -471,6 +471,8 @@ public class TurnManager : MonoBehaviour
                     {
                         foreach (var zombie in GameManager.Of.Zombies)
                         {
+                            if (zombie.Path.Count <= 1) continue;
+
                             if (zombie.Path[^1] == witchPos + incr)
                             {
                                 search = false;
@@ -489,6 +491,11 @@ public class TurnManager : MonoBehaviour
                 }
             }
 
+            if (!path.Contains(playerPos))
+            {
+                path = new List<Vector2Int> { witchPos };
+                paths = new List<Vector2Int> { witchPos };
+            }
             _witchAllTilePaths.Add(paths);
             path.Add(witchPos);
             _witchPaths.Add(path);
