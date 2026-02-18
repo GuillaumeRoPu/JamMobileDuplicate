@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
     {
         if (_echoEntity)
         {
-            Debug.LogError("Echo déjà crée");
+            Debug.LogError("Echo dï¿½jï¿½ crï¿½e");
             return;
         }
         Vector2Int pos = playerPos + Vector2Int.left;
