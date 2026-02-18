@@ -29,5 +29,5 @@ MonoBehaviour:
     SpawnCellIndex: 2
   <TrapToUse>k__BackingField:
     Net: 1
-    Log: 1
+    Log: 0
     Blocker: 1
