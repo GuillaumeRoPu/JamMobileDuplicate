@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05a7d48b69c1b84f9926c51917fb1c9, type: 3}
+  m_Name: Level 7
+  m_EditorClassIdentifier: Assembly-CSharp::GridLevelData
+  allTilesPosition:
+  - {x: -2, y: -2}
+  - {x: -2, y: -1}
+  - {x: -2, y: 0}
+  - {x: -2, y: 1}
+  - {x: -2, y: 2}
+  - {x: -1, y: -2}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: -1, y: 1}
+  - {x: -1, y: 2}
+  - {x: 0, y: -2}
+  - {x: 0, y: -1}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 1, y: -2}
+  - {x: 1, y: -1}
+  - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 1, y: 2}
+  - {x: 2, y: -2}
+  - {x: 2, y: -1}
+  - {x: 3, y: 1}
+  - {x: 2, y: 1}
+  - {x: 2, y: 2}
+  - {x: 3, y: 2}
+  - {x: 0, y: 3}
+  - {x: 3, y: -2}
+  - {x: -2, y: -3}
+  keys:
+  - {x: -2, y: -3}
+  - {x: 3, y: -2}
+  - {x: 0, y: 3}
+  - {x: 3, y: 1}
+  values: 02000000020000000200000001000000
+  allRoomsPosition:
+  - {x: 3, y: 1}
+  - {x: 0, y: 2}
+  - {x: 0, y: 0}
+  - {x: -1, y: -1}
+  - {x: 1, y: -2}
+  _allRoomsCellsBis:
+  - items:
+    - {x: 3, y: 1}
+    - {x: 3, y: 2}
+    - {x: 2, y: 2}
+    - {x: 2, y: 1}
+    - {x: 1, y: 1}
+  - items:
+    - {x: 0, y: 2}
+    - {x: -1, y: 2}
+    - {x: 1, y: 2}
+    - {x: 0, y: 1}
+    - {x: -1, y: 1}
+    - {x: -2, y: 2}
+    - {x: -2, y: 1}
+  - items:
+    - {x: 0, y: 0}
+    - {x: -1, y: 0}
+    - {x: 1, y: 0}
+  - items:
+    - {x: -1, y: -1}
+    - {x: -2, y: 0}
+    - {x: -2, y: -1}
+    - {x: -2, y: -2}
+    - {x: -1, y: -2}
+  - items:
+    - {x: 1, y: -2}
+    - {x: 1, y: -1}
+    - {x: 0, y: -1}
+    - {x: 2, y: -1}
+    - {x: 0, y: -2}
+    - {x: 2, y: -2}
+  allRoomsPrefab:
+  - {fileID: 8492922275141297969, guid: c36916b5d0a7d73438ecc152dae91f07, type: 3}
+  - {fileID: 8531337252353013662, guid: da93bbb8e0fa4e940ae6fc1a8d23df21, type: 3}
+  - {fileID: 2674893041750321684, guid: 7483ef56ddba31d469142a19a1f1c24e, type: 3}
+  - {fileID: 2703889681254799002, guid: 5dc6b706802b60b4c92179b6586ad12f, type: 3}
+  - {fileID: 524855027648352078, guid: 21a3c57984f4b834a9897eea59c7fac7, type: 3}
+  keysD:
+  - {x: 1, y: 2}
+  - {x: 2, y: 2}
+  - {x: 0, y: 3}
+  - {x: 0, y: 2}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: -2, y: 0}
+  - {x: -2, y: 1}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}
+  - {x: 1, y: -1}
+  - {x: 1, y: 0}
+  - {x: -2, y: -3}
+  - {x: -2, y: -2}
+  - {x: 0, y: -2}
+  - {x: -1, y: -2}
+  - {x: 3, y: -2}
+  - {x: 2, y: -2}
+  valuesD: 030000000200000001000000000000000000000001000000000000000100000000000000010000000000000001000000000000000100000002000000030000000200000003000000
+  allMaterialsList:
+  - {x: 0, y: 0}
+  - {x: 0, y: -2}
+  - {x: -2, y: 0}
+  allBarricadesList: []
+  limitsMin: {x: -2, y: -3}
+  limitsMax: {x: 3, y: 3}
