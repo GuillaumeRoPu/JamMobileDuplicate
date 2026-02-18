@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
             foreach (SpriteRenderer renderer in _rooms.GetComponentsInChildren<SpriteRenderer>())
             {
                 renderer.sortingOrder = (int)renderer.transform.position.y * -5;
-                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 3;
+                //if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 0;
             }
 
             for (int i = 0; i < _other.Count; i++)
@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
         if (_echoEntity)
         {
             _echoEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)_echoEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+            (int)((Vector2)_echoEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 1;
         }
     }
 
