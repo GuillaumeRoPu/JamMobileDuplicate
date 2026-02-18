@@ -5,8 +5,10 @@ public class Entity : MonoBehaviour
 {
     Tile _currentTile;
     public Tile CurrentTile => _currentTile;
-    List<Vector2Int> _path;
+    List<Vector2Int> _path = new List<Vector2Int>();
     public List<Vector2Int> Path => _path;
+    public Vector2Int CurrentPath => _pathIndex - 1 >= _path.Count || _pathIndex - 1 < 0 ? CurrentTile.CellData.GridPosition : _path[_pathIndex - 1];
+    public Vector2Int NextPath => _pathIndex >= _path.Count ? CurrentTile.CellData.GridPosition : _path[_pathIndex];
     bool _reachTarget = true;
 
     bool _isMoving;
@@ -20,17 +22,33 @@ public class Entity : MonoBehaviour
 
     System.Action _onTargetReached;
 
+    Animator _animator;
+
+    int _turnBeforeCanMove;
+    public bool CanMove => _turnBeforeCanMove <= 0;
+    public void PassTurn()
+    {
+        _turnBeforeCanMove--; 
+    }
+
+    public void SetTurnBeforeMove(int turn)
+    {
+        _turnBeforeCanMove = turn; 
+    }
+
+    private void Awake()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
+
     public void SetCurrentTile(Vector2Int tile)
     {
         if (_currentTile)
         {
-            GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition, false);
             _currentTile.CellData.Entity = null;
         }
         _currentTile = GridManager.Tiles[tile];
         _currentTile.CellData.Entity = this;
-        if (_currentTile.CellData.HasRoom)
-            GameManager.Of.Grid.EntityInARoom(_currentTile.CellData.GridPosition);
     }
 
     public void SetPath(List<Vector2Int> path, System.Action WhenReached = null)
@@ -48,6 +66,8 @@ public class Entity : MonoBehaviour
 
     void Update()
     {
+        SendVelocity();
+
         if (!_reachTarget)
         {
             if (_isMoving)
@@ -78,6 +98,8 @@ public class Entity : MonoBehaviour
     {
         if (_reachTarget) return;
 
+        if (_turnBeforeCanMove > 0) return;
+
         _duration = duration;
         _initPosition = transform.position;
         _isMoving = true;
@@ -99,4 +121,29 @@ public class Entity : MonoBehaviour
             spriteTransform.localScale = scale;
         }
     }
+
+    // ANIMATIONS
+    void SendVelocity()
+    {
+        _animator.SetBool("Move", _isMoving); 
+    }
+
+    public void SendDead(bool net)
+    {
+        if (net)
+        {
+            _animator.SetTrigger("DeadNet");
+        }
+        else
+        {
+            _animator.SetTrigger("DeadLog");
+        }
+
+    }
+
+    public void SendAttack()
+    {
+        _animator.SetTrigger("Attack");
+    }
+
 }

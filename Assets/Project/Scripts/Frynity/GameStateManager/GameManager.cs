@@ -1,6 +1,7 @@
 using Frynity.Saves.Binary;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -27,7 +28,6 @@ public class GameManager : MonoBehaviour
     public List<Entity> Zombies => _zombieEntity;
     public Entity Echo => _echoEntity;
     public List<Entity> Witches => _witchEntity;
-    public bool CanPlay => !_playerEntity.IsMoving;
 
     int _currentLevel;
     public void SetCurrentLevel(int level) { _currentLevel = level; } 
@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Object With Z Order")]
     [SerializeField] GameObject _rooms;
+    public Transform RoomTransform => _rooms.transform;
     [SerializeField] List<GameObject> _other = new List<GameObject>();
     public void AddObjectRespectZOrder(GameObject obj) { _other.Add(obj); }
 
@@ -69,6 +70,8 @@ public class GameManager : MonoBehaviour
     [Header("Manager")]
     [SerializeField] TurnManager _turnManager;
     [SerializeField] GridManager _gridManager;
+
+    [SerializeField, Foldout("Events")] UnityEvent _whenGameOver;
     public TurnManager Turn => _turnManager;
     public GridManager Grid => _gridManager;
 
@@ -156,8 +159,9 @@ public class GameManager : MonoBehaviour
     {
         GameObject zombie = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _zombieEntity.Add(zombie.GetComponent<Entity>());
-        _zombieEntity[_zombieEntity.Count - 1].SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[_zombieEntity.Count - 1];
+        _zombieEntity[^1].SetTurnBeforeMove(2);
+        _zombieEntity[^1].SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[^1];
     }
 
     public void SpawnEcho(Vector2Int playerPos)
@@ -168,13 +172,12 @@ public class GameManager : MonoBehaviour
             return;
         }
         Vector2Int pos = playerPos + Vector2Int.left;
-        if (_playerMovement.Count > 0) pos = _playerMovement[_playerMovement.Count - 1];
+        if (_playerMovement.Count > 0) pos = _playerMovement[^1];
 
         GameObject echo = Instantiate(_echo, (Vector2)pos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(pos);
         Grid.GetTileAtPosition(pos).CellData.Entity = _echoEntity;
-        PlayerMovement.Clear();
     }
 
     public void DestroyEcho()
@@ -187,8 +190,8 @@ public class GameManager : MonoBehaviour
     {
         GameObject witch = Instantiate(_witch, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _witchEntity.Add(witch.GetComponent<Entity>());
-        _witchEntity[_witchEntity.Count - 1].SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[_witchEntity.Count - 1];
+        _witchEntity[^1].SetCurrentTile(spawnPos);
+        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[^1];
     }
 
     public void UpdateZOrder(bool changeStatic = true)
@@ -197,8 +200,8 @@ public class GameManager : MonoBehaviour
         {
             foreach (SpriteRenderer renderer in _rooms.GetComponentsInChildren<SpriteRenderer>())
             {
-                renderer.sortingOrder = (int)renderer.transform.position.y * -4;
-                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 2;
+                renderer.sortingOrder = (int)renderer.transform.position.y * -5;
+                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 3;
             }
 
             for (int i = 0; i < _other.Count; i++)
@@ -211,17 +214,32 @@ public class GameManager : MonoBehaviour
                 }
 
                 SpriteRenderer renderer = _other[i].GetComponentInChildren<SpriteRenderer>();
-                renderer.sortingOrder = (int)renderer.transform.position.y * -4 - 2;
+                renderer.sortingOrder = (int)renderer.transform.position.y * -5 - 3;
             }
         }
 
-        _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)_playerEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+        if (_playerEntity)
+        {
+            _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)_playerEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 2;
+        }
 
         foreach (var zombie in _zombieEntity)
         {
             zombie.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+            (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 1;
+        }
+
+        foreach (var witch in _witchEntity)
+        {
+            witch.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)witch.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 1;
+        }
+
+        if (_echoEntity)
+        {
+            _echoEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
+            (int)((Vector2)_echoEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
         }
     }
 
@@ -242,6 +260,7 @@ public class GameManager : MonoBehaviour
     public void QuitToHome()
     {
         EndLevel();
+        _whenGameOver?.Invoke();
         stateMachine.ChangeState(menuState);
         _doorAnim.SetTrigger("Open");
     }

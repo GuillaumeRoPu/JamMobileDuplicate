@@ -95,9 +95,16 @@ public class CellData
             tile == GridPosition + Vector2Int.up || tile == GridPosition + Vector2Int.down;
     }
 
-    public bool IsTheSameRoom(Tile tile)
+    public bool IsTheSameRoomOrHaveDoor(Tile tile, Face face)
     {
-        return tile.CellData.MainRoomCell == MainRoomCell;
+        Face receptFace = face == Face.Up ? Face.Down :
+           face == Face.Left ? Face.Right :
+           face == Face.Down ? Face.Up :
+           face == Face.Right ? Face.Left : Face.None;
+
+        if (receptFace == Face.None || !HasRoom) return false;
+
+        return tile.CellData.MainRoomCell == MainRoomCell || DoorPosition == receptFace || tile.CellData.DoorPosition == face;
     }
 
     public void SetTrap(Trap newtrap)
@@ -156,8 +163,12 @@ public class CellData
         return hasADoorTrap;
     }
 
-    public void KillEntity()
+    public async void KillEntity()
     {
+        if (Entity && tileTrap)
+            Entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
+
+        await Awaitable.WaitForSecondsAsync(2);
         GameManager.Of.KillAnEntity(Entity);
     }
 
@@ -232,7 +243,7 @@ public class CellData
     {
         if (newTrap.TrapMode == Trap.TrapType.Single)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
@@ -243,7 +254,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Multiple)
         {
-            if (!HasATileTrap() && !HasEntity())
+            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
@@ -254,7 +265,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Door)
         {
-            if (!HasADoorTrap())
+            if (!HasADoorTrap() && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }

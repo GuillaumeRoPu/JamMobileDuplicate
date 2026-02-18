@@ -1,5 +1,7 @@
 using Frynity.Gen;
+using Frynity.Utils;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -86,13 +88,28 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void EntityInARoom(Vector2Int tile, bool enter = true)
+    public void EntityInARoom()
     {
-        if (!Tiles[tile].CellData.HasRoom) return;
-        foreach (SpriteRenderer sprite in GetTileAtPosition(tile).GetRoomData().GetWalls)
+        RoomData data = null;
+
+        foreach (var tile in Tiles)
         {
-            if (sprite == null) continue;
-            sprite.color = new Color(1, 1, 1, enter ? 0.5f : 1);
+
+            if (!tile.Value.CellData.HasRoom) continue;
+
+            if (tile.Value.GetRoomData() == data) continue;
+
+            if (tile.Value.CellData.Entity)
+            {
+                data = tile.Value.GetRoomData();
+            }
+
+            foreach (SpriteRenderer sprite in tile.Value.GetRoomData().GetWalls)
+            {
+
+                if (sprite == null) continue;
+                sprite.color = new Color(1, 1, 1, tile.Value.CellData.Entity ? 0.5f : 1);
+            }
         }
     }
 
@@ -119,7 +136,7 @@ public class GridManager : MonoBehaviour
     {
         if (_gridLevelData != null && _generateGridOnPlay)
         {
-            //Init();
+            Init();
         }
     }
 
@@ -134,6 +151,13 @@ public class GridManager : MonoBehaviour
             PlaceAllDoors(_gridLevelData.allDoors);
             PlaceAllMaterials(_gridLevelData.allMaterials);
             PlaceAllBarricades(_gridLevelData.allBarricades);
+            foreach(var tile in _tiles)
+            {
+                if (!tile.Value.IsInARoom())
+                {
+                    tile.Value.MakeInvisible();
+                }
+            }
         }
     }
 
@@ -406,5 +430,22 @@ public class GridManager : MonoBehaviour
                 Gizmos.DrawWireSphere(pos, 0.25f);
             }
         }
+    }
+
+    [SerializeField] int _spawnIndex;
+    private void OnDrawGizmos()
+    {
+        if (_gridLevelData == null) return;
+
+        _spawnIndex = Mathf.Clamp(_spawnIndex, 0, _gridLevelData.keys.Count - 1);
+
+        if (_gridLevelData.values[_spawnIndex] == CellData.SpawnPointType.Player)
+            _spawnIndex++;
+
+        _spawnIndex = Mathf.Min(_spawnIndex, _gridLevelData.keys.Count - 1);
+
+        Vector2Int pos = _gridLevelData.keys[_spawnIndex];
+
+        Gizmos.DrawCube((Vector2)pos * TileSize + Vector2.one/2, Vector3.one * TileSize);
     }
 }
