@@ -130,7 +130,7 @@ public class TurnManager : MonoBehaviour
         }
         if (GameManager.Of.Echo)
         {
-            if (GameManager.Of.PlayerMovement.Count > 3)
+            if (GameManager.Of.PlayerMovement.Count > 4)
             {
                 List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, GameManager.Of.PlayerMovement[GameManager.Of.PlayerMovement.Count - 5] };
                 GameManager.Of.Echo.SetPath(path);
