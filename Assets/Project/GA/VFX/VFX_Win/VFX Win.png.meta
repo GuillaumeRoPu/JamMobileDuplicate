@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 01b1c74a824175d4090c0d1c1d82b320
+guid: d75795f24c7ea8d45854d17458d8d309
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1670660276820739667
-    second: Dust_0
+      213: -8982230653975345518
+    second: VFX Win_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dust_0
+      name: VFX Win_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 146
-        height: 146
+        x: 0
+        y: 0
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 35681449ba06f2710800000000000000
-      internalID: 1670660276820739667
+      spriteID: 296cc236fc4b85380800000000000000
+      internalID: -8982230653975345518
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dust_0: 1670660276820739667
+      VFX Win_0: -8982230653975345518
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
