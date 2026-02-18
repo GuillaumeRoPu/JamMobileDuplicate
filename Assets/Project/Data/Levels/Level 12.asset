@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bacb3bf12ef6042947ede5220d91e8, type: 3}
+  m_Name: Level 12
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  <GridLevel>k__BackingField: {fileID: 11400000, guid: 40e83a692ebbdae45b828e7bd0068c27, type: 2}
+  <TurnMax>k__BackingField: 30
+  <Events>k__BackingField:
+  - Turn: 2
+    EventType: 0
+    SpawnCellIndex: 1
+  - Turn: 3
+    EventType: 0
+    SpawnCellIndex: 0
+  - Turn: 3
+    EventType: 0
+    SpawnCellIndex: 1
+  <TrapToUse>k__BackingField:
+    Net: 1
+    Log: 1
+    Blocker: 1
