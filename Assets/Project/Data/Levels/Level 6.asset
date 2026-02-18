@@ -31,3 +31,9 @@ MonoBehaviour:
     Net: 1
     Log: 1
     Blocker: 1
+  <HasTutorial>k__BackingField: 1
+  <TutoImage>k__BackingField: {fileID: -8775281181512184826, guid: 410f04c63a4349a47bbc6f3125e031df, type: 3}
+  <TutoText>k__BackingField: 'c''est le texte test en fait ????
+
+    Trop la classe
+    omg'

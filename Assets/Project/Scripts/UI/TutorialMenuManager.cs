@@ -11,7 +11,20 @@ public class TutorialMenuManager : MonoBehaviour
     public void ActivateMenu(Sprite image, string str)
     {
         _menu.SetActive(true);
-        _text.text = str;
-        _image.sprite = image;
+        if (str != null)
+        {
+            _text.text = str;
+        }
+        if (_image != null) 
+        {
+            _image.sprite = image;
+        }
+        Time.timeScale = 0;
+    }
+
+    public void DeactivateMenu() 
+    {
+        Time.timeScale = 1;
+        _menu.SetActive(false);
     }
 }
