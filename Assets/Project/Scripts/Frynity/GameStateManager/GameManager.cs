@@ -199,8 +199,8 @@ public class GameManager : MonoBehaviour
         {
             foreach (SpriteRenderer renderer in _rooms.GetComponentsInChildren<SpriteRenderer>())
             {
-                renderer.sortingOrder = (int)renderer.transform.position.y * -4;
-                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 2;
+                renderer.sortingOrder = (int)renderer.transform.position.y * -5;
+                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 3;
             }
 
             for (int i = 0; i < _other.Count; i++)
@@ -213,26 +213,26 @@ public class GameManager : MonoBehaviour
                 }
 
                 SpriteRenderer renderer = _other[i].GetComponentInChildren<SpriteRenderer>();
-                renderer.sortingOrder = (int)renderer.transform.position.y * -4 - 2;
+                renderer.sortingOrder = (int)renderer.transform.position.y * -5 - 3;
             }
         }
 
         if (_playerEntity)
         {
             _playerEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)_playerEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+            (int)((Vector2)_playerEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 2;
         }
 
         foreach (var zombie in _zombieEntity)
         {
             zombie.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+            (int)((Vector2)zombie.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 1;
         }
 
         foreach (var witch in _witchEntity)
         {
             witch.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)witch.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+            (int)((Vector2)witch.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 1;
         }
 
         if (_echoEntity)

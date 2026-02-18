@@ -115,7 +115,7 @@ public class TurnManager : MonoBehaviour
         GameManager.Of.Player.MoveToNextTileInPath(_durationTurn);
         foreach (var zombie in GameManager.Of.Zombies)
         {
-            if (zombie.Path.Count == 2 && zombie.Path[^1] == playerPosition)
+            if (zombie.CurrentPath == playerPosition)
             {
                 zombie.SendAttack();
             }
@@ -189,7 +189,7 @@ public class TurnManager : MonoBehaviour
                 zombie.CurrentTile.CellData.ActivateTileTrap(zombie);
             }
 
-            if (zombie.CurrentTile.CellData.GridPosition == player)
+            if (zombie.CurrentPath == player)
             {
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.LoseLevel();

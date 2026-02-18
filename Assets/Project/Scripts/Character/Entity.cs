@@ -7,6 +7,7 @@ public class Entity : MonoBehaviour
     public Tile CurrentTile => _currentTile;
     List<Vector2Int> _path = new List<Vector2Int>();
     public List<Vector2Int> Path => _path;
+    public Vector2Int CurrentPath => _path[_pathIndex];
     bool _reachTarget = true;
 
     bool _isMoving;
@@ -129,7 +130,5 @@ public class Entity : MonoBehaviour
     {
         _animator.SetTrigger("Attack");
     }
-
-
 
 }
