@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
+
 
 namespace Frynity.Gen
 {
@@ -73,6 +72,8 @@ namespace Frynity.Gen
         [SerializeField] List<Cell> _localCells = new List<Cell>();
         [SerializeField] List<CellDoor> _localDoors = new List<CellDoor>();
         [SerializeField, HideInInspector] List<bool> _activeDoors = new List<bool>();
+
+        [SerializeField] List<GameObject> _props = new List<GameObject>();
 
         public AssetList GetAssetList => _assets;
         public AssetList SetAssetList { set  { _assets = value; } }
@@ -215,6 +216,11 @@ namespace Frynity.Gen
                         }
                     }
                 }
+            }
+
+            foreach (var obj in _props)
+            {
+                GameManager.Of.AddObjectRespectZOrder(obj);
             }
         }
 
