@@ -17,9 +17,9 @@ public class PlayGameManager : MonoBehaviour
 
     void Start()
     {
-        PlayGamesPlatform.Activate();
-        //PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
-        Social.localUser.Authenticate(SocialProcessAuthentication);
+        //PlayGamesPlatform.Activate();
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+        //Social.localUser.Authenticate(SocialProcessAuthentication);
     }
 
     void SocialProcessAuthentication(bool status)
@@ -55,7 +55,7 @@ public class PlayGameManager : MonoBehaviour
     // Débloque achievement STANDARD (100%)
     public void UnlockAchievement(string id)
     {
-        Social.ReportProgress(id, 100.0f, success => {
+        PlayGamesPlatform.Instance.ReportProgress(id, 100.0f, success => {
             Debug.Log(id + (success ? " débloqué!" : " échec"));
         });
     }

@@ -16,17 +16,8 @@ MonoBehaviour:
   <TurnMax>k__BackingField: 30
   <Events>k__BackingField:
   - Turn: 5
-    EventType: 0
-    SpawnCellIndex: 1
-  - Turn: 12
-    EventType: 0
-    SpawnCellIndex: 3
-  - Turn: 15
     EventType: 3
-    SpawnCellIndex: 4
-  - Turn: 18
-    EventType: 0
-    SpawnCellIndex: 2
+    SpawnCellIndex: 1
   <TrapToUse>k__BackingField:
     Net: 1
     Log: 1

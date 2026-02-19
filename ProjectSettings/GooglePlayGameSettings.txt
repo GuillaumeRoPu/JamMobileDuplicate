@@ -1,5 +1,5 @@
-lastUpgrade=20100
-proj.pluginVersion=2.1.0
+lastUpgrade=20000
+proj.pluginVersion=2.0.0
 proj.AppId=391387260140
 and.BundleId=com.IIMaxeJV.LongNightAtGrandmas
 proj.classDir=Assets
