@@ -27,4 +27,9 @@ public class TutorialMenuManager : MonoBehaviour
         Time.timeScale = 1;
         _menu.SetActive(false);
     }
+
+    private void Start()
+    {
+        DeactivateMenu();
+    }
 }

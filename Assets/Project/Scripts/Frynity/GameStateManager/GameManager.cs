@@ -232,8 +232,7 @@ public class GameManager : MonoBehaviour
             PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_at_the_stake);
         }
 
-        await Awaitable.WaitForSecondsAsync(1);
-        Destroy(entity.gameObject);
+        entity.Kill();
     }
 
 

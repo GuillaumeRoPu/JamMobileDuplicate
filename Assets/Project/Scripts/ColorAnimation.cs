@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class ColorAnimation : MonoBehaviour
 
     [SerializeField] float _duration;
     [SerializeField] AnimationCurve _animCurve;
+    [SerializeField] List<Image> _allButtons;
     float _timing;
     bool _reverse;
 
@@ -38,6 +40,11 @@ public class ColorAnimation : MonoBehaviour
 
             if (GetComponentInChildren<TextMeshProUGUI>())
                 GetComponentInChildren<TextMeshProUGUI>().color = Color.Lerp(_baseColor, _endColor, _animCurve.Evaluate(ratio));
+
+            foreach(var button in _allButtons)
+            {
+                button.color = Color.Lerp(_baseColor, _endColor, _animCurve.Evaluate(ratio));
+            }
 
             if (_timing >= _duration)
             {
