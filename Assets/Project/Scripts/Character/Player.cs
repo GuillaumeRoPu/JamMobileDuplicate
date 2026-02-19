@@ -354,6 +354,7 @@ public class Player : MonoBehaviour
         Face[] faces = {Face.Up, Face.Down, Face.Right, Face.Left};
         for (int i = 0; i < 4; i++)
         {
+            _addListCount = 0;
             bool check = CheckIfTrapCanBePlaced(_trap, player, faces[i], false);
             if (check)
             {
@@ -368,15 +369,12 @@ public class Player : MonoBehaviour
             }
             else if (_addListCount > 0)
             {
-                Debug.Log(_addListCount);
                 for (int j = 0; j < _addListCount; j++)
                 {
                     Destroy(_pathOverList[^1]);
                     _pathOverList.RemoveAt(_pathOverList.Count - 1);
                 }
             }
-
-            _addListCount = 0;
         }
     }
 
@@ -585,7 +583,7 @@ public class Player : MonoBehaviour
                     var trapPositionBis = playerPosition + newpos + offset;
                     if (GridManager.Tiles.ContainsKey(trapPositionBis))
                     {
-                        if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(newTrap)
+                        if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(newTrap, false)
                             && GridManager.Tiles[trapPositionBis].CellData.CanPass(direction, GridManager.Tiles[playerPosition + newpos].CellData))
                         {
                             _pathOverList.Add(Instantiate(_pathOver, (Vector2)trapPositionBis * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));

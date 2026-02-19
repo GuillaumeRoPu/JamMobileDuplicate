@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public List<Entity> Witches => _witchEntity;
 
     int _currentLevel;
+    public int CurrentLevel => _currentLevel;
     public void SetCurrentLevel(int level) { _currentLevel = level; } 
 
     [Header("Game Scene")]
@@ -132,10 +133,10 @@ public class GameManager : MonoBehaviour
         GameObject player = Instantiate(_player, (Vector2)tile * Grid.TileSize, Quaternion.identity);
         _playerEntity = player.GetComponent<Entity>();
         _playerEntity.SetCurrentTile(tile);
-        Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
+        Grid.GetTileAtPosition(tile).CellData.Entities.Add(_playerEntity);
     }
 
-    public void SpawnZombie(List<Vector2Int> spawnPos, int turnBeforeMove = 2)
+    public void SpawnZombie(List<Vector2Int> spawnPos, int turnBeforeMove = 1)
     {
         Vector2Int last = new Vector2Int(-100, -100);
         foreach (var spawn in spawnPos)
@@ -144,7 +145,7 @@ public class GameManager : MonoBehaviour
             _zombieEntity.Add(zombie.GetComponent<Entity>());
             _zombieEntity[^1].SetTurnBeforeMove(last == spawn ? turnBeforeMove + 1 : turnBeforeMove);
             _zombieEntity[^1].SetCurrentTile(spawn);
-            Grid.GetTileAtPosition(spawn).CellData.Entity = _zombieEntity[^1];
+            Grid.GetTileAtPosition(spawn).CellData.Entities.Add(_zombieEntity[^1]);
 
             last = spawn;
         }
@@ -164,7 +165,7 @@ public class GameManager : MonoBehaviour
         GameObject echo = Instantiate(_echo, (Vector2)pos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(pos);
-        Grid.GetTileAtPosition(pos).CellData.Entity = _echoEntity;
+        Grid.GetTileAtPosition(pos).CellData.Entities.Add(_echoEntity);
     }
 
     public void DestroyEcho()
@@ -180,7 +181,7 @@ public class GameManager : MonoBehaviour
             GameObject witch = Instantiate(_witch, (Vector2)spawn * Grid.TileSize, Quaternion.identity);
             _witchEntity.Add(witch.GetComponent<Entity>());
             _witchEntity[^1].SetCurrentTile(spawn);
-            Grid.GetTileAtPosition(spawn).CellData.Entity = _witchEntity[^1];
+            Grid.GetTileAtPosition(spawn).CellData.Entities.Add(_witchEntity[^1]);
         }
     }
 

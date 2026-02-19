@@ -14,7 +14,7 @@ public class Log : Trap
             foreach(var pos in AdditionalPosition)
             {
                 GridManager.Tiles[pos].CellData.KillEntity();
-                if (GridManager.Tiles[pos].CellData.Entity)
+                if (GridManager.Tiles[pos].CellData.Entities.Count > 0)
                 {
                     nbEntity++;
                 }
