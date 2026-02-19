@@ -27,7 +27,7 @@ MonoBehaviour:
   <TrapToUse>k__BackingField:
     Net: 1
     Log: 0
-    Blocker: 1
+    Blocker: 0
   <HasTutorial>k__BackingField: 0
   <TutoImage>k__BackingField: {fileID: -8775281181512184826, guid: 410f04c63a4349a47bbc6f3125e031df, type: 3}
   <TutoText>k__BackingField: 'c''est le texte test en fait ????

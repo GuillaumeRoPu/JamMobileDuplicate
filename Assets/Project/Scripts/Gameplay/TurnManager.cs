@@ -64,6 +64,7 @@ public class TurnManager : MonoBehaviour
     {
         _level.Init();
         _ui.Init();
+        _player.ResetAchievment();
 
         _currentTurn = 0;
 
@@ -281,6 +282,7 @@ public class TurnManager : MonoBehaviour
                 if (GameManager.Of.Player.NextPath != GameManager.Of.Player.CurrentPath) continue;
                 if (GridManager.Tiles[GameManager.Of.Player.CurrentPath].CellData.HasADoorTrap()) continue;
 
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_nooo_not_my_brain);
                 _gameOverUI.SetActive(true);
                 await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
@@ -302,17 +304,34 @@ public class TurnManager : MonoBehaviour
                 if (_witchAllTilePaths[w].Contains(player))
                 {
                     _gameOverUI.SetActive(true);
+                    PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_avada_kedavra);
                     await Awaitable.WaitForSecondsAsync(1);
                     _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                     return;
                 }
 
+                int enemy = 0;
                 foreach (var tile in _witchAllTilePaths[w])
                 {
                     if (GridManager.Tiles[tile].CellData.HasADoorTrap())
                     {
+                        PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_heres_johnny);
                         GridManager.Tiles[tile].CellData.ActivateDoorTrap(GameManager.Of.Witches[w]);
                         GridManager.Tiles[tile].CellData.ActivateDoorTrap(GameManager.Of.Witches[w]);
+                    }
+
+                    foreach (var entity in GridManager.Tiles[tile].CellData.Entities)
+                    {
+                        if (GameManager.Of.Zombies.Contains(entity) || GameManager.Of.Witches.Contains(entity)
+                            || entity == GameManager.Of.Echo)
+                        {
+                            enemy++;
+                        }
+                    }
+
+                    if (enemy >= 2)
+                    {
+                        PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_leapfrog);
                     }
                 }
             }
@@ -323,6 +342,7 @@ public class TurnManager : MonoBehaviour
             if (GameManager.Of.Echo.CurrentTile.CellData.GridPosition == player)
             {
                 _gameOverUI.SetActive(true);
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_ma_meilleure_ennemie);
                 await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                 return;
@@ -331,6 +351,11 @@ public class TurnManager : MonoBehaviour
 
         // Attend la fin de la frame
         await Awaitable.EndOfFrameAsync();
+
+        if (GameManager.Of.Zombies.Count >= 4)
+        {
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_invasion);
+        }
 
 
         if (_currentTurn > _lastEventTurn)

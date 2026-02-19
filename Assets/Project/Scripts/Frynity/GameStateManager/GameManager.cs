@@ -280,6 +280,89 @@ public class GameManager : MonoBehaviour
             SaveManager.Of.Level.LevelUnlock++;
             SaveManager.Of.SaveGame();
         }
+
+        switch(_currentLevel)
+        {
+            case 1:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_1_finish);
+                break;
+
+            case 2:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_2_finish);
+                break;
+
+            case 3:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_3_finish);
+                break;
+
+            case 4:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_4_finish);
+                break;
+
+            case 5:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_five_nights_at_grannys);
+                break;
+
+            case 6:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_6_finish);
+                break;
+
+            case 7:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_7_finish);
+                break;
+
+            case 8:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_8_finish);
+                break;
+
+            case 9:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_9_finish);
+                break;
+
+            case 10:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_10_finish);
+                break;
+
+            case 11:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_11_finish);
+                break;
+
+            case 12:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_12_finish);
+                break;
+
+            case 13:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_13_finish);
+                break;
+
+            case 14:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_14_finish);
+                break;
+
+            case 15:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_15_finish);
+                break;
+
+            case 16:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_16_finish);
+                break;
+
+            case 17:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_17_finish);
+                break;
+
+            case 18:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_18_finish);
+                break;
+
+            case 19:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_19_finish);
+                break;
+
+            case 20:
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_20_finish);
+                break;
+        }
     }
 
     public void EndLevel()

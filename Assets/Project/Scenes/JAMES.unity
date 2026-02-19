@@ -6780,10 +6780,22 @@ MonoBehaviour:
     endTime: 0
     volume: 0.25
   fx:
-  - clip: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 00a6bcbbf7190cf4e9ff616d674db150, type: 3}
     startTime: 0
     endTime: 0
-    volume: 0
+    volume: 1
+  - clip: {fileID: 8300000, guid: b72ea0339585fbf45887ed1e82b5a03e, type: 3}
+    startTime: 0
+    endTime: 0
+    volume: 1
+  - clip: {fileID: 8300000, guid: adeed9d1aad083a4fad4d093bd055174, type: 3}
+    startTime: 0
+    endTime: 0
+    volume: 1
+  - clip: {fileID: 8300000, guid: 682c4bea19a9ba34cb13f367208dead7, type: 3}
+    startTime: 0
+    endTime: 0
+    volume: 1
   musicEffectMixer: {fileID: -6707401127656026385, guid: bd3ab056d7c917240a9debfb6a5f891d, type: 2}
   fxEffectMixer: {fileID: 1760957101577796974, guid: bd3ab056d7c917240a9debfb6a5f891d, type: 2}
 --- !u!114 &1155825363
@@ -9340,7 +9352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.000001, y: -335.23022}
+  m_AnchoredPosition: {x: -15, y: -335.23022}
   m_SizeDelta: {x: -370, y: 372.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1614061172

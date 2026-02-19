@@ -1,8 +1,6 @@
-using GooglePlayGames;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Player : MonoBehaviour
 {
@@ -43,11 +41,18 @@ public class Player : MonoBehaviour
     Trap _trap;
     int _price;
 
+    int _barricadePlace;
+
     List<Vector2Int> _faceForDestroyTrap = new List<Vector2Int>();
 
     private void Start()
     {
         MaterialChange?.Invoke();
+    }
+
+    public void ResetAchievment()
+    {
+        _barricadePlace = 0;
     }
 
     public void SelectPath(Vector2Int tile)
@@ -459,6 +464,7 @@ public class Player : MonoBehaviour
 
             GridManager.Tiles[trap].CellData.ActivateDoorTrap(GameManager.Of.Player);
             GridManager.Tiles[trap].CellData.ActivateDoorTrap(GameManager.Of.Player);
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_recycling);
             _faceForDestroyTrap.Remove(tile);
             ResetTrapsDestroy();
         }
@@ -708,6 +714,12 @@ public class Player : MonoBehaviour
                                 trap.TrapPlaced(trapPosition, GridManager.Tiles[trapPosition].CellData.DoorPosition);
                                 GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
                                 GameManager.Of.AddObjectRespectZOrder(trap.gameObject);
+                                _barricadePlace++;
+
+                                if (_barricadePlace >= 3)
+                                {
+                                    PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_paranoia);
+                                }
                             }
                             return true;
                         }
