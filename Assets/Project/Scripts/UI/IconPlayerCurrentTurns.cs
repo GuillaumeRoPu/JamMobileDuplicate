@@ -15,7 +15,7 @@ public class IconPlayerCurrentTurns : MonoBehaviour
         _text.text = strNum;
     }
 
-    private void UpdateText()
+    public void UpdateText()
     {
         string strNum = GameManager.Of.Turn.Turn.ToString();
         if (strNum.Length == 1)

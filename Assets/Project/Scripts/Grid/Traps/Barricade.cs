@@ -13,6 +13,8 @@ public class Barricade : Trap
         if (_currentHealth <= 0)
         {
             GridManager.Tiles[_position].GiveTileAMaterial();
+            AudioManager.Of.PlayClipAt(AudioManager.Of.fx[3], Vector3.zero, true);
+
             DestroyTrap();
         }
     }

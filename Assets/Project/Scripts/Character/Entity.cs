@@ -152,10 +152,12 @@ public class Entity : MonoBehaviour
         if (net)
         {
             _animator.SetTrigger("DeadNet");
+            AudioManager.Of.PlayClipAt(AudioManager.Of.fx[1], Vector3.zero, true);
         }
         else
         {
             _animator.SetTrigger("DeadLog");
+            AudioManager.Of.PlayClipAt(AudioManager.Of.fx[2], Vector3.zero, true);
         }
 
     }
