@@ -249,6 +249,8 @@ public class TurnManager : MonoBehaviour
                 Debug.Log(_witchAllTilePaths.Count);
                 if (_witchAllTilePaths[w].Contains(player))
                 {
+                    _gameOverUI.SetActive(true);
+                    await Awaitable.WaitForSecondsAsync(1);
                     _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                     GameManager.Of.LoseLevel();
                     return;
@@ -268,6 +270,8 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.Echo.CurrentTile.CellData.GridPosition == player)
             {
+                _gameOverUI.SetActive(true);
+                await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.LoseLevel();
                 return;
@@ -631,5 +635,12 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    [Button]
+    private void ActivateWin()
+    {
+        _gameWinUI.SetActive(true);
+        _gameWinUI.GetComponent<ColorAnimation>().PlayAnimation();
     }
 }

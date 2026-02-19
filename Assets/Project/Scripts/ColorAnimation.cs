@@ -11,6 +11,8 @@ public class ColorAnimation : MonoBehaviour
     [SerializeField] float _duration;
     [SerializeField] AnimationCurve _animCurve;
     [SerializeField] List<Image> _allButtons;
+    [SerializeField] List<ParticleSystem> _allParticles;
+    [SerializeField] private bool _darken = false;
     float _timing;
     bool _reverse;
 
@@ -20,6 +22,10 @@ public class ColorAnimation : MonoBehaviour
     private void Start()
     {
         _play = !_controlPlay;
+        foreach (var particle in _allParticles) 
+        { 
+            particle.Stop();
+        }
     }
 
     void Update()
@@ -32,6 +38,9 @@ public class ColorAnimation : MonoBehaviour
                 ratio = 1 - ratio;
             }
 
+            Color baseColor = new Color(0, 0, 0, 0);
+            Color endColor = new Color(0, 0, 0, 0.5f);
+
             if (GetComponent<SpriteRenderer>())
                 GetComponent<SpriteRenderer>().color = Color.Lerp(_baseColor, _endColor, _animCurve.Evaluate(ratio));
 
@@ -40,6 +49,18 @@ public class ColorAnimation : MonoBehaviour
 
             if (GetComponentInChildren<TextMeshProUGUI>())
                 GetComponentInChildren<TextMeshProUGUI>().color = Color.Lerp(_baseColor, _endColor, _animCurve.Evaluate(ratio));
+
+            if (_darken)
+            {
+                if (GetComponent<SpriteRenderer>())
+                    GetComponent<SpriteRenderer>().color = Color.Lerp(baseColor, endColor, _animCurve.Evaluate(ratio));
+
+                if (GetComponent<Image>())
+                    GetComponent<Image>().color = Color.Lerp(baseColor, endColor, _animCurve.Evaluate(ratio));
+
+                if (GetComponentInChildren<TextMeshProUGUI>())
+                    GetComponentInChildren<TextMeshProUGUI>().color = Color.Lerp(baseColor, endColor, _animCurve.Evaluate(ratio));
+            }
 
             foreach(var button in _allButtons)
             {
@@ -62,5 +83,10 @@ public class ColorAnimation : MonoBehaviour
         _play = true;
         _timing = 0;
         _reverse = false;
+        foreach (var particle in _allParticles)
+        {
+            particle.Play();
+        }
     }
+
 }
