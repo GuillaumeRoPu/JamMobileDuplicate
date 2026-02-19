@@ -66,7 +66,19 @@ public class TurnManager : MonoBehaviour
         _notNext = false;
 
         _gameOverUI.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+        Image[] images = _gameOverUI.GetComponentsInChildren<Image>();
+        foreach(var image in images)
+        {
+            image.color = new Color(255, 255, 255, 0);
+        }
+        _gameOverUI.SetActive(false);
         _gameWinUI.GetComponent<Image>().color = new Color(255, 255, 255, 0);
+        images = _gameWinUI.GetComponentsInChildren<Image>();
+        foreach (var image in images)
+        {
+            image.color = new Color(255, 255, 255, 0);
+        }
+        _gameWinUI.SetActive(false);
 
         _player.ReachedTarget();
         _player.RemoveMaterials(_player.Materials);
@@ -237,6 +249,7 @@ public class TurnManager : MonoBehaviour
                 if (GameManager.Of.Player.NextPath != GameManager.Of.Player.CurrentPath) continue;
                 if (GridManager.Tiles[GameManager.Of.Player.CurrentPath].CellData.HasADoorTrap()) continue;
 
+                _gameOverUI.SetActive(true);
                 await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.LoseLevel();
@@ -257,6 +270,8 @@ public class TurnManager : MonoBehaviour
             {
                 if (_witchAllTilePaths[w].Contains(player))
                 {
+                    _gameOverUI.SetActive(true);
+                    await Awaitable.WaitForSecondsAsync(1);
                     _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                     GameManager.Of.LoseLevel();
                     return;
@@ -276,6 +291,8 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.Echo.CurrentTile.CellData.GridPosition == player)
             {
+                _gameOverUI.SetActive(true);
+                await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.LoseLevel();
                 return;
@@ -290,6 +307,7 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.Zombies.Count == 0 && GameManager.Of.Witches.Count == 0 && !GameManager.Of.Echo)
             {
+                _gameWinUI.SetActive(true);
                 _gameWinUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.WinLevel();
             }
@@ -650,5 +668,12 @@ public class TurnManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    [Button]
+    private void ActivateWin()
+    {
+        _gameWinUI.SetActive(true);
+        _gameWinUI.GetComponent<ColorAnimation>().PlayAnimation();
     }
 }
