@@ -28,3 +28,11 @@ MonoBehaviour:
     Net: 1
     Log: 1
     Blocker: 1
+  <HasTutorial>k__BackingField: 1
+  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoText>k__BackingField: "Looks like there\u2019s more zombies than trinkets
+    this time..\r\nTime to introduce you to the log. For the measly cost of 2 trinkets,
+    you can set up a log that\u2019s 3 squares long. Be wary that you\u2019ll need
+    these 3 squares of space to set it up. Meaning, no walls on these 3 squares.
+    \r\nThe log will only be triggered when an enemy will walk on the pressure plate,
+    triggering it and killing everything in its path."
