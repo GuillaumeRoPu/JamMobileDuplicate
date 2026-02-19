@@ -27,4 +27,9 @@ MonoBehaviour:
     Blocker: 1
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 0}
-  <TutoText>k__BackingField: 
+  <TutoText>k__BackingField: "As if zombies weren\u2019t enough, here comes the witch
+    !\r\nShe doesn\u2019t bother to take the front door and directly comes through
+    the roof. Unlike the zombies, she doesn\u2019t wander around in the manor and
+    only targets you when she sees you.\r\nHer line of sight is only straight lines.
+    Once you enter her line of sight, she\u2019ll prepare to run over you the next
+    turn, ignoring everything in her way besides walls !"

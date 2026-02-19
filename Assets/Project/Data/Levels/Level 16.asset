@@ -30,4 +30,9 @@ MonoBehaviour:
     Blocker: 1
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 0}
-  <TutoText>k__BackingField: 
+  <TutoText>k__BackingField: "They say that your worst enemy is yourself..\r\nLet
+    me introduce you to the echo ! This reflection of you will copy your every move
+    with a delay and isn\u2019t bothered by anything else, once you take a path,
+    no one is stopping it from taking the same path.\r\nDon\u2019t bother to kill
+    it, it\u2019ll go away after some time but try not to go back on your steps or
+    stay too static."

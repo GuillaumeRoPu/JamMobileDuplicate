@@ -24,4 +24,8 @@ MonoBehaviour:
     Blocker: 0
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 0}
-  <TutoText>k__BackingField: 
+  <TutoText>k__BackingField: "Hi grandma, it seems like someone\u2019s trying to
+    break in.\r\nZombies like these will try to break in from your outside doors.
+    They will take the shortest path to you. Try to move around by sliding your fingers
+    to make your path. Those trinkets lying around will help you build traps to defend
+    your manor."

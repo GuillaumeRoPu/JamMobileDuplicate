@@ -22,6 +22,11 @@ MonoBehaviour:
     Net: 1
     Log: 0
     Blocker: 1
-  <HasTutorial>k__BackingField: 0
+  <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 0}
-  <TutoText>k__BackingField: 
+  <TutoText>k__BackingField: "Once a zombie is one square away from you, you\u2019re
+    toast/there\u2019s no escaping !\r\nThe barricade will help you with that, place
+    it when there\u2019s a door between you and a zombie and he\u2019ll take some
+    time to break it, allowing you to make some space.\r\nA broken barricade leaves
+    a trinket on the ground, so don\u2019t worry about \u201Cwasting\u201D them on
+    barricades."
