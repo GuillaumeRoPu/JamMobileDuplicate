@@ -25,3 +25,6 @@ MonoBehaviour:
     Net: 1
     Log: 1
     Blocker: 1
+  <HasTutorial>k__BackingField: 1
+  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoText>k__BackingField: 

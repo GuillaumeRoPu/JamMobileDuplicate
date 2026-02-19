@@ -1144,7 +1144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: c1744a449d13406448cba1a12de54812, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1027010606}
   _roomsParent: {fileID: 1232655206}
@@ -1153,7 +1153,7 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _coolColors: 0
   _coolColorsAnimated: 0
-  _spawnIndex: 4
+  _spawnIndex: 3
 --- !u!114 &1006221673
 MonoBehaviour:
   m_ObjectHideFlags: 0
