@@ -40,7 +40,6 @@ public class TrapUI : MonoBehaviour
 
     void CheckIfCanPlaceATrap()
     {
-
         _trap1.MaterialImage.SetActive(GameManager.Of.Turn.Level.TrapToUse.Net);
         _trap1.RequiredTxt.gameObject.SetActive(GameManager.Of.Turn.Level.TrapToUse.Net);
 

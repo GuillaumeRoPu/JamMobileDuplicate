@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,7 @@ public class TurnManager : MonoBehaviour
     List<List<Vector2Int>> _witchPaths = new List<List<Vector2Int>>();
 
     List<Vector2> _nextSpawnTiles = new List<Vector2>();
+    List<List<Vector2Int>> _spawnPaths = new List<List<Vector2Int>>();
 
     public void Init()
     {
@@ -197,7 +199,7 @@ public class TurnManager : MonoBehaviour
                 {
                     if (_warnings.Count > 0)
                     {
-                        ZombieTurn();
+                        ZombieTurn(true);
                         Destroy(_warnings[0]); 
                         _warnings.RemoveAt(0);
                     }
@@ -335,9 +337,55 @@ public class TurnManager : MonoBehaviour
     {
         WarningSpawn(playerPath.Count > 1 ? playerPath.Count - 1 : 1);
         _zombiePaths.Clear();
+        _spawnPaths.Clear();
         ResetFeedbackZombie();
         int zIndex = 0;
-        List<Vector2Int> stop = new List<Vector2Int>();;
+        List<Vector2Int> stop = new List<Vector2Int>();
+
+        foreach (var spawn in _nextSpawnTiles)
+        {
+            Vector2Int s = Vector2Int.FloorToInt( spawn / GameManager.Of.Grid.TileSize);
+            List<Vector2Int> tiles = new List<Vector2Int> { GridManager.Tiles[s].CellData.GridPosition };
+
+            for (int i = 0; playerPath.Count > 1 ? i < playerPath.Count - 1 : i < playerPath.Count; i++)
+            {
+                if (playerPath[i] == tiles[tiles.Count - 1]) break;
+
+                List<Vector2Int> newStop = new List<Vector2Int>(stop);
+                newStop.AddRange(tiles);
+                foreach (var witch in GameManager.Of.Witches)
+                {
+                    newStop.Add(witch.CurrentTile.CellData.GridPosition);
+                }
+
+                List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[s], GridManager.Tiles[playerPath[i]], newStop);
+
+                if (path.Count <= 1) break;
+                bool pass = false;
+                foreach (var paths in _zombiePaths)
+                {
+                    if (i + 1 >= paths.Count) continue;
+                    if (paths[i + 1] == path[1])
+                    {
+                        tiles.Add(tiles[tiles.Count - 1]);
+                        pass = true;
+                        break;
+                    }
+                }
+                if (pass) continue;
+                tiles.Add(path[1]);
+                if (playerPath.Count < i + 1)
+                {
+                    if (path[1] == playerPath[i + 1] && i != 0)
+                    {
+                        break;
+                    }
+                }
+            }
+            stop.Add(tiles[tiles.Count - 1]);
+            _spawnPaths.Add(tiles);
+        }
+
         foreach (var zombie in GameManager.Of.Zombies)
         {
             _zombieFeedbacks.Add(new List<GameObject>());
@@ -569,10 +617,17 @@ public class TurnManager : MonoBehaviour
 
     }
 
-    public void ZombieTurn()
+    public void ZombieTurn(bool spawn = false)
     {
         ResetFeedbackZombie();
         int zombieIndex = 0;
+        if (spawn)
+        {
+            for (int i = 1; i < _nextSpawnTiles.Count; i++)
+            {
+                GameManager.Of.Zombies[^i].SetPath(_spawnPaths[i - 1]);  
+            }
+        }
         foreach (var zombie in GameManager.Of.Zombies)
         {
             if (_zombiePaths[zombieIndex].Count <= 1) continue;

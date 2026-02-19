@@ -92,8 +92,9 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-
         InitializeStates();
+
+        _game.SetActive(false);
     }
 
     private void Start()
@@ -298,7 +299,8 @@ public class GameManager : MonoBehaviour
         if (_echoEntity)
             Destroy(_echoEntity.gameObject);
 
-        Destroy(_playerEntity.gameObject);
+        if (_playerEntity)
+            Destroy(_playerEntity.gameObject);
 
         Grid.EraseAll();
     }
