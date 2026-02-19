@@ -284,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _maxTurnToMove: 5
   _pathOver: {fileID: 3919265444166492961, guid: e63923996d3829443aeaedd5a207794c, type: 3}
+  _destroyTrap: {fileID: 0}
   _pathFeedback:
     Arrow: {fileID: 0}
     Row: {fileID: 0}
@@ -1144,7 +1145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 1
-  _gridLevelData: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: da3ff4369fdb59c4e94a978ca6a4ed3c, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1027010606}
   _roomsParent: {fileID: 1232655206}
@@ -1153,7 +1154,7 @@ MonoBehaviour:
   _camera: {fileID: 0}
   _coolColors: 0
   _coolColorsAnimated: 0
-  _spawnIndex: 3
+  _spawnIndex: 0
 --- !u!114 &1006221673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,6 +1177,8 @@ MonoBehaviour:
   _settings: {fileID: 0}
   _rooms: {fileID: 0}
   _other: []
+  _lightParent: {fileID: 0}
+  _doorLight: {fileID: 0}
   _sideInWallSprite: {fileID: 0}
   _sideInDoorWallSprite: {fileID: 0}
   _sideOutWallSprite: {fileID: 0}
@@ -1185,6 +1188,7 @@ MonoBehaviour:
   - {fileID: 0}
   _outDoorWallSprite: []
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
+  Music: {fileID: 0}
   _doorAnim: {fileID: 0}
   _turnManager: {fileID: 1006221670}
   _gridManager: {fileID: 1006221672}
@@ -1746,23 +1750,23 @@ MonoBehaviour:
   _limitsMaxX: 11
   _limitsMinY: -4
   _limitsMaxY: 7
-  _drawGridWidth: 1
+  _drawGridWidth: 2
   _drawGridHeight: 1
-  _drawGridOrigin: {x: -5, y: 1}
-  _eraseGridWidth: 1
+  _drawGridOrigin: {x: 2, y: 3}
+  _eraseGridWidth: 2
   _eraseGridHeight: 1
-  _eraseGridOrigin: {x: -2, y: 0}
+  _eraseGridOrigin: {x: 3, y: 2}
   _gridLevelData: {fileID: 0}
-  _spawnPointPosition: {x: 0, y: 1}
-  _spawnPointTypes: 1
-  _roomPrefab: {fileID: 1760020817208077146, guid: 37d0f992742f28e4082f0617b8af530e, type: 3}
-  _roomPosition: {x: -3, y: -2}
-  _eraseRoomPosition: {x: 2, y: 0}
-  _materialPosition: {x: -2, y: 2}
-  _eraseMaterialPosition: {x: -5, y: 0}
+  _spawnPointPosition: {x: 3, y: 3}
+  _spawnPointTypes: 2
+  _roomPrefab: {fileID: 8697954554260469774, guid: 580f91dff5e1ec6478d6b147a383202c, type: 3}
+  _roomPosition: {x: 2, y: 2}
+  _eraseRoomPosition: {x: -1, y: 0}
+  _materialPosition: {x: 2, y: 3}
+  _eraseMaterialPosition: {x: 3, y: 2}
   _barricadePosition: {x: -1, y: 1}
   _eraseBarricadePosition: {x: 0, y: 0}
-  _gridLevelName: Level 18
+  _gridLevelName: Level 9
 --- !u!1 &1870003581
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
     Log: 1
     Blocker: 1
   <HasTutorial>k__BackingField: 1
-  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoImage>k__BackingField: {fileID: 6957082991898076456, guid: ada4bf4fc2b24c749b17c30c3fee775d, type: 3}
   <TutoText>k__BackingField: "As if zombies weren\u2019t enough, here comes the witch
     !\r\nShe doesn\u2019t bother to take the front door and directly comes through
     the roof. Unlike the zombies, she doesn\u2019t wander around in the manor and

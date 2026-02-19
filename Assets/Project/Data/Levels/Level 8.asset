@@ -29,7 +29,7 @@ MonoBehaviour:
     Log: 1
     Blocker: 0
   <HasTutorial>k__BackingField: 1
-  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoImage>k__BackingField: {fileID: -2716393184026147826, guid: 0a1905965cabba74ba5f35dbac66d401, type: 3}
   <TutoText>k__BackingField: "Looks like there\u2019s more zombies than trinkets
     this time..\r\nTime to introduce you to the log. For the measly cost of 2 trinkets,
     you can set up a log that\u2019s 3 squares long. Be wary that you\u2019ll need
