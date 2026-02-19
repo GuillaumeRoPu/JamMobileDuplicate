@@ -15,14 +15,20 @@ MonoBehaviour:
   <GridLevel>k__BackingField: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
   <TurnMax>k__BackingField: 30
   <Events>k__BackingField:
-  - Turn: 5
-    EventType: 3
+  - Turn: 6
+    EventType: 0
+    SpawnCellIndex: 2
+  - Turn: 6
+    EventType: 0
+    SpawnCellIndex: 3
+  - Turn: 11
+    EventType: 0
     SpawnCellIndex: 1
   <TrapToUse>k__BackingField:
     Net: 1
-    Log: 1
+    Log: 0
     Blocker: 1
-  <HasTutorial>k__BackingField: 1
+  <HasTutorial>k__BackingField: 0
   <TutoImage>k__BackingField: {fileID: -8775281181512184826, guid: 410f04c63a4349a47bbc6f3125e031df, type: 3}
   <TutoText>k__BackingField: 'c''est le texte test en fait ????
 
