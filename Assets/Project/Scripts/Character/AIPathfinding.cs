@@ -21,9 +21,12 @@ public class AIPathfinding
     static Vector2Int[] _posTests = {new Vector2Int(0, 1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(1, 0) };
     static Face[] _faceTests = {Face.Up, Face.Down, Face.Left, Face.Right };
 
+    static Tile _depart;
+
     public static List<Vector2Int> CreatePath(Tile depart, Tile target, List<Vector2Int> notPassOn = null)
     {
         _target = target;
+        _depart = depart;
         _paths = new List<List<Vector2Int>>() { new List<Vector2Int>() };
         _notPassOn = notPassOn;
 
@@ -50,6 +53,7 @@ public class AIPathfinding
 
             if (path.Count < selectPath.Count) selectPath = path;
         }
+
 
         return selectPath;
     }
@@ -89,19 +93,26 @@ public class AIPathfinding
                 }
                 else
                 {
-                    int distance = Mathf.Abs(_target.CellData.GridPosition.x - tile.CellData.GridPosition.x)
-             + Mathf.Abs(_target.CellData.GridPosition.y - tile.CellData.GridPosition.y);
-
-                    if (distance < lastDistance)
+                    if (nextTile == _depart)
                     {
-                        lastDistance = distance;
-                        searchTiles.Clear();
                         searchTiles.Add(tile);
                     }
-                    else if (distance == lastDistance || searchTiles.Count == 0)
+                    else
                     {
-                        lastDistance = distance;
-                        searchTiles.Add(tile);
+                        int distance = Mathf.Abs(_target.CellData.GridPosition.x - tile.CellData.GridPosition.x)
+                            + Mathf.Abs(_target.CellData.GridPosition.y - tile.CellData.GridPosition.y);
+
+                        if (distance < lastDistance)
+                        {
+                            lastDistance = distance;
+                            searchTiles.Clear();
+                            searchTiles.Add(tile);
+                        }
+                        else if (distance == lastDistance || searchTiles.Count == 0)
+                        {
+                            lastDistance = distance;
+                            searchTiles.Add(tile);
+                        }
                     }
                 }
             }

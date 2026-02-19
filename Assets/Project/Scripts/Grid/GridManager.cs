@@ -113,7 +113,7 @@ public class GridManager : MonoBehaviour
 
             if (tile.Value.GetRoomData() == data) continue;
 
-            if (tile.Value.CellData.Entity)
+            if (tile.Value.CellData.Entities.Count > 0)
             {
                 data = tile.Value.GetRoomData();
             }
@@ -122,7 +122,7 @@ public class GridManager : MonoBehaviour
             {
 
                 if (sprite == null) continue;
-                sprite.color = new Color(1, 1, 1, tile.Value.CellData.Entity ? 0.8f : 1);
+                sprite.color = new Color(1, 1, 1, tile.Value.CellData.Entities.Count > 0 ? 0.8f : 1);
             }
         }
     }

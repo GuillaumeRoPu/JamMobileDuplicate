@@ -57,10 +57,10 @@ public class Entity : MonoBehaviour
     {
         if (_currentTile)
         {
-            _currentTile.CellData.Entity = null;
+            _currentTile.CellData.Entities.Remove(this);
         }
         _currentTile = GridManager.Tiles[tile];
-        _currentTile.CellData.Entity = this;
+        _currentTile.CellData.Entities.Add(this);
     }
 
     public void SetPath(List<Vector2Int> path, System.Action WhenReached = null)

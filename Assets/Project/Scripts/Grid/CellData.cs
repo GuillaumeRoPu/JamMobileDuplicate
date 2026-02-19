@@ -1,5 +1,6 @@
 using GooglePlayGames;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Face
@@ -36,7 +37,7 @@ public class CellData
     public Face DoorPosition = Face.None;
     public bool HasDoor = false;
     public bool DoorKeyClosed;
-    public Entity Entity;
+    public List<Entity> Entities = new List<Entity>();
     public bool hasAMaterial = false;
 
     public bool CanPass(Face face, CellData originalCell)
@@ -73,7 +74,7 @@ public class CellData
 
     public bool HasEntity()
     {
-        if (Entity != null)
+        if (Entities.Count > 0)
         {
             return true;
         }
@@ -188,16 +189,30 @@ public class CellData
 
     public void KillEntity()
     {
-        if (Entity && tileTrap)
+        if (Entities.Count > 0 && tileTrap)
         {
-            Entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
-            if (tileTrap.TrapMode == Trap.TrapType.Single)
+            List<Entity> deadEntities = new List<Entity>();
+            foreach (Entity entity  in Entities)
             {
-                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_the_prey_in_the_net);
+                if (GameManager.Of.Echo != entity)
+                {
+                    entity.SendDead(tileTrap.TrapMode == Trap.TrapType.Single);
+                    deadEntities.Add(entity);
+
+                    if (tileTrap.TrapMode == Trap.TrapType.Single)
+                    {
+                        PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_the_prey_in_the_net);
+                    }
+
+                    GameManager.Of.KillAnEntity(entity);
+                }
+            }
+
+            foreach (Entity dead in deadEntities)
+            {
+                Entities.Remove(dead);
             }
         }
-
-        GameManager.Of.KillAnEntity(Entity);
     }
 
     public void ActivateTileTrap(Entity entity)
@@ -267,7 +282,7 @@ public class CellData
     /// <summary>
     /// Returns a bool that tells you wether you can place a trap on the specified tile
     /// </summary>
-    public bool CanPlaceTrap(Trap newTrap)
+    public bool CanPlaceTrap(Trap newTrap, bool main = true)
     {
         if (newTrap.TrapMode == Trap.TrapType.Single)
         {
@@ -282,7 +297,7 @@ public class CellData
         }
         else if (newTrap.TrapMode == Trap.TrapType.Multiple)
         {
-            if (!HasATileTrap() && !HasEntity() && GridManager.Tiles[GridPosition].IsInARoom())
+            if (!HasATileTrap() && (HasEntity() && !main || !HasEntity()) && GridManager.Tiles[GridPosition].IsInARoom())
             {
                 return true;
             }
