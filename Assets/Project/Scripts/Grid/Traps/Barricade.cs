@@ -8,14 +8,12 @@ public class Barricade : Trap
     public override void ActivateTrap(Entity entity)
     {
         base.ActivateTrap(entity);
-        if (entity != GameManager.Of.Player)
+        Debug.Log("rfe");
+        _currentHealth -= 1;
+        if (_currentHealth <= 0)
         {
-            _currentHealth -= 1;
-            if (_currentHealth <= 0)
-            {
-                GridManager.Tiles[_position].GiveTileAMaterial();
-                DestroyTrap();
-            }
+            GridManager.Tiles[_position].GiveTileAMaterial();
+            DestroyTrap();
         }
     }
 

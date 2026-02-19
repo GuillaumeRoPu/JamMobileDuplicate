@@ -164,6 +164,9 @@ namespace Frynity.Gen
 
                         light1.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 0.65f);
                         light2.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 1.3f);
+
+                        light1.transform.SetParent(GameManager.Of.LightParent.transform);
+                        light2.transform.SetParent(GameManager.Of.LightParent.transform);
                     }
                     else
                     {
@@ -189,6 +192,9 @@ namespace Frynity.Gen
 
                         light1.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 0.65f);
                         light2.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 1.3f);
+
+                        light1.transform.SetParent(GameManager.Of.LightParent.transform);
+                        light2.transform.SetParent(GameManager.Of.LightParent.transform);
                     }
                     else
                     {

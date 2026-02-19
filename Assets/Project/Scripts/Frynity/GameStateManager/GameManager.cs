@@ -47,12 +47,14 @@ public class GameManager : MonoBehaviour
     public void AddObjectRespectZOrder(GameObject obj) { _other.Add(obj); }
 
     [Header("Room Design")]
+    [SerializeField] GameObject _lightParent;
     [SerializeField] GameObject _doorLight;
     [SerializeField] Sprite _sideInWallSprite;
     [SerializeField] Sprite _sideInDoorWallSprite;
     [SerializeField] Sprite _sideOutWallSprite;
     [SerializeField] Sprite[] _outWallSprite;
     [SerializeField] Sprite[] _outDoorWallSprite;
+    public GameObject LightParent => _lightParent;
     public GameObject DoorLight => _doorLight;
     public Sprite SideInWall => _sideInWallSprite;
     public Sprite SideInDoorWall => _sideInDoorWallSprite;
@@ -133,20 +135,27 @@ public class GameManager : MonoBehaviour
         Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
     }
 
-    public void SpawnZombie(Vector2Int spawnPos, int turnBeforeMove = 2)
+    public void SpawnZombie(List<Vector2Int> spawnPos, int turnBeforeMove = 2)
     {
-        GameObject zombie = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
-        _zombieEntity.Add(zombie.GetComponent<Entity>());
-        _zombieEntity[^1].SetTurnBeforeMove(turnBeforeMove);
-        _zombieEntity[^1].SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[^1];
+        Vector2Int last = new Vector2Int(-100, -100);
+        foreach (var spawn in spawnPos)
+        {
+            GameObject zombie = Instantiate(_zombie, (Vector2)spawn * Grid.TileSize, Quaternion.identity);
+            _zombieEntity.Add(zombie.GetComponent<Entity>());
+            _zombieEntity[^1].SetTurnBeforeMove(last == spawn ? turnBeforeMove + 1 : turnBeforeMove);
+            _zombieEntity[^1].SetCurrentTile(spawn);
+            Grid.GetTileAtPosition(spawn).CellData.Entity = _zombieEntity[^1];
+
+            last = spawn;
+        }
+        
     }
 
     public void SpawnEcho(Vector2Int playerPos)
     {
         if (_echoEntity)
         {
-            Debug.LogError("Echo d�j� cr�e");
+            Debug.LogError("Echo deja cree");
             return;
         }
         Vector2Int pos = playerPos + Vector2Int.left;
@@ -164,12 +173,15 @@ public class GameManager : MonoBehaviour
         _echoEntity = null;
     }
 
-    public void SpawnWitch(Vector2Int spawnPos)
+    public void SpawnWitch(List<Vector2Int> spawnPos)
     {
-        GameObject witch = Instantiate(_witch, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
-        _witchEntity.Add(witch.GetComponent<Entity>());
-        _witchEntity[^1].SetCurrentTile(spawnPos);
-        Grid.GetTileAtPosition(spawnPos).CellData.Entity = _witchEntity[^1];
+        foreach (var spawn in spawnPos)
+        {
+            GameObject witch = Instantiate(_witch, (Vector2)spawn * Grid.TileSize, Quaternion.identity);
+            _witchEntity.Add(witch.GetComponent<Entity>());
+            _witchEntity[^1].SetCurrentTile(spawn);
+            Grid.GetTileAtPosition(spawn).CellData.Entity = _witchEntity[^1];
+        }
     }
 
     public void UpdateZOrder(bool changeStatic = true)
@@ -293,6 +305,12 @@ public class GameManager : MonoBehaviour
 
         if (_playerEntity)
             Destroy(_playerEntity.gameObject);
+
+
+        for (int i = 0; i < _lightParent.transform.childCount; i++)
+        {
+            Destroy(_lightParent.transform.GetChild(i).gameObject);
+        }
 
         Grid.EraseAll();
     }

@@ -149,7 +149,7 @@ public class CellData
         doorTrap.onDestroy -= RemoveDoorTrap;
         doorTrap = null;
         hasADoorTrap = false;
-        Debug.Log("Removed a trap at : X = " + GridPosition.x + " | Y = " + GridPosition.y);
+        Debug.Log("Removed a door trap at : X = " + GridPosition.x + " | Y = " + GridPosition.y);
     }
 
     public bool HasATileTrap()
@@ -159,7 +159,31 @@ public class CellData
 
     public bool HasADoorTrap()
     {
-        return hasADoorTrap;
+        if (DoorPosition == Face.None) return false;
+
+        var pos = GridPosition + GridManager.GetDirection(DoorPosition);
+
+        if (!GridManager.Tiles.ContainsKey(pos)) return false;
+
+        return GridManager.Tiles[pos].CellData.hasADoorTrap || hasADoorTrap;
+    }
+
+    public bool HasADoorTrapToFace(Face face)
+    {
+        if (face == Face.None) return false;
+
+        Face receptFace = face == Face.Up ? Face.Down :
+           face == Face.Left ? Face.Right :
+           face == Face.Down ? Face.Up :
+           face == Face.Right ? Face.Left : Face.None;
+
+        var pos = GridPosition + GridManager.GetDirection(face);
+
+        if (!GridManager.Tiles.ContainsKey(pos)) return false;
+
+        if (GridManager.Tiles[pos].CellData.DoorPosition != receptFace) return false;
+
+        return GridManager.Tiles[pos].CellData.hasADoorTrap || hasADoorTrap;
     }
 
     public void KillEntity()
@@ -186,7 +210,7 @@ public class CellData
 
     public void ActivateDoorTrap(Entity entity)
     {
-        if (HasADoorTrap())
+        if (hasADoorTrap)
         {
             doorTrap.ActivateTrap(entity);
         }

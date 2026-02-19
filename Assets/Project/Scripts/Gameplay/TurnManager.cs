@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
@@ -107,8 +108,11 @@ public class TurnManager : MonoBehaviour
 
         }
 
+        int turn = -1;
         foreach (var evnt in _level.Events)
         {
+            if (evnt.Turn == turn) continue;
+
             if (evnt.Turn < 3)
             {
                 if (evnt.EventType == EventType.Zombie)
@@ -117,6 +121,7 @@ public class TurnManager : MonoBehaviour
                     CalculZombiePath(new List<Vector2Int>() { GameManager.Of.Player.CurrentTile.CellData.GridPosition });
                 }
             }
+            turn = evnt.Turn;
         }
 
         _lastEventTurn = _level.Events[_level.Events.Length - 1].Turn;
@@ -153,10 +158,10 @@ public class TurnManager : MonoBehaviour
 
             zombie.PassTurn();
 
-            if (GridManager.Tiles[zombie.NextPath].CellData.HasADoorTrap())
+            if (GridManager.Tiles[zombie.CurrentPath].CellData.HasADoorTrap())
             {
                 zombie.SendAttack();
-                GridManager.Tiles[zombie.NextPath].CellData.ActivateDoorTrap(zombie);
+                GridManager.Tiles[zombie.CurrentPath].CellData.ActivateDoorTrap(zombie);
             }
             else if (zombie.NextPath == GameManager.Of.Player.NextPath)
             {
@@ -184,8 +189,10 @@ public class TurnManager : MonoBehaviour
 
         _ui.UpdateTurn(_durationTurn, _currentTurn, _level.TurnMax);
 
+        int turn = -1;
         foreach (var evnt in _level.Events)
         {
+            if (turn == evnt.Turn) continue;
             if (evnt.Turn == _currentTurn + 2)
             {
                 if (evnt.EventType == EventType.Zombie)
@@ -218,6 +225,8 @@ public class TurnManager : MonoBehaviour
                     GameManager.Of.SpawnWitch(_level.GetNextSpawn(_currentTurn));
                 }
             }
+
+            turn = evnt.Turn;
         }
 
         WaitEndOfTurn();
@@ -282,7 +291,8 @@ public class TurnManager : MonoBehaviour
                 {
                     if (GridManager.Tiles[tile].CellData.HasADoorTrap())
                     {
-                        GridManager.Tiles[tile].CellData.RemoveDoorTrap();
+                        GridManager.Tiles[tile].CellData.ActivateDoorTrap(GameManager.Of.Witches[w]);
+                        GridManager.Tiles[tile].CellData.ActivateDoorTrap(GameManager.Of.Witches[w]);
                     }
                 }
             }
@@ -358,7 +368,7 @@ public class TurnManager : MonoBehaviour
                     newStop.Add(witch.CurrentTile.CellData.GridPosition);
                 }
 
-                List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[s], GridManager.Tiles[playerPath[i]], newStop);
+                List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[tiles[tiles.Count - 1]], GridManager.Tiles[playerPath[i]], newStop);
 
                 if (path.Count <= 1) break;
                 bool pass = false;
@@ -625,9 +635,9 @@ public class TurnManager : MonoBehaviour
         ResetFeedbackZombie();
         if (spawn)
         {
-            for (int i = 1; i < _nextSpawnTiles.Count; i++)
+            for (int i = 0; i < _nextSpawnTiles.Count; i++)
             {
-                GameManager.Of.Zombies[^i].SetPath(_spawnPaths[i - 1]);  
+                GameManager.Of.Zombies[^(_nextSpawnTiles.Count - i)].SetPath(_spawnPaths[i]);  
             }
         }
         else
@@ -714,20 +724,28 @@ public class TurnManager : MonoBehaviour
         _warnings.Clear();
         _nextSpawnTiles.Clear();
 
+        int turn = 0;
         foreach (var evnt in _level.Events)
         {
+            if (turn == evnt.Turn) continue;
+
             if (evnt.EventType.HasFlag(EventType.Zombie) || evnt.EventType.HasFlag(EventType.Witch))
             {
                 if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn)
                 {
-                    _warnings.Add(Instantiate(_spawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
-
-                    if (evnt.EventType.HasFlag(EventType.Zombie))
+                    foreach (var spawn in _level.GetNextSpawn(evnt.Turn))
                     {
-                        _nextSpawnTiles.Add(_level.GetNextSpawn(evnt.Turn));
+                        _warnings.Add(Instantiate(_spawnWarning, (Vector2)spawn * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
+
+                        if (evnt.EventType.HasFlag(EventType.Zombie))
+                        {
+                            _nextSpawnTiles.Add(spawn);
+                        }
                     }
                 }
             }
+
+            turn = evnt.Turn;
         }
     }
 

@@ -2,12 +2,15 @@ using GooglePlayGames;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Player : MonoBehaviour
 {
     [SerializeField, Range(1, 10)] int _maxTurnToMove = 1;
     [SerializeField] GameObject _pathOver;
+    [SerializeField] GameObject _destroyTrap;
     List<GameObject> _pathOverList = new List<GameObject>();
+    List<GameObject> _destroyTrapList = new List<GameObject>();
     int _addListCount;
  
     List<GameObject> _feedbacks = new List<GameObject>();
@@ -28,7 +31,7 @@ public class Player : MonoBehaviour
         
         if (_materials >= 3)
         {
-            PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_greedy, 100f, null);
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_greedy);
         }
     }
     public void RemoveMaterials(int nb) { _materials -= nb; MaterialChange?.Invoke(); _countMaterialText.text = _materials.ToString(); }
@@ -39,6 +42,8 @@ public class Player : MonoBehaviour
     List<Face> _faceForPlaceTrap = new List<Face>();
     Trap _trap;
     int _price;
+
+    List<Vector2Int> _faceForDestroyTrap = new List<Vector2Int>();
 
     private void Start()
     {
@@ -57,7 +62,8 @@ public class Player : MonoBehaviour
                 {
                     if (_last.CellData.hasNeighbour(GridManager.Tiles[tile].CellData.GridPosition))
                     {
-                        if (GridManager.Tiles[tile].CellData.CanPass(GridManager.GetFace(tile - _selectPath[_selectPath.Count - 1]), GridManager.Tiles[_selectPath[_selectPath.Count - 1]].CellData))
+                        if (GridManager.Tiles[tile].CellData.CanPass(GridManager.GetFace(tile - _selectPath[^1]), GridManager.Tiles[_selectPath[^1]].CellData)
+                            && !GridManager.Tiles[_selectPath[^1]].CellData.HasADoorTrapToFace(GridManager.GetFace(tile - _selectPath[^1])))
                         {
                             if (_selectPath.Count - 1 == _maxTurnToMove) return;
                             _last = GridManager.Tiles[tile];
@@ -324,6 +330,8 @@ public class Player : MonoBehaviour
             Destroy(over);
         }
         _pathOverList.Clear();
+
+        CheckForBarricade();
     }
 
     public void ChooseTrapToPlace(Trap trap, int price)
@@ -360,6 +368,7 @@ public class Player : MonoBehaviour
             }
             else if (_addListCount > 0)
             {
+                Debug.Log(_addListCount);
                 for (int j = 0; j < _addListCount; j++)
                 {
                     Destroy(_pathOverList[^1]);
@@ -413,6 +422,54 @@ public class Player : MonoBehaviour
         _faceForPlaceTrap.Clear();
 
         ReachedTarget();
+    }
+
+    void ResetTrapsDestroy()
+    {
+        _faceForDestroyTrap.Clear();
+
+        foreach (GameObject over in _destroyTrapList)
+        {
+            Destroy(over);
+        }
+        _destroyTrapList.Clear();
+    }
+
+    void CheckForBarricade()
+    {
+        ResetTrapsDestroy();
+        if (GameManager.Of.Player.CurrentTile.CellData.HasADoorTrap())
+        {
+            var pos = GameManager.Of.Player.CurrentTile.CellData.GridPosition;
+
+            _destroyTrapList.Add(Instantiate(_destroyTrap, (Vector2)(pos + 
+                GridManager.GetDirection(GameManager.Of.Player.CurrentTile.CellData.DoorPosition)) * 
+                GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
+
+            _faceForDestroyTrap.Add(pos + GridManager.GetDirection(GameManager.Of.Player.CurrentTile.CellData.DoorPosition));
+        }
+    }
+
+    public void DestroyBarricade(Vector2Int tile)
+    {
+        if (!GameManager.Of.Turn.CanPlay || _selected) return;
+
+        if (_faceForDestroyTrap.Contains(tile))
+        {
+            var trap = GridManager.Tiles[tile].CellData.hasADoorTrap ? tile :
+                tile + GridManager.GetDirection(GridManager.Tiles[tile].CellData.DoorPosition);
+
+            GridManager.Tiles[trap].CellData.ActivateDoorTrap(GameManager.Of.Player);
+            GridManager.Tiles[trap].CellData.ActivateDoorTrap(GameManager.Of.Player);
+            _faceForDestroyTrap.Remove(tile);
+            ResetTrapsDestroy();
+        }
+
+        if (GameManager.Of.Player.CurrentTile.ContainsMaterial())
+        {
+            GameManager.Of.Player.CurrentTile.RemoveMaterial();
+            AddMaterial();
+        }
     }
 
     private bool CheckIfTrapCanBePlaced(Trap newTrap, Vector2Int playerPosition, Face direction, bool placeTrap)
@@ -485,7 +542,6 @@ public class Player : MonoBehaviour
                         break;
                 }
                 var trapPosition = playerPosition + offset;
-                Debug.Log("Pos : X = " + trapPosition.x + " | Y = " + trapPosition.y);
                 bool canPose = true;
 
                 if (GridManager.Tiles.ContainsKey(trapPosition))
@@ -527,7 +583,6 @@ public class Player : MonoBehaviour
                             break;
                     }
                     var trapPositionBis = playerPosition + newpos + offset;
-                    Debug.Log("Pos : X = " + trapPositionBis.x + " | Y = " + trapPositionBis.y);
                     if (GridManager.Tiles.ContainsKey(trapPositionBis))
                     {
                         if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(newTrap)

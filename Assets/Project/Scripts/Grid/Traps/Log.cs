@@ -9,9 +9,24 @@ public class Log : Trap
         if (entity.CurrentTile.CellData.GridPosition == _position && entity != GameManager.Of.Player)
         {
             GridManager.Tiles[_position].CellData.KillEntity();
+
+            int nbEntity = 1;
             foreach(var pos in AdditionalPosition)
             {
                 GridManager.Tiles[pos].CellData.KillEntity();
+                if (GridManager.Tiles[pos].CellData.Entity)
+                {
+                    nbEntity++;
+                }
+            }
+
+            if (nbEntity == 1)
+            {
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_overkill);
+            }
+            else if (nbEntity == 3)
+            {
+                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_strike);
             }
             DestroyTrap();
         }

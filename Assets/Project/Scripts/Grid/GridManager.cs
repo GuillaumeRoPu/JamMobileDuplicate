@@ -55,6 +55,20 @@ public class GridManager : MonoBehaviour
             return Face.None;
     }
 
+    public static Vector2Int GetDirection(Face face)
+    {
+        if (face == Face.Right)
+            return Vector2Int.right;
+        if (face == Face.Left)
+            return Vector2Int.left;
+        if (face == Face.Up)
+            return Vector2Int.up;
+        if (face == Face.Down)
+            return Vector2Int.down;
+        else
+            return Vector2Int.zero;
+    }
+
 
     //Fills the whole grid with tiles depending on width and height, as well as the origin
 

@@ -23,32 +23,28 @@ public class LevelData : ScriptableObject
 
     [field: SerializeField, ShowIf(nameof(HasTutorial), false, true), TextArea] public string TutoText { get; private set; }
 
-    Dictionary<int, Vector2Int> _spawnTiles;
-    public Vector2Int GetNextSpawn(int turn)
+    Dictionary<int, List<Vector2Int>> _spawnTiles;
+    public List<Vector2Int> GetNextSpawn(int turn)
     {
         return _spawnTiles[turn];
     }
 
     public void Init()
     {
-        _spawnTiles = new Dictionary<int, Vector2Int>();
+        _spawnTiles = new Dictionary<int, List<Vector2Int>>();
         foreach (var evnt in Events)
         {
             if (evnt.EventType != EventType.Zombie && evnt.EventType != EventType.Witch) continue;
 
-            List<Vector2Int> tilesPos = new List<Vector2Int>();
-            foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
+            if (_spawnTiles.ContainsKey(evnt.Turn))
             {
-                CellData.SpawnPointType spawn = CellData.SpawnPointType.None;
-                GameManager.Of.Grid.GridLevelData.spawnPointsTiles.TryGetValue(posTile, out spawn);
-
-                if (spawn.HasFlag(CellData.SpawnPointType.Zombie) || spawn.HasFlag(CellData.SpawnPointType.Witch))
-                {
-                    tilesPos.Add(posTile);
-                }
+                _spawnTiles[evnt.Turn].Add(GameManager.Of.Grid.GridLevelData.keys[evnt.SpawnCellIndex]);
             }
-
-            _spawnTiles.Add(evnt.Turn, GameManager.Of.Grid.GridLevelData.keys[evnt.SpawnCellIndex]);
+            else
+            {
+                _spawnTiles.Add(evnt.Turn, new List<Vector2Int>() {
+                GameManager.Of.Grid.GridLevelData.keys[evnt.SpawnCellIndex] });
+            }
         }
     }
 }
