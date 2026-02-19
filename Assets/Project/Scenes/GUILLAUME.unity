@@ -934,7 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 0
-  _gridLevelData: {fileID: 11400000, guid: c7ad00c7b58718f4ca84d997f84a3935, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1279247409}
   _roomsParent: {fileID: 748570913}
@@ -943,7 +943,7 @@ MonoBehaviour:
   _camera: {fileID: 728178542}
   _coolColors: 0
   _coolColorsAnimated: 0
-  _spawnIndex: 1
+  _spawnIndex: 3
 --- !u!114 &96259453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -957,7 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurnManager
   _durationTurn: 1
-  _level: {fileID: 11400000, guid: fb31117501a5f6545b4342c1897f5997, type: 2}
+  _level: {fileID: 11400000, guid: 5c24956b82b4de342a135f6ac4bb86c8, type: 2}
   _player: {fileID: 1302320600}
   _zombiePathFeedback:
     Arrow: {fileID: 21300000, guid: 98b3c5748c94255459815cbf554df73a, type: 3}
@@ -1006,6 +1006,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   music:
+  - clip: {fileID: 8300000, guid: b780aff42e655ef4bbf5e26b02bfc92b, type: 3}
+    startTime: 0
+    endTime: 0
+    volume: 0.25
   - clip: {fileID: 8300000, guid: 5db319f36a71b714e8ef64ab469a9439, type: 3}
     startTime: 0
     endTime: 0
@@ -4198,13 +4202,13 @@ MonoBehaviour:
   _levelText: {fileID: 2129506714}
   _tutorialMenuManager: {fileID: 2005495764}
   _levels:
-  - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
+  - {fileID: 11400000, guid: 5c24956b82b4de342a135f6ac4bb86c8, type: 2}
   - {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
   - {fileID: 11400000, guid: fb31117501a5f6545b4342c1897f5997, type: 2}
   - {fileID: 11400000, guid: be6a4d1e94e7239458af033f3526fe33, type: 2}
   - {fileID: 11400000, guid: 88ccaa5b9eca0394fb4d57af4df4b26a, type: 2}
   - {fileID: 11400000, guid: f0fc9af0a1ca25e49a58d33a8a619072, type: 2}
-  - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
+  - {fileID: 11400000, guid: 5c24956b82b4de342a135f6ac4bb86c8, type: 2}
 --- !u!1 &801374713
 GameObject:
   m_ObjectHideFlags: 0
@@ -11763,7 +11767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
-  _levelCreationSteps: 0
+  _levelCreationSteps: 32
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1689348504}
   _roomsParent: {fileID: 727614965}
@@ -11779,8 +11783,8 @@ MonoBehaviour:
   _eraseGridHeight: 2
   _eraseGridOrigin: {x: -6, y: 0}
   _gridLevelData: {fileID: 0}
-  _spawnPointPosition: {x: 0, y: -2}
-  _spawnPointTypes: 8
+  _spawnPointPosition: {x: 3, y: 2}
+  _spawnPointTypes: 2
   _roomPrefab: {fileID: 1427111047931260316, guid: 99ab28a5c5bdce24590555307f5fcffa, type: 3}
   _roomPosition: {x: -3, y: -2}
   _eraseRoomPosition: {x: 13, y: 0}
