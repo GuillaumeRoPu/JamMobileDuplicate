@@ -161,7 +161,10 @@ public class TurnManager : MonoBehaviour
             if (GridManager.Tiles[zombie.CurrentPath].CellData.HasADoorTrap())
             {
                 zombie.SendAttack();
-                GridManager.Tiles[zombie.CurrentPath].CellData.ActivateDoorTrap(zombie);
+
+                var trap = GridManager.Tiles[zombie.CurrentPath].CellData.hasADoorTrap ? zombie.CurrentPath :
+                    zombie.NextPath;
+                GridManager.Tiles[trap].CellData.ActivateDoorTrap(zombie);
             }
             else if (zombie.NextPath == GameManager.Of.Player.NextPath)
             {
