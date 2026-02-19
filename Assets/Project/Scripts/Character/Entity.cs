@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -15,6 +16,11 @@ public class Entity : MonoBehaviour
     int _pathIndex;
     float _currentMoveTime;
     float _duration;
+
+    private bool _isDying = false;
+    private float _timePassed = 0;
+    private float _timeBeforeDead = 2;
+    private Material _shader;
 
     public bool IsMoving => _isMoving;
 
@@ -41,6 +47,10 @@ public class Entity : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
+        _shader = GetComponentInChildren<SpriteRenderer>().material;
+        _isDying = false;
+        _timePassed = 0;
+        _timeBeforeDead = 2;
     }
 
     public void SetCurrentTile(Vector2Int tile)
@@ -94,6 +104,12 @@ public class Entity : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (_isDying)
+        {
+            _timePassed += Time.deltaTime;
+            _shader.SetFloat("_Dissolve_amount", Mathf.Clamp(_timePassed / _timeBeforeDead, 0, 1));
         }
     }
 
@@ -149,4 +165,10 @@ public class Entity : MonoBehaviour
         _animator.SetTrigger("Attack");
     }
 
+    public async void Kill()
+    {
+        _isDying = true;
+        await Awaitable.WaitForSecondsAsync(_timeBeforeDead);
+        Destroy(gameObject);
+    }
 }
