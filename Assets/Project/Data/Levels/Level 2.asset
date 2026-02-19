@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   <GridLevel>k__BackingField: {fileID: 11400000, guid: f34ae6b78f502ea4db66123c70931b54, type: 2}
-  <TurnMax>k__BackingField: 30
+  <TurnMax>k__BackingField: 20
   <Events>k__BackingField:
   - Turn: 6
     EventType: 0

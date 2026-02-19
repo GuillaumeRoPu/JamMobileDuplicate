@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] SoundData _zombieSounds;
     public SoundData ZombieAudio => _zombieSounds;
 
+    public AudioSource Music;
+
     [Header("Animation")]
     [SerializeField] Animator _doorAnim;
 
@@ -260,21 +262,11 @@ public class GameManager : MonoBehaviour
 
     public async void WinLevel()
     {
-        await Awaitable.WaitForSecondsAsync(4);
-
         if (_currentLevel == SaveManager.Of.Level.LevelUnlock)
         {
             SaveManager.Of.Level.LevelUnlock++;
             SaveManager.Of.SaveGame();
         }
-        QuitToHome();
-    }
-
-    public async void LoseLevel()
-    {
-        await Awaitable.WaitForSecondsAsync(4);
-
-        QuitToHome();
     }
 
     public void EndLevel()

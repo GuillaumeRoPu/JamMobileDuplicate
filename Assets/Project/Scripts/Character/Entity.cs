@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour
     private bool _isDying = false;
     private float _timePassed = 0;
     private float _timeBeforeDead = 2;
+    [SerializeField] private Material _shaderDisolve;
     private Material _shader;
 
     public bool IsMoving => _isMoving;
@@ -47,7 +48,6 @@ public class Entity : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
-        _shader = GetComponentInChildren<SpriteRenderer>().material;
         _isDying = false;
         _timePassed = 0;
         _timeBeforeDead = 2;
@@ -168,6 +168,7 @@ public class Entity : MonoBehaviour
     public async void Kill()
     {
         _isDying = true;
+        _shader = GetComponentInChildren<SpriteRenderer>().material = _shaderDisolve;
         await Awaitable.WaitForSecondsAsync(_timeBeforeDead);
         Destroy(gameObject);
     }

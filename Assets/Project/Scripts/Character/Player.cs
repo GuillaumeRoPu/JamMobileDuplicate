@@ -649,7 +649,7 @@ public class Player : MonoBehaviour
                                 else if (dir == Face.Down)
                                 {
                                     renderer.sprite = newTrap.UpSprite;
-                                    trap.transform.position = ((Vector2)trapPosition + Vector2.down + Vector2.right / 2) * GameManager.Of.Grid.TileSize;
+                                    trap.transform.position = ((Vector2)trapPosition + Vector2.right / 2) * GameManager.Of.Grid.TileSize;
                                 }
                                 allPositions.Add(trapPosition);
                                 trap.TrapPlaced(trapPosition, GridManager.Tiles[trapPosition].CellData.DoorPosition);

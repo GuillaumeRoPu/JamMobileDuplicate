@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class MenuState : GameState
 {
-    AudioSource music;
+
     public override void Enter()
     {
         Camera.main.orthographicSize = 5;
         Camera.main.transform.position = new Vector3(0, 0, -10);
 
-        music = AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
+        if (GameManager.Of.Music)
+        {
+            GameObject.Destroy(GameManager.Of.Music);
+        }
+        GameManager.Of.Music = AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
 
         GameManager.Of.ShowMenu(true);
         GameManager.Of.ShowSettings(false);
@@ -29,6 +33,7 @@ public class MenuState : GameState
 
     public override void Exit()
     {
-        GameObject.Destroy(music.gameObject);
+        GameObject.Destroy(GameManager.Of.Music.gameObject);
+        GameManager.Of.Music = null;
     }
 }

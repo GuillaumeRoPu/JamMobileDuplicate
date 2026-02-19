@@ -108,7 +108,7 @@ public class GridManager : MonoBehaviour
             {
 
                 if (sprite == null) continue;
-                sprite.color = new Color(1, 1, 1, tile.Value.CellData.Entity ? 0.5f : 1);
+                sprite.color = new Color(1, 1, 1, tile.Value.CellData.Entity ? 0.8f : 1);
             }
         }
     }
