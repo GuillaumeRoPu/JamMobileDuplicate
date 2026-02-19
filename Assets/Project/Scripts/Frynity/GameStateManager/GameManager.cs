@@ -47,11 +47,13 @@ public class GameManager : MonoBehaviour
     public void AddObjectRespectZOrder(GameObject obj) { _other.Add(obj); }
 
     [Header("Room Design")]
+    [SerializeField] GameObject _doorLight;
     [SerializeField] Sprite _sideInWallSprite;
     [SerializeField] Sprite _sideInDoorWallSprite;
     [SerializeField] Sprite _sideOutWallSprite;
     [SerializeField] Sprite[] _outWallSprite;
     [SerializeField] Sprite[] _outDoorWallSprite;
+    public GameObject DoorLight => _doorLight;
     public Sprite SideInWall => _sideInWallSprite;
     public Sprite SideInDoorWall => _sideInDoorWallSprite;
     public Sprite SideOutWall => _sideOutWallSprite;

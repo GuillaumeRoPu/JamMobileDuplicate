@@ -4448,6 +4448,7 @@ Transform:
   - {fileID: 45757940}
   - {fileID: 691589960}
   - {fileID: 917632381}
+  - {fileID: 1384027262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815601001
@@ -4607,11 +4608,11 @@ MonoBehaviour:
   _levelText: {fileID: 1728141873}
   _tutorialMenuManager: {fileID: 0}
   _levels:
-  - {fileID: 11400000, guid: f0fc9af0a1ca25e49a58d33a8a619072, type: 2}
   - {fileID: 11400000, guid: 8d399014ef57a3a41afa9c23f9ed6dbe, type: 2}
   - {fileID: 11400000, guid: fb31117501a5f6545b4342c1897f5997, type: 2}
   - {fileID: 11400000, guid: be6a4d1e94e7239458af033f3526fe33, type: 2}
   - {fileID: 11400000, guid: 88ccaa5b9eca0394fb4d57af4df4b26a, type: 2}
+  - {fileID: 11400000, guid: f0fc9af0a1ca25e49a58d33a8a619072, type: 2}
   - {fileID: 11400000, guid: 2aadbf9e93a918d4992c2d82d62e0fa3, type: 2}
   - {fileID: 11400000, guid: bb69b0f01e41d0c4faaa5c1162f39b35, type: 2}
   - {fileID: 11400000, guid: 16071e7f54b10c24697c5a1eb55fcf06, type: 2}
@@ -5738,15 +5739,16 @@ MonoBehaviour:
   _settings: {fileID: 682580166}
   _rooms: {fileID: 1233790246}
   _other: []
-  _sideInWallSprite: {fileID: -253279086, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
-  _sideInDoorWallSprite: {fileID: -1729574527, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
-  _sideOutWallSprite: {fileID: -1567378635, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
+  _doorLight: {fileID: 8307084718305683608, guid: 60cbfc234858e674897669866c73cb37, type: 3}
+  _sideInWallSprite: {fileID: -464147789, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
+  _sideInDoorWallSprite: {fileID: 1200830277, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
+  _sideOutWallSprite: {fileID: -790151279, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
   _outWallSprite:
-  - {fileID: 1854727404, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
-  - {fileID: 1754163234, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
-  - {fileID: 649323952, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
+  - {fileID: 1531261191, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
+  - {fileID: 1647128786, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
+  - {fileID: 2059998347, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
   _outDoorWallSprite:
-  - {fileID: 258483510, guid: 19345492d0a06ef47bb068c88d441bff, type: 3}
+  - {fileID: -1667023556, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   _doorAnim: {fileID: 93771814}
   _turnManager: {fileID: 1155825358}
@@ -7349,6 +7351,80 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &1384027261
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 808652892}
+    m_Modifications:
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835668563158723254, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_Name
+      value: Win_particle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835668563158723254, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8024375165649644972, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8024375165649644972, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -493644115
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+--- !u!4 &1384027262 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7083425849396102086, guid: ec2e58f83c6b43a49b7e23db90aff9cf, type: 3}
+  m_PrefabInstance: {fileID: 1384027261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1398121530
 GameObject:
   m_ObjectHideFlags: 0

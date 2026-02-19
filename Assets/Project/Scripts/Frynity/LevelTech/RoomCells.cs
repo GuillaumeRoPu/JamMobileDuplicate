@@ -137,6 +137,12 @@ namespace Frynity.Gen
 
         public void CreateWalls()
         {
+            foreach (var sprite in _renderers)
+            {
+                sprite.renderer.sprite = _assets.Grounds[Random.Range(0, _assets.Grounds.Length)];
+                sprite.renderer.sortingLayerName = "Ground";
+            }
+
             GameObject wallParent = new GameObject("Walls");
             wallParent.transform.SetParent(transform);
             Vector2Int cellRoomPos = Vector2Int.FloorToInt((Vector2)transform.position / GameManager.Of.Grid.TileSize);
@@ -152,6 +158,12 @@ namespace Frynity.Gen
                     if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Right)
                     {
                         sprite = GameManager.Of.SideInDoorWall;
+
+                        var light1 = Instantiate(GameManager.Of.DoorLight);
+                        var light2 = Instantiate(GameManager.Of.DoorLight);
+
+                        light1.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 0.65f);
+                        light2.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 1.3f);
                     }
                     else
                     {
@@ -171,6 +183,12 @@ namespace Frynity.Gen
                     if (GridManager.Tiles[worldPos].CellData.DoorPosition == Face.Left)
                     {
                         sprite = GameManager.Of.SideInDoorWall;
+
+                        var light1 = Instantiate(GameManager.Of.DoorLight);
+                        var light2 = Instantiate(GameManager.Of.DoorLight);
+
+                        light1.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 0.65f);
+                        light2.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 1.3f);
                     }
                     else
                     {
@@ -227,6 +245,12 @@ namespace Frynity.Gen
         void SpawnWall(Sprite sprite, Vector2 cellPos, bool side, Transform parent, Tile tileWallPos = null, bool flipX = false)
         {
             GameObject go = new GameObject(side ? "Side Wall" : "Wall");
+            if (side)
+            {
+                Vector3 rotation = go.transform.localEulerAngles;
+                rotation.z = 90;
+                go.transform.localEulerAngles = rotation;
+            }
             go.transform.parent = gameObject.transform;
             go.transform.position = cellPos;
             go.transform.localScale = Vector3.one * GameManager.Of.Grid.TileSize;
@@ -234,7 +258,7 @@ namespace Frynity.Gen
             SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
             renderer.sortingLayerName = "Playground";
             renderer.sprite = sprite;
-            renderer.flipX = flipX;
+            renderer.flipY = flipX;
 
             if (tileWallPos != null)
             {

@@ -53,6 +53,8 @@ public class TurnManager : MonoBehaviour
     List<List<Vector2Int>> _witchAllTilePaths = new List<List<Vector2Int>>();
     List<List<Vector2Int>> _witchPaths = new List<List<Vector2Int>>();
 
+    List<Vector2> _nextSpawnTiles = new List<Vector2>();
+
     public void Init()
     {
         _level.Init();
@@ -183,7 +185,8 @@ public class TurnManager : MonoBehaviour
                 {
                     if (_warnings.Count > 0)
                     {
-                        Destroy(_warnings[0]);
+                        ZombieTurn();
+                        Destroy(_warnings[0]); 
                         _warnings.RemoveAt(0);
                     }
                 }
@@ -630,6 +633,7 @@ public class TurnManager : MonoBehaviour
             Destroy(go);
         }
         _warnings.Clear();
+        _nextSpawnTiles.Clear();
 
         foreach (var evnt in _level.Events)
         {
@@ -638,6 +642,11 @@ public class TurnManager : MonoBehaviour
                 if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn)
                 {
                     _warnings.Add(Instantiate(_spawnWarning, (Vector2)_level.GetNextSpawn(evnt.Turn) * GameManager.Of.Grid.TileSize + new Vector2(0.5f, 0.5f), Quaternion.identity));
+
+                    if (evnt.EventType.HasFlag(EventType.Zombie))
+                    {
+                        _nextSpawnTiles.Add(_level.GetNextSpawn(evnt.Turn));
+                    }
                 }
             }
         }
