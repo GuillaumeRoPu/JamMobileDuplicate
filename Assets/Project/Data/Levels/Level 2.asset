@@ -26,7 +26,7 @@ MonoBehaviour:
     Log: 0
     Blocker: 0
   <HasTutorial>k__BackingField: 1
-  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoImage>k__BackingField: {fileID: -8663269436457536251, guid: e4e672c3e356eaf498704a17f04832da, type: 3}
   <TutoText>k__BackingField: "On top of your screen is a timeline that shows when
     zombies are coming. \r\nYou\u2019ll have to manage your resources in order to
     take care of multiple of them. On your right you\u2019ll be able to see how many
