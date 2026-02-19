@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField, Range(1, 10)] int _maxTurnToMove = 1;
     [SerializeField] GameObject _pathOver;
     List<GameObject> _pathOverList = new List<GameObject>();
+    int _addListCount;
  
     List<GameObject> _feedbacks = new List<GameObject>();
     List<Vector2Int> _diffFeedbacks = new List<Vector2Int>();
@@ -357,6 +358,16 @@ public class Player : MonoBehaviour
                     _faceForPlaceTrap.Add(faces[i]);
                 }
             }
+            else if (_addListCount > 0)
+            {
+                for (int j = 0; j < _addListCount; j++)
+                {
+                    Destroy(_pathOverList[^1]);
+                    _pathOverList.RemoveAt(_pathOverList.Count - 1);
+                }
+            }
+
+            _addListCount = 0;
         }
     }
 
@@ -368,6 +379,7 @@ public class Player : MonoBehaviour
             Face face = GridManager.GetFace(tile - GameManager.Of.Player.CurrentTile.CellData.GridPosition);
             if (_faceForPlaceTrap.Contains(face))
             {
+
                 RemoveMaterials(_price);
                 CheckIfTrapCanBePlaced(_trap, GameManager.Of.Player.CurrentTile.CellData.GridPosition, face, true);
                 if (_trap.TrapMode == Trap.TrapType.Single)
@@ -382,8 +394,11 @@ public class Player : MonoBehaviour
                 {
                     PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_you_shall_not_pass);
                 }
+
+                
                 GameManager.Of.Turn.NextTurn();
                 GameManager.Of.UpdateZOrder();
+
                 ResetTrapsPlace();
             }
             else
@@ -479,7 +494,7 @@ public class Player : MonoBehaviour
                         && GridManager.Tiles[trapPosition].CellData.CanPass(direction, GridManager.Tiles[playerPosition].CellData))
                     {
                         _pathOverList.Add(Instantiate(_pathOver, (Vector2)trapPosition * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
-
+                        _addListCount++;
                     }
                     else
                     {
@@ -516,9 +531,10 @@ public class Player : MonoBehaviour
                     if (GridManager.Tiles.ContainsKey(trapPositionBis))
                     {
                         if (GridManager.Tiles[trapPositionBis].CellData.CanPlaceTrap(newTrap)
-                            && GridManager.Tiles[trapPosition].CellData.CanPass(direction, GridManager.Tiles[playerPosition].CellData))
+                            && GridManager.Tiles[trapPositionBis].CellData.CanPass(direction, GridManager.Tiles[playerPosition + newpos].CellData))
                         {
-                            Debug.Log("Been There");
+                            _pathOverList.Add(Instantiate(_pathOver, (Vector2)trapPositionBis * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
+                            _addListCount++;
                         }
                         else
                         {
@@ -600,7 +616,7 @@ public class Player : MonoBehaviour
                         }
                         if (canPlace)
                         {
-                            _pathOverList.Add(Instantiate(_pathOver, (Vector2)trapPosition * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
+                            _pathOverList.Add(Instantiate(_pathOver, (Vector2)otherDoorTile * GameManager.Of.Grid.TileSize + Vector2.one / 2, Quaternion.identity));
                             if (placeTrap)
                             {
                                 var offset = new Vector2(0, 0);

@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913f6a62a9a54b44d803449f1cc2713e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorAnimation
-  _baseColor: {r: 1, g: 1, b: 1, a: 0.18431373}
+  _baseColor: {r: 1, g: 1, b: 1, a: 0.45882353}
   _endColor: {r: 1, g: 1, b: 1, a: 0.011764706}
   _duration: 1
   _animCurve:

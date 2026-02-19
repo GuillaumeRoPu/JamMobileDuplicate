@@ -4,15 +4,17 @@ using UnityEngine;
 public class PlayState : GameState
 {
     bool playSound;
+    AudioSource music;
+
     public override void Enter()
     {
         Camera.main.orthographicSize = 3.5f;
+
         GameManager.Of.ShowPause(false);
         GameManager.Of.ShowGame(true);
         GameManager.Of.ShowMenu(false);
 
         if (GameManager.Of.Player != null) return;
-
 
         GameManager.Of.Grid.Init();
 
@@ -21,7 +23,7 @@ public class PlayState : GameState
             room.CreateWalls();
         }
 
-        //AudioManager.Of.PlayClipAt(AudioManager.Of.music[0], Vector3.zero);
+        music = AudioManager.Of.PlayClipAt(AudioManager.Of.music[1], Vector3.zero);
 
         foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
         {
@@ -37,11 +39,12 @@ public class PlayState : GameState
 
         GameManager.Of.UpdateZOrder();
 
-        Camera.main.transform.position = new Vector3(GameManager.Of.RoomTransform.position.x, 
-            GameManager.Of.RoomTransform.position.y, -10);
+        Camera.main.transform.position = new Vector3(GameManager.Of.RoomTransform.position.x + GameManager.Of.Grid.TileSize/2, 
+            GameManager.Of.RoomTransform.position.y + GameManager.Of.Grid.TileSize / 2, -10);
 
 
         GameManager.Of.Grid.EntityInARoom();
+
 
         GameManager.Of.Turn.Init();
         playSound = true;
@@ -61,6 +64,7 @@ public class PlayState : GameState
     public override void Exit()
     {
         playSound = false;
+        GameObject.Destroy(music.gameObject);
     }
 
     async void PlayRandomAmbiantSound()

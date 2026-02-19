@@ -17,6 +17,12 @@ public class LevelData : ScriptableObject
     [field: SerializeField] public TurnEvent[] Events { get; private set; }
     [field: SerializeField] public TrapToUse TrapToUse { get; private set; }
 
+    [field: SerializeField] public bool HasTutorial { get; private set; }
+
+    [field: SerializeField, ShowIf(nameof(HasTutorial), false, true)] public Sprite TutoImage { get; private set; }
+
+    [field: SerializeField, ShowIf(nameof(HasTutorial), false, true), TextArea] public string TutoText { get; private set; }
+
     Dictionary<int, Vector2Int> _spawnTiles;
     public Vector2Int GetNextSpawn(int turn)
     {

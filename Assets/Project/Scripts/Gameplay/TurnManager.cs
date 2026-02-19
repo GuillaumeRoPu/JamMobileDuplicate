@@ -105,6 +105,7 @@ public class TurnManager : MonoBehaviour
 
         onNextTurn?.Invoke();
         _notNext = true;
+
         ZombieTurn();
         WitchTurn();
         PlayTurn();
@@ -118,8 +119,16 @@ public class TurnManager : MonoBehaviour
         GameManager.Of.Player.MoveToNextTileInPath(_durationTurn);
         foreach (var zombie in GameManager.Of.Zombies)
         {
+            if (zombie == null) continue;
+
             zombie.PassTurn();
-            if (zombie.NextPath == GameManager.Of.Player.NextPath)
+
+            if (GridManager.Tiles[zombie.NextPath].CellData.HasADoorTrap())
+            {
+                zombie.SendAttack();
+                GridManager.Tiles[zombie.NextPath].CellData.ActivateDoorTrap(zombie);
+            }
+            else if (zombie.NextPath == GameManager.Of.Player.NextPath)
             {
                 zombie.SendAttack();
             }
@@ -195,14 +204,16 @@ public class TurnManager : MonoBehaviour
             _player.AddMaterial();
         }
 
-        foreach (var zombie in GameManager.Of.Zombies)
+        int baseCount = GameManager.Of.Zombies.Count;
+        for (int z = 0; z < GameManager.Of.Zombies.Count; z++)
         {
-            if (zombie.CurrentTile.CellData.HasATileTrap())
+            if (GameManager.Of.Zombies[z].CurrentTile.CellData.HasATileTrap())
             {
-                zombie.CurrentTile.CellData.ActivateTileTrap(zombie);
+                GameManager.Of.Zombies[z].CurrentTile.CellData.ActivateTileTrap(GameManager.Of.Zombies[z]);
+                if (baseCount != GameManager.Of.Zombies.Count) 
+                    z--;
             }
-
-            if (zombie.NextPath == GameManager.Of.Player.CurrentPath)
+            else if (GameManager.Of.Zombies[z].NextPath == GameManager.Of.Player.CurrentPath)
             {
                 await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
@@ -211,24 +222,33 @@ public class TurnManager : MonoBehaviour
             }
         }
 
-        int w = 0;
-        foreach (var witch in GameManager.Of.Witches)
+        baseCount = GameManager.Of.Witches.Count;
+        for (int w = 0; w < GameManager.Of.Witches.Count; w++)
         {
-            if (witch.CurrentTile.CellData.HasATileTrap())
+            if (GameManager.Of.Witches[w].CurrentTile.CellData.HasATileTrap())
             {
-                witch.CurrentTile.CellData.ActivateTileTrap(witch);
+                GameManager.Of.Witches[w].CurrentTile.CellData.ActivateTileTrap(GameManager.Of.Witches[w]);
+                if (baseCount != GameManager.Of.Witches.Count)
+                    w--;
             }
-            if (witch.Path.Count >= 2)
+            if (GameManager.Of.Witches[w].Path.Count >= 2)
             {
+                Debug.Log(_witchAllTilePaths.Count);
                 if (_witchAllTilePaths[w].Contains(player))
                 {
                     _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
                     GameManager.Of.LoseLevel();
                     return;
                 }
-            }
 
-            w++;
+                foreach (var tile in _witchAllTilePaths[w])
+                {
+                    if (GridManager.Tiles[tile].CellData.HasADoorTrap())
+                    {
+                        GridManager.Tiles[tile].CellData.RemoveDoorTrap();
+                    }
+                }
+            }
         }
 
         if (GameManager.Of.Echo)
@@ -244,7 +264,6 @@ public class TurnManager : MonoBehaviour
         // Attend la fin de la frame
         await Awaitable.EndOfFrameAsync();
 
-        GameManager.Of.CheckEntityAlive();
 
         if (_currentTurn > _lastEventTurn)
         {
@@ -282,7 +301,6 @@ public class TurnManager : MonoBehaviour
         List<Vector2Int> stop = new List<Vector2Int>();;
         foreach (var zombie in GameManager.Of.Zombies)
         {
-            if (GameManager.Of.Deads.Contains(zombie)) continue;
             _zombieFeedbacks.Add(new List<GameObject>());
             List<Vector2Int> diff = new List<Vector2Int>();
             List<Vector2Int> tiles = new List<Vector2Int> { zombie.CurrentTile.CellData.GridPosition };
@@ -294,6 +312,11 @@ public class TurnManager : MonoBehaviour
 
                     List<Vector2Int> newStop = new List<Vector2Int>(stop);
                     newStop.AddRange(tiles);
+                    foreach (var witch in GameManager.Of.Witches)
+                    {
+                        newStop.Add(witch.CurrentTile.CellData.GridPosition);
+                    }
+
                     List<Vector2Int> path = AIPathfinding.CreatePath(GridManager.Tiles[tiles[tiles.Count - 1]], GridManager.Tiles[playerPath[i]], newStop);
 
                     if (path.Count <= 1) break;
@@ -435,7 +458,6 @@ public class TurnManager : MonoBehaviour
     }
     public void CalculWitchPath()
     {
-        _witchFeedbacks = new List<List<GameObject>>();
         int wIndex = 0;
         _witchPaths.Clear();
         _witchAllTilePaths.Clear();
@@ -469,16 +491,6 @@ public class TurnManager : MonoBehaviour
                 {
                     if (GridManager.Tiles[witchPos + incr].CellData.IsTheSameRoomOrHaveDoor(GridManager.Tiles[witchPos], GridManager.GetFace(incr)))
                     {
-                        foreach (var zombie in GameManager.Of.Zombies)
-                        {
-                            if (zombie.Path.Count <= 1) continue;
-
-                            if (zombie.Path[^1] == witchPos + incr)
-                            {
-                                search = false;
-                                break;
-                            }
-                        }
                         witchPos += incr;
                         paths.Add(witchPos);
                         GameObject feed = Instantiate(_witchPathFeedback, ((Vector2)witchPos + Vector2.one / 2) * GameManager.Of.Grid.TileSize, Quaternion.identity);
@@ -488,6 +500,20 @@ public class TurnManager : MonoBehaviour
                     {
                         search = false;
                     }
+                }
+            }
+
+            foreach (var zombie in GameManager.Of.Zombies)
+            {
+                if (zombie.Path.Count <= 1) continue;
+
+                if (zombie.Path[^1] == witchPos)
+                {
+                    witchPos -= incr;
+                    paths.RemoveAt(paths.Count - 1);
+                    Destroy(_witchFeedbacks[wIndex][^1]);
+                    _witchFeedbacks[wIndex].RemoveAt(_witchFeedbacks.Count - 1);
+                    break;
                 }
             }
 
@@ -517,19 +543,11 @@ public class TurnManager : MonoBehaviour
 
     public void WitchTurn()
     {
-        
-        _witchFeedbacks.Clear();
+
+        ResetFeedback();
         int witchIndex = 0;
         foreach (var witch in GameManager.Of.Witches)
         {
-            if (witchIndex < _witchFeedbacks.Count)
-            {
-                foreach (GameObject feed in _witchFeedbacks[witchIndex])
-                {
-                    Destroy(feed);
-                }
-            }
-
             if (_witchPaths[witchIndex].Count <= 1) continue;
             witch.SetPath(_witchPaths[witchIndex]);
             witchIndex++;

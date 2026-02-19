@@ -22,9 +22,6 @@ public class GameManager : MonoBehaviour
     Entity _echoEntity = null;
     List<Entity> _witchEntity = new List<Entity>();
 
-    List<Entity> _deadEntity = new List<Entity>();
-    public List<Entity> Deads => _deadEntity;
-
     public Entity Player => _playerEntity;
     public List<Entity> Zombies => _zombieEntity;
     public Entity Echo => _echoEntity;
@@ -123,33 +120,6 @@ public class GameManager : MonoBehaviour
         pauseState = new PauseState();
     }
 
-    public void CheckEntityAlive()
-    {
-        for (int i = 0; i < _zombieEntity.Count; i++)
-        {
-            if (_zombieEntity[i] == null)
-            {
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_humans_are_superior, 100f, null);
-                _zombieEntity.RemoveAt(i);
-                i--;
-                continue;
-            }
-        }
-
-        for (int i = 0; i < _witchEntity.Count; i++)
-        {
-            if (_witchEntity[i] == null)
-            {
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_at_the_stake, 100f, null);
-                _witchEntity.RemoveAt(i);
-                i--;
-                continue;
-            }
-        }
-
-        _deadEntity.Clear();
-    }
-
     public void CreatePlayer(Vector2Int tile)
     {
         GameObject player = Instantiate(_player, (Vector2)tile * Grid.TileSize, Quaternion.identity);
@@ -204,7 +174,7 @@ public class GameManager : MonoBehaviour
             foreach (SpriteRenderer renderer in _rooms.GetComponentsInChildren<SpriteRenderer>())
             {
                 renderer.sortingOrder = (int)renderer.transform.position.y * -5;
-                if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 3;
+                //if (renderer.gameObject.name == "Wall") renderer.sortingOrder += 0;
             }
 
             for (int i = 0; i < _other.Count; i++)
@@ -242,16 +212,28 @@ public class GameManager : MonoBehaviour
         if (_echoEntity)
         {
             _echoEntity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder =
-            (int)((Vector2)_echoEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -4 - 1;
+            (int)((Vector2)_echoEntity.CurrentTile.CellData.GridPosition * Grid.TileSize).y * -5 - 1;
         }
     }
 
-    public void KillAnEntity(Entity entity)
+    public async void KillAnEntity(Entity entity)
     {
         if (entity == null) return;
 
+        if (Zombies.Contains(entity))
+        {
+            _zombieEntity.Remove(entity);
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_humans_are_superior);
+        }
+
+        if (Witches.Contains(entity))
+        {
+            _witchEntity.Remove(entity);
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_at_the_stake);
+        }
+
+        await Awaitable.WaitForSecondsAsync(1);
         Destroy(entity.gameObject);
-        _deadEntity.Add(entity);
     }
 
 
@@ -267,9 +249,10 @@ public class GameManager : MonoBehaviour
         stateMachine.ChangeState(menuState);
         _doorAnim.SetTrigger("Open");
     }
-    public void RetryLevel()
+    public async void RetryLevel()
     {
         EndLevel();
+        await Awaitable.EndOfFrameAsync();
         stateMachine.ChangeState(playState);
     }
 
