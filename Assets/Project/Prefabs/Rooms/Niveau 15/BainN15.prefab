@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 1157321192177921690}
   - component: {fileID: 1757456322005565656}
   m_Layer: 0
-  m_Name: Bain
+  m_Name: BainN15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
