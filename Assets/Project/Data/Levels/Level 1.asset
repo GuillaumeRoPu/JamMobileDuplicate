@@ -17,11 +17,11 @@ MonoBehaviour:
   <Events>k__BackingField:
   - Turn: 6
     EventType: 0
-    SpawnCellIndex: 1
+    SpawnCellIndex: 0
   <TrapToUse>k__BackingField:
     Net: 1
     Log: 0
     Blocker: 0
-  <HasTutorial>k__BackingField: 0
+  <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 0}
   <TutoText>k__BackingField: 
