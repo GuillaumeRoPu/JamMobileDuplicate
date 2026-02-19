@@ -23,7 +23,7 @@ MonoBehaviour:
     Log: 0
     Blocker: 1
   <HasTutorial>k__BackingField: 1
-  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoImage>k__BackingField: {fileID: 21300000, guid: 556a128caf49b0f4ab9dea71a0d9baa4, type: 3}
   <TutoText>k__BackingField: "Once a zombie is one square away from you, you\u2019re
     toast/there\u2019s no escaping !\r\nThe barricade will help you with that, place
     it when there\u2019s a door between you and a zombie and he\u2019ll take some
