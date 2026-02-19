@@ -128,11 +128,11 @@ public class GameManager : MonoBehaviour
         Grid.GetTileAtPosition(tile).CellData.Entity = _playerEntity;
     }
 
-    public void SpawnZombie(Vector2Int spawnPos)
+    public void SpawnZombie(Vector2Int spawnPos, int turnBeforeMove = 2)
     {
         GameObject zombie = Instantiate(_zombie, (Vector2)spawnPos * Grid.TileSize, Quaternion.identity);
         _zombieEntity.Add(zombie.GetComponent<Entity>());
-        _zombieEntity[^1].SetTurnBeforeMove(2);
+        _zombieEntity[^1].SetTurnBeforeMove(turnBeforeMove);
         _zombieEntity[^1].SetCurrentTile(spawnPos);
         Grid.GetTileAtPosition(spawnPos).CellData.Entity = _zombieEntity[^1];
     }
@@ -276,7 +276,8 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel()
     {
-        Turn.ResetFeedback();
+        Turn.ResetFeedbackZombie();
+        Turn.ResetFeedbackWitch();
 
         for (int i = 0; i < _zombieEntity.Count; i++)
         {

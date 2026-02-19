@@ -56,6 +56,8 @@ public class TurnManager : MonoBehaviour
     public void Init()
     {
         _level.Init();
+        _ui.Init();
+
         _currentTurn = 0;
 
         onNewTurn?.Invoke();
@@ -99,6 +101,17 @@ public class TurnManager : MonoBehaviour
             if (evnt.EventType == EventType.Witch)
                 _ui.PlaceWicthTurn(evnt.Turn, _level.TurnMax);
 
+        }
+
+        foreach (var evnt in _level.Events)
+        {
+            if (evnt.Turn < 3)
+            {
+                if (evnt.EventType == EventType.Zombie)
+                {
+                    GameManager.Of.SpawnZombie(_level.GetNextSpawn(evnt.Turn), 0);
+                }
+            }
         }
 
         _lastEventTurn = _level.Events[_level.Events.Length - 1].Turn;
@@ -180,8 +193,11 @@ public class TurnManager : MonoBehaviour
             {
                 if (evnt.EventType == EventType.Zombie)
                 {
-                    Destroy(_warnings[0]);
-                    _warnings.RemoveAt(0);
+                    if (_warnings.Count > 0)
+                    {
+                        Destroy(_warnings[0]);
+                        _warnings.RemoveAt(0);
+                    }
                 }
                 if (evnt.EventType == EventType.EchoEnter)
                 {
@@ -227,6 +243,9 @@ public class TurnManager : MonoBehaviour
             }
             else if (GameManager.Of.Zombies[z].NextPath == GameManager.Of.Player.CurrentPath)
             {
+                if (GameManager.Of.Player.NextPath != GameManager.Of.Player.CurrentPath) continue;
+                if (GridManager.Tiles[GameManager.Of.Player.CurrentPath].CellData.HasADoorTrap()) continue;
+
                 _gameOverUI.SetActive(true);
                 await Awaitable.WaitForSecondsAsync(1);
                 _gameOverUI.GetComponent<ColorAnimation>().PlayAnimation();
@@ -244,9 +263,8 @@ public class TurnManager : MonoBehaviour
                 if (baseCount != GameManager.Of.Witches.Count)
                     w--;
             }
-            if (GameManager.Of.Witches[w].Path.Count >= 2)
+            else if (GameManager.Of.Witches[w].Path.Count >= 2)
             {
-                Debug.Log(_witchAllTilePaths.Count);
                 if (_witchAllTilePaths[w].Contains(player))
                 {
                     _gameOverUI.SetActive(true);
@@ -314,7 +332,7 @@ public class TurnManager : MonoBehaviour
     {
         WarningSpawn(playerPath.Count > 1 ? playerPath.Count - 1 : 1);
         _zombiePaths.Clear();
-        ResetFeedback();
+        ResetFeedbackZombie();
         int zIndex = 0;
         List<Vector2Int> stop = new List<Vector2Int>();;
         foreach (var zombie in GameManager.Of.Zombies)
@@ -479,7 +497,7 @@ public class TurnManager : MonoBehaviour
         int wIndex = 0;
         _witchPaths.Clear();
         _witchAllTilePaths.Clear();
-        ResetFeedback();
+        ResetFeedbackWitch();
         foreach (Entity witch in GameManager.Of.Witches)
         {
             _witchFeedbacks.Add(new List<GameObject>());
@@ -530,12 +548,12 @@ public class TurnManager : MonoBehaviour
                     witchPos -= incr;
                     paths.RemoveAt(paths.Count - 1);
                     Destroy(_witchFeedbacks[wIndex][^1]);
-                    _witchFeedbacks[wIndex].RemoveAt(_witchFeedbacks.Count - 1);
+                    _witchFeedbacks[wIndex].RemoveAt(_witchFeedbacks[wIndex].Count - 1);
                     break;
                 }
             }
 
-            if (!path.Contains(playerPos))
+            if (!paths.Contains(playerPos))
             {
                 path = new List<Vector2Int> { witchPos };
                 paths = new List<Vector2Int> { witchPos };
@@ -545,11 +563,12 @@ public class TurnManager : MonoBehaviour
             _witchPaths.Add(path);
             wIndex++;
         }
+
     }
 
     public void ZombieTurn()
     {
-        ResetFeedback();
+        ResetFeedbackZombie();
         int zombieIndex = 0;
         foreach (var zombie in GameManager.Of.Zombies)
         {
@@ -561,8 +580,7 @@ public class TurnManager : MonoBehaviour
 
     public void WitchTurn()
     {
-
-        ResetFeedback();
+        ResetFeedbackWitch();
         int witchIndex = 0;
         foreach (var witch in GameManager.Of.Witches)
         {
@@ -595,7 +613,7 @@ public class TurnManager : MonoBehaviour
         renderer.flipX = xFlip;
         renderer.flipY = yFlip;
     }
-    public void ResetFeedback()
+    public void ResetFeedbackZombie()
     {
         foreach (var feed in _zombieFeedbacks)
         {
@@ -605,6 +623,13 @@ public class TurnManager : MonoBehaviour
             }
         }
 
+        
+        _zombieFeedbacks.Clear();
+    }
+
+    public void ResetFeedbackWitch()
+    {
+
         foreach (var feed in _witchFeedbacks)
         {
             foreach (var go in feed)
@@ -613,7 +638,6 @@ public class TurnManager : MonoBehaviour
             }
         }
 
-        _zombieFeedbacks.Clear();
         _witchFeedbacks.Clear();
     }
 
