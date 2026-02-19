@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve_amount: 0.581
+    - _Dissolve_amount: 0.43
     - _Dissolve_scale: 50
     - _Dissolve_size: 75.93
     - _Outline_Thickness: 0.112
