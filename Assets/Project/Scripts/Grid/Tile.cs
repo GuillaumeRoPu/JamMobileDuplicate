@@ -52,7 +52,7 @@ public class Tile : MonoBehaviour, IHoverable
             rend.color = new Color (0, 0, 0, 0);
             rend.sortingOrder = 100;
         }
-        if (_cellData.IsSpawnPoint && Application.isPlaying)
+        if (_cellData.IsSpawnPoint && !Application.isPlaying)
         {
             if (_cellData.spawnPointType.HasFlag(CellData.SpawnPointType.Player))
             {

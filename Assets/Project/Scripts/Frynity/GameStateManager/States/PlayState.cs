@@ -23,7 +23,7 @@ public class PlayState : GameState
             room.CreateWalls();
         }
 
-        //music = AudioManager.Of.PlayClipAt(AudioManager.Of.music[1], Vector3.zero);
+        music = AudioManager.Of.PlayClipAt(AudioManager.Of.music[1], Vector3.zero);
 
         foreach (Vector2Int posTile in GameManager.Of.Grid.GridLevelData.allTilesPosition)
         {
@@ -64,7 +64,7 @@ public class PlayState : GameState
     public override void Exit()
     {
         playSound = false;
-        //GameObject.Destroy(music.gameObject);
+        GameObject.Destroy(music.gameObject);
     }
 
     async void PlayRandomAmbiantSound()

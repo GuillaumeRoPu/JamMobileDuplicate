@@ -305,6 +305,7 @@ public class TurnManager : MonoBehaviour
             if (GameManager.Of.Zombies.Count == 0 && GameManager.Of.Witches.Count == 0 && !GameManager.Of.Echo)
             {
                 _gameWinUI.SetActive(true);
+                await Awaitable.WaitForSecondsAsync(1);
                 _gameWinUI.GetComponent<ColorAnimation>().PlayAnimation();
                 GameManager.Of.WinLevel();
             }
