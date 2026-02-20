@@ -295,7 +295,7 @@ public class GameManager : MonoBehaviour
             SaveManager.Of.SaveGame();
         }
 
-        switch(_currentLevel)
+        switch(_currentLevel + 1)
         {
             case 1:
                 PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_level_1_finish);

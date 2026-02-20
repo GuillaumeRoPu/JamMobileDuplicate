@@ -288,7 +288,8 @@ public class TurnManager : MonoBehaviour
                     break;
                 }
             }
-            else if (GameManager.Of.Zombies[z].NextPath == GameManager.Of.Player.CurrentPath
+            else if (GameManager.Of.Zombies[z].NextPath == GameManager.Of.Player.CurrentPath &&
+                GameManager.Of.Player.NextPath == GameManager.Of.Player.CurrentPath
                 || GameManager.Of.Player.NextPath == GameManager.Of.Zombies[z].CurrentPath
                 || GameManager.Of.Player.CurrentPath == GameManager.Of.Zombies[z].CurrentPath)
             {
