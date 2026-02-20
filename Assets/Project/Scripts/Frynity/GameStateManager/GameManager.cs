@@ -45,7 +45,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _rooms;
     public Transform RoomTransform => _rooms.transform;
     [SerializeField] List<GameObject> _other = new List<GameObject>();
+    [SerializeField] List<GameObject> _barricades = new List<GameObject>();
     public void AddObjectRespectZOrder(GameObject obj) { _other.Add(obj); }
+    public void AddBarricadeRespectZOrder(GameObject obj) { _barricades.Add(obj); }
 
     [Header("Room Design")]
     [SerializeField] GameObject _lightParent;
@@ -149,7 +151,6 @@ public class GameManager : MonoBehaviour
 
             last = spawn;
         }
-        
     }
 
     public void SpawnEcho(Vector2Int playerPos)
@@ -206,6 +207,19 @@ public class GameManager : MonoBehaviour
 
                 SpriteRenderer renderer = _other[i].GetComponentInChildren<SpriteRenderer>();
                 renderer.sortingOrder = (int)renderer.transform.position.y * -5 - 3;
+            }
+
+            for (int i = 0; i < _barricades.Count; i++)
+            {
+                if (_barricades[i] == null)
+                {
+                    _barricades.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+
+                SpriteRenderer renderer = _other[i].GetComponentInChildren<SpriteRenderer>();
+                renderer.sortingOrder = (int)renderer.transform.position.y * -5;
             }
         }
 

@@ -17,7 +17,7 @@ MonoBehaviour:
   <Events>k__BackingField:
   - Turn: 1
     EventType: 3
-    SpawnCellIndex: 3
+    SpawnCellIndex: 2
   - Turn: 3
     EventType: 0
     SpawnCellIndex: 1

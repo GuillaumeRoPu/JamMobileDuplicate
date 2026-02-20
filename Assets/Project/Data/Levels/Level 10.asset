@@ -13,21 +13,24 @@ MonoBehaviour:
   m_Name: Level 10
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   <GridLevel>k__BackingField: {fileID: 11400000, guid: faff81cfcf4f7254b8061e0f036d8c87, type: 2}
-  <TurnMax>k__BackingField: 30
+  <TurnMax>k__BackingField: 16
   <Events>k__BackingField:
-  - Turn: 6
-    EventType: 0
-    SpawnCellIndex: 1
-  - Turn: 7
-    EventType: 0
-    SpawnCellIndex: 1
   - Turn: 8
     EventType: 0
-    SpawnCellIndex: 0
+    SpawnCellIndex: 1
   - Turn: 9
+    EventType: 0
+    SpawnCellIndex: 1
+  - Turn: 10
+    EventType: 0
+    SpawnCellIndex: 0
+  - Turn: 11
     EventType: 0
     SpawnCellIndex: 0
   <TrapToUse>k__BackingField:
     Net: 1
     Log: 1
     Blocker: 1
+  <HasTutorial>k__BackingField: 0
+  <TutoImage>k__BackingField: {fileID: 0}
+  <TutoText>k__BackingField: 

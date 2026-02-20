@@ -1557,7 +1557,7 @@ Transform:
   m_GameObject: {fileID: 297163302}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.82, y: -3.54, z: 0}
+  m_LocalPosition: {x: -1.18, y: -4.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3292,7 +3292,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1295683965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &543641003
@@ -5328,7 +5329,6 @@ Transform:
   m_Children:
   - {fileID: 32858467}
   - {fileID: 652559514}
-  - {fileID: 1295683965}
   - {fileID: 580948834}
   - {fileID: 1477165159}
   - {fileID: 1420296221}
@@ -5595,7 +5595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d019473ad0be7d249a565dc99f929ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridDrawer
-  _levelCreationSteps: 1
+  _levelCreationSteps: 32
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1477165159}
   _roomsParent: {fileID: 45757940}
@@ -5610,17 +5610,17 @@ MonoBehaviour:
   _eraseGridWidth: 1
   _eraseGridHeight: 1
   _eraseGridOrigin: {x: 0, y: -2}
-  _gridLevelData: {fileID: 11400000, guid: d8fac2e2e49011e4993cfb66021ef247, type: 2}
+  _gridLevelData: {fileID: 0}
   _spawnPointPosition: {x: -5, y: -1}
   _spawnPointTypes: 0
-  _roomPrefab: {fileID: 5346576557854014465, guid: 6372648ae2dedca43ac2e862aad65406, type: 3}
-  _roomPosition: {x: 1, y: 0}
-  _eraseRoomPosition: {x: 0, y: 1}
+  _roomPrefab: {fileID: 8697954554260469774, guid: 580f91dff5e1ec6478d6b147a383202c, type: 3}
+  _roomPosition: {x: 2, y: 2}
+  _eraseRoomPosition: {x: 2, y: 1}
   _materialPosition: {x: -3, y: -2}
   _eraseMaterialPosition: {x: 0, y: 0}
   _barricadePosition: {x: 0, y: 0}
   _eraseBarricadePosition: {x: 0, y: 0}
-  _gridLevelName: Level 3
+  _gridLevelName: Level 9
 --- !u!1 &915083398
 GameObject:
   m_ObjectHideFlags: 0
@@ -6701,6 +6701,7 @@ MonoBehaviour:
   _settings: {fileID: 682580166}
   _rooms: {fileID: 1233790246}
   _other: []
+  _barricades: []
   _lightParent: {fileID: 652559513}
   _doorLight: {fileID: 8307084718305683608, guid: 60cbfc234858e674897669866c73cb37, type: 3}
   _sideInWallSprite: {fileID: -464147789, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
@@ -6784,7 +6785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
   _generateGridOnPlay: 0
-  _gridLevelData: {fileID: 11400000, guid: fd7e9923a9512b74b918383d31dbb3df, type: 2}
+  _gridLevelData: {fileID: 11400000, guid: bc119757575b29c4a87c34b79f397279, type: 2}
   _tilesPrefab: {fileID: 4327572520850285720, guid: 102a18b1047db2b4199a2529e0937147, type: 3}
   _tilesParent: {fileID: 1420296221}
   _roomsParent: {fileID: 1233790247}
@@ -6793,7 +6794,7 @@ MonoBehaviour:
   _camera: {fileID: 519420032}
   _coolColors: 0
   _coolColorsAnimated: 0
-  _spawnIndex: 0
+  _spawnIndex: 2
 --- !u!114 &1155825362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8055,7 +8056,7 @@ Transform:
   m_GameObject: {fileID: 1295683964}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8068,7 +8069,7 @@ Transform:
   - {fileID: 1722093793}
   - {fileID: 373944694}
   - {fileID: 294731551}
-  m_Father: {fileID: 808652892}
+  m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1303673437
 GameObject:
@@ -11235,7 +11236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1863953961

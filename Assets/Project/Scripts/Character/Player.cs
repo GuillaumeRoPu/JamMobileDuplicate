@@ -603,6 +603,7 @@ public class Player : MonoBehaviour
                     else
                     {
                         canPose = false;
+                        break;
                     }
                 }
 
@@ -704,16 +705,22 @@ public class Player : MonoBehaviour
                                 {
                                     renderer.sprite = newTrap.UpSprite;
                                     trap.transform.position = ((Vector2)trapPosition + Vector2.up + Vector2.right/2)* GameManager.Of.Grid.TileSize;
+                                    GameManager.Of.AddBarricadeRespectZOrder(trap.gameObject);
                                 }
                                 else if (dir == Face.Down)
                                 {
                                     renderer.sprite = newTrap.UpSprite;
                                     trap.transform.position = ((Vector2)trapPosition + Vector2.right / 2) * GameManager.Of.Grid.TileSize;
+                                    GameManager.Of.AddBarricadeRespectZOrder(trap.gameObject);
+                                }
+                                else
+                                {
+                                    GameManager.Of.AddObjectRespectZOrder(trap.gameObject);
                                 }
                                 allPositions.Add(trapPosition);
                                 trap.TrapPlaced(trapPosition, GridManager.Tiles[trapPosition].CellData.DoorPosition);
                                 GridManager.Tiles[trapPosition].CellData.SetTrap(trap);
-                                GameManager.Of.AddObjectRespectZOrder(trap.gameObject);
+                                
                                 _barricadePlace++;
 
                                 if (_barricadePlace >= 3)

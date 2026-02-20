@@ -8,7 +8,6 @@ public class Barricade : Trap
     public override void ActivateTrap(Entity entity)
     {
         base.ActivateTrap(entity);
-        Debug.Log("rfe");
         _currentHealth -= 1;
         if (_currentHealth <= 0)
         {

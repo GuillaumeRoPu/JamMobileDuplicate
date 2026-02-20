@@ -39,8 +39,14 @@ public class PlayState : GameState
 
         GameManager.Of.UpdateZOrder();
 
+        float offsetY = 0;
+        if (GameManager.Of.CurrentLevel == 8)
+        {
+            offsetY = 1;
+            Camera.main.orthographicSize = 4.3f;
+        }
         Camera.main.transform.position = new Vector3(GameManager.Of.RoomTransform.position.x + GameManager.Of.Grid.TileSize/2, 
-            GameManager.Of.RoomTransform.position.y + GameManager.Of.Grid.TileSize / 2, -10);
+            GameManager.Of.RoomTransform.position.y + GameManager.Of.Grid.TileSize / 2 + offsetY, -10);
 
 
         GameManager.Of.Grid.EntityInARoom();
