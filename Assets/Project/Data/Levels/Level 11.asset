@@ -27,9 +27,16 @@ MonoBehaviour:
     Blocker: 1
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 6957082991898076456, guid: ada4bf4fc2b24c749b17c30c3fee775d, type: 3}
-  <TutoText>k__BackingField: "As if zombies weren\u2019t enough, here comes the witch
-    !\r\nShe doesn\u2019t bother to take the front door and directly comes through
-    the roof. Unlike the zombies, she doesn\u2019t wander around in the manor and
-    only targets you when she sees you.\r\nHer line of sight is only straight lines.
-    Once you enter her line of sight, she\u2019ll prepare to run over you the next
-    turn, ignoring everything in her way besides walls !"
+  <TutoTextEnglish>k__BackingField: "As if zombies weren\u2019t enough, here comes
+    the witch !\r\nShe doesn\u2019t bother to take the front door and directly comes
+    through the roof. Unlike the zombies, she doesn\u2019t wander around in the manor
+    and only targets you when she sees you.\r\nHer line of sight is only straight
+    lines. Once you enter her line of sight, she\u2019ll prepare to run over you
+    the next turn, ignoring everything in her way besides walls !"
+  <TutoTextFrench>k__BackingField: "Comme si les zombies ne suffisaient pas, voici
+    la sorci\xE8re !\r\nElle ne prend pas la peine de passer par la porte d'entr\xE9e
+    et arrive directement par le toit. Contrairement aux zombies, elle ne se prom\xE8ne
+    pas dans le manoir et ne vous attaque que lorsqu'elle vous voit.\r\nSon champ
+    de vision est limit\xE9 aux lignes droites. Une fois que vous entrez dans son
+    champ de vision, elle se pr\xE9pare \xE0 vous \xE9craser au tour suivant, ignorant
+    tout ce qui se trouve sur son chemin \xE0 l'exception des murs !"

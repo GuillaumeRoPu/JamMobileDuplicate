@@ -24,8 +24,14 @@ MonoBehaviour:
     Blocker: 0
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 21300000, guid: 0081e393cffa72e44aff7afa96be3f19, type: 3}
-  <TutoText>k__BackingField: "Hi grandma, it seems like someone\u2019s trying to
-    break in.\r\nZombies like these will try to break in from your outside doors.
+  <TutoTextEnglish>k__BackingField: "Hi grandma, it seems like someone\u2019s trying
+    to break in.\r\nZombies like these will try to break in from your outside doors.
     They will take the shortest path to you. Try to move around by sliding your fingers
     to make your path. Those trinkets lying around will help you build traps to defend
     your manor."
+  <TutoTextFrench>k__BackingField: "Salut mamie ! On dirait que quelqu'un essaie
+    de s'introduire chez toi.\r\nLes zombies comme ceux-ci vont essayer de s'introduire
+    par tes portes ext\xE9rieures. Ils prendront le chemin le plus court pour t'atteindre.
+    Essaie de te d\xE9placer en faisant glisser ton doigts pour tracer ton chemin.
+    Les bibelots qui tra\xEEnent t'aideront \xE0 construire des pi\xE8ges pour d\xE9fendre
+    ton manoir."

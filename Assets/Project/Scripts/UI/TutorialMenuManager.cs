@@ -1,3 +1,4 @@
+using Frynity.Saves.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,13 +8,28 @@ public class TutorialMenuManager : MonoBehaviour
     [SerializeField] private GameObject _menu;
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
+    private string _frenchText;
+    private string _englishText;
 
-    public void ActivateMenu(Sprite image, string str)
+    int _languageIndex;
+
+    public void ActivateMenu(Sprite image, string engl, string fr)
     {
+        _languageIndex = SaveManager.Of.Settings.languageIndex;
         _menu.SetActive(true);
-        if (str != null)
+        if (engl != null && fr != null)
         {
-            _text.text = str;
+            _englishText = engl;
+            _frenchText = fr;
+
+            if (_languageIndex == 0)
+            {
+                _text.text = engl;
+            }
+            else
+            {
+                _text.text = fr;
+            }
         }
         if (_image != null) 
         {
@@ -26,6 +42,22 @@ public class TutorialMenuManager : MonoBehaviour
     {
         Time.timeScale = 1;
         _menu.SetActive(false);
+    }
+
+    public void ChangeLanguage()
+    {
+        _languageIndex = _languageIndex == 0 ? 1 : 0;
+        if (_languageIndex == 0 )
+        {
+            _text.text = _englishText;
+        }
+        else
+        {
+            _text.text = _frenchText;
+        }
+
+        SaveManager.Of.Settings.languageIndex = _languageIndex;
+        SaveManager.Of.SaveSettings();
     }
 
     private void Start()

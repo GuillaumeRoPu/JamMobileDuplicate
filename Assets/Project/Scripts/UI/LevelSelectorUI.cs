@@ -115,7 +115,7 @@ public class LevelSelectorUI : MonoBehaviour
 
         if (_levels[_index].HasTutorial && _tutorialMenuManager != null)
         {
-            _tutorialMenuManager.ActivateMenu(_levels[_index].TutoImage, _levels[_index].TutoTextEnglish);
+            _tutorialMenuManager.ActivateMenu(_levels[_index].TutoImage, _levels[_index].TutoTextEnglish, _levels[_index].TutoTextFrench);
         }
     }
 }

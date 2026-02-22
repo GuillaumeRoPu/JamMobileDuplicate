@@ -9185,7 +9185,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1307042586}
         m_TargetAssemblyTypeName: TutorialMenuManager, Assembly-CSharp
-        m_MethodName: DeactivateMenu
+        m_MethodName: ChangeLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

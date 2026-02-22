@@ -6,4 +6,5 @@ public class SettingsData : ISaveData
 {
     public float fxVolume;
     public float musicVolume;
+    public int languageIndex;
 }

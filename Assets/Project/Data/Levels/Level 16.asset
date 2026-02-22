@@ -30,9 +30,16 @@ MonoBehaviour:
     Blocker: 1
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: -7390356349524820674, guid: 3a4ba90375a48ea448d1bc7f6bc346e6, type: 3}
-  <TutoText>k__BackingField: "They say that your worst enemy is yourself..\r\nLet
+  <TutoTextEnglish>k__BackingField: "They say that your worst enemy is yourself..\r\nLet
     me introduce you to the echo ! This reflection of you will copy your every move
     with a delay and isn\u2019t bothered by anything else, once you take a path,
     no one is stopping it from taking the same path.\r\nDon\u2019t bother to kill
     it, it\u2019ll go away after some time but try not to go back on your steps or
     stay too static."
+  <TutoTextFrench>k__BackingField: "On dit que votre pire ennemi, c'est vous-m\xEAme...\r\nLaissez
+    moi vous pr\xE9senter l'\xE9cho ! Ce reflet de vous-m\xEAme copiera chacun de
+    vos mouvements avec un l\xE9ger d\xE9calage et ne se laissera perturber par rien
+    d'autre. Une fois que vous aurez emprunt\xE9 un chemin, rien ne l'emp\xEAchera
+    de suivre le m\xEAme.\r\nNe vous donnez pas la peine de le tuer, il dispara\xEEtra
+    apr\xE8s un certain temps, mais essayez de ne pas revenir sur vos pas et de ne
+    pas rester trop immobile."

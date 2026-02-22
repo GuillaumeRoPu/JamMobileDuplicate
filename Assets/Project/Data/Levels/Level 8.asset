@@ -30,9 +30,16 @@ MonoBehaviour:
     Blocker: 0
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: -2716393184026147826, guid: 0a1905965cabba74ba5f35dbac66d401, type: 3}
-  <TutoText>k__BackingField: "Looks like there\u2019s more zombies than trinkets
+  <TutoTextEnglish>k__BackingField: "Looks like there\u2019s more zombies than trinkets
     this time..\r\nTime to introduce you to the log. For the measly cost of 2 trinkets,
     you can set up a log that\u2019s 3 squares long. Be wary that you\u2019ll need
     these 3 squares of space to set it up. Meaning, no walls on these 3 squares.
     \r\nThe log will only be triggered when an enemy will walk on the pressure plate,
     triggering it and killing everything in its path."
+  <TutoTextFrench>k__BackingField: "On dirait qu'il y a plus de zombies que de bibelots
+    cette fois-ci...\r\nIl est temps de vous pr\xE9senter la b\xFBche. Pour la modique
+    somme de 2 bibelots, vous pouvez installer une b\xFBche de 3 cases de long. Attention,
+    vous aurez besoin de ces 3 cases pour l'installer. Cela signifie qu'il ne doit
+    y avoir aucun mur sur ces 3 cases. \r\nLa b\xFBche ne se d\xE9clenchera que lorsqu'un
+    ennemi marchera sur la plaque de pression, la d\xE9clenchant et tuant tout sur
+    son passage."

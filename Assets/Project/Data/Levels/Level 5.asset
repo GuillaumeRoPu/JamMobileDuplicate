@@ -24,9 +24,15 @@ MonoBehaviour:
     Blocker: 1
   <HasTutorial>k__BackingField: 1
   <TutoImage>k__BackingField: {fileID: 21300000, guid: 556a128caf49b0f4ab9dea71a0d9baa4, type: 3}
-  <TutoText>k__BackingField: "Once a zombie is one square away from you, you\u2019re
+  <TutoTextEnglish>k__BackingField: "Once a zombie is one square away from you, you\u2019re
     toast/there\u2019s no escaping !\r\nThe barricade will help you with that, place
     it when there\u2019s a door between you and a zombie and he\u2019ll take some
     time to break it, allowing you to make some space.\r\nA broken barricade leaves
     a trinket on the ground, so don\u2019t worry about \u201Cwasting\u201D them on
     barricades."
+  <TutoTextFrench>k__BackingField: "Une fois qu'un zombie est \xE0 une case de vous,
+    vous \xEAtes fichu ! Vous ne pouvez plus vous \xE9chapper !\r\nLa barricade vous
+    aidera dans ce cas, placez l\xE0 lorsqu'il y a une porte entre vous et un zombie
+    et il lui faudra un certain temps pour la briser, ce qui vous permettra de gagner
+    un peu de temps.\r\nUne barricade bris\xE9e laisse un bibelot au sol, alors ne
+    vous inqui\xE9tez pas de les \xAB gaspiller \xBB pour des barricades."
