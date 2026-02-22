@@ -21,7 +21,8 @@ public class LevelData : ScriptableObject
 
     [field: SerializeField, ShowIf(nameof(HasTutorial), false, true)] public Sprite TutoImage { get; private set; }
 
-    [field: SerializeField, ShowIf(nameof(HasTutorial), false, true), TextArea] public string TutoText { get; private set; }
+    [field: SerializeField, ShowIf(nameof(HasTutorial), false, true), TextArea(5, 10)] public string TutoTextEnglish { get; private set; }
+    [field: SerializeField, ShowIf(nameof(HasTutorial), false, true), TextArea(5, 10)] public string TutoTextFrench { get; private set; }
 
     Dictionary<int, List<Vector2Int>> _spawnTiles;
     public List<Vector2Int> GetNextSpawn(int turn)

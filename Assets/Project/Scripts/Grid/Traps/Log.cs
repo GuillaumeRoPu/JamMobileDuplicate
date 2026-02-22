@@ -13,11 +13,11 @@ public class Log : Trap
             int nbEntity = 1;
             foreach(var pos in AdditionalPosition)
             {
-                GridManager.Tiles[pos].CellData.KillEntity();
                 if (GridManager.Tiles[pos].CellData.Entities.Count > 0)
                 {
                     nbEntity++;
                 }
+                GridManager.Tiles[pos].CellData.KillEntity();
             }
 
             if (nbEntity == 1)
