@@ -36,7 +36,7 @@ public class Trap : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public virtual void ActivateTrap(Entity entity)
+    public virtual async Awaitable ActivateTrap(Entity entity)
     {
         onActivate?.Invoke();
     }

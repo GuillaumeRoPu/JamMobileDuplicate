@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class Player : MonoBehaviour
 {
@@ -246,6 +247,13 @@ public class Player : MonoBehaviour
 
             if (addFeed)
                 _diffFeedbacks.Add(diff);
+
+            //if (_feedbacks.Count > 1)
+            //{
+            //    GameObject feed = _feedbacks[0];
+            //    SpriteRenderer renderer = feed.GetComponent<SpriteRenderer>();
+            //    renderer.sprite = _pathFeedback.Base;
+            //}
         }
         else
         {
@@ -286,7 +294,7 @@ public class Player : MonoBehaviour
     {
         if (_feedbacks.Count == 0) return;
 
-        GameObject feed = _feedbacks[_feedbacks.Count - 1];
+        GameObject feed = _feedbacks[^1];
         feed.transform.eulerAngles = new Vector3(0, 0, rotation);
         SpriteRenderer renderer = feed.GetComponent<SpriteRenderer>();
         renderer.sprite = sprite;
@@ -621,7 +629,7 @@ public class Player : MonoBehaviour
                                 trap.transform.Rotate(new Vector3(0, 0, -90));
                                 break;
                             case Face.Left:
-                                trap.transform.Rotate(new Vector3(0, 0, 180));
+                                trap.transform.localScale = new Vector3(-1, 1, 1);
                                 break;
                             case Face.Right:
                                 break;

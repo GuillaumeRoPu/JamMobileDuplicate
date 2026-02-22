@@ -1,34 +1,40 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Log : Trap
 {
-    public override void ActivateTrap(Entity entity)
+    public override async Awaitable ActivateTrap(Entity entity)
     {
-        base.ActivateTrap(entity);
         if (entity.CurrentTile.CellData.GridPosition == _position && entity != GameManager.Of.Player)
         {
-            GridManager.Tiles[_position].CellData.KillEntity();
+            await base.ActivateTrap(entity);
 
-            int nbEntity = 1;
-            foreach(var pos in AdditionalPosition)
-            {
-                if (GridManager.Tiles[pos].CellData.Entities.Count > 0)
-                {
-                    nbEntity++;
-                }
-                GridManager.Tiles[pos].CellData.KillEntity();
-            }
+            GetComponent<Animator>().SetTrigger("Active");
 
-            if (nbEntity == 1)
+            await Awaitable.WaitForSecondsAsync(0.5f);
+        }
+    }
+
+    public void KillEntities()
+    {
+        GridManager.Tiles[_position].CellData.KillEntity();
+
+        int nbEntity = 1;
+        foreach (var pos in AdditionalPosition)
+        {
+            if (GridManager.Tiles[pos].CellData.Entities.Count > 0)
             {
-                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_overkill);
+                nbEntity++;
             }
-            else if (nbEntity == 3)
-            {
-                PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_strike);
-            }
-            DestroyTrap();
+            GridManager.Tiles[pos].CellData.KillEntity();
+        }
+
+        if (nbEntity == 1)
+        {
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_overkill);
+        }
+        else if (nbEntity == 3)
+        {
+            PlayGameManager.Of.UnlockAchievement(GPGSIds.achievement_strike);
         }
     }
 

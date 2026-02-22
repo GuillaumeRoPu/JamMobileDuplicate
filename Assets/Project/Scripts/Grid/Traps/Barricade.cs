@@ -5,9 +5,9 @@ public class Barricade : Trap
     [SerializeField] private int _maxhealth = 2;
     private int _currentHealth;
 
-    public override void ActivateTrap(Entity entity)
+    public override async Awaitable ActivateTrap(Entity entity)
     {
-        base.ActivateTrap(entity);
+        await base.ActivateTrap(entity);
         _currentHealth -= 1;
         if (_currentHealth <= 0)
         {

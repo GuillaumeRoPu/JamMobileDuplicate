@@ -215,11 +215,11 @@ public class CellData
         }
     }
 
-    public void ActivateTileTrap(Entity entity)
+    public async Awaitable ActivateTileTrap(Entity entity)
     {
         if (HasATileTrap())
         {
-            tileTrap.ActivateTrap(entity);
+            await tileTrap.ActivateTrap(entity);
         }
     }
 

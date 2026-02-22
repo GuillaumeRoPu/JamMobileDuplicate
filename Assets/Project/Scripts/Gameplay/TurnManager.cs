@@ -280,7 +280,7 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.Zombies[z].CurrentTile.CellData.HasATileTrap())
             {
-                GameManager.Of.Zombies[z].CurrentTile.CellData.ActivateTileTrap(GameManager.Of.Zombies[z]);
+                await GameManager.Of.Zombies[z].CurrentTile.CellData.ActivateTileTrap(GameManager.Of.Zombies[z]);
                 z -= baseCount - GameManager.Of.Zombies.Count;
 
                 if (z < 0)
@@ -309,7 +309,7 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.Witches[w].CurrentTile.CellData.HasATileTrap())
             {
-                GameManager.Of.Witches[w].CurrentTile.CellData.ActivateTileTrap(GameManager.Of.Witches[w]);
+                await GameManager.Of.Witches[w].CurrentTile.CellData.ActivateTileTrap(GameManager.Of.Witches[w]);
                 if (baseCount != GameManager.Of.Witches.Count)
                     w--;
             }
@@ -511,6 +511,13 @@ public class TurnManager : MonoBehaviour
                 int tileIndex = 1;
                 foreach (var result in diff)
                 {
+                    //if (_zombieFeedbacks.Count > 1)
+                    //{
+                    //    GameObject feed = _zombieFeedbacks[zIndex][0];
+                    //    SpriteRenderer renderer = feed.GetComponent<SpriteRenderer>();
+                    //    renderer.sprite = _zombiePathFeedback.Base;
+                    //}
+
                     if (lastDiff == Vector2Int.right)
                     {
                         if (result == Vector2Int.right)

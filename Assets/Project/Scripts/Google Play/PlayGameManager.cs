@@ -58,8 +58,6 @@ public class PlayGameManager : MonoBehaviour
         PlayGamesPlatform.Instance.ReportProgress(id, 100.0f, success => {
             Debug.Log(id + (success ? " débloqué!" : " échec"));
         });
-
-        AudioManager.Of.PlayClipAt(AudioManager.Of.fx[0], Vector3.zero, true);
     }
 
     // Achievement INCREMENTIEL

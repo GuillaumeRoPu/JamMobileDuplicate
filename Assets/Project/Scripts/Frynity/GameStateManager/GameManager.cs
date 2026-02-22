@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SoundData _zombieSounds;
     public SoundData ZombieAudio => _zombieSounds;
 
-    public AudioSource Music;
+    [HideInInspector] public AudioSource Music;
 
     [Header("Animation")]
     [SerializeField] Animator _doorAnim;
@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
         GameObject echo = Instantiate(_echo, (Vector2)pos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(pos);
+        _echoEntity.SetTurnBeforeMove(_currentLevel == 15 ? 3 : 4);
         Grid.GetTileAtPosition(pos).CellData.Entities.Add(_echoEntity);
     }
 
@@ -205,8 +206,11 @@ public class GameManager : MonoBehaviour
                     continue;
                 }
 
-                SpriteRenderer renderer = _other[i].GetComponentInChildren<SpriteRenderer>();
-                renderer.sortingOrder = (int)renderer.transform.position.y * -5 - 3;
+                SpriteRenderer[] renderers = _other[i].GetComponentsInChildren<SpriteRenderer>();
+                foreach (SpriteRenderer renderer in renderers)
+                {
+                    renderer.sortingOrder = (int)renderer.transform.position.y * -5 - 3;
+                }
             }
 
             for (int i = 0; i < _barricades.Count; i++)

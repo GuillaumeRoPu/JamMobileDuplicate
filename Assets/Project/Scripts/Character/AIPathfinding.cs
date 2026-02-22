@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PathFeedback
 {
+    public Sprite Base;
     public Sprite Arrow;
     public Sprite Row;
     public Sprite Turn;

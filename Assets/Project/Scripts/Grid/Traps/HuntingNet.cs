@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class HuntingNet : Trap
 {
-    public override void ActivateTrap(Entity entity)
+    public override async Awaitable ActivateTrap(Entity entity)
     {
-        base.ActivateTrap(entity);
+        await base.ActivateTrap(entity);
         if (entity != GameManager.Of.Player)
         {
             GridManager.Tiles[_position].CellData.KillEntity();
