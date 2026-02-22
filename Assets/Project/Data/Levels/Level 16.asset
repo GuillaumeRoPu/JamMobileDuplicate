@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Level 16
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   <GridLevel>k__BackingField: {fileID: 11400000, guid: aaec4d78c530e2b48b54ae80490f39d2, type: 2}
-  <TurnMax>k__BackingField: 20
+  <TurnMax>k__BackingField: 15
   <Events>k__BackingField:
-  - Turn: 10
-    EventType: 0
-    SpawnCellIndex: 1
   - Turn: 3
     EventType: 1
     SpawnCellIndex: 0
   - Turn: 10
     EventType: 2
     SpawnCellIndex: 0
+  - Turn: 10
+    EventType: 0
+    SpawnCellIndex: 1
   <TrapToUse>k__BackingField:
     Net: 1
     Log: 1

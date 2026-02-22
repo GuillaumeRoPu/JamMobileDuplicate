@@ -42,16 +42,4 @@ public class Log : Trap
     {
         base.TrapPlaced(position, face);
     }
-
-    [Button("ActivateTrap")]
-    private void ActivateTrapButton()
-    {
-        ActivateTrap(new Entity());
-    }
-
-    [Button("DestroyTrap")]
-    private void DestroyTrapButton()
-    {
-        DestroyTrap();
-    }
 }

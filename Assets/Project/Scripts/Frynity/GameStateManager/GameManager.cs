@@ -147,7 +147,6 @@ public class GameManager : MonoBehaviour
             _zombieEntity.Add(zombie.GetComponent<Entity>());
             _zombieEntity[^1].SetTurnBeforeMove(last == spawn ? turnBeforeMove + 1 : turnBeforeMove);
             _zombieEntity[^1].SetCurrentTile(spawn);
-            Grid.GetTileAtPosition(spawn).CellData.Entities.Add(_zombieEntity[^1]);
 
             last = spawn;
         }
@@ -167,7 +166,6 @@ public class GameManager : MonoBehaviour
         _echoEntity = echo.GetComponent<Entity>();
         _echoEntity.SetCurrentTile(pos);
         _echoEntity.SetTurnBeforeMove(_currentLevel == 15 ? 3 : 4);
-        Grid.GetTileAtPosition(pos).CellData.Entities.Add(_echoEntity);
     }
 
     public void DestroyEcho()
@@ -183,7 +181,6 @@ public class GameManager : MonoBehaviour
             GameObject witch = Instantiate(_witch, (Vector2)spawn * Grid.TileSize, Quaternion.identity);
             _witchEntity.Add(witch.GetComponent<Entity>());
             _witchEntity[^1].SetCurrentTile(spawn);
-            Grid.GetTileAtPosition(spawn).CellData.Entities.Add(_witchEntity[^1]);
         }
     }
 
