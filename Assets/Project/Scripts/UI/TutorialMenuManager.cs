@@ -8,6 +8,11 @@ public class TutorialMenuManager : MonoBehaviour
     [SerializeField] private GameObject _menu;
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] Image _languageButtonImage;
+
+    [SerializeField] Sprite _englishSprite;
+    [SerializeField] Sprite _frenchSprite;
+
     private string _frenchText;
     private string _englishText;
 
@@ -35,6 +40,9 @@ public class TutorialMenuManager : MonoBehaviour
         {
             _image.sprite = image;
         }
+
+        _languageButtonImage.sprite = _languageIndex == 0 ? _englishSprite : _frenchSprite;
+
         Time.timeScale = 0;
     }
 
@@ -55,6 +63,8 @@ public class TutorialMenuManager : MonoBehaviour
         {
             _text.text = _frenchText;
         }
+
+        _languageButtonImage.sprite = _languageIndex == 0 ? _englishSprite : _frenchSprite;
 
         SaveManager.Of.Settings.languageIndex = _languageIndex;
         SaveManager.Of.SaveSettings();

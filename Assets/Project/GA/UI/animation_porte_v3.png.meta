@@ -1,49 +1,49 @@
 fileFormatVersion: 2
-guid: 255c0c8695ad91d4eb04778450c74b09
+guid: 9b1f8b8170fe7724e8eb7cce2a056662
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4289164792609600588
-    second: animation_porte_v2_0
+      213: 2707227932287166801
+    second: animation_porte_v3_0
   - first:
-      213: 5241564706001125467
-    second: animation_porte_v2_1
+      213: 2652572567778325794
+    second: animation_porte_v3_1
   - first:
-      213: -5264037421501758470
-    second: animation_porte_v2_2
+      213: 7103410211059955767
+    second: animation_porte_v3_2
   - first:
-      213: -2787730747836592323
-    second: animation_porte_v2_3
+      213: 4990738862455632077
+    second: animation_porte_v3_3
   - first:
-      213: 7019315510269407804
-    second: animation_porte_v2_4
+      213: -556931588131644401
+    second: animation_porte_v3_4
   - first:
-      213: -6433807154273819869
-    second: animation_porte_v2_5
+      213: 4521303605904530470
+    second: animation_porte_v3_5
   - first:
-      213: -536043005679054281
-    second: animation_porte_v2_6
+      213: 3022562515308934417
+    second: animation_porte_v3_6
   - first:
-      213: 4830993653514910073
-    second: animation_porte_v2_7
+      213: 5116960662514260305
+    second: animation_porte_v3_7
   - first:
-      213: 7143298663361957311
-    second: animation_porte_v2_8
+      213: -5870453741471171649
+    second: animation_porte_v3_8
   - first:
-      213: 2465471432655237222
-    second: animation_porte_v2_9
+      213: 7774099029174369623
+    second: animation_porte_v3_9
   - first:
-      213: 8539138701841850068
-    second: animation_porte_v2_10
+      213: 7683171486110447680
+    second: animation_porte_v3_10
   - first:
-      213: -2848828915511911050
-    second: animation_porte_v2_11
+      213: -8847218241735913547
+    second: animation_porte_v3_11
   - first:
-      213: 2473347048627479245
-    second: animation_porte_v2_12
+      213: -1372192349241787718
+    second: animation_porte_v3_12
   - first:
-      213: -9014816522424142379
-    second: animation_porte_v2_13
+      213: 3124070610602784879
+    second: animation_porte_v3_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -165,309 +165,309 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animation_porte_v2_0
+      name: animation_porte_v3_0
       rect:
         serializedVersion: 2
         x: 716
-        y: 3956
-        width: 1000
-        height: 1007
+        y: 3951
+        width: 999
+        height: 1012
       alignment: 9
-      pivot: {x: 0.027094543, y: 0.009131878}
+      pivot: {x: 0.026619393, y: 0.013396131}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c447b9667ac268b30800000000000000
-      internalID: 4289164792609600588
+      spriteID: 159edfdf571029520800000000000000
+      internalID: 2707227932287166801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_1
+      name: animation_porte_v3_1
       rect:
         serializedVersion: 2
         x: 2348
-        y: 3936
-        width: 1000
-        height: 1062
+        y: 3941
+        width: 981
+        height: 1057
       alignment: 9
-      pivot: {x: 0.026525635, y: 0.02425475}
+      pivot: {x: 0.024040261, y: 0.016516795}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b500c604457cdb840800000000000000
-      internalID: 5241564706001125467
+      spriteID: 2257f5b42b4dfc420800000000000000
+      internalID: 2652572567778325794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_2
+      name: animation_porte_v3_2
       rect:
         serializedVersion: 2
         x: 4052
-        y: 3830
-        width: 1000
-        height: 1123
+        y: 3831
+        width: 929
+        height: 1122
       alignment: 9
-      pivot: {x: 0.020593017, y: 0.052257832}
+      pivot: {x: 0.023293223, y: 0.057063628}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af3460fead162f6b0800000000000000
-      internalID: -5264037421501758470
+      spriteID: 7387c1493f1649260800000000000000
+      internalID: 7103410211059955767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_3
+      name: animation_porte_v3_3
       rect:
         serializedVersion: 2
         x: 5888
-        y: 3793
-        width: 1000
-        height: 1175
+        y: 3794
+        width: 893
+        height: 1174
       alignment: 9
-      pivot: {x: 0.02044629, y: 0.07027697}
+      pivot: {x: 0.023802754, y: 0.07256883}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d3f04c5a7adff49d0800000000000000
-      internalID: -2787730747836592323
+      spriteID: dc0b767ad8aa24540800000000000000
+      internalID: 4990738862455632077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_4
+      name: animation_porte_v3_4
       rect:
         serializedVersion: 2
         x: 7772
         y: 3765
-        width: 1000
+        width: 760
         height: 1165
       alignment: 9
-      pivot: {x: 0.017642578, y: 0.07858918}
+      pivot: {x: 0.022836786, y: 0.086631365}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c327ff3444e996160800000000000000
-      internalID: 7019315510269407804
+      spriteID: f0c183ddba16548f0800000000000000
+      internalID: -556931588131644401
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_5
+      name: animation_porte_v3_5
       rect:
         serializedVersion: 2
         x: 740
-        y: 2068
-        width: 1000
-        height: 1173
+        y: 2070
+        width: 739
+        height: 1172
       alignment: 9
-      pivot: {x: 0.017727906, y: 0.073780626}
+      pivot: {x: 0.020685798, y: 0.07184421}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 32364202b7686b6a0800000000000000
-      internalID: -6433807154273819869
+      spriteID: 62cd1a7bca5eebe30800000000000000
+      internalID: 4521303605904530470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_6
+      name: animation_porte_v3_6
       rect:
         serializedVersion: 2
-        x: 2423
-        y: 2048
-        width: 1000
-        height: 1157
+        x: 2420
+        y: 2043
+        width: 664
+        height: 1158
       alignment: 9
-      pivot: {x: 0.010894775, y: 0.070262276}
+      pivot: {x: 0.023675758, y: 0.079511836}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 732da26f9b79f88f0800000000000000
-      internalID: -536043005679054281
+      spriteID: 115766ce79c42f920800000000000000
+      internalID: 3022562515308934417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_7
+      name: animation_porte_v3_7
       rect:
         serializedVersion: 2
         x: 4088
-        y: 1947
-        width: 1000
-        height: 1179
+        y: 1946
+        width: 574
+        height: 1180
       alignment: 9
-      pivot: {x: 0.013151367, y: 0.09617546}
+      pivot: {x: 0.024249034, y: 0.09886289}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9793ce5d1232b0340800000000000000
-      internalID: 4830993653514910073
+      spriteID: 1595fca9c98130740800000000000000
+      internalID: 5116960662514260305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_8
+      name: animation_porte_v3_8
       rect:
         serializedVersion: 2
         x: 5912
-        y: 1966
-        width: 1000
-        height: 1218
+        y: 1964
+        width: 482
+        height: 1220
       alignment: 9
-      pivot: {x: 0.01032373, y: 0.09894791}
+      pivot: {x: 0.028538113, y: 0.09852195}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbd463a9948122360800000000000000
-      internalID: 7143298663361957311
+      spriteID: fbb7f35dc65f78ea0800000000000000
+      internalID: -5870453741471171649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_9
+      name: animation_porte_v3_9
       rect:
         serializedVersion: 2
         x: 7470
-        y: 1960
-        width: 1000
-        height: 1177
+        y: 1958
+        width: 330
+        height: 1179
       alignment: 9
-      pivot: {x: 0.010429199, y: 0.09111486}
+      pivot: {x: 0.039383583, y: 0.095722385}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 660f943943d173220800000000000000
-      internalID: 2465471432655237222
+      spriteID: 75db5aac0e523eb60800000000000000
+      internalID: 7774099029174369623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_10
+      name: animation_porte_v3_10
       rect:
         serializedVersion: 2
-        x: 919
-        y: 250
-        width: 1000
-        height: 1161
+        x: 917
+        y: 246
+        width: 274
+        height: 1168
       alignment: 9
-      pivot: {x: 0.016114501, y: 0.07649422}
+      pivot: {x: 0.07876119, y: 0.08363}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ded213386d118670800000000000000
-      internalID: 8539138701841850068
+      spriteID: 048f50a62cb10aa60800000000000000
+      internalID: 7683171486110447680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_11
+      name: animation_porte_v3_11
       rect:
         serializedVersion: 2
         x: 2503
-        y: 322
-        width: 1000
-        height: 1150
+        y: 320
+        width: 202
+        height: 1149
       alignment: 9
-      pivot: {x: 0.013734131, y: 0.06497184}
+      pivot: {x: 0.07188974, y: 0.070028014}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 67d1d01f13de678d0800000000000000
-      internalID: -2848828915511911050
+      spriteID: 5bf89fa32ed583580800000000000000
+      internalID: -8847218241735913547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_12
+      name: animation_porte_v3_12
       rect:
         serializedVersion: 2
-        x: 3920
+        x: 3918
         y: 349
-        width: 1000
+        width: 186
         height: 1148
       alignment: 9
-      pivot: {x: 0.011577881, y: 0.09614653}
+      pivot: {x: 0.065621324, y: 0.09630274}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc2a3bf4908135220800000000000000
-      internalID: 2473347048627479245
+      spriteID: aba3feb145ef4fce0800000000000000
+      internalID: -1372192349241787718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animation_porte_v2_13
+      name: animation_porte_v3_13
       rect:
         serializedVersion: 2
-        x: 5151
+        x: 5109
         y: 414
-        width: 1000
+        width: 135
         height: 1085
       alignment: 9
-      pivot: {x: 0.088129394, y: 0.045866318}
+      pivot: {x: 0.94048756, y: 0.049889095}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d53699a220f4e280800000000000000
-      internalID: -9014816522424142379
+      spriteID: f6877361badea5b20800000000000000
+      internalID: 3124070610602784879
       vertices: []
       indices: 
       edges: []
@@ -476,7 +476,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4a75656a0a9035d47866e4a5760fff8f
+    spriteID: 22128e0c8f5134d4ea0a273788042b37
     internalID: 0
     vertices: []
     indices: 
@@ -486,21 +486,20 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      animation_porte_v2_0: 4289164792609600588
-      animation_porte_v2_1: 5241564706001125467
-      animation_porte_v2_10: 8539138701841850068
-      animation_porte_v2_11: -2848828915511911050
-      animation_porte_v2_12: 2473347048627479245
-      animation_porte_v2_13: -9014816522424142379
-      animation_porte_v2_14: 697409099
-      animation_porte_v2_2: -5264037421501758470
-      animation_porte_v2_3: -2787730747836592323
-      animation_porte_v2_4: 7019315510269407804
-      animation_porte_v2_5: -6433807154273819869
-      animation_porte_v2_6: -536043005679054281
-      animation_porte_v2_7: 4830993653514910073
-      animation_porte_v2_8: 7143298663361957311
-      animation_porte_v2_9: 2465471432655237222
+      animation_porte_v3_0: 2707227932287166801
+      animation_porte_v3_1: 2652572567778325794
+      animation_porte_v3_10: 7683171486110447680
+      animation_porte_v3_11: -8847218241735913547
+      animation_porte_v3_12: -1372192349241787718
+      animation_porte_v3_13: 3124070610602784879
+      animation_porte_v3_2: 7103410211059955767
+      animation_porte_v3_3: 4990738862455632077
+      animation_porte_v3_4: -556931588131644401
+      animation_porte_v3_5: 4521303605904530470
+      animation_porte_v3_6: 3022562515308934417
+      animation_porte_v3_7: 5116960662514260305
+      animation_porte_v3_8: -5870453741471171649
+      animation_porte_v3_9: 7774099029174369623
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
