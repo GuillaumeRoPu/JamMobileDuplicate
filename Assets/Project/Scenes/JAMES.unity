@@ -6716,6 +6716,7 @@ MonoBehaviour:
   - {fileID: 2059998347, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
   _outDoorWallSprite:
   - {fileID: -1667023556, guid: a85368b89fb8e8046b901279f602c33a, type: 3}
+  _sideDoorArrow: {fileID: -4392226437488121091, guid: bde5deb2f94da5f4caa1a1a4c1f20425, type: 3}
   _zombieSounds: {fileID: 11400000, guid: 8725a4e6fcd14bd4cbb3bb42f8f624fd, type: 2}
   Music: {fileID: 0}
   _doorAnim: {fileID: 93771814}

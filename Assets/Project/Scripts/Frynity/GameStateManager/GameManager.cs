@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Sprite _sideOutWallSprite;
     [SerializeField] Sprite[] _outWallSprite;
     [SerializeField] Sprite[] _outDoorWallSprite;
+    [SerializeField] Sprite _sideDoorArrow;
     public GameObject LightParent => _lightParent;
     public GameObject DoorLight => _doorLight;
     public Sprite SideInWall => _sideInWallSprite;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
     public Sprite SideOutWall => _sideOutWallSprite;
     public Sprite[] OutWall => _outWallSprite;
     public Sprite[] OutDoorWall => _outDoorWallSprite;
+    public Sprite SideDoorArrow => _sideDoorArrow;
 
     [Header("Sound Data")]
     [SerializeField] SoundData _zombieSounds;

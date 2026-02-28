@@ -147,6 +147,8 @@ namespace Frynity.Gen
             wallParent.transform.SetParent(transform);
             Vector2Int cellRoomPos = Vector2Int.FloorToInt((Vector2)transform.position / GameManager.Of.Grid.TileSize);
 
+            List<Vector2Int> _doorTweens = new List<Vector2Int>();
+
             foreach (Cell tile in _localCells)
             {
                 Sprite sprite = GameManager.Of.SideInWall;
@@ -159,14 +161,27 @@ namespace Frynity.Gen
                     {
                         sprite = GameManager.Of.SideInDoorWall;
 
-                        var light1 = Instantiate(GameManager.Of.DoorLight);
-                        var light2 = Instantiate(GameManager.Of.DoorLight);
+                        //var light1 = Instantiate(GameManager.Of.DoorLight);
+                        //var light2 = Instantiate(GameManager.Of.DoorLight);
 
-                        light1.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 0.65f);
-                        light2.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 1.3f);
+                        //light1.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 0.65f);
+                        //light2.transform.position = (Vector2)(worldPos + Vector2Int.right) * GameManager.Of.Grid.TileSize + new Vector2(-0.16f, 1.3f);
 
-                        light1.transform.SetParent(GameManager.Of.LightParent.transform);
-                        light2.transform.SetParent(GameManager.Of.LightParent.transform);
+                        //light1.transform.SetParent(GameManager.Of.LightParent.transform);
+                        //light2.transform.SetParent(GameManager.Of.LightParent.transform);
+
+                        if (!_doorTweens.Contains(worldPos))
+                        {
+                            var arrow = new GameObject("Door Arrow");
+                            SpriteRenderer renderer = arrow.AddComponent<SpriteRenderer>();
+                            renderer.sprite = GameManager.Of.SideDoorArrow;
+                            renderer.sortingLayerName = "Foreground";
+
+                            arrow.transform.position = (worldPos + Vector2Int.right + Vector2.up / 2) * GameManager.Of.Grid.TileSize;
+                            arrow.transform.SetParent(transform);
+
+                            _doorTweens.Add(worldPos + Vector2Int.right);
+                        }
                     }
                     else
                     {
@@ -187,14 +202,27 @@ namespace Frynity.Gen
                     {
                         sprite = GameManager.Of.SideInDoorWall;
 
-                        var light1 = Instantiate(GameManager.Of.DoorLight);
-                        var light2 = Instantiate(GameManager.Of.DoorLight);
+                        //var light1 = Instantiate(GameManager.Of.DoorLight);
+                        //var light2 = Instantiate(GameManager.Of.DoorLight);
 
-                        light1.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 0.65f);
-                        light2.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 1.3f);
+                        //light1.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 0.65f);
+                        //light2.transform.position = (Vector2)worldPos * GameManager.Of.Grid.TileSize + new Vector2(0.16f, 1.3f);
 
-                        light1.transform.SetParent(GameManager.Of.LightParent.transform);
-                        light2.transform.SetParent(GameManager.Of.LightParent.transform);
+                        //light1.transform.SetParent(GameManager.Of.LightParent.transform);
+                        //light2.transform.SetParent(GameManager.Of.LightParent.transform);
+
+                        if (!_doorTweens.Contains(worldPos))
+                        {
+                            var arrow = new GameObject("Door Arrow");
+                            SpriteRenderer renderer = arrow.AddComponent<SpriteRenderer>();
+                            renderer.sprite = GameManager.Of.SideDoorArrow;
+                            renderer.sortingLayerName = "Foreground";
+
+                            arrow.transform.position = (worldPos + Vector2.up / 2) * GameManager.Of.Grid.TileSize;
+                            arrow.transform.SetParent(transform);
+
+                            _doorTweens.Add(worldPos + Vector2Int.left);
+                        }
                     }
                     else
                     {

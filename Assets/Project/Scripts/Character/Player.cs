@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class Player : MonoBehaviour
 {
