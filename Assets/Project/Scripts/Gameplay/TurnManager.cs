@@ -185,7 +185,7 @@ public class TurnManager : MonoBehaviour
         {
             if (GameManager.Of.PlayerMovement.Count > (GameManager.Of.CurrentLevel > 15 ? 4 : 3))
             {
-                List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, GameManager.Of.PlayerMovement[GameManager.Of.PlayerMovement.Count - 5] };
+                List<Vector2Int> path = new List<Vector2Int>{ GameManager.Of.Echo.CurrentTile.CellData.GridPosition, GameManager.Of.PlayerMovement[GameManager.Of.PlayerMovement.Count - (GameManager.Of.CurrentLevel > 15 ? 5 : 4)] };
                 GameManager.Of.Echo.SetPath(path);
                 GameManager.Of.Echo.MoveToNextTileInPath(_durationTurn);
             }
@@ -377,7 +377,7 @@ public class TurnManager : MonoBehaviour
         }
 
 
-        if (_currentTurn > _lastEventTurn)
+        if (_currentTurn >= _lastEventTurn)
         {
             if (GameManager.Of.Zombies.Count == 0 && GameManager.Of.Witches.Count == 0 && !GameManager.Of.Echo)
             {
@@ -678,7 +678,7 @@ public class TurnManager : MonoBehaviour
 
             foreach (var zombie in GameManager.Of.Zombies)
             {
-                if (zombie.Path.Count <= 1) continue;
+                if (zombie.Path.Count < 1) continue;
 
                 if (zombie.Path[^1] == witchPos)
                 {
@@ -805,7 +805,7 @@ public class TurnManager : MonoBehaviour
         {
             if (turn == evnt.Turn) continue;
 
-            if (evnt.EventType.HasFlag(EventType.Zombie))
+            if (evnt.EventType == EventType.Zombie)
             {
                 if (evnt.Turn <= _currentTurn + turnWillMake && evnt.Turn > _currentTurn + 1)
                 {

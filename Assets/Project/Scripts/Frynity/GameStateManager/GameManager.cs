@@ -164,10 +164,11 @@ public class GameManager : MonoBehaviour
         Vector2Int pos = playerPos + Vector2Int.left;
         if (_playerMovement.Count > 0) pos = _playerMovement[^1];
 
+        _playerMovement.Clear();
         GameObject echo = Instantiate(_echo, (Vector2)pos * Grid.TileSize, Quaternion.identity);
         _echoEntity = echo.GetComponent<Entity>();
+        _echoEntity.SetIfGhost(true);
         _echoEntity.SetCurrentTile(pos);
-        _echoEntity.SetTurnBeforeMove(_currentLevel == 15 ? 3 : 4);
     }
 
     public void DestroyEcho()

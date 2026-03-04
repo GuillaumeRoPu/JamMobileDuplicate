@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    bool _isGhost;
+    public void SetIfGhost(bool isGhost) {  _isGhost = isGhost; }
+
     Tile _currentTile;
     public Tile CurrentTile => _currentTile;
     List<Vector2Int> _path = new List<Vector2Int>();
@@ -59,6 +62,9 @@ public class Entity : MonoBehaviour
             _currentTile.CellData.Entities.Remove(this);
         }
         _currentTile = GridManager.Tiles[tile];
+
+        if (_isGhost) return;
+
         _currentTile.CellData.Entities.Add(this);
     }
 

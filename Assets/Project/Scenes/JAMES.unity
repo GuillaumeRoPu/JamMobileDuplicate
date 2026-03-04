@@ -5615,14 +5615,14 @@ MonoBehaviour:
   _gridLevelData: {fileID: 0}
   _spawnPointPosition: {x: -5, y: -1}
   _spawnPointTypes: 0
-  _roomPrefab: {fileID: 8697954554260469774, guid: 580f91dff5e1ec6478d6b147a383202c, type: 3}
-  _roomPosition: {x: 2, y: 2}
-  _eraseRoomPosition: {x: 2, y: 1}
+  _roomPrefab: {fileID: 3651317043682486778, guid: 8b0eaf689a9755044a344edffcabb28d, type: 3}
+  _roomPosition: {x: 0, y: -1}
+  _eraseRoomPosition: {x: 1, y: -1}
   _materialPosition: {x: -3, y: -2}
   _eraseMaterialPosition: {x: 0, y: 0}
   _barricadePosition: {x: 0, y: 0}
   _eraseBarricadePosition: {x: 0, y: 0}
-  _gridLevelName: Level 9
+  _gridLevelName: Level 19
 --- !u!1 &915083398
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ MonoBehaviour:
   - Turn: 10
     EventType: 2
     SpawnCellIndex: 0
-  - Turn: 10
+  - Turn: 11
     EventType: 0
     SpawnCellIndex: 1
   <TrapToUse>k__BackingField:
